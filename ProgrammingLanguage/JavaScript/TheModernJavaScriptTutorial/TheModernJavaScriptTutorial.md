@@ -115,7 +115,7 @@
           
             用于任何类型的数字：常规的数字：整数或浮点数，在 `±(2^53 - 1)` 范围内的整数。还包括“特殊数值（“special numeric values”）”也属于这种类型：`Infinity`,`-Infinity` 和 `NaN`。
             
-            - `Infinity` 是*全局对象*（*global object*）的一个属性，即它是一个全局变量。`Infinity` 的初始值是 `[Number.POSITIVE_INFINITY](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Number/POSITIVE_INFINITY)`。`Infinity`（正无穷大）大于任何值。
+            - `Infinity` 是*全局对象*（*global object*）的一个属性，即它是一个全局变量。`Infinity` 的初始值是 [`Number.POSITIVE_INFINITY`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Number/POSITIVE_INFINITY)。`Infinity`（正无穷大）大于任何值。
             - `NaN` 代表一个计算错误。它是一个不正确的或者一个未定义的数学操作所得到的结果。`NaN` 是粘性的。任何对 `NaN` 的进一步数学运算都会返回 `NaN`（只有一个例外：`NaN ** 0` 结果为 `1`）。
             
         - `BigInt`
@@ -132,7 +132,7 @@
                 ```
                 
             - 可以通过将 `n` 附加到整数字段的末尾来创建 `BigInt` 值。e.g.`const bigInt = 1234567890123456789012345678901234567890n;`
-            - 查看 *[MDN* BigInt 兼容性表](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt#browser_compatibility) 以了解哪些版本的浏览器已经支持 BigInt 了。
+            - 查看 [MDN BigInt 兼容性表](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt#browser_compatibility) 以了解哪些版本的浏览器已经支持 BigInt 了。
             
         - `String` 一个字符串可以包含零个（为空）、一个或多个字符，没有单独的单字符类型。
         - `Boolean` 逻辑类型，用于 `true` 和 `false`。
@@ -165,7 +165,7 @@
         从技术上讲，这种行为是不正确的，但在实际编程中却非常方便。
         
     
-    ```jsx
+    ```javascript
     typeof 0 // 'number'
     typeof 10n // 'bigint'
     typeof 'foo' // 'string'
@@ -180,7 +180,7 @@
 
 ### 2.6 Interaction: alert, prompt, confirm
 
-- `**alert`** 显示信息。
+- **`alert`** 显示信息。
   
     弹出的这个带有信息的小窗口被称为 **模态窗** *modal window*
     
@@ -299,7 +299,7 @@
     console.log( Number(apples) + Number(oranges) ); // 5
     ```
     
-- 运算符优先级 —— *[MDN* Operator Precedence](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence)
+- 运算符优先级 —— [MDN Operator Precedence](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence)
 - 自增 / 自减
     - 如果自增/自减的值不会被使用，那么两者形式没有区别。
     - 如果想要对变量进行自增操作，并且需要立刻使用自增后的值，那么需要使用前置形式（`++counter`）。
@@ -326,13 +326,13 @@
     console.log(counter); // 4
     ```
     
-- 位运算符 —— *[MDN* Expressions and Operators](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Expressions_and_Operators)
-- 逗号运算符 —— *[MDN* Comma operator (,)](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Comma_Operator)
+- 位运算符 —— [MDN Expressions and Operators](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Expressions_and_Operators)
+- 逗号运算符 —— [MDN Comma operator (,)](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Comma_Operator)
 
 ### 2.9 Comparisons
 
 - 比较运算符始终返回布尔值。
-- 字符串的比较，会按照“词典”顺序逐字符地比较大小。即字符串是按字符逐个进行 **Unicode 编码顺序**的比较。
+- 字符串的比较，会按照“词典”顺序逐字符地比较大小。即字符串是按字符逐个进行 **Unicode 编码顺序** 的比较。
   
     字符串的比较算法：
     
@@ -342,7 +342,7 @@
     4. 重复上述步骤进行比较，直到比较完成某字符串的所有字符为止。
     5. 如果两个字符串的字符同时用完，那么则判定它们相等，否则未结束（还有未比较的字符）的字符串更大。
     
-- 当对不同类型的值进行比较时，它们会先被转化为**数字**（不包括严格相等检查）再进行比较。
+- 当对不同类型的值进行比较时，它们会先被转化为 **数字**（不包括严格相等检查）再进行比较。
 - 严格相等运算符 `===` 在进行比较时不会做任何的类型转换。
 - 与“不相等”符号 `!=` 类似，“严格不相等”表示为 `!==`。
 - 对 `null` 和 `undefined` 进行比较。
@@ -358,7 +358,7 @@
         - 进行值的比较时，`null` 会被转化为数字，因此它被转化为了 `0`。// 所以 (3) 中的 `null >= 0` 返回值是 true，(1) 中 `null > 0` 返回值是 false。
         - `undefined` 和 `null` 在相等性检查 `==` 中不会进行任何的类型转换，它们有自己独立的比较规则，所以除了它们之间互等外，不会等于任何其他的值。// 所以 (2) 中 `null == 0` 会返回 false。
         
-        ```jsx
+        ```javascript
         null > 0 // (1) false
         null == 0 // (2) false
         null >= 0 // (3) true
@@ -368,13 +368,14 @@
         - `(1)` 和 `(2)` 都返回 `false` 是因为 `undefined` 在比较中被转换为了 `NaN`，而 `NaN` 是一个特殊的数值型值，它与任何值进行比较都会返回 `false`。
         - `(3)` 返回 `false` 是因为这是一个相等性检查，而 `undefined` 只与 `null` 相等（非严格相等下），不会与其他值相等。
         
-        ```jsx
+        ```javascript
         undefined < 0 // (1) false
         undefined > 0 // (2) false
         undefined == 0 // (3) false
         ```
         
     - **避免问题**
+      
         - 除了严格相等 `===` 外，其他但凡是有 `undefined/null` 参与的比较，我们都需要格外小心。
         - 除非你非常清楚自己在做什么，否则永远不要使用 `>= > < <=` 去比较一个可能为 `null/undefined` 的变量。对于取值可能是 `null/undefined` 的变量，请按需要分别检查它的取值情况。
 
@@ -497,7 +498,7 @@ JavaScript 中有四个逻辑运算符：`||`（或），`&&`（与），`!`（�
 
 ### 2.13 Loops: while and for
 
-### 2.14 The “switch” statement
+### 2.14 The "switch" statement
 
 ### 2.15 Functions
 
@@ -509,7 +510,7 @@ JavaScript 中有四个逻辑运算符：`||`（或），`&&`（与），`!`（�
 
 ## 3. **Code quality**
 
-## 4. ****Objects: the basics****
+## 4. Objects: the basics
 
 ### 4.1 Objects
 
@@ -527,11 +528,11 @@ JavaScript 中有四个逻辑运算符：`||`（或），`&&`（与），`!`（�
 
 ### 4.8 Object to primitive conversion
 
-## 5. ****Data types****
+## 5. Data types
 
-## 6. ****Advanced working with functions****
+## 6. Advanced working with functions
 
-## 7. ****Object properties configuration****
+## 7. Object properties configuration
 
 ## 8. Prototypes, inheritance
 
@@ -555,9 +556,11 @@ JavaScript 中有四个逻辑运算符：`||`（或），`&&`（与），`!`（�
 
 JavaScript 主机（host）环境提供了许多函数，这些函数允许我们计划 **异步** 行为（asynchronous action）。换句话说，我们现在开始执行的行为，但它们会在稍后完成。
 
-e.g. function `setTimeout`
+![asynchronous-sample](./assets/asynchronous-sample.png)
 
-e.g. 实际中的异步行为示例，如加载脚本和模块。
+#### **基于回调的异步编程**
+
+实际中的异步行为示例，如加载脚本（如下）和模块。
 
 ```javascript
 function loadScript(src) {
@@ -594,15 +597,148 @@ loadScript('./script.js', script => {
 
 以上是被称为“基于回调”的异步编程风格。异步执行某项功能的函数应该提供一个 `callback` 参数用于在相应事件（如上述的脚本加载事件）完成时调用。
 
+异步常见案例之图片加载：https://codepen.io/Vessel420/pen/MWGZRVO?editors=1101
+
+> 需要开启控制台禁用网络缓存。
+
+![image-asynchronous_load](./assets/image-asynchronous_load.png)
+
 #### **在回调中回调**
+
+依次加载两个脚本：第一个加载完成后，然后再加载第二个。
+
+在外部 `loadScript` 执行完成时，回调就会发起内部的 `loadScript`。
+
+每一个新行为（action）都在回调内部。几个还好，多了就不好了。
+
+```javascript
+loadScript('/my/script.js', function(script) {
+    loadScript('/my/script2.js', function(script) {
+        loadScript('/my/script3.js', function(script) {
+            // ...加载完所有脚本后继续
+        });
+    });
+});
+```
 
 #### **处理 Error**
 
+避免脚本加载失败，跟踪加载错误。
+
+加载成功时，它会调用 `callback(null, script)`，否则调用 `callback(error)`。
+
+```javascript
+function loadScript(src, callback) {
+  let script = document.createElement('script');
+  script.src = src;
+
+  script.onload = () => callback(null, script);
+  script.onerror = () => callback(new Error(`Script load error for ${src}`));
+
+  document.head.append(script);
+}
+
+loadScript('/my/script.js', function(error, script) {
+  if (error) {
+    // 处理 error
+  } else {
+    // 脚本加载成功
+  }
+});
+```
+
+>在 `loadScript` 中所使用的方案其实很普遍。它被称为“Error 优先回调（error-first callback）”风格。
+>
+>约定是：
+>
+>1. `callback` 的第一个参数是为 `error` 而保留的。一旦出现 error，`callback(err)` 就会被调用。
+>
+>2. 第二个参数（和下一个参数，如果需要的话）用于成功的结果。此时 `callback(null, result1, result2…)` 就会被调用。
+>
+>因此，单一的 `callback` 函数可以同时具有报告 error 和传递返回结果的作用。
+
 #### **厄运金字塔**
 
+随着调用嵌套的增加，代码层次变得更深，维护难度也随之增加，尤其是我们使用的是可能包含了很多循环和条件语句的真实代码，而不是例子中的 `...`。
 
+嵌套调用的“金字塔”随着每个异步行为会向右增长。很快它就失控了。所以这种编码方式不是很好。
+
+```javascript
+loadScript('1.js', function(error, script) {
+
+  if (error) {
+    handleError(error);
+  } else {
+    // 脚本加载成功，继续...
+    loadScript('2.js', function(error, script) {
+      if (error) {
+        handleError(error);
+      } else {
+        // 脚本加载成功，继续...
+        loadScript('3.js', function(error, script) {
+          if (error) {
+            handleError(error);
+          } else {
+            // ...加载完所有脚本后继续 (*)
+          }
+        });
+      }
+    });
+  }
+});
+```
+
+我们可以通过使每个行为都成为一个独立的函数来尝试减轻这种问题，如下所示：
+
+它的作用相同，但是没有深层的嵌套了，因为我们将每个行为都编写成了一个独立的顶层函数。
+
+问题：
+1. 可读性差；阅读时需要在各个代码块之间跳转；
+2. 名为 `step*` 的函数都是一次性使用的，创建它们就是为了避免“厄运金字塔”。没有人会在行为链之外重用它们。因此，这里的命名空间有点混乱。
+
+```javascript
+loadScript('1.js', step1);
+
+function step1(error, script) {
+  if (error) {
+    handleError(error);
+  } else {
+    // ...
+    loadScript('2.js', step2);
+  }
+}
+
+function step2(error, script) {
+  if (error) {
+    handleError(error);
+  } else {
+    // ...
+    loadScript('3.js', step3);
+  }
+}
+
+function step3(error, script) {
+  if (error) {
+    handleError(error);
+  } else {
+    // ...加载完所有脚本后继续 (*)
+  }
+}
+```
+
+有其他方法可以避免此类金字塔。最好的方法之一就是 “promise”。
 
 ### 11.2 Promise
+
+#### **Consumers: then, catch**
+
+
+
+#### **Cleanup: finally**
+
+#### **Example: loadScript**
+
+
 
 ### 11.3 Promise chaining
 
