@@ -1,0 +1,78 @@
+{
+  "editor.minimap.enabled": false,
+  "todo-tree.tree.showScanModeButton": false,
+  "settingsSync.ignoredSettings": [
+    "editor.fontSize"
+  ],
+  "settingsSync.ignoredExtensions": [
+    "ms-vscode.cpptools",
+    "octref.vetur",
+    "tomoki1207.pdf"
+  ],
+  "workbench.iconTheme": "vscode-icons",
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "extensions.autoUpdate": false,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "vue"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "vetur.format.defaultFormatterOptions": {
+    "prettier": {
+      "singleQuote": true, // Prefer double quotes over single quotes
+      "bracketSpacing": false,
+      "printWidth": 200, // 超过最大值换行
+      "semi": true
+    }
+  },
+  // "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "editor.largeFileOptimizations": false,
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter-notebook"
+  },
+  "terminal.integrated.tabs.enabled": true,
+  "editor.fontSize": 17,
+  "diffEditor.wordWrap": "off",
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
+  "js/ts.implicitProjectConfig.strictFunctionTypes": false,
+  "javascript.validate.enable": false,
+  "typescript.validate.enable": false,
+  "gitlens.hovers.enabled": false,
+  "gitlens.hovers.currentLine.over": "line",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "vscodeGoogleTranslate.preferredLanguage": "Chinese (Simplified)",
+  "files.associations": {
+    "*.geojson": "json"
+  },
+  "json.schemas": [
+    {
+      "fileMatch": [
+        "*.geojson"
+      ],
+      "url": "http://json.schemastore.org/geojson"
+    }
+  ],
+  "editor.unicodeHighlight.includeStrings": false,
+  "git.mergeEditor": true,
+  "git.branchProtection": [
+    "master"
+  ],
+  "terminal.integrated.shellIntegration.enabled": true,
+  "editor.stickyScroll.enabled": true,
+  "eslint.alwaysShowStatus": true,
+  "eslint.run": "onSave",
+  "eslint.format.enable": true,
+  "workbench.editor.enablePreview": false,
+  "workbench.colorTheme": "Dracula Soft",
+}
