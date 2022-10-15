@@ -87,12 +87,12 @@
     - 变量名称必须仅包含：字母、数字、符号 `$` 和 `_`。
     - 首字符必须非数字。
     
-    ℹ️注意：
+    :information_source:注意：
     
     - 变量名区分大小写，命名为 `apple` 和 `APPLE` 的变量是不同的两个变量。
     - 允许非英文字母，西里尔字母甚至象形文字（汉字）都是可以使用的，但不建议。
     
-    ⚠️警告：
+    :warning:警告：
     
     - 有一张 [保留字列表](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#Keywords)，这张表中的保留字无法用作变量命名，因为它们被用于编程语言本身了。
     - 未采用 `use strict` 下的赋值：在早期，我们可以不使用 `let` 进行变量声明，而可以简单地通过赋值来创建一个变量。现在如果我们不在脚本中使用 `use strict` 声明启用严格模式，这仍然可以正常工作，这是为了保持对旧脚本的兼容。
@@ -254,7 +254,7 @@
   
     如果加号 `+` 被应用于字符串，它将合并（连接）各个字符串。
     
-    ⚠️只要任意一个运算元是字符串，那么另一个运算元也将被转化为字符串。
+    :warning:只要任意一个运算元是字符串，那么另一个运算元也将被转化为字符串。
     
     ```jsx
     console.log( '1' + 2 ); // "12"
@@ -263,7 +263,7 @@
     console.log( '1' + 2 + 2); // "122"，不是 "14"
     ```
     
-    ⚠️二元 `+` 是唯一一个以这种方式支持字符串的运算符。其他算术运算符只对数字起作用，并且总是将其运算元转换为数字。
+    :warning:二元 `+` 是唯一一个以这种方式支持字符串的运算符。其他算术运算符只对数字起作用，并且总是将其运算元转换为数字。
     
     ```jsx
     console.log( 6 - '2' ); // 4，将 '2' 转换为数字
@@ -456,7 +456,7 @@ JavaScript 中有四个逻辑运算符：`||`（或），`&&`（与），`!`（�
     console.log( 1 && 2 && 3 ); // 3，最后一个值
     ```
     
-    - ⚠️**不要用 `||` 或 `&&` 来取代 `if`**
+    - :warning:**不要用 `||` 或 `&&` 来取代 `if`**
       
         有时候，有人会将与运算符 `&&` 作为“简化 `if`”的一种方式。
         
@@ -494,7 +494,7 @@ JavaScript 中有四个逻辑运算符：`||`（或），`&&`（与），`!`（�
 
 ### 2.12 Nullish coalescing operator '??' - 空值合并运算符
 
-⚠️**这是一个最近添加到 JavaScript 的特性。 旧式浏览器可能需要 polyfills.**
+:warning:**这是一个最近添加到 JavaScript 的特性。 旧式浏览器可能需要 polyfills.**
 
 ### 2.13 Loops: while and for
 
@@ -556,7 +556,7 @@ JavaScript 中有四个逻辑运算符：`||`（或），`&&`（与），`!`（�
 
 JavaScript 主机（host）环境提供了许多函数，这些函数允许我们计划 **异步** 行为（asynchronous action）。换句话说，我们现在开始执行的行为，但它们会在稍后完成。
 
-![asynchronous-sample](./assets/asynchronous-sample.png)
+<img src="./assets/asynchronous-sample.png" alt="asynchronous-sample" style="zoom:150%;" />
 
 #### **基于回调的异步编程**
 
@@ -597,7 +597,7 @@ loadScript('./script.js', script => {
 
 以上是被称为“基于回调”的异步编程风格。异步执行某项功能的函数应该提供一个 `callback` 参数用于在相应事件（如上述的脚本加载事件）完成时调用。
 
-异步常见案例之图片加载：https://codepen.io/Vessel420/pen/MWGZRVO?editors=1101
+代码示例：[[CODEPEN] 异步常见案例之图片加载](https://codepen.io/Vessel420/pen/MWGZRVO)
 
 > 需要开启控制台禁用网络缓存。
 
@@ -730,17 +730,239 @@ function step3(error, script) {
 
 ### 11.2 Promise
 
+*detail:*
+- [[JAVASCRIPT.INFO] Promise](https://javascript.info/promise-basics)
+
+- [[MDN] Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
+
+- [[MDN] Promise() constructor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/Promise)
+
+
+
+#### **Description**
+
+
+```javascript
+let promise = new Promise(function(resolve, reject) {
+  // executor (the producing code)
+  // The function passed to new Promise is called the executor.
+});
+```
+
+由 `new Promise` 构造器返回的 `promise` 对象具有以下内部属性：
+
+- `state` —— 最初是 `"pending"`，然后在 resolve 被调用时变为 `"fulfilled"`，或者在 `reject` 被调用时变为 `"rejected"`。
+
+- `result` —— 最初是 `undefined`，然后在 `resolve(value)` 被调用时变为 `value`，或者在 `reject(error)` 被调用时变为 `error`。
+
+<img src="./assets/image-promise_state.png" alt="image-promise_state"  />
+
+1. 传递给 `new Promise` 的函数被称为 **executor**。它包含最终应产出结果的生产者代码。
+    > executor 被自动且立即调用（通过 `new Promise`）。
+
+2. executor 接受两个参数：`resolve` 和 `reject`。这些函数由 JavaScript 引擎预先定义，因此我们不需要创建它们。我们需要在 executor 准备好时调用 `resolve` 或 `reject`，来改变对应的 promise 对象的状态。
+    > 它的参数 `resolve` 和 `reject` 是由 JavaScript 自身提供的回调。
+    > 我们的代码仅在 executor 的内部。
+    >
+    > 与最初的 “pending” promise 相反，一个 resolved 或 rejected 的 promise 都会被称为 “settled”。
+    >
+    > - `resolve(value)` —— 如果任务成功完成并带有结果 `value`。
+    > - `reject(error)` —— 如果出现了 error，`error` 即为 error 对象。
+    >
+    > 执行器函数参数的名字和实际调用的 resolve() 和 reject() 无关，关键在于顺序，第一个代表 resolve()，第二个代表 reject()。
+    > 
+
+:information_source:**这只能有一个结果或一个 error**
+executor 只能调用一个 `resolve` 或一个 `reject`。任何状态的更改都是最终的。
+所有其他的再对 `resolve` 和 `reject` 的调用都会被忽略：
+
+```javascript
+let promise = new Promise(function(resolve, reject) {
+  resolve("done");
+
+  reject(new Error("…")); // 被忽略
+  setTimeout(() => resolve("…")); // 被忽略
+});
+```
+这的宗旨是，一个被 executor 完成的工作只能有一个结果或一个 error。
+并且，`resolve/reject` 只需要一个参数（或不包含任何参数），并且将忽略额外的参数。
+
+:information_source:**以 Error 对象 reject**
+如果什么东西出了问题，executor 应该调用 `reject`。这可以使用任何类型的参数来完成（就像 `resolve` 一样）。但建议使用 `Error` 对象（或继承自 `Error` 的对象）。理由：// **TODO**
+
+:information_source:**resolve/reject 可以立即进行**
+实际上，executor 通常是异步执行某些操作，并在一段时间后调用 `resolve/reject`，但这不是必须的。我们还可以立即调用 `resolve` 或 `reject`，就像这样：
+
+```javascript
+let promise = new Promise(function(resolve, reject) {
+  // 不花时间去做这项工作
+  resolve(123); // 立即给出结果：123
+});
+```
+例如，当我们开始做一个任务时，但随后看到一切都已经完成并已被缓存时，可能就会发生这种情况。
+这挺好。我们立即就有了一个 resolved 的 promise。
+
+在 new Promise() 的时候，Promise 的执行器就会立马执行，但是**调用 resolve() 会触发异步操作，传入 then() 方法的函数会被添加到任务队列并异步执行**。代码示例：[[CODEPEN] resolve()立即执行但then()异步执行](https://codepen.io/Vessel420/pen/gOzEemo)。
+
+:information_source:**`state` 和 `result` 都是内部的**
+Promise 对象的 `state` 和 `result` 属性都是内部的。我们无法直接访问它们。但我们可以对它们使用 `.then`/`.catch`/`.finally` 方法。
+
+
+
 #### **Consumers: then, catch**
+
+Promise 对象充当的是 executor（“生产者代码”）和消费函数之间的连接，后者将接收结果或 error。可以通过使用 `.then` 和 `.catch` 方法注册消费函数。
+
+**then**
+
+`.then` 的第一个参数是一个函数，该函数将在 promise resolved 且接收到结果后执行。
+
+`.then` 的第二个参数也是一个函数，该函数将在 promise rejected 且接收到 error 信息后执行。
+
+```javascript
+promise.then(
+  function(result) { /* handle a successful result */ },
+  function(error) { /* handle an error */ }
+);
+```
+
+```javascript
+let promise = new Promise(function(resolve, reject) {
+  setTimeout(() => resolve("done!"), 1000);
+  setTimeout(() => reject(new Error("Whoops!")), 1000);
+});
+
+// resolve 运行 .then 中的第一个函数
+// reject 运行 .then 中的第二个函数
+promise.then(
+  result => alert(result), // 1 秒后显示 "done!"
+  error => alert(error) // 1 秒后显示 "Error: Whoops!"
+);
+```
+
+如果我们只对成功完成的情况感兴趣，那么我们可以只为 `.then` 提供一个函数参数：
+
+```javascript
+let promise = new Promise(resolve => {
+  setTimeout(() => resolve("done!"), 1000);
+});
+promise.then(alert); // 1 秒后显示 "done!"
+```
+
+**catch**
+
+如果我们只对 error 感兴趣，那么我们可以使用 `null` 作为第一个参数：`.then(null, errorHandlingFunction)`。或者我们也可以使用 `.catch(errorHandlingFunction)`，其实是一样的。
+
+`.catch(f)` 调用是 `.then(null, f)` 的完全的模拟，它只是一个简写形式。
+
+```javascript
+let promise = new Promise((resolve, reject) => {
+  setTimeout(() => reject(new Error("Whoops!")), 1000);
+});
+
+// .catch(f) 与 promise.then(null, f) 一样
+promise.catch(alert); // 1 秒后显示 "Error: Whoops!"
+```
 
 
 
 #### **Cleanup: finally**
 
+调用 `.finally(f)` 类似于 `.then(f, f)`，因为当 promise settled 时 `f` 就会执行：无论 promise 被 resolve 还是 reject。
+
+`finally` 的功能是设置一个处理程序在前面的操作完成后，执行清理/终结。
+
+```javascript
+new Promise((resolve, reject) => {
+  /* 做一些需要时间的事，之后调用可能会 resolve 也可能会 reject */
+})
+  // 在 promise 为 settled 时运行，无论成功与否
+  .finally(() => stop loading indicator)
+  // 所以，加载指示器（loading indicator）始终会在我们继续之前停止
+  .then(result => show result, err => show error)
+```
+
+**:information_source:注意，`finally(f)` 并不完全是 `then(f,f)` 的别名。它们之间有重要的区别：**
+
+1. `finally` 处理程序（handler）没有参数。在 `finally` 中，我们不知道 promise 是否成功。没关系，因为我们的任务通常是执行“常规”的完成程序（finalizing procedures）。
+
+2. `finally` 处理程序将结果或 error “传递”给下一个合适的处理程序。
+     第一个 promise 返回的 `value` 通过 `finally` 被传递给了下一个 `then`。
+
+3. `finally` 处理程序也不应该返回任何内容。如果它返回了，返回的值会默认被忽略。
+     此规则的唯一例外是当 `finally` 处理程序抛出 error 时。此时这个 error（而不是任何之前的结果）会被转到最近的 error 的处理程序。
+
+:information_source:**我们可以对 settled 的 promise 附加处理程序**
+如果 promise 为 pending 状态，`.then/catch/finally` 处理程序（handler）将等待它的结果。
+有时候，当我们向一个 promise 添加处理程序时，它可能已经 settled 了。在这种情况下，这些处理程序会立即执行：
+```javascript
+// 下面这 promise 在被创建后立即变为 resolved 状态
+let promise = new Promise(resolve => resolve("done!"));
+
+promise.then(alert); // done!（现在显示）
+```
+Promise 灵活在于，我们可以随时添加处理程序（handler）：如果结果已经在了，它们就会执行。
+
+
+
 #### **Example: loadScript**
+
+promise 重写异步加载：[[CODEPEN] 异步常见案例之图片加载](https://codepen.io/Vessel420/pen/MWGZRVO)
+
+> 需要开启控制台禁用网络缓存。
+
+用 promise 重写 PART 1 - 11.1 处理 Error 中的代码块。
+
+```javascript
+function loadScript(src) {
+  return new Promise(function(resolve, reject) {
+    let script = document.createElement('script');
+    script.src = src;
+
+    script.onload = () => resolve(script);
+    script.onerror = () => reject(new Error(`Script load error for ${src}`));
+
+    document.head.append(script);
+  });
+}
+
+let promise = loadScript('./script.js');
+
+promise.then(
+  script => alert(`${script.src} is loaded!`),
+  error => alert(`Error: ${error.message}`)
+);
+promise.then(script => alert('Another handler...'));
+```
+
+promise 与 基于回调 模式的对比：
+
+| promise                                                      | callback                                                     |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| promise 允许我们按照自然顺序进行编码。首先，我们运行 `loadScript` 和 `.then` 来处理结果。 | 在调用 `loadScript(script, callback)` 时，我们必须有一个 `callback` 函数可供使用。换句话说，在调用 `loadScript` **之前**，我们必须知道如何处理结果。 |
+| 我们可以根据需要，在 promise 上多次调用 `.then`。每次调用，我们都会在“订阅列表”中添加一个新的“粉丝”，一个新的订阅函数。 | 只能有一个回调。                                             |
+
+
+
+*案例：*
+
+**基于 promise 的延时**
+
+在此任务中 `resolve` 是不带参数调用的。我们不从 `delay` 中返回任何值，只是确保延迟即可。
+
+```javascript
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+delay(3000).then(() => alert('runs after 3 seconds'));
+```
 
 
 
 ### 11.3 Promise chaining
+
+
 
 ### 11.4 Error handling with promises
 
