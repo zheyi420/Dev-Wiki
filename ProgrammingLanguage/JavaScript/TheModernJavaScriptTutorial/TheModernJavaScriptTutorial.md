@@ -2,7 +2,11 @@
 
 # PART 1 The JavaScript language
 
+
+
 ## 1. An introduction
+
+
 
 ### 1.1 Intro
 
@@ -22,6 +26,10 @@
     > 引擎会对流程中的每个阶段都进行优化。它甚至可以在编译的脚本运行时监视它，分析流经该脚本的数据，并根据获得的信息进一步优化机器代码。
     > 
 
+
+
+
+
 ### 1.2 Manuals and specifications
 
 - **[ECMA-262 规范](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/)** 包含了大部分深入的、详细的、规范化的关于 JavaScript 的信息。这份规范明确地定义了这门语言。
@@ -29,6 +37,10 @@
 - 兼容性表
     - [https://kangax.github.io/compat-table](https://kangax.github.io/compat-table) ECMAScript 版本兼容性表，一份列有语言功能以及引擎是否支持这些功能的表格（可查看用户当前浏览器、使用的 js 编译器如 node 的支持功能）
     - [https://caniuse.com/](https://caniuse.com/) 查看浏览器可用的功能，每个功能的支持表（现代网络技术的浏览器支持表）
+
+
+
+
 
 ### 1.3 Code editors
 
@@ -41,15 +53,29 @@
     e.g. [Sublime Text](http://www.sublimetext.com/), [Notepad++](https://notepad-plus-plus.org/), [Vim](http://www.vim.org/), [Emacs](https://www.gnu.org/software/emacs/)
     
 
+
+
+
+
 ### 1.4 Developer console
 
 *omitted*
 
+
+
+
+
 ## 2. JavaScript Fundamentals
+
+
 
 ### 2.1 Hello, world!
 
 *omitted*
+
+
+
+
 
 ### 2.2 Code structure
 
@@ -62,6 +88,10 @@
     
 - **注释** - *omitted*
 
+
+
+
+
 ### 2.3 The modern mode, "use strict"
 
 2009 年 ECMAScript 5 (ES5) 规范出现。增加了新的语言特性并且修改了一些已经存在的特性。
@@ -73,6 +103,10 @@
 - 没有类似于 `"no use strict"` 这样的指令可以使程序返回默认模式。一旦进入了严格模式，就没有回头路了。
 - 在浏览器开发者控制台启用`"use strict"`：多行代码的输入方式，并将`"use strict"` 放在代码最顶端。或使用 ES5 的语法，将代码放在包装器中，`"use strict"` 放在代码头前。
 - 现代 JavaScript 支持 “class” 和 “module” —— 高级语言结构，它们会自动启用 `use strict`。因此，如果我们使用它们，则无需添加 `"use strict"` 指令。
+
+
+
+
 
 ### 2.4 Variables
 
@@ -106,19 +140,23 @@
         - 大写命名的常量仅用作“硬编码（hard-coded）”值的别名。
         - `const pageLoadTime = /* 网页加载所需的时间 */;` `pageLoadTime`的值在页面加载之前是未知的，所以采用常规命名。但是它仍然是个常量，因为赋值之后不会改变。
 
+
+
+
+
 ### 2.5 Data types
 
 - 可以将任何类型的值存入变量，允许这种操作的编程语言，例如 JavaScript，被称为“动态类型”（dynamically typed）的编程语言，意思是虽然编程语言中有不同的数据类型，但是你定义的变量并不会在定义后，被限制为某一数据类型。
-- JavaScript 中的八种基本的数据类型（七种基本数据类型，也称为原始数据类型。一种引用类型，即 `object`，是复杂数据类型）。
+- JavaScript 中的八种基本的数据类型（七种基本数据类型，也称为原始数据类型。一种引用类型，即 `object`，是复杂数据类型）。*details:* [[MDN] JavaScript types](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#javascript_types)
     - 七种原始数据类型：
-        - `Number`
+        - **`Number`**
           
             用于任何类型的数字：常规的数字：整数或浮点数，在 `±(2^53 - 1)` 范围内的整数。还包括“特殊数值（“special numeric values”）”也属于这种类型：`Infinity`,`-Infinity` 和 `NaN`。
             
             - `Infinity` 是*全局对象*（*global object*）的一个属性，即它是一个全局变量。`Infinity` 的初始值是 [`Number.POSITIVE_INFINITY`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Number/POSITIVE_INFINITY)。`Infinity`（正无穷大）大于任何值。
             - `NaN` 代表一个计算错误。它是一个不正确的或者一个未定义的数学操作所得到的结果。`NaN` 是粘性的。任何对 `NaN` 的进一步数学运算都会返回 `NaN`（只有一个例外：`NaN ** 0` 结果为 `1`）。
             
-        - `BigInt`
+        - **`BigInt`**
           
             用于任意长度的整数。
             
@@ -134,22 +172,23 @@
             - 可以通过将 `n` 附加到整数字段的末尾来创建 `BigInt` 值。e.g.`const bigInt = 1234567890123456789012345678901234567890n;`
             - 查看 [MDN BigInt 兼容性表](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt#browser_compatibility) 以了解哪些版本的浏览器已经支持 BigInt 了。
             
-        - `String` 一个字符串可以包含零个（为空）、一个或多个字符，没有单独的单字符类型。
-        - `Boolean` 逻辑类型，用于 `true` 和 `false`。
-        - `null` 用于未知的值 —— 只有一个 `null` 值的独立类型。
+        - **`String`** 一个字符串可以包含零个（为空）、一个或多个字符，没有单独的单字符类型。
+        - **`Boolean`** 逻辑类型，用于 `true` 和 `false`。
+        - **`null`** 用于未知的值 —— 只有一个 `null` 值的独立类型。
           
             相比较于其他编程语言，JavaScript 中的 `null` 不是一个“对不存在的 `object` 的引用”或者 “null 指针”。
             
             JavaScript 中的 `null` 仅仅是一个代表“无”、“空”或“值未知”的特殊值。
             
-        - `undefined` 用于未定义的值 —— 只有一个 `undefined` 值的独立类型。
+        - **`undefined`** 用于未定义的值 —— 只有一个 `undefined` 值的独立类型。 
+          
             - `undefined` 的含义是 `未被赋值`。
             - 如果一个变量已被声明，但未被赋值，那么它的值就是 `undefined` 。
             - 从技术上讲，可以显式地将 `undefined` 赋值给变量。……但是不建议这样做。通常，使用 `null` 将一个“空”或者“未知”的值写入变量中，而 `undefined` 则保留作为未进行初始化的事物的默认初始值。
             
-        - `Symbol` 用于唯一的标识符。
+        - **`Symbol`** 用于唯一的标识符。
     - 以及一种非原始数据类型：
-        - `object` 用于更复杂的数据结构。
+        - **`object`** 用于更复杂的数据结构。
           
             其他所有的数据类型都被称为“原始类型”，因为它们的值只包含一个单独的内容（字符串、数字或者其他）。相反，`object` 则用于储存数据集合和更复杂的实体。
             
@@ -177,6 +216,10 @@
     typeof alert // 'function'
     ```
     
+
+
+
+
 
 ### 2.6 Interaction: alert, prompt, confirm
 
@@ -209,6 +252,10 @@
 1. 模态窗口的确切位置由浏览器决定。通常在页面中心。
 2. 窗口的确切外观也取决于浏览器。我们不能修改它。
 
+
+
+
+
 ### 2.7 Type Conversions
 
 大多数情况下，运算符和函数会自动将赋予它们的值转换为正确的类型。
@@ -233,6 +280,10 @@
     - 数字 `0`、空字符串 `""`、`null`、`undefined` 和 `NaN` 都会被转换成 `false`。它们被称为“假值（falsy）”。
     - 其他值被转换为 `true`，它们被称为“真值（truthy）”。
 - **对象-原始值转换** —— [4.8 Object to primitive conversion]
+
+
+
+
 
 ### 2.8 Basic operators, maths
 
@@ -329,6 +380,10 @@
 - 位运算符 —— [MDN Expressions and Operators](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Expressions_and_Operators)
 - 逗号运算符 —— [MDN Comma operator (,)](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Comma_Operator)
 
+
+
+
+
 ### 2.9 Comparisons
 
 - 比较运算符始终返回布尔值。
@@ -379,9 +434,17 @@
         - 除了严格相等 `===` 外，其他但凡是有 `undefined/null` 参与的比较，我们都需要格外小心。
         - 除非你非常清楚自己在做什么，否则永远不要使用 `>= > < <=` 去比较一个可能为 `null/undefined` 的变量。对于取值可能是 `null/undefined` 的变量，请按需要分别检查它的取值情况。
 
+
+
+
+
 ### 2.10 Conditional branching: if, '?'
 
 *omitted*
+
+
+
+
 
 ### 2.11 Logical operators
 
@@ -492,9 +555,17 @@ JavaScript 中有四个逻辑运算符：`||`（或），`&&`（与），`!`（�
     ```
     
 
+
+
+
+
 ### 2.12 Nullish coalescing operator '??' - 空值合并运算符
 
 :warning:**这是一个最近添加到 JavaScript 的特性。 旧式浏览器可能需要 polyfills.**
+
+
+
+
 
 ### 2.13 Loops: while and for
 
@@ -552,13 +623,17 @@ JavaScript 中有四个逻辑运算符：`||`（或），`&&`（与），`!`（�
 
 ## 11. Promises, async/await
 
+
+
 ### 11.1 Introduction: callbacks
 
 JavaScript 主机（host）环境提供了许多函数，这些函数允许我们计划 **异步** 行为（asynchronous action）。换句话说，我们现在开始执行的行为，但它们会在稍后完成。
 
 <img src="./assets/asynchronous-sample.png" alt="asynchronous-sample" style="zoom:150%;" />
 
-#### **基于回调的异步编程**
+
+
+#### Callback-based asynchronous programming
 
 实际中的异步行为示例，如加载脚本（如下）和模块。
 
@@ -593,7 +668,7 @@ loadScript('./script.js', script => {
 });
 ```
 
-> `onload` 事件：它通常会在脚本加载和执行完成后执行一个函数。参考 <u>PART 2: 5.3 Resource loading: onload and onerror</u>。
+> `onload` 事件：它通常会在脚本加载和执行完成后执行一个函数。参考 *PART 2 - 5.3 Resource loading: onload and onerror*。
 
 以上是被称为“基于回调”的异步编程风格。异步执行某项功能的函数应该提供一个 `callback` 参数用于在相应事件（如上述的脚本加载事件）完成时调用。
 
@@ -603,7 +678,9 @@ loadScript('./script.js', script => {
 
 ![image-asynchronous_load](./assets/image-asynchronous_load.png)
 
-#### **在回调中回调**
+
+
+#### Callback in callback
 
 依次加载两个脚本：第一个加载完成后，然后再加载第二个。
 
@@ -621,7 +698,9 @@ loadScript('/my/script.js', function(script) {
 });
 ```
 
-#### **处理 Error**
+
+
+#### Handling errors
 
 避免脚本加载失败，跟踪加载错误。
 
@@ -657,7 +736,9 @@ loadScript('/my/script.js', function(error, script) {
 >
 >因此，单一的 `callback` 函数可以同时具有报告 error 和传递返回结果的作用。
 
-#### **厄运金字塔**
+
+
+#### Pyramid of Doom 厄运金字塔
 
 随着调用嵌套的增加，代码层次变得更深，维护难度也随之增加，尤其是我们使用的是可能包含了很多循环和条件语句的真实代码，而不是例子中的 `...`。
 
@@ -690,12 +771,6 @@ loadScript('1.js', function(error, script) {
 
 我们可以通过使每个行为都成为一个独立的函数来尝试减轻这种问题，如下所示：
 
-它的作用相同，但是没有深层的嵌套了，因为我们将每个行为都编写成了一个独立的顶层函数。
-
-问题：
-1. 可读性差；阅读时需要在各个代码块之间跳转；
-2. 名为 `step*` 的函数都是一次性使用的，创建它们就是为了避免“厄运金字塔”。没有人会在行为链之外重用它们。因此，这里的命名空间有点混乱。
-
 ```javascript
 loadScript('1.js', step1);
 
@@ -726,11 +801,23 @@ function step3(error, script) {
 }
 ```
 
+它的作用相同，但是没有深层的嵌套了，因为我们将每个行为都编写成了一个独立的顶层函数。
+
+问题：
+
+1. 可读性差；阅读时需要在各个代码块之间跳转；
+2. 名为 `step*` 的函数都是一次性使用的，创建它们就是为了避免“厄运金字塔”。没有人会在行为链之外重用它们。因此，这里的命名空间有点混乱。
+
 有其他方法可以避免此类金字塔。最好的方法之一就是 “promise”。
+
+
+
+
 
 ### 11.2 Promise
 
 *detail:*
+
 - [[JAVASCRIPT.INFO] Promise](https://javascript.info/promise-basics)
 
 - [[MDN] Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
@@ -739,7 +826,7 @@ function step3(error, script) {
 
 
 
-#### **Description**
+#### Description
 
 
 ```javascript
@@ -809,11 +896,11 @@ Promise 对象的 `state` 和 `result` 属性都是内部的。我们无法直�
 
 
 
-#### **Consumers: then, catch**
+#### Consumers: then, catch
 
 Promise 对象充当的是 executor（“生产者代码”）和消费函数之间的连接，后者将接收结果或 error。可以通过使用 `.then` 和 `.catch` 方法注册消费函数。
 
-**then**
+##### then
 
 `.then` 的第一个参数是一个函数，该函数将在 promise resolved 且接收到结果后执行。
 
@@ -821,22 +908,23 @@ Promise 对象充当的是 executor（“生产者代码”）和消费函数之
 
 ```javascript
 promise.then(
-  function(result) { /* handle a successful result */ },
-  function(error) { /* handle an error */ }
+	function(result) { /* handle a successful result */ },
+	function(error) { /* handle an error */ }
 );
 ```
 
 ```javascript
 let promise = new Promise(function(resolve, reject) {
-  setTimeout(() => resolve("done!"), 1000);
-  setTimeout(() => reject(new Error("Whoops!")), 1000);
+	setTimeout(() => resolve("done!"), 1000);
+	setTimeout(() => reject(new Error("Whoops!")), 1000);
 });
 
+// 只会运行其中一个。
 // resolve 运行 .then 中的第一个函数
 // reject 运行 .then 中的第二个函数
 promise.then(
-  result => alert(result), // 1 秒后显示 "done!"
-  error => alert(error) // 1 秒后显示 "Error: Whoops!"
+	result => alert(result), // 1 秒后显示 "done!"
+	error => alert(error) // 1 秒后显示 "Error: Whoops!"
 );
 ```
 
@@ -844,12 +932,12 @@ promise.then(
 
 ```javascript
 let promise = new Promise(resolve => {
-  setTimeout(() => resolve("done!"), 1000);
+	setTimeout(() => resolve("done!"), 1000);
 });
 promise.then(alert); // 1 秒后显示 "done!"
 ```
 
-**catch**
+##### catch
 
 如果我们只对 error 感兴趣，那么我们可以使用 `null` 作为第一个参数：`.then(null, errorHandlingFunction)`。或者我们也可以使用 `.catch(errorHandlingFunction)`，其实是一样的。
 
@@ -866,7 +954,7 @@ promise.catch(alert); // 1 秒后显示 "Error: Whoops!"
 
 
 
-#### **Cleanup: finally**
+#### Cleanup: finally
 
 调用 `.finally(f)` 类似于 `.then(f, f)`，因为当 promise settled 时 `f` 就会执行：无论 promise 被 resolve 还是 reject。
 
@@ -893,8 +981,9 @@ new Promise((resolve, reject) => {
      此规则的唯一例外是当 `finally` 处理程序抛出 error 时。此时这个 error（而不是任何之前的结果）会被转到最近的 error 的处理程序。
 
 :information_source:**我们可以对 settled 的 promise 附加处理程序**
-如果 promise 为 pending 状态，`.then/catch/finally` 处理程序（handler）将等待它的结果。
+如果 promise 为 pending 状态，`.then`/`.catch`/`.finally` 处理程序（handler）将等待它的结果。
 有时候，当我们向一个 promise 添加处理程序时，它可能已经 settled 了。在这种情况下，这些处理程序会立即执行：
+
 ```javascript
 // 下面这 promise 在被创建后立即变为 resolved 状态
 let promise = new Promise(resolve => resolve("done!"));
@@ -905,13 +994,13 @@ Promise 灵活在于，我们可以随时添加处理程序（handler）：如�
 
 
 
-#### **Example: loadScript**
+#### Example: loadScript
 
 promise 重写异步加载：[[CODEPEN] 异步常见案例之图片加载](https://codepen.io/Vessel420/pen/MWGZRVO)
 
 > 需要开启控制台禁用网络缓存。
 
-用 promise 重写 PART 1 - 11.1 处理 Error 中的代码块。
+用 promise 重写 *PART 1 - 11.1 Introduction: callbacks - Handling errors* 中的代码块。
 
 ```javascript
 function loadScript(src) {
@@ -960,7 +1049,202 @@ delay(3000).then(() => alert('runs after 3 seconds'));
 
 
 
+
+
 ### 11.3 Promise chaining
+
+用 promise 重写 *PART 1 - 11.1 Introduction: callbacks - Callback in callback* 中的系列异步任务：
+
+```javascript
+new Promise(function(resolve, reject) {
+    setTimeout(() => resolve(1), 1000); // (*)
+}).then(function(result) { // (**)
+    alert(result); // 1
+    return result * 2;
+}).then(function(result) { // (***)
+    alert(result); // 2
+    return result * 2;
+}).then(function(result) {
+    alert(result); // 4
+    return result * 2;
+});
+```
+
+> 它的想法是通过 `.then` 处理程序（handler）链进行传递 result。
+>
+> 运行流程如下：
+>
+> 1. 初始 promise 在 1 秒后 resolve `(*)`，
+> 2. 然后 `.then` 处理程序被调用 `(**)`，它又创建了一个新的 promise（以 `2` 作为值 resolve）。
+> 3. 下一个 `then` `(***)` 得到了前一个 `then` 的值，对该值进行处理（*2）并将其传递给下一个处理程序。
+> 4. ……依此类推。
+>
+> 随着 result 在处理程序链中传递，我们可以看到一系列的 `alert` 调用：`1` → `2` → `4`。
+
+这样之所以是可行的，是因为每个对 `.then` 的调用都会返回了一个新的 promise，因此我们可以在其之上调用下一个 `.then`。
+
+![image-chain_call](./assets/image-chain_call.png)
+
+> :information_desk_person:**新手常犯的一个经典错误：从技术上讲，我们也可以将多个 `.then` 添加到一个 promise 上。但这并不是 promise 链（chaining）。**
+>
+> 如下:arrow_heading_down::x:
+>
+> ```javascript
+> let promise = new Promise(function(resolve, reject) {
+>     setTimeout(() => resolve(1), 1000);
+> });
+> promise.then(function(result) {
+>     alert(result); // 1
+>     return result * 2;
+> });
+> promise.then(function(result) {
+>     alert(result); // 1
+>     return result * 2;
+> });
+> promise.then(function(result) {
+>     alert(result); // 1
+>     return result * 2;
+> });
+> ```
+> 我们在这里所做的只是一个 promise 的几个处理程序。它们不会相互传递 result；相反，它们之间彼此独立运行处理任务。
+> 在同一个 promise 上的所有 `.then` 获得的结果都相同 —— 该 promise 的结果。
+>
+> ![image-independent_call](./assets/image-independent_call.png)
+>
+
+
+
+#### Returning promises
+
+`.then(handler)` 中所使用的处理程序（handler）可以创建并返回一个 promise。
+
+在这种情况下，其他的处理程序将等待它 settled 后再获得其结果。如:arrow_heading_down:
+
+```javascript
+new Promise(function(resolve, reject) {
+    setTimeout(() => resolve(1), 1000);
+}).then(function(result) {
+    alert(result); // 1
+    return new Promise((resolve, reject) => { // (*)
+        setTimeout(() => resolve(result * 2), 1000);
+    });
+}).then(function(result) { // (**)
+    alert(result); // 2
+    return new Promise((resolve, reject) => {
+        setTimeout(() => resolve(result * 2), 1000);
+    });
+}).then(function(result) {
+    alert(result); // 4
+});
+```
+
+返回 promise 使我们能够构建异步行为链。
+
+
+
+#### Example: loadScript
+
+结合 *PART 1 - 11.2 Promise - Example: loadScript* 按顺序依次加载脚本。:arrow_heading_down:
+
+```javascript
+loadScript("./script_1.js")
+    .then(function(script) {
+    	return loadScript("./script_2.js");
+	})
+    .then(function(script) {
+    	return loadScript("./script_3.js");
+  	})
+  	.then(function(script) {
+    	// 使用在脚本中声明的函数
+    	// 以证明脚本确实被加载完成了
+        one();
+        two();
+        three();
+	});
+```
+
+使用箭头函数重写以简化。:arrow_heading_down:
+
+```javascript
+loadScript("./script_1.js")
+	.then(script => loadScript("./script_2.js"))
+	.then(script => loadScript("./script_3.js"))
+	.then(script => {
+    	// 脚本加载完成，我们可以在这儿使用脚本中声明的函数
+    	one();
+    	two();
+    	three();
+	})
+```
+
+> 我们可以向链中添加更多的异步行为。请注意，代码仍然是“扁平”的 —— 它向下增长，而不是向右。这里没有“厄运金字塔”的迹象。
+
+从技术上讲，我们可以向每个 `loadScript` 直接添加 `.then`，就像这样 :arrow_heading_down:
+
+```javascript
+loadScript("./script_1.js").then(script1 => {
+    loadScript("./script_2.js").then(script2 => {
+        loadScript("./script_3.js").then(script3 => {
+            // 此函数可以访问变量 script1，script2 和 script3
+            one();
+            two();
+            three();
+        });
+    });
+});
+```
+
+> 这段代码做了相同的事儿：按顺序加载 3 个脚本。但它是“向右增长”的。所以会有和使用回调函数一样的问题。
+>
+> :grey_exclamation:有时候直接写 `.then` 也是可以的，因为嵌套的函数可以访问外部作用域。在上面的例子中，嵌套在最深层的那个回调（callback）可以访问所有变量 `script1`，`script2` 和 `script3`。但这是一个例外，而不是一条规则。
+
+##### :information_source:Thenables
+
+*details:*
+
+- [[MDN] Thenables](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise#thenables)
+- [[MDN] Promise.resolve()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve)
+
+确切地说，处理程序返回的不完全是一个 promise，而是返回的被称为 “thenable” 的对象 :point_right: 一个具有方法 `.then` 的任意对象。它会被当做一个 promise 来对待。
+
+这个想法是，第三方库可以实现自己的“promise 兼容（promise-compatible）”对象。它们可以具有扩展的方法集，但也与原生的 promise 兼容，因为它们实现了 `.then` 方法。
+
+> 一个 thenable 对象的示例 :arrow_heading_down:
+>
+> ```javascript
+> class Thenable {
+> 	constructor(num) {
+>     	this.num = num;
+>     }
+>     then(resolve, reject) {
+>     	alert(resolve); // function() { native code }
+>     	// 1 秒后使用 this.num*2 进行 resolve
+>     	setTimeout(() => resolve(this.num * 2), 1000); // (**)
+>     }
+> }
+> 
+> new Promise(resolve => resolve(1))
+>     .then(result => {
+>     	return new Thenable(result); // (*)
+> 	})
+>   	.then(alert); // 1000ms 后显示 2
+> ```
+>
+> JavaScript 检查在 `(*)` 行中由 `.then` 处理程序返回的对象：如果它具有名为 `then` 的可调用方法，那么它将调用该方法并**提供原生的函数 `resolve` 和 `reject` 作为参数**（类似于 executor），并等待直到其中一个函数被调用。在上面的示例中，`resolve(2)` 在 1 秒后被调用 `(**)`。然后，result 会被进一步沿着链向下传递。
+>
+> 这个特性允许我们将自定义的对象与 promise 链集成在一起，而不必继承自 `Promise`。
+
+
+
+#### Bigger example: fetch
+
+在前端编程中，promise 通常被用于网络请求。
+
+
+
+
+
+#### Summary
 
 
 
