@@ -147,75 +147,126 @@
 ### 2.5 Data types
 
 - 可以将任何类型的值存入变量，允许这种操作的编程语言，例如 JavaScript，被称为“动态类型”（dynamically typed）的编程语言，意思是虽然编程语言中有不同的数据类型，但是你定义的变量并不会在定义后，被限制为某一数据类型。
-- JavaScript 中的八种基本的数据类型（七种基本数据类型，也称为原始数据类型。一种引用类型，即 `object`，是复杂数据类型）。*details:* [[MDN] JavaScript types](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#javascript_types)
-    - 七种原始数据类型：
-        - **`Number`**
-          
-            用于任何类型的数字：常规的数字：整数或浮点数，在 `±(2^53 - 1)` 范围内的整数。还包括“特殊数值（“special numeric values”）”也属于这种类型：`Infinity`,`-Infinity` 和 `NaN`。
-            
-            - `Infinity` 是*全局对象*（*global object*）的一个属性，即它是一个全局变量。`Infinity` 的初始值是 [`Number.POSITIVE_INFINITY`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Number/POSITIVE_INFINITY)。`Infinity`（正无穷大）大于任何值。
-            - `NaN` 代表一个计算错误。它是一个不正确的或者一个未定义的数学操作所得到的结果。`NaN` 是粘性的。任何对 `NaN` 的进一步数学运算都会返回 `NaN`（只有一个例外：`NaN ** 0` 结果为 `1`）。
-            
-        - **`BigInt`**
-          
-            用于任意长度的整数。
-            
-            - 在 JavaScript 中，“number” 类型无法安全地表示大于 `(2^53 - 1)`（即 `9007199254740991`），或小于 `-(2^53 - 1)` 的整数。
-            - 更准确的说，“number” 类型可以存储更大的整数（最多 `1.7976931348623157 * 10^308`），但超出安全整数范围 `±(2^53 - 1)` 会出现精度问题，因为并非所有数字都适合固定的 64 位存储。因此，可能存储的是“近似值”。
-              
-                ```jsx
-                console.log(Math.pow(2, 53) - 1); // 9007199254740991
-                console.log(9007199254740991 + 1); // 9007199254740992
-                console.log(9007199254740991 + 2); // 9007199254740992
-                ```
-                
-            - 可以通过将 `n` 附加到整数字段的末尾来创建 `BigInt` 值。e.g.`const bigInt = 1234567890123456789012345678901234567890n;`
-            - 查看 [MDN BigInt 兼容性表](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt#browser_compatibility) 以了解哪些版本的浏览器已经支持 BigInt 了。
-            
-        - **`String`** 一个字符串可以包含零个（为空）、一个或多个字符，没有单独的单字符类型。
-        - **`Boolean`** 逻辑类型，用于 `true` 和 `false`。
-        - **`null`** 用于未知的值 —— 只有一个 `null` 值的独立类型。
-          
-            相比较于其他编程语言，JavaScript 中的 `null` 不是一个“对不存在的 `object` 的引用”或者 “null 指针”。
-            
-            JavaScript 中的 `null` 仅仅是一个代表“无”、“空”或“值未知”的特殊值。
-            
-        - **`undefined`** 用于未定义的值 —— 只有一个 `undefined` 值的独立类型。 
-          
-            - `undefined` 的含义是 `未被赋值`。
-            - 如果一个变量已被声明，但未被赋值，那么它的值就是 `undefined` 。
-            - 从技术上讲，可以显式地将 `undefined` 赋值给变量。……但是不建议这样做。通常，使用 `null` 将一个“空”或者“未知”的值写入变量中，而 `undefined` 则保留作为未进行初始化的事物的默认初始值。
-            
-        - **`Symbol`** 用于唯一的标识符。
-    - 以及一种非原始数据类型：
-        - **`object`** 用于更复杂的数据结构。
-          
-            其他所有的数据类型都被称为“原始类型”，因为它们的值只包含一个单独的内容（字符串、数字或者其他）。相反，`object` 则用于储存数据集合和更复杂的实体。
-            
-    
-- 可以通过 `typeof` 运算符查看存储在变量中的数据类型。对 `typeof x` 或 `typeof(x)` 的调用会以字符串的形式返回数据类型。
-    - `typeof` 是一个操作符，不是一个函数。这里的括号不是 `typeof` 的一部分。它是数学运算分组的括号。
-    - `typeof null` 的结果为 `"object"`。这是官方承认的 `typeof` 的错误，这个问题来自于 JavaScript 语言的早期阶段，并为了兼容性而保留了下来。
-      
-        `null` 绝对不是一个 `object`。`null` 有自己的类型，它是一个特殊值。`typeof` 的行为在这里是错误的。
-        
-    - 在 JavaScript 语言中没有一个特别的 `“function”` 类型。函数隶属于 `object` 类型。但是 `typeof` 会对函数区分对待，并返回 `"function"`。这也是来自于 JavaScript 语言早期的问题。
-      
-        从技术上讲，这种行为是不正确的，但在实际编程中却非常方便。
-        
-    
-    ```javascript
-    typeof 0 // 'number'
-    typeof 10n // 'bigint'
-    typeof 'foo' // 'string'
-    typeof true // 'boolean'
-    typeof null // 'object'
-    typeof undefined // 'undefined'
-    typeof Symbol('id') // 'symbol'
-    typeof Math // 'object' // Math 是一个提供数学运算的内建 object
-    typeof alert // 'function'
+- JavaScript 中的八种基本的数据类型（七种基本数据类型，也称为原始数据类型。一种引用类型，即 `object`，是复杂数据类型）。
+
+
+
+*details:* 
+
+- [[MDN] JavaScript types](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#javascript_types)
+- [[MDN] Data types](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Language_overview#data_types)
+
+
+
+#### seven *primitive types*
+
+##### `Number`
+
+用于任何类型的数字：常规的数字：整数或浮点数，在 `±(2^53 - 1)` 范围内的整数。还包括“特殊数值（“special numeric values”）”也属于这种类型：`Infinity`,`-Infinity` 和 `NaN`。
+
+- `Infinity` 是*全局对象*（*global object*）的一个属性，即它是一个全局变量。`Infinity` 的初始值是 [`Number.POSITIVE_INFINITY`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Number/POSITIVE_INFINITY)。`Infinity`（正无穷大）大于任何值。
+- `NaN` 代表一个计算错误。它是一个不正确的或者一个未定义的数学操作所得到的结果。`NaN` 是粘性的。任何对 `NaN` 的进一步数学运算都会返回 `NaN`（只有一个例外：`NaN ** 0` 结果为 `1`）。
+
+
+
+##### `BigInt`
+
+用于任意长度的整数。
+
+- 在 JavaScript 中，“number” 类型无法安全地表示大于 `(2^53 - 1)`（即 `9007199254740991`），或小于 `-(2^53 - 1)` 的整数。
+- 更准确的说，“number” 类型可以存储更大的整数（最多 `1.7976931348623157 * 10^308`），但超出安全整数范围 `±(2^53 - 1)` 会出现精度问题，因为并非所有数字都适合固定的 64 位存储。因此，可能存储的是“近似值”。
+  
+    ```jsx
+    console.log(Math.pow(2, 53) - 1); // 9007199254740991
+    console.log(9007199254740991 + 1); // 9007199254740992
+    console.log(9007199254740991 + 2); // 9007199254740992
     ```
     
+- 可以通过将 `n` 附加到整数字段的末尾来创建 `BigInt` 值。e.g.`const bigInt = 1234567890123456789012345678901234567890n;`
+- 查看 [MDN BigInt 兼容性表](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt#browser_compatibility) 以了解哪些版本的浏览器已经支持 BigInt 了。
+
+
+
+##### `String`
+
+一个字符串可以包含零个（为空）、一个或多个字符，没有单独的单字符类型。
+
+
+
+##### `Boolean`
+
+逻辑类型，用于 `true` 和 `false`。
+
+
+
+##### `null`
+
+用于未知的值 —— 只有一个 `null` 值的独立类型。
+
+相比较于其他编程语言，JavaScript 中的 `null` 不是一个“对不存在的 `object` 的引用”或者 “null 指针”。
+
+JavaScript 中的 `null` 仅仅是一个代表“无”、“空”或“值未知”的特殊值。
+
+
+
+##### `undefined`
+
+用于未定义的值 —— 只有一个 `undefined` 值的独立类型。
+
+- `undefined` 的含义是 `未被赋值`。
+- 如果一个变量已被声明，但未被赋值，那么它的值就是 `undefined` 。
+- 从技术上讲，可以显式地将 `undefined` 赋值给变量。……但是不建议这样做。通常，使用 `null` 将一个“空”或者“未知”的值写入变量中，而 `undefined` 则保留作为未进行初始化的事物的默认初始值。
+
+
+
+##### `Symbol`
+
+用于唯一的标识符。
+
+
+
+#### everything else is known as an *Object*.
+
+##### `Object`
+
+Common object types include:
+
+- `Function`
+- `Array`
+- `Date`
+- `RegExp`
+- `Error`
+
+Object 用于更复杂的数据结构。
+
+其他所有的数据类型都被称为“原始类型”，因为它们的值只包含一个单独的内容（字符串、数字或者其他）。相反，`object` 则用于储存数据集合和更复杂的实体。
+
+
+
+#### The typeof operator
+
+可以通过 `typeof` 运算符查看存储在变量中的数据类型。对 `typeof x` 或 `typeof(x)` 的调用会以字符串的形式返回数据类型。
+- `typeof` 是一个操作符，不是一个函数。这里的括号不是 `typeof` 的一部分。它是数学运算分组的括号。
+- `typeof null` 的结果为 `"object"`。这是官方承认的 `typeof` 的错误，这个问题来自于 JavaScript 语言的早期阶段，并为了兼容性而保留了下来。
+  
+    `null` 绝对不是一个 `object`。`null` 有自己的类型，它是一个特殊值。`typeof` 的行为在这里是错误的。
+    
+- 在 JavaScript 语言中没有一个特别的 `“function”` 类型。函数隶属于 `object` 类型。但是 `typeof` 会对函数区分对待，并返回 `"function"`。这也是来自于 JavaScript 语言早期的问题。
+  
+    从技术上讲，这种行为是不正确的，但在实际编程中却非常方便。
+    
+
+```javascript
+typeof 0 // 'number'
+typeof 10n // 'bigint'
+typeof 'foo' // 'string'
+typeof true // 'boolean'
+typeof null // 'object'
+typeof undefined // 'undefined'
+typeof Symbol('id') // 'symbol'
+typeof Math // 'object' // Math 是一个提供数学运算的内建 object
+typeof alert // 'function'
+```
 
 
 
@@ -928,7 +979,7 @@ promise.then(
 );
 ```
 
-如果我们只对成功完成的情况感兴趣，那么我们可以只为 `.then` 提供一个函数参数：
+如果我们只对成功完成的情况感兴趣，那么我们<u>**可以只为 `.then` 提供一个函数参数**</u>：:arrow_heading_down:
 
 ```javascript
 let promise = new Promise(resolve => {
@@ -1238,7 +1289,209 @@ loadScript("./script_1.js").then(script1 => {
 
 #### Bigger example: fetch
 
-在前端编程中，promise 通常被用于网络请求。
+在前端编程中，promise 通常被用于网络请求。使用 fetch 方法从远程服务器加载用户信息。
+
+> Fetch 参考 *PART 3 - 3.1 Fetch*
+
+```javascript
+// 执行这条语句，向 url 发出网络请求并返回一个 promise。
+// 当远程服务器返回 header（是在 全部响应加载完成前）时，
+// 该 promise 使用一个 response 对象来进行 resolve。
+fetch('/article/promise-chaining/user.json')
+    // 当远程服务器响应时，下面的 .then 开始执行
+    .then(function(response) {
+        // 当 user.json 加载完成时，response.text() 会返回一个新的 promise
+        // 该 promise 以加载的 user.json 为 result 进行 resolve
+        return response.text();
+    })
+    .then(function(text) {
+        // ……这是远程文件的内容
+        alert(text); // {"name": "iliakan", "isAdmin": true}
+    });
+```
+
+从 `fetch` 返回的 `response` 对象还包含 `response.json()` 方法，该方法可以读取远程数据并将其解析为 JSON。在我们的例子中，这更加方便，所以我们用这个方法吧。:arrow_heading_down:
+
+```javascript
+// 同上，但使用 response.json() 将远程内容解析为 JSON
+fetch('/article/promise-chaining/user.json')
+    .then(response => response.json())
+    .then(user => alert(user.name)); // iliakan，获取到了用户名
+```
+
+:arrow_down:实现更多:arrow_down:
+
+```javascript
+// 发送一个对 user.json 的请求
+fetch('/article/promise-chaining/user.json')
+    // 将其加载为 JSON
+    .then(response => response.json())
+    // 发送一个到 GitHub 的请求
+    .then(user => fetch(`https://api.github.com/users/${user.name}`))
+    // 将响应加载为 JSON
+    .then(response => response.json())
+    // 显示头像图片（githubUser.avatar_url）3 秒（也可以加上动画效果）
+    .then(githubUser => {
+        let img = document.createElement('img');
+        img.src = githubUser.avatar_url;
+        img.className = "promise-avatar-example";
+        document.body.append(img);
+
+        setTimeout(() => img.remove(), 3000); // (*)
+    });
+```
+
+:arrow_down:改进 `(*)` 行，使得能在头像显示结束并被移除后能继续操作，即让链可扩展。:arrow_down:
+
+```javascript
+fetch('/article/promise-chaining/user.json')
+    .then(response => response.json())
+    .then(user => fetch(`https://api.github.com/users/${user.name}`))
+    .then(response => response.json())
+    .then(githubUser => new Promise(function(resolve, reject) { // (*)
+        let img = document.createElement('img');
+        img.src = githubUser.avatar_url;
+        img.className = "promise-avatar-example";
+        document.body.append(img);
+
+        setTimeout(() => {
+            img.remove();
+            resolve(githubUser); // (**)
+        }, 3000);
+    }))
+	// 3 秒后触发
+    .then(githubUser => alert(`Finished showing ${githubUser.name}`));
+```
+
+:handshake:作为一个好的做法，异步行为应该始终返回一个 promise。这样就可以使得之后我们计划后续的行为成为可能。即使我们现在不打算对链进行扩展，但我们之后可能会需要。
+
+:arrow_down:最后，将代码拆分为可重用的函数。:arrow_down:
+
+```javascript
+function loadJson(url) {
+    return fetch(url)
+        .then(response => response.json());
+}
+
+function loadGithubUser(name) {
+    return loadJson(`https://api.github.com/users/${name}`);
+}
+
+function showAvatar(githubUser) {
+    return new Promise(function(resolve, reject) {
+        let img = document.createElement('img');
+        img.src = githubUser.avatar_url;
+        img.className = "promise-avatar-example";
+        document.body.append(img);
+
+        setTimeout(() => {
+            img.remove();
+            resolve(githubUser);
+        }, 3000);
+    });
+}
+
+// 使用它们：
+loadJson('/article/promise-chaining/user.json')
+    .then(user => loadGithubUser(user.name))
+    .then(showAvatar)
+    .then(githubUser => alert(`Finished showing ${githubUser.name}`));
+	// ...
+```
+
+
+
+#### Summary
+
+如果 `.then`（或 `.catch`/`.finally` 都可以）处理程序返回一个 promise，那么链的其余部分将会等待，直到它状态变为 settled。当它被 settled 后，其 result（或 error）将被进一步传递下去。
+
+![image-promise-chaining-workflow](./assets/image-promise-chaining-workflow.png)
+
+
+
+*案例：*
+
+**Promise: then 对比 catch**
+
+`promise.then(f1).catch(f2); // (*)` 与 `promise.then(f1, f2); // (**)` 不相等。
+
+不同之处在于：
+
+如果 `f1` 中出现 error，在代码（*）中它会被 `.catch` 处理，在代码（**）中则不会。
+
+这是因为 error 是沿着链传递的，而在第二段代码中，`f1` 下面没有链。
+
+换句话说，`.then` 将 result/error 传递给下一个 `.then`/`.catch`。所以在例子 (*) 中，在下面有一个 `.catch`，而在例子 (**) 中并没有 `.catch`，所以 error 未被处理。
+
+
+
+
+
+### 11.4 Error handling with promises
+
+promise 链在错误（error）处理中十分强大。
+
+当一个 promise 被 reject 时，控制权将移交至最近的 rejection 处理程序。这在实际开发中非常方便。
+
+- 若 `fetch` 的 URL 是错的，`.catch` 对这个 error 进行处理，但 `.catch` 不必是立即的，它可能在一个或多个 `.then` 之后出现。
+
+- 或者网站正常，但响应不是有效的 JSON。捕获所有 error 的最简单的方法是，将 `.catch` 附加到链的末尾。
+
+	> 通常情况下，这样的 `.catch` 根本不会被触发。但是如果 promise 链中众多的 `.then` 中任意一个返回的 promise rejected（网络问题或者无效的 json 或其他），`.catch` 就会捕获它。
+
+
+
+#### Implicit try...catch
+
+promise 的执行者（executor）和 promise 的处理程序周围有一个“隐式的 `try..catch`”。如果发生异常，它就会被捕获，并被视为 rejection 进行处理。
+
+```javascript
+new Promise((resolve, reject) => {
+    throw new Error("Whoops!"); // (*)
+}).catch(alert); // Error: Whoops!
+
+new Promise((resolve, reject) => {
+    reject(new Error("Whoops!")); // (**)
+}).catch(alert); // Error: Whoops!
+```
+
+以上两个代码块的工作完全相同。:arrow_heading_up:
+
+
+
+**在 executor 周围的“隐式 `try..catch`”自动捕获了 error，并将其变为 rejected promise。**
+
+这不仅仅发生在 executor 函数中，同样也发生在其处理程序中。如果我们在 `.then` 处理程序中 `throw`，这意味着 promise rejected，因此控制权移交至最近的 error 处理程序。`// (***)`
+
+对于所有的 error 都会发生这种情况，而不仅仅是由 `throw` 语句导致的这些 error。`// (****)` :arrow_heading_down:
+
+```javascript
+new Promise((resolve, reject) => {
+    resolve("ok");
+}).then((result) => {
+    throw new Error("Whoops!"); // reject 这个 promise // (***)
+}).catch(alert); // Error: Whoops!
+
+new Promise((resolve, reject) => {
+    resolve("ok");
+}).then((result) => {
+    blabla(); // 没有这个函数 // (****) 编程错误
+}).catch(alert); // ReferenceError: blabla is not defined
+```
+
+最后的 `.catch` 不仅会捕获显式的 rejection，还会捕获它上面的处理程序中意外出现的 error。
+
+
+
+#### Rethrowing
+
+
+
+
+
+
+
+#### Unhandled rejections
 
 
 
@@ -1248,15 +1501,115 @@ loadScript("./script_1.js").then(script1 => {
 
 
 
-### 11.4 Error handling with promises
+
 
 ### 11.5 Promise API
 
+在 `Promise` 类中，有以下 6 种静态方法。
+
+*detail:*
+
+- [[MDN] Promise - Static methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise#static_methods)
+
+
+
+#### Promise.all
+
+
+
+
+
+#### Promise.allSettled
+
+
+
+
+
+#### Promise.race
+
+
+
+
+
+#### Promise.any
+
+
+
+
+
+#### Promise.resolve/reject
+
+
+
+
+
+#### Summary
+
+
+
+
+
+
+
 ### 11.6 Promisification
+
+
+
+
+
+
 
 ### 11.7 Microtask
 
+
+
+#### Microtasks queue
+
+
+
+
+
+#### Unhandled rejection
+
+
+
+
+
+#### Summary
+
+
+
+
+
+
+
 ### 11.8 async/await
+
+
+
+#### async functions
+
+
+
+
+
+#### await
+
+
+
+
+
+#### Error handling
+
+
+
+
+
+#### Summary
+
+
+
+
 
 
 
@@ -1303,6 +1656,80 @@ loadScript("./script_1.js").then(script1 => {
 ## 2. Binary data, files
 
 ## 3. Network requests
+
+
+
+### 3.1 Fetch
+
+
+
+
+
+### 3.2 FormData
+
+
+
+
+
+### 3.3 Fetch: Download progress
+
+
+
+
+
+### 3.4 Fetch: Abort - 中止
+
+
+
+
+
+### 3.5 Fetch: Cross-Origin Requests
+
+
+
+
+
+### 3.6 Fetch API
+
+
+
+
+
+### 3. 7 URL objects
+
+
+
+
+
+### 3.8 XMLHttpRequest
+
+
+
+
+
+### 3.9 Resumable file upload
+
+
+
+
+
+### 3.10 Long polling - 长轮询
+
+
+
+
+
+### 3.11 WebSocket
+
+
+
+
+
+### 3.12 Server Sent Events
+
+
+
+
 
 ## 4. Storing data in the browser
 
