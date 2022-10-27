@@ -672,6 +672,56 @@ JavaScript 中有四个逻辑运算符：`||`（或），`&&`（与），`!`（�
 
 ## 10. Error handling
 
+
+
+### 10.1 Error handling, "try...catch"
+
+
+
+#### The "try...catch" syntax
+
+
+
+#### Error object
+
+
+
+#### Optional "catch" binding
+
+
+
+#### Using "try...catch"
+
+
+
+#### Throwing our own errors
+
+
+
+#### Rethrowing
+
+
+
+#### try...catch...finally
+
+
+
+#### Global catch
+
+
+
+#### Summary
+
+
+
+### 10.2 Custom errors, extending Error
+
+
+
+
+
+
+
 ## 11. Promises, async/await
 
 
@@ -1419,7 +1469,7 @@ loadJson('/article/promise-chaining/user.json')
 
 如果 `f1` 中出现 error，在代码（*）中它会被 `.catch` 处理，在代码（**）中则不会。
 
-这是因为 error 是沿着链传递的，而在第二段代码中，`f1` 下面没有链。
+这是因为 **error 是沿着链传递的**，而在第二段代码中，`f1` 下面没有链。
 
 换句话说，`.then` 将 result/error 传递给下一个 `.then`/`.catch`。所以在例子 (*) 中，在下面有一个 `.catch`，而在例子 (**) 中并没有 `.catch`，所以 error 未被处理。
 
@@ -1443,7 +1493,7 @@ promise 链在错误（error）处理中十分强大。
 
 #### Implicit try...catch
 
-promise 的执行者（executor）和 promise 的处理程序周围有一个“隐式的 `try..catch`”。如果发生异常，它就会被捕获，并被视为 rejection 进行处理。
+**promise 的执行者（executor）**和 **promise 的处理程序**周围有一个“隐式的 `try...catch`”。如果发生异常，它就会被捕获，并被视为 rejection 进行处理。
 
 ```javascript
 new Promise((resolve, reject) => {
@@ -1459,7 +1509,7 @@ new Promise((resolve, reject) => {
 
 
 
-**在 executor 周围的“隐式 `try..catch`”自动捕获了 error，并将其变为 rejected promise。**
+**在 executor 周围的 “隐式 `try..catch`” 自动捕获了 error，并将其变为 rejected promise。**
 
 这不仅仅发生在 executor 函数中，同样也发生在其处理程序中。如果我们在 `.then` 处理程序中 `throw`，这意味着 promise rejected，因此控制权移交至最近的 error 处理程序。`// (***)`
 
@@ -1485,19 +1535,156 @@ new Promise((resolve, reject) => {
 
 #### Rethrowing
 
+- 如果 `.catch` 块处理该 error 并正常完成，那么下一个成功的 `.then` 处理程序就会被调用。:arrow_heading_down:
+
+```javascript
+// 执行流：catch -> then
+new Promise((resolve, reject) => {
+    throw new Error("Whoops!");
+}).catch(function(error) {
+    alert("The error is handled, continue normally");
+}).then(() => alert("Next successful handler runs"));
+```
 
 
 
+- 如果我们在 `.catch` 中 `throw`，那么控制权就会被移交到下一个最近的 error 处理程序。:arrow_heading_down:
+
+```javascript
+// 执行流：catch -> catch
+new Promise((resolve, reject) => {
+    throw new Error("Whoops!");
+}).catch(function(error) { // (*)
+    if (error instanceof URIError) {
+        // 处理它
+    } else {
+        alert("Can't handle such error");
+        throw error; // 再次抛出此 error 或另外一个 error，执行将跳转至下一个 catch
+    }
+}).then(function() {
+    /* 不在这里运行 */
+}).catch(error => { // (**)
+    alert(`The unknown error has occurred: ${error}`);
+    // 不会返回任何内容 => 执行正常进行
+});
+```
+
+> 执行从第一个 `.catch` `(*)` 沿着链跳转至下一个 `(**)`。
 
 
 
 #### Unhandled rejections
 
+如果出现 error，promise 的状态将变为 “rejected”，然后执行应该跳转至最近的 rejection 处理程序。
 
+​	:arrow_right: 若没有这样的处理程序，error 会“卡住”，没有代码来处理它。
+
+当发生一个常规的 error 并且未被 `try..catch` 捕获时会发生什么？
+
+​	:arrow_right: 脚本死了，并在控制台中留下了一个信息。
+
+​	:arrow_right: 对于在 promise 中未被处理的 rejection，也会发生类似的事。
+
+​	:arrow_right: JavaScript 引擎会跟踪此类 rejection，在这种情况下会生成一个全局的 error。
+
+
+
+在浏览器中，我们可以使用 `unhandledrejection` 事件来捕获这类 error：
+
+*detail:*
+
+- [[MDN] Window: unhandledrejection event](https://developer.mozilla.org/en-US/docs/Web/API/Window/unhandledrejection_event)
+- [[HTML Living Standard] 8.1.4.7 Unhandled promise rejections](https://html.spec.whatwg.org/multipage/webappapis.html#unhandled-promise-rejections)
+
+```javascript
+window.addEventListener('unhandledrejection', function(event) {
+    // 这个事件对象有两个特殊的属性：
+    alert(event.promise); // [object Promise] —— 生成该全局 error 的 promise
+    alert(event.reason); // Error: Whoops! —— 未处理的 error 对象
+});
+new Promise(function() {
+    throw new Error("Whoops!");
+}); // 没有用来处理 error 的 catch
+```
+
+如果出现了一个 error，并且在这没有 `.catch`，那么 `unhandledrejection` 处理程序就会被触发，并获取具有 error 相关信息的 `event` 对象，所以我们就能做一些后续处理了。
+
+> 通常此类 error 是无法恢复的，所以我们最好的解决方案是将问题告知用户，并且可以将事件报告给服务器。
+>
+> 在 Node.js 等非浏览器环境中，有其他用于跟踪未处理的 error 的方法。
 
 
 
 #### Summary
+
+- `.catch` 处理 promise 中的各种 error：在 `reject()` 调用中的，或者在处理程序中抛出的 error。
+- 如果给定 `.then` 的第二个参数（即 error 处理程序），那么 `.then` 也会以相同的方式捕获 error。
+- 我们应该将 `.catch` 准确地放到我们想要处理 error，并知道如何处理这些 error 的地方。处理程序应该分析 error（可以自定义 error 类来帮助分析）并再次抛出未知的 error（它们可能是编程错误）。
+- 如果没有办法从 error 中恢复，不使用 `.catch` 也可以。
+- 在任何情况下我们都应该有 `unhandledrejection` 事件处理程序（用于浏览器，以及其他环境的模拟），以跟踪未处理的 error 并告知用户（可能还有我们的服务器）有关信息，以使我们的应用程序永远不会“死掉”。
+
+
+
+*案例：* [setTimeout 中的错误](https://zh.javascript.info/task/error-async)
+
+```javascript
+new Promise(function(resolve, reject) {
+    setTimeout(() => {
+        throw new Error("Whoops 111!"); // Uncaught Error: Whoops 111! at...
+        // reject(new Error("Whoops 222!")); // Error: Whoops 222!
+    }, 1000);
+}).catch(alert);
+```
+
+上面的 `.catch` 不会被触发。控制台会出现：`Uncaught Error: Whoops! at ......`
+
+如本节解释的，<u>promise 的执行者（executor）和 promise 的处理程序</u>周围有个“隐式的 `try..catch`”。所以，所有同步错误都会得到处理。
+
+但是这里的错误并不是在 executor 运行时生成的，而是在稍后生成的。因此，promise 无法处理它。
+
+:question: 那为什么错误是稍后生成的，promise 就无法处理了呢。
+
+参考回顾 `try...catch` 同步执行原理 *PART 1 - 10.1 Error handling, "try...catch"* :arrow_heading_down:
+
+发现
+
+​	:arrow_right: 如果一个异常发生在“计划的”（scheduled）代码中，比如在 `setTimeout` 中，那么 `try...catch` 就不会捕获它这个异常。因为 `try...catch` 包裹了计划要执行的函数，该函数本身要稍后才执行，这时引擎已经离开了 `try...catch` 结构。
+
+上面案例代码块相当于下面的代码块：
+
+```javascript
+new Promise(function(resolve, reject) {
+    try {
+        setTimeout(() => {
+            throw new Error("Whoops 111!");
+        }, 1000);
+    } catch {
+        // 不工作。
+    }
+}).catch(alert);
+```
+
+为了捕获到计划的（scheduled）函数中的异常，那么 `try...catch` 必须在这个函数内：
+
+```javascript
+new Promise(function(resolve, reject) {
+    setTimeout(() => {
+        try {
+            throw new Error("Whoops 111!");
+        } catch {
+            
+        }
+    }, 1000);
+}).catch(alert);
+```
+
+而 promise 的执行者（executor）和 promise 的处理程序周围的 `try..catch` 是“隐式的”。
+
+没法更改位置。
+
+​	:arrow_right: 即：任务中隐式的 `try..catch` 结构只能「捕抓」到同步的错误
+
+​	:arrow_right: 因此，error 或 异常，未被 `try...catch` 捕获，也就无法被转化为 rejected promise，`.catch` 就一直在干等 promise 的状态变为 settled，而无法被触发。
 
 
 
