@@ -920,10 +920,10 @@ function step3(error, script) {
 *detail:*
 
 - [[JAVASCRIPT.INFO] Promise](https://javascript.info/promise-basics)
-
+- [[MDN] Using Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises)
 - [[MDN] Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
-
 - [[MDN] Promise() constructor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/Promise)
+- [[web.dev] JavaScript Promises](https://web.dev/promises/)
 
 
 
@@ -1001,6 +1001,8 @@ Promise 对象的 `state` 和 `result` 属性都是内部的。我们无法直�
 
 Promise 对象充当的是 executor（“生产者代码”）和消费函数之间的连接，后者将接收结果或 error。可以通过使用 `.then` 和 `.catch` 方法注册消费函数。
 
+
+
 ##### then
 
 `.then` 的第一个参数是一个函数，该函数将在 promise resolved 且接收到结果后执行。
@@ -1037,6 +1039,8 @@ let promise = new Promise(resolve => {
 });
 promise.then(alert); // 1 秒后显示 "done!"
 ```
+
+
 
 ##### catch
 
