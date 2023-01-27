@@ -630,7 +630,7 @@ JavaScript 中有四个逻辑运算符：`||`（或），`&&`（与），`!`（�
 
 ### 2.18 JavaScript specials
 
-## 3. **Code quality**
+## 3. Code quality
 
 ## 4. Objects: the basics
 
@@ -730,9 +730,7 @@ JavaScript 中有四个逻辑运算符：`||`（或），`&&`（与），`!`（�
 
 JavaScript 主机（host）环境提供了许多函数，这些函数允许我们计划 **异步** 行为（asynchronous action）。换句话说，我们现在开始执行的行为，但它们会在稍后完成。
 
-<img src="./assets/asynchronous-sample.png" alt="asynchronous-sample" style="zoom:150%;" />
-
-
+![img-asynchronous-sample.png](./assets/asynchronous-sample.png)
 
 #### Callback-based asynchronous programming
 
@@ -943,7 +941,7 @@ let promise = new Promise(function(resolve, reject) {
 
 - `result` —— 最初是 `undefined`，然后在 `resolve(value)` 被调用时变为 `value`，或者在 `reject(error)` 被调用时变为 `error`。
 
-<img src="./assets/image-promise_state.png" alt="image-promise_state"  />
+![image-promise_state.png](./assets/image-promise_state.png)
 
 1. 传递给 `new Promise` 的函数被称为 **executor**。它包含最终应产出结果的生产者代码。
     > executor 被自动且立即调用（通过 `new Promise`）。
