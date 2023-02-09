@@ -84,7 +84,8 @@
 # Set 集合 _顺序数据结构_
 
 ECMAScript 2015 - Set [值，值]
-https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Set
+- [MDN JS Set](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Set)
+
 
 - 集合是由一组无序且唯一（即不能重复）的项组成的。该数据结构使用了与有限集合相同的数学概念，但应用在计算机科学的数据结构中；  
 
@@ -103,7 +104,8 @@ https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects
 # Dictionary 字典 _非顺序数据结构_
 
 ECMAScript 2015 - Map [键，值]
-https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Map 
+- [MDN JS Map](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Map)
+
 
 - 在字典中，存储的是 [键，值] 对，其中键名是用来查询特定元素的。字典和集合很相似，集合以 [值，值] 的形式存储元素，字典则是以 [键，值] 的形式来存储元素。字典也称作映射、符号表或关联数组；
 - ECMAScript 2015 的 Map 类的实现，即字典；  
@@ -112,7 +114,8 @@ https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects
 # HashTable/HashMap 散列表 _非顺序数据结构_
 
 ECMAScript 2015 - Map [键，值]
-https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Map  
+- [MDN JS Map](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Map)
+
 
 >**是 Dictionary 类的一种散列表实现方式；**
 
@@ -126,18 +129,20 @@ https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects
 >良好的散列函数由以下两方面组成：
 >	- 较少的插入和检索的时间（即性能）；
 >	- 较低的冲突可能性；
->一个好的散列函数示例：
->```javascript
->djb2HashCode(key) {
->  const tableKey = this.toStrFn(key);
->  let hash = 5381; // 初始化一个 hash 变量并赋值为一个质数（大多数实现都使用 5381）
->  for (let i = 0; i < tableKey.length; i++) {
->    // 将 hash 与 33 相乘（用作一个幻数）【幻数在编程中指直接使用的常数】
->    hash = (hash * 33) + tableKey.charCodeAt(i);
->  }
->  return hash % 1013; // 质数，选择比我们认为的散列表大小要大的质数
->}
->```
+
+一个好的散列函数示例：
+
+```js
+djb2HashCode(key) {
+	const tableKey = this.toStrFn(key);
+	let hash = 5381; // 初始化一个 hash 变量并赋值为一个质数（大多数实现都使用 5381）
+	for (let i = 0; i < tableKey.length; i++) {
+		// 将 hash 与 33 相乘（用作一个幻数）【幻数在编程中指直接使用的常数】
+		hash = (hash * 33) + tableKey.charCodeAt(i);
+	}
+	return hash % 1013; // 质数，选择比我们认为的散列表大小要大的质数
+}
+```
 
 
 >最常见的散列函数，lose lose 散列函数，方法是简单地将每个键值中的每个字母的 ASCII 值相加；
@@ -147,6 +152,7 @@ https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects
 >在一些编程语言中，还有一种叫作散列集合的实现。散列集合由一个集合构成，但是插入、移除或获取元素时，使用的是 hashCode 函数。我们可以复用散列表中实现的所有代码来实现散列集合，不同之处在于，不再添加键值对，而是只插入值而没有键。例如，可以使用散列集合来存储所有的英语单词（不包括它们的定义）。和集合相似，散列集合只存储不重复的唯一值；
 
 ## 处理相同散列值带来的冲突
+
 有这几种方法：分离链接、线性探查和双散列法； 
 
 ### 分离链接
@@ -184,8 +190,10 @@ https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects
 
 ---
 # ES2015 WeakSet 类 和 WeakMap 类
-https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/WeakSet
-https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/WeakMap
+
+- [MDN JS WeakSet](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/WeakSet)
+- [MDN JS WeakMap](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/WeakSet)
+
 
 除了 Set 和 Map 这两种新的数据结构，ES2015还增加了它们的弱化版本，WeakSet 和 WeakMap。
 
@@ -202,7 +210,7 @@ https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects
 # Tree 树 _非顺序数据结构_
 
 - 存储需要快速查找的数据；
-	>新增及删除数据时耗时；
+	> 新增及删除数据时耗时；
 
 - 树是一种分层数据的抽象模型；
 
@@ -224,9 +232,11 @@ https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects
 结构
 
 - 二叉树中的节点最多只能有两个子节点：一个是左侧子节点，另一个是右侧子节点。
+
 	> 这个定义有助于我们写出更高效地在树中插入、查找和删除节点的算法。
 
 - 二叉搜索树（BST）是二叉树的一种
+
 	但是**只允许你在左侧节点存储（比父节点）小的值，在右侧节点存储（比父节点）大的值。**
 
  >![BST](./assets/BST.png)
@@ -242,181 +252,181 @@ https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects
 
 三种方法
 
-- 中序遍历
+### 中序遍历
 
-	>一种以上行顺序（先左侧子节点 → 自身节点 → 最后右侧子节点）访问 BST 所有节点的遍历方式，也就是以从最小到最大的顺序访问所有节点。
-	>
-	>中序遍历的一种应用就是对树进行排序操作。
+>一种以上行顺序（先左侧子节点 → 自身节点 → 最后右侧子节点）访问 BST 所有节点的遍历方式，也就是以从最小到最大的顺序访问所有节点。
 
-    ```js
-    inOrderTraverseNode(node, callback) {
-      if (node == null) return;
+中序遍历的一种应用就是对树进行排序操作。
 
-      this.inOrderTraverseNode(node.left, callback);
-      callback(node.key);
-      this.inOrderTraverseNode(node.right, callback);
-    }
-    ```
+```js
+inOrderTraverseNode(node, callback) {
+  if (node == null) return;
 
-- 先序遍历
+  this.inOrderTraverseNode(node.left, callback);
+  callback(node.key);
+  this.inOrderTraverseNode(node.right, callback);
+}
+```
 
-	>以优先于后代节点的顺序（先自身节点 → 左侧子节点 → 最后右侧子节点）访问每个节点。
-	>
-	>先序遍历的一种应用是打印一个结构化的文档。
+### 先序遍历
 
-    ```js
-    preOrderTraverseNode(node, callback) {
-      if (node == null) return;
+>以优先于后代节点的顺序（先自身节点 → 左侧子节点 → 最后右侧子节点）访问每个节点。
 
-      callback(node.key);
-      this.preOrderTraverseNode(node.left, callback);
-      this.preOrderTraverseNode(node.right, callback);
-    }
-    ```
+先序遍历的一种应用是打印一个结构化的文档。
 
-- 后序遍历
+```js
+preOrderTraverseNode(node, callback) {
+  if (node == null) return;
 
-	>先访问节点的后代节点，再访问节点本身（先左侧子节点 → 右侧子节点 → 最后自身节点）。
-	>
-	>后序遍历的一种应用是计算一个目录及其子目录中所有文件所占空间的大小。
+  callback(node.key);
+  this.preOrderTraverseNode(node.left, callback);
+  this.preOrderTraverseNode(node.right, callback);
+}
+```
 
-    ```js
-    postOrderTraverseNode(node, callback) {
-      if (node == null) return;
+### 后序遍历
 
-      this.postOrderTraverseNode(node.left, callback);
-      this.postOrderTraverseNode(node.right, callback);
-      callback(node.key);
-    }
-    ```
+>先访问节点的后代节点，再访问节点本身（先左侧子节点 → 右侧子节点 → 最后自身节点）。
+
+后序遍历的一种应用是计算一个目录及其子目录中所有文件所占空间的大小。
+
+```js
+postOrderTraverseNode(node, callback) {
+  if (node == null) return;
+
+  this.postOrderTraverseNode(node.left, callback);
+  this.postOrderTraverseNode(node.right, callback);
+  callback(node.key);
+}
+```
 
 
 ## 搜索树中的值
 
 三种常执行的搜索类型
 
-- 搜索最小值
+### 搜索最小值
 
-	>遍历二叉搜索树的左边直到找到树的最下层（最左端）。
+>遍历二叉搜索树的左边直到找到树的最下层（最左端）。
 
-    ```js
+```js
 
-    minNode(node) {
-      let current = node;
+minNode(node) {
+  let current = node;
 
-      while (current != null && current.left != null) {
-        current = current.left;
-      }
+  while (current != null && current.left != null) {
+	current = current.left;
+  }
 
-      return current;
-    }
-    ```
+  return current;
+}
+```
 
-- 搜索最大值
+### 搜索最大值
 
-	>遍历二叉搜索树的右边直到找到树的最下层（最右端）。
+>遍历二叉搜索树的右边直到找到树的最下层（最右端）。
 
-    ```js
-    
-    maxNode(node) {
-      let current = node;
+```js
 
-      while (current != null && current.right != null) {
-        current = current.right;
-      }
+maxNode(node) {
+  let current = node;
 
-      return current;
-    }
-    ```
+  while (current != null && current.right != null) {
+	current = current.right;
+  }
 
-- 搜索特定值
+  return current;
+}
+```
 
-    ```js
+### 搜索特定值
 
-    searchNode(node, key) {
-      if (node == null) {
-        return false;
-      }
+```js
 
-      if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
-        return this.searchNode(node.left, key);
-      } else if (this.compareFn(key, node.key) === Compare.BIGGER_THAN) {
-        return this.searchNode(node.right, key);
-      }
+searchNode(node, key) {
+  if (node == null) {
+	return false;
+  }
 
-      return true;
-    }
-    ```
+  if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
+	return this.searchNode(node.left, key);
+  } else if (this.compareFn(key, node.key) === Compare.BIGGER_THAN) {
+	return this.searchNode(node.right, key);
+  }
+
+  return true;
+}
+```
 
 
-- 移除一个节点
+### 移除一个节点
 
-    ```js
-    
-    removeNode(node, key) {
-      if (node == null) {
-        return undefined;
-      }
-      
-      if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
-        // 如果移除不存在的节点值，最终只会是在叶节点的 left 和 right 再次赋值为 undefined
-        node.left = this.removeNode(node.left, key);
-        return node;
-      } else if (this.compareFn(key, node.key) === Compare.BIGGER_THAN) {
-        node.right = this.removeNode(node.right, key);
-        return node;
-      }
-      // key is equal to node.item
-      // handle 3 special conditions
-      // 1 - a leaf node
-      // 2 - a node with only 1 child
-      // 3 - a node with 2 children
+```js
 
-      // case 1
-      if (node.left == null && node.right == null) {
-        node = undefined;
-        return node;
-      }
+removeNode(node, key) {
+  if (node == null) {
+	return undefined;
+  }
+  
+  if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
+	// 如果移除不存在的节点值，最终只会是在叶节点的 left 和 right 再次赋值为 undefined
+	node.left = this.removeNode(node.left, key);
+	return node;
+  } else if (this.compareFn(key, node.key) === Compare.BIGGER_THAN) {
+	node.right = this.removeNode(node.right, key);
+	return node;
+  }
+  // key is equal to node.item
+  // handle 3 special conditions
+  // 1 - a leaf node
+  // 2 - a node with only 1 child
+  // 3 - a node with 2 children
 
-      // case 2
-      if (node.left == null) {
-        node = node.right;
-        return node;
-      } else if (node.right == null) {
-        node = node.left;
-        return node;
-      }
+  // case 1
+  if (node.left == null && node.right == null) {
+	node = undefined;
+	return node;
+  }
 
-      // case 3
-      const aux = this.minNode(node.right);
-      node.key = aux.key;
-      node.right = this.removeNode(node.right, aux.key);
-      return node;
-    }
-    ```
+  // case 2
+  if (node.left == null) {
+	node = node.right;
+	return node;
+  } else if (node.right == null) {
+	node = node.left;
+	return node;
+  }
+
+  // case 3
+  const aux = this.minNode(node.right);
+  node.key = aux.key;
+  node.right = this.removeNode(node.right, aux.key);
+  return node;
+}
+```
 
 
 ## 自平衡树
 
-- **Adelson-Velskii-Landi 树（AVL Tree）**
+### Adelson-Velskii-Landi 树（AVL Tree）
 
-	一种自平衡二叉搜索树
+> 一种自平衡二叉搜索树
 
-	添加或移除节点时，AVL 树会尝试保持自平衡（尽可能尝试转换为完全树），即任意一个节点（不论深度）的左子树和右子树高度最多相差 1。
+添加或移除节点时，AVL 树会尝试保持自平衡（尽可能尝试转换为完全树），即任意一个节点（不论深度）的左子树和右子树高度最多相差 1。
 
-	平衡操作：向 AVL 树插入或移除节点时，可以执行单旋转或双旋转两种平衡操作平衡树的结构。
+平衡操作：向 AVL 树插入或移除节点时，可以执行单旋转或双旋转两种平衡操作平衡树的结构。
 
-- **红黑树**
+### 红黑树
 
-	一种自平衡二叉搜索树
+> 一种自平衡二叉搜索树
 
-	- 结构
-		1. 每个节点不是红的就是黑的；
-		2. 树的根节点是黑的；
-		3. 所有叶节点都是黑的（用 NULL 引用表示的节点）；
-		4. 如果一个节点是红的，那么它的两个子节点都是黑的；
-		5. 不能有两个相邻的红节点，一个红节点不能有红的父节点或子节点；
-		6. 从给定的节点到它的后代节点（NULL 叶节点）的所有路径包含相同数量的黑色节点。
+- 结构
+	1. 每个节点不是红的就是黑的；
+	2. 树的根节点是黑的；
+	3. 所有叶节点都是黑的（用 NULL 引用表示的节点）；
+	4. 如果一个节点是红的，那么它的两个子节点都是黑的；
+	5. 不能有两个相邻的红节点，一个红节点不能有红的父节点或子节点；
+	6. 从给定的节点到它的后代节点（NULL 叶节点）的所有路径包含相同数量的黑色节点。
 
 优缺点：
 - 插入删除操作少，搜索操作多，使用 AVL 树；
@@ -489,8 +499,9 @@ https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects
 > 图是一组由边连接的节点（顶点）。
 
 一个图 `G = (V, E)` 由以下元素组成：
-	- V, Vertex: 一组顶点；
-	- E, Edge: 一组边，连接 V 中的顶点；  
+- V, Vertex: 一组顶点；
+- E, Edge: 一组边，连接 V 中的顶点；  
+
 
 - 相邻顶点：由一条边连接在一起的顶点；
 - 一个顶点的度：其相邻顶点的数量；
@@ -500,6 +511,7 @@ https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects
 - 如果图中每两个顶点间都存在路径（不需要相邻），则该图是连通的。
 - 未加权的图：图的边没有赋值；
 - 加权的图：图的边被赋予了权值；
+
 
 有向图 & 无向图
 - 有向图：图的边存在方向；
