@@ -1,5 +1,5 @@
-CRS: Coordinate Reference Systems 坐标参考系
-SRS: Spatial Reference System 空间参考系
+- CRS: Coordinate Reference Systems 坐标参考系
+- SRS: Spatial Reference System 空间参考系
 
 # Site
 
@@ -14,6 +14,18 @@ SRS: Spatial Reference System 空间参考系
 - [GIS基础知识 - 坐标系、投影、EPSG:4326、EPSG:3857](https://e7868a.com/gis-coordinate-project)
 - [EPSG 4326 vs EPSG 3857 (投影，数据集，坐标系统等等)](https://github.com/penouc/blog/issues/1)
 - [A Short Guide To The Chinese Coordinate System. GCJ-02(gcj 02) Explained.](https://abstractkitchen.com/blog/a-short-guide-to-chinese-coordinate-system/)
+
+
+---
+
+# 大地测量学 Geodesy
+
+## 大地水准面 Geoid
+
+
+
+## 参考椭球体 Reference ellipsoid
+
 
 
 ---
@@ -39,7 +51,7 @@ SRS: Spatial Reference System 空间参考系
 
 ### 常用的地图投影
 
-#### 墨卡托投影
+#### 墨卡托投影 - Mercator
 
 - [ArcGIS - 墨卡托投影](https://desktop.arcgis.com/zh-cn/arcmap/latest/map/projections/mercator.htm)
 
@@ -63,20 +75,32 @@ SRS: Spatial Reference System 空间参考系
 	- 大面积畸变造成墨卡托投影不适用于一般地理世界地图和专题制图。
 
 
-##### Web 墨卡托坐标系
+##### Web 墨卡托坐标系 - Web Mercator
 
 - [ArcGIS - Web 墨卡托坐标系](https://desktop.arcgis.com/zh-cn/arcmap/latest/map/projections/mercator.htm#ESRI_SECTION1_AB3E85B510ED40698AB95BB94CB87374)
 - [Wikipedia - Web Mercator projection](https://en.wikipedia.org/wiki/Web_Mercator_projection)
 
 **说明**
 - 别称：Google Web Mercator, Spherical Mercator, WGS 84 Web Mercator, and Pseudo-Mercator.
+
 - 它是 web 地图和在线服务的事实标准。
+
+- 正式的ESPG标识符为 EPSG:3857。不过历史上也曾使用过其他标识符。
+
 - __Web 墨卡托坐标系不是等角（正形）的，除了远离赤道有巨大的面积和距离畸变外，它也不能将恒向线投影为直线。__
-	> 在这个坐标系下，将使用基于球体的墨卡托投影版本对 WGS 84 基准面上定义的测地坐标进行投影，就好像它们是在球体上定义的一样。
-	> 球体的半径等于WGS 1984半长轴，6378137.0米。
+	> 在这个坐标系下，将使用基于球体的墨卡托投影版本对 WGS 84 基准面上定义的测地坐标进行投影，就好像它们是在球体上定义的一样。  
+	> 
+	> 球体的半径等于WGS 1984长半轴，6378137.0米。  
+	> 
 	> 将椭球面上的大地坐标与球面方程相结合，会导致坐标系无法在所有方向上保持比例因子。
 
+- 有两种方法可以模拟web服务所使用的墨卡托投影。
+	- 如果墨卡托实现支持椭球体，则投影坐标系必须以基于球体的地理坐标系为基础。这要求必须使用球体方程。
+	- 墨卡托辅助球的实现只有球体方程。此外，它还有一个投影参数，如果地理坐标系是基于椭圆的，它可以确定使用什么作为球体半径。默认值为零（0），使用长半轴。
 
+
+###### Web Mercator & Mercator
+- 
 
 #### 横轴墨卡托投影
 
@@ -94,8 +118,8 @@ SRS: Spatial Reference System 空间参考系
 
 - [Wikipedia - Map projection](https://en.wikipedia.org/wiki/Map_projection)
 
-地理坐标系转换到投影坐标系的过程为投影，即将不规则的地球曲面转换为平面。
-在地球椭球面和平面之间建立点与点之间函数关系的数学方法，称为地图投影。
+- 地理坐标系转换到投影坐标系的过程为投影，即将不规则的地球曲面转换为平面。
+- 在地球椭球面和平面之间建立点与点之间函数关系的数学方法，称为地图投影。
 
 ## 投影变形
 
@@ -112,9 +136,9 @@ SRS: Spatial Reference System 空间参考系
 ---
 
 # EPSG
-[Wikipedia - EPSG Geodetic Parameter Dataset (also EPSG registry)](https://en.wikipedia.org/wiki/EPSG_Geodetic_Parameter_Dataset)
-Most GIS use ESPG codes as Spatial Reference System Identifiers (SRIDs)
-EPSG: European Petroleum Survey Group 欧洲石油调查组织
+- [Wikipedia - EPSG Geodetic Parameter Dataset (also EPSG registry)](https://en.wikipedia.org/wiki/EPSG_Geodetic_Parameter_Dataset)
+- Most GIS use ESPG codes as Spatial Reference System Identifiers (SRIDs)
+- EPSG: European Petroleum Survey Group 欧洲石油调查组织
 
 ## ESPG:4326
 
