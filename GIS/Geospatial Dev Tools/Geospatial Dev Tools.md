@@ -17,7 +17,7 @@
 ---
 
 # Desktop tools
-- [QGIS](https://www.qgis.org/)
+- [[QGIS]]
 
 
 ## Reference
