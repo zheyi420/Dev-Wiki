@@ -1,9 +1,13 @@
+Site
+- https://qgis.org/
+- https://plugins.qgis.org/plugins/
+
 Doc
-- [https://docs.qgis.org/3.16/zh_Hans/docs/index.html](https://docs.qgis.org/3.16/zh_Hans/docs/index.html)
+- https://docs.qgis.org/3.22/zh-Hans/docs/index.html
 
 Tutorial
-- [http://www.qgistutorials.com/zh_TW/index.html](http://www.qgistutorials.com/zh_TW/index.html)
-- [https://www.osgeo.cn/qgis-tutorial/index.html](https://www.osgeo.cn/qgis-tutorial/index.html#)
+- http://www.qgistutorials.com/zh_TW/index.html
+- https://www.osgeo.cn/qgis-tutorial/index.html
 
 Blog
 - [如何打开带坐标的文本文件](https://blog.csdn.net/QGISClass/article/details/108994098)

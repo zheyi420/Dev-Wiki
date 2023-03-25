@@ -1312,27 +1312,27 @@ loadScript("./script_1.js").then(script1 => {
 
 这个想法是，第三方库可以实现自己的“promise 兼容（promise-compatible）”对象。它们可以具有扩展的方法集，但也与原生的 promise 兼容，因为它们实现了 `.then` 方法。
 
-> 一个 thenable 对象的示例 :arrow_heading_down:
->
+> 一个 thenable 对象的示例 ⤵
+
 > ```javascript
 > class Thenable {
-> 	constructor(num) {
->     	this.num = num;
->     }
->     then(resolve, reject) {
->     	alert(resolve); // function() { native code }
->     	// 1 秒后使用 this.num*2 进行 resolve
->     	setTimeout(() => resolve(this.num * 2), 1000); // (**)
->     }
+> constructor(num) {
+> this.num = num;
+> }
+> then(resolve, reject) {
+> alert(resolve); // function() { native code }
+> // 1 秒后使用 this.num*2 进行 resolve
+> setTimeout(() => resolve(this.num * 2), 1000); // (**)
+> }
 > }
 > 
 > new Promise(resolve => resolve(1))
->     .then(result => {
->     	return new Thenable(result); // (*)
-> 	})
->   	.then(alert); // 1000ms 后显示 2
+> .then(result => {
+> return new Thenable(result); // (*)
+> })
+> .then(alert); // 1000ms 后显示 2
 > ```
->
+
 > JavaScript 检查在 `(*)` 行中由 `.then` 处理程序返回的对象：如果它具有名为 `then` 的可调用方法，那么它将调用该方法并**提供原生的函数 `resolve` 和 `reject` 作为参数**（类似于 executor），并等待直到其中一个函数被调用。在上面的示例中，`resolve(2)` 在 1 秒后被调用 `(**)`。然后，result 会被进一步沿着链向下传递。
 >
 > 这个特性允许我们将自定义的对象与 promise 链集成在一起，而不必继承自 `Promise`。
