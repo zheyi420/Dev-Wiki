@@ -19,6 +19,18 @@ Git 全局配置文件路径（Win10）`C:\Users\${usrname}\.gitconfig`
 
 # Using
 
+## 创建空分支
+
+reference: [git-checkout--orphan](https://git-scm.com/docs/git-checkout#Documentation/git-checkout.txt---orphanltnew-branchgt)
+
+1. `git checkout --orphan <new_branch_name>`
+2. `git rm -rf .` 删除当前目录下所有文件及文件夹。
+3. `echo '# new_branch_name' >> README.md`
+4. `git add README.md`
+5. `git commit -m 'xxx'`
+6. `git push origin <new_branch_name>`
+
+
 ## 撤销上次提交
 
 1. `git reset --soft HEAD^` 撤销上次提交，回到上次推送前的状态。
