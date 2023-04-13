@@ -1314,24 +1314,24 @@ loadScript("./script_1.js").then(script1 => {
 
 > 一个 thenable 对象的示例 ⤵
 
-> ```javascript
-> class Thenable {
-> constructor(num) {
-> this.num = num;
-> }
-> then(resolve, reject) {
-> alert(resolve); // function() { native code }
-> // 1 秒后使用 this.num*2 进行 resolve
-> setTimeout(() => resolve(this.num * 2), 1000); // (**)
-> }
-> }
-> 
-> new Promise(resolve => resolve(1))
-> .then(result => {
-> return new Thenable(result); // (*)
-> })
-> .then(alert); // 1000ms 后显示 2
-> ```
+```javascript
+class Thenable {
+	constructor(num) {
+		this.num = num;
+	}
+	then(resolve, reject) {
+		alert(resolve); // function() { native code }
+		// 1 秒后使用 this.num*2 进行 resolve
+		setTimeout(() => resolve(this.num * 2), 1000); // (**)
+	}
+}
+
+new Promise(resolve => resolve(1))
+	.then(result => {
+		return new Thenable(result); // (*)
+	})
+	.then(alert); // 1000ms 后显示 2
+```
 
 > JavaScript 检查在 `(*)` 行中由 `.then` 处理程序返回的对象：如果它具有名为 `then` 的可调用方法，那么它将调用该方法并**提供原生的函数 `resolve` 和 `reject` 作为参数**（类似于 executor），并等待直到其中一个函数被调用。在上面的示例中，`resolve(2)` 在 1 秒后被调用 `(**)`。然后，result 会被进一步沿着链向下传递。
 >

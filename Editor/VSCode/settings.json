@@ -68,11 +68,21 @@
   "git.branchProtection": [
     "master"
   ],
+  "git.ignoreMissingGitWarning": true,
   "terminal.integrated.shellIntegration.enabled": true,
   "editor.stickyScroll.enabled": true,
   "eslint.alwaysShowStatus": true,
   "eslint.run": "onSave",
   "eslint.format.enable": true,
   "workbench.editor.enablePreview": false,
-  "workbench.colorTheme": "Dracula Soft",
+  "workbench.colorTheme": "Dracula",
+  "editor.inlineSuggest.enabled": true,
+  "github.copilot.enable": {
+    "*": true,
+    "yaml": false,
+    "plaintext": false,
+    "markdown": false,
+    "javascript": true,
+    "python": true
+  },
 }
