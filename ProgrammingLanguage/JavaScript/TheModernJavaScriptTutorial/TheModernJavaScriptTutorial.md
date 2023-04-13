@@ -1191,7 +1191,7 @@ new Promise(function(resolve, reject) {
 > :information_desk_person:**新手常犯的一个经典错误：从技术上讲，我们也可以将多个 `.then` 添加到一个 promise 上。但这并不是 promise 链（chaining）。**
 >
 > 如下:arrow_heading_down::x:
->
+> 
 > ```javascript
 > let promise = new Promise(function(resolve, reject) {
 >     setTimeout(() => resolve(1), 1000);
@@ -1209,6 +1209,7 @@ new Promise(function(resolve, reject) {
 >     return result * 2;
 > });
 > ```
+> 
 > 我们在这里所做的只是一个 promise 的几个处理程序。它们不会相互传递 result；相反，它们之间彼此独立运行处理任务。
 > 在同一个 promise 上的所有 `.then` 获得的结果都相同 —— 该 promise 的结果。
 >
