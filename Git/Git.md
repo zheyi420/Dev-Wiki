@@ -39,6 +39,7 @@ reference: [git-checkout--orphan](https://git-scm.com/docs/git-checkout#Document
 4. `git commit -m 'xxx'`
 5. `git push --force` 强制推送远程仓库。
 
+
 ## 初始化项目
 
 1. `git init`  
@@ -66,6 +67,18 @@ reference: [git-checkout--orphan](https://git-scm.com/docs/git-checkout#Document
 ---
 
 # Commands
+
+## git clone
+> Clone a repository into a new directory
+- https://git-scm.com/docs/git-clone
+
+`git clone -b main https://github.com/mapbox/geojson.io.git --depth=10 --single-branch`
+
+## git log
+
+`git log --pretty=oneline`
+
+
 
 ## git branch
 > List, create, or delete branches.
