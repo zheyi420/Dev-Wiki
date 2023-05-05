@@ -3,20 +3,35 @@
 - WKT
 	`POINT (30 10)`
 - GeoJSON
-	`{ "type": "Point", "coordinates": [30, 10] }`
-
+```json
+{
+	"type": "Point",
+	"coordinates": [30, 10]
+}
+```
 
 # MultiPoint
 ![MultiPoint](./assets/MultiPoint.png)
 - WKT
 	`MULTIPOINT ((10 40), (40 30), (20 20), (30 10))`
 - GeoJSON
-	`{ "type": "MultiPoint", "coordinates": [ [10, 40], [40, 30], [20, 20], [30, 10] ] }`
+```json
+{
+	"type": "MultiPoint",
+	"coordinates": [ [10, 40], [40, 30], [20, 20], [30, 10] ]
+}
+```
+
 
 - WKT
 	`MULTIPOINT (10 40, 40 30, 20 20, 30 10)`
 - GeoJSON
-	`{ "type": "MultiPoint", "coordinates": [ [10, 40], [40, 30], [20, 20], [30, 10] ] }`
+```json
+{
+	"type": "MultiPoint",
+	"coordinates": [ [10, 40], [40, 30], [20, 20], [30, 10] ]
+}
+```
 
 
 # LineString
@@ -24,7 +39,13 @@
 - WKT
 	`LINESTRING (30 10, 10 30, 40 40)`
 - GeoJSON
-	`{ "type": "LineString", "coordinates": [ [30, 10], [10, 30], [40, 40] ] }`
+```json
+{
+	"type": "LineString",
+	"coordinates": [ [30, 10], [10, 30], [40, 40] ]
+}
+```
+
 
 
 # MultiLineString
@@ -73,6 +94,9 @@
 }
 ```
 
+- 关于线性环数组组成的数组【Polygon with hole】：
+	- 内部环与外部环的走向是相反的，如何实现和判断？
+	- 有多个内部环，如何表示？
 
 # MultiPolygon
 ![MultiPolygon](./assets/MultiPolygon.png)
