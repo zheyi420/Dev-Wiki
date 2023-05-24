@@ -730,7 +730,7 @@ JavaScript 中有四个逻辑运算符：`||`（或），`&&`（与），`!`（�
 
 JavaScript 主机（host）环境提供了许多函数，这些函数允许我们计划 **异步** 行为（asynchronous action）。换句话说，我们现在开始执行的行为，但它们会在稍后完成。
 
-![img-asynchronous-sample.png](./assets/asynchronous-sample.png)
+![img-asynchronous-sample.png](asynchronous-sample.png)
 
 #### Callback-based asynchronous programming
 
@@ -775,7 +775,7 @@ loadScript('./script.js', script => {
 
 > 需要开启控制台禁用网络缓存。
 
-![image-asynchronous_load](./assets/image-asynchronous_load.png)
+![image-asynchronous_load](image-asynchronous_load.png)
 
 
 
@@ -941,7 +941,7 @@ let promise = new Promise(function(resolve, reject) {
 
 - `result` —— 最初是 `undefined`，然后在 `resolve(value)` 被调用时变为 `value`，或者在 `reject(error)` 被调用时变为 `error`。
 
-![image-promise_state.png](./assets/image-promise_state.png)
+![image-promise_state.png](image-promise_state.png)
 
 1. 传递给 `new Promise` 的函数被称为 **executor**。它包含最终应产出结果的生产者代码。
     > executor 被自动且立即调用（通过 `new Promise`）。
@@ -1186,7 +1186,7 @@ new Promise(function(resolve, reject) {
 
 这样之所以是可行的，是因为每个对 `.then` 的调用都会返回了一个新的 promise，因此我们可以在其之上调用下一个 `.then`。
 
-![image-chain_call](./assets/image-chain_call.png)
+![image-chain_call](image-chain_call.png)
 
 > :information_desk_person:**新手常犯的一个经典错误：从技术上讲，我们也可以将多个 `.then` 添加到一个 promise 上。但这并不是 promise 链（chaining）。**
 >
@@ -1213,7 +1213,7 @@ new Promise(function(resolve, reject) {
 > 我们在这里所做的只是一个 promise 的几个处理程序。它们不会相互传递 result；相反，它们之间彼此独立运行处理任务。
 > 在同一个 promise 上的所有 `.then` 获得的结果都相同 —— 该 promise 的结果。
 >
-> ![image-independent_call](./assets/image-independent_call.png)
+> ![image-independent_call](image-independent_call.png)
 >
 
 
@@ -1458,7 +1458,7 @@ loadJson('/article/promise-chaining/user.json')
 
 如果 `.then`（或 `.catch`/`.finally` 都可以）处理程序返回一个 promise，那么链的其余部分将会等待，直到它状态变为 settled。当它被 settled 后，其 result（或 error）将被进一步传递下去。
 
-![image-promise-chaining-workflow](./assets/image-promise-chaining-workflow.png)
+![image-promise-chaining-workflow](image-promise-chaining-workflow.png)
 
 
 

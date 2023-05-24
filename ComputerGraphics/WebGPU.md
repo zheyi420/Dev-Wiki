@@ -1,5 +1,5 @@
-- https://developer.mozilla.org/zh-CN/docs/Web/API/WebGPU_API
-- https://github.com/webgpu/webgpu-samples
-- https://webgpu.github.io/webgpu-samples/
-- https://github.com/gpuweb/gpuweb/wiki/Implementation-Status
-
+- [GitHub - gpuweb/gpuweb](https://github.com/gpuweb/gpuweb)
+	- [Implementation Status](https://github.com/gpuweb/gpuweb/wiki/Implementation-Status)
+- [WebGPU Samples](https://webgpu.github.io/webgpu-samples)
+	- [GitHub - webgpu/webgpu-samples](https://github.com/webgpu/webgpu-samples)
+- [MDN - WebGPU API](https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API)
