@@ -1,3 +1,0 @@
-# Doc
-- https://kubernetes.io/
-- 
