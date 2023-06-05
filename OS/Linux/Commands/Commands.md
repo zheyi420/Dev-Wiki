@@ -1,5 +1,4 @@
-[[sudo & su]]
-
+[sudo & su](./sudo&su.md)
 
 # System management
 

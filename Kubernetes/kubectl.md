@@ -24,6 +24,10 @@
 > 显示给定命名空间及其容器的度量。
 
 `kubectl get pods -n=<namespace-name> -o=wide`
-> 以ps输出格式列出所有pod的更多信息(如节点名称)
-> about output format `ps`: xxx
+> 以 ps 输出格式列出所有 pod 的更多信息(如节点名称)
+> about output format `ps`:
+> - what's ps output format???
+> 
 > `-o=wide` 以纯文本格式输出，包含所有附加信息。对于 Pod 包含节点名。
+> - [输出选项 - 格式化输出](https://kubernetes.io/zh-cn/docs/reference/kubectl/#formatting-output)
+

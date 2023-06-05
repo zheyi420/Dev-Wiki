@@ -4,6 +4,10 @@
 # Doc
 - https://kubernetes.io/
 
+# Concepts
+
+## Pod
+
 Pod 内运行 free 用于显示内存状态
 内存关系为：`total` = `used` + `free` + `buff/cache`
 
