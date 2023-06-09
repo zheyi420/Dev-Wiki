@@ -1,4 +1,5 @@
 # Spec
+
 - [The GeoJSON Specification (RFC 7946)](https://tools.ietf.org/html/rfc7946)
 - https://geojson.org/
 - [[JSON]]
@@ -37,3 +38,10 @@ LngLat 组成的数组的数组的数组: `MultiPolygon`, `MultiPolygonWithHole`
 
 sample: https://github.com/cfjedimaster/eleventy-demos/blob/master/geojson/v4/_data/cats.js
 docs: [fs.readFileSync(path[, options])](https://nodejs.org/docs/latest-v14.x/api/fs.html#fs_fs_readfilesync_path_options)
+
+---
+
+# GeoJSON Validation
+
+- @mapbox/geojsonhint
+	- https://www.npmjs.com/package/@mapbox/geojsonhint
