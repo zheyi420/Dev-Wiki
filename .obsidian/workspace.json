@@ -1,0 +1,263 @@
+{
+  "main": {
+    "id": "328b516a8b3df8db",
+    "type": "split",
+    "children": [
+      {
+        "id": "05408f68448d8982",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ba723441cfd5b457",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "GIS/Geospatial Data/Geospatial Data Type/GeoJSON.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "6708bf37df6f91ec",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Kubernetes/kubectl.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          }
+        ],
+        "currentTab": 1
+      },
+      {
+        "id": "373b82c6aa6a5ca4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "fbcb61af7b0eddb1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Docker/Docker.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "89f20c481a22dc3a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Language/YAML.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "124443a7b16a68c4",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Kubernetes/Kubernetes.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "b492adb9ec4420db",
+    "type": "split",
+    "children": [
+      {
+        "id": "e9e7f7709609ae77",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "4db751f89d34867d",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "26c5004a01d0a025",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "three",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "84b9223807900dd1",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          },
+          {
+            "id": "a87fed9bf7c26e63",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 311.5
+  },
+  "right": {
+    "id": "29194b246ca5af9b",
+    "type": "split",
+    "children": [
+      {
+        "id": "84d1ffdf63397350",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a12707f92c76cffb",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Docker/Docker.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "ffada58e32819361",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Docker/Docker.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "b7664f301ddf2145",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": false
+              }
+            }
+          },
+          {
+            "id": "0490a5f24114532a",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Docker/Docker.md"
+              }
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 394.5,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "canvas:新建白板": false,
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false
+    }
+  },
+  "active": "fbcb61af7b0eddb1",
+  "lastOpenFiles": [
+    "Kubernetes/Kubernetes.md",
+    "Three-Dimensional/ThreeJS.md",
+    "Docker/Docker.md",
+    "Kubernetes/kubectl.md",
+    "Language/YAML.md",
+    "GIS/Geospatial Data/Geospatial Data Type/GeoJSON.md",
+    "Three-Dimensional/3D.md",
+    "Three-Dimensional/assets",
+    "Three-Dimensional/assets/context-relation.png",
+    "Three-Dimensional",
+    "Language/JavaScript/TheModernJavaScriptTutorial/TheModernJavaScriptTutorial.md",
+    "GIS/Geospatial Data/Geospatial Data Type/PBF Format.md",
+    "GIS/Geospatial Data/DataSet/DataSet.md",
+    "OS/Linux/Commands/Commands.md",
+    "Nginx.md",
+    "Git/Git.md",
+    "OS/OS.md",
+    "Microservices.md",
+    "DataStructuresAlgorithms/DataStructures.md",
+    "README.md",
+    "未命名.canvas",
+    "OS/Linux/Commands/sudo&su.md",
+    "OS/Linux/WSL.md",
+    "DB/PostgreSQL/PostgreSQL.md",
+    "GIS/Spec/Simple Features Interface Standard-SFS.md",
+    "GIS/WebGIS Engine/Available Checking.md",
+    "ComputerGraphics/WebGPU.md",
+    "DB/PostgreSQL",
+    "DB",
+    "Language/JavaScript/DeepShallowCopy.md",
+    "ComputerGraphics/WebGL.md",
+    "Kubernetes",
+    "ComputerGraphics/WebGL availability.md",
+    "ComputerGraphics/WebGPU",
+    "GIS/Geospatial Data/Layer",
+    "CV",
+    "Node/npm",
+    "Node",
+    "Pasted image 20230326014904.png",
+    "GIS/Geospatial Data/Geospatial Data Type/assets/MultiLineString.png",
+    "GIS/Geospatial Data/Geospatial Data Type/assets/Polygon-with-hole.png",
+    "GIS/Geospatial Data/Geospatial Data Type/assets/Polygon.png",
+    "GIS/Geospatial Data/Geospatial Data Type/assets/MultiPolygon-with-hole.png",
+    "GIS/Geospatial Data/Geospatial Data Type/assets/MultiPolygon.png",
+    "GIS/Geospatial Data/Geospatial Data Type/assets/MultiPoint.png",
+    "GIS/Geospatial Data/Geospatial Data Type/assets/linestring.png",
+    "GIS/Geospatial Data/Geospatial Data Type/assets/point.png"
+  ]
+}

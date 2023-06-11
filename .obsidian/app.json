@@ -1,0 +1,10 @@
+{
+  "alwaysUpdateLinks": true,
+  "promptDelete": true,
+  "defaultViewMode": "preview",
+  "showLineNumber": true,
+  "showFrontmatter": true,
+  "readableLineLength": false,
+  "useMarkdownLinks": true,
+  "showUnsupportedFiles": true
+}
