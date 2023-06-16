@@ -6,5 +6,6 @@
   "showFrontmatter": true,
   "readableLineLength": false,
   "useMarkdownLinks": true,
-  "showUnsupportedFiles": true
+  "showUnsupportedFiles": true,
+  "livePreview": true
 }

@@ -11,3 +11,20 @@
 
 ## `free`
 > 显示内存状态。
+
+## `df`
+> 
+
+## 查看用户&用户组
+
+`cat /etc/passwd`
+> 查看用户
+
+`cat /etc/group`
+> 查看用户组
+
+`w`
+> 查看当前活跃的用户列表
+
+`cat /etc/passwd|grep -v nologin|grep -v halt|grep -v shutdown|awk -F":" '{ print $1"|"$3"|"$4 }'|more`
+> 对于 `cat /etc/passwd` 的替换
