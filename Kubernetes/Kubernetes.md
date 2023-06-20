@@ -11,6 +11,8 @@
 Pod 内运行 free 用于显示内存状态
 内存关系为：`total` = `used` + `free` + `buff/cache`
 
+**重新部署服务** 和 **修改 Pod 数量为 0 后再增加** 的区别
+
 # Solution
 
 ## 排查 Kubernetes 的内存增长问题

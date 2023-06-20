@@ -5,10 +5,10 @@
 
 `kubectl exec -it <pod-name> -n <namespace-name> bash`
 > 交互式进入容器
-> 和从K8s的UI界面进入工作负载 `执行命令行` 一样。
+> 和从 K8s 的 UI 界面进入工作负载 `执行命令行` 一样。
 
 `kubectl logs <pod-name> -n <namespace-name>`
-> 和从K8s的UI界面进入工作负载查看Pods日志内容一样。
+> 和从 K8s 的 UI 界面进入工作负载查看 Pods 日志内容一样。
 > 建议执行以下这些避免刷屏
 > - `kubectl logs <pod-name> -n <namespace-name> | head -50`
 > - `kubectl logs <pod-name> -n <namespace-name> | tail -50`
@@ -31,3 +31,5 @@
 > `-o=wide` 以纯文本格式输出，包含所有附加信息。对于 Pod 包含节点名。
 > - [输出选项 - 格式化输出](https://kubernetes.io/zh-cn/docs/reference/kubectl/#formatting-output)
 
+重建 pod
+``

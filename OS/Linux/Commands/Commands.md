@@ -1,4 +1,11 @@
-[sudo & su](./sudo&su.md)
+# Reference
+
+- [菜鸟教程 Linux 命令大全](https://www.runoob.com/linux/linux-command-manual.html)
+
+# Category
+
+- [sudo & su](./sudo&su.md)
+
 
 # System management
 
@@ -8,6 +15,8 @@
 > `top -b -n 1` 以批处理模式输出仅更新一次的进程状态。
 > about option `-b` :
 > - [What does "batch mode" mean for the top command?](https://unix.stackexchange.com/questions/138484/what-does-batch-mode-mean-for-the-top-command)
+
+
 
 ## `free`
 > 显示内存状态。
@@ -28,3 +37,9 @@
 
 `cat /etc/passwd|grep -v nologin|grep -v halt|grep -v shutdown|awk -F":" '{ print $1"|"$3"|"$4 }'|more`
 > 对于 `cat /etc/passwd` 的替换
+
+## `ps`
+
+
+### 监控某段时间内运行的所有进程
+
