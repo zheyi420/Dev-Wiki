@@ -13,6 +13,11 @@ Pod 内运行 free 用于显示内存状态
 
 **重新部署服务** 和 **修改 Pod 数量为 0 后再增加** 的区别
 
+
+## PV
+
+### PVC - PersistentVolumeClaim
+
 # Solution
 
 ## 排查 Kubernetes 的内存增长问题

@@ -47,3 +47,13 @@
 
 ### 监控某段时间内运行的所有进程
 
+
+# File management
+
+## `chown`
+
+使用示例
+- `chown user:usergroup filename.txt`
+
+## 空文件创建方法
+
