@@ -39,6 +39,8 @@
 `kubectl top pod -n=<namespace-name> --containers`
 > 显示给定命名空间及其容器的度量。
 
+`kubectl get all -n=<namespace-name> -o=wide`
+
 
 `kubectl get pods -n=<namespace-name> -o=wide`
 > 以 ps 输出格式列出所有 pod 的更多信息(如节点名称)

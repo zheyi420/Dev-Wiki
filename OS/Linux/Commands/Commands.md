@@ -47,8 +47,17 @@
 
 ### 监控某段时间内运行的所有进程
 
+## `id`
+> 打印每个指定用户的用户和组信息，
+> 或(当USER省略时)为当前用户。
+
+
 
 # File management
+
+## `rm`
+> remove file or directory.
+
 
 ## `chown`
 
@@ -57,3 +66,24 @@
 
 ## 空文件创建方法
 
+# Disk management
+
+## `du`
+> ➡ disk usage
+> 用于显示目录或文件的大小。
+> 显示指定的目录或文件所占用的磁盘空间。
+
+`du -s * | sort -nr`
+> 显示当前目录下各子目录及文件的大小，并从大到小排序。
+
+## `df`
+> ➡ disk free
+> 显示每个文件所在的文件系统的信息，
+> 默认为所有文件系统。
+
+## `mkdir`
+> ➡ make directory
+
+
+`mkdir -p ./parentDir1/parentDir2/targetDir/`
+> 如果存在，则没有错误，根据需要创建父目录。

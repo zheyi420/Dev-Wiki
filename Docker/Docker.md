@@ -19,4 +19,6 @@ Tutorial
 `systemctl restart docker`
 
 `docker load -i xxx.tar`
-> 
+
+`docker images`
+
