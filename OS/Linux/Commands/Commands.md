@@ -1,6 +1,7 @@
 # Reference
 
 - [菜鸟教程 Linux 命令大全](https://www.runoob.com/linux/linux-command-manual.html)
+- [GNU Manuals Online](https://www.gnu.org/manual/)
 
 # Category
 
@@ -8,17 +9,17 @@
 
 # User management
 
-`cat /etc/passwd`
-> 查看用户
+- `cat /etc/passwd`
+  > 查看用户
 
-`cat /etc/group`
-> 查看用户组
+- `cat /etc/group`
+  > 查看用户组
 
-`w`
-> 查看当前活跃的用户列表
+- `w`
+  > 查看当前活跃的用户列表
 
-`cat /etc/passwd|grep -v nologin|grep -v halt|grep -v shutdown|awk -F":" '{ print $1"|"$3"|"$4 }'|more`
-> 对于 `cat /etc/passwd` 的替换
+- `cat /etc/passwd|grep -v nologin|grep -v halt|grep -v shutdown|awk -F":" '{ print $1"|"$3"|"$4 }'|more`
+  > 对于 `cat /etc/passwd` 的替换
 
 # System management
 
@@ -73,8 +74,8 @@
 > 用于显示目录或文件的大小。
 > 显示指定的目录或文件所占用的磁盘空间。
 
-`du -s * | sort -nr`
-> 显示当前目录下各子目录及文件的大小，并从大到小排序。
+- `du -s * | sort -nr`
+  > 显示当前目录下各子目录及文件的大小，并从大到小排序。
 
 ## `df`
 > ➡ disk free
@@ -85,5 +86,22 @@
 > ➡ make directory
 
 
-`mkdir -p ./parentDir1/parentDir2/targetDir/`
-> 如果存在，则没有错误，根据需要创建父目录。
+- `mkdir -p ./parentDir1/parentDir2/targetDir/`
+  > 如果存在，则没有错误，根据需要创建父目录。
+
+
+# Document editing
+
+## `sed`
+> sed (stream editor) is a non-interactive command-line text editor.
+> https://www.gnu.org/software/sed/manual/sed.html
+
+- `sed -i '2,5000d' filename.csv`
+  > 删除第 2 行至第 5000 行。（就地编辑源文件）
+
+- `sed -i '/60169077/d' file.csv`
+  > 删除文件中匹配的数据行
+
+- `sed -n '100,200p' filename`
+  > 查看文件中间一段，你可以使用sed命令，如上，这样你就可以只查看文件的第100行到第200行。  
+

@@ -25,8 +25,8 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Microservices.md",
-                "mode": "source",
+                "file": "Nginx.md",
+                "mode": "preview",
                 "source": false
               }
             }
@@ -44,19 +44,19 @@
             }
           },
           {
-            "id": "58faf91b8bc798f3",
+            "id": "10d55740767a2a3a",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
                 "file": "OS/Linux/Commands/Commands.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -130,7 +130,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Microservices.md",
+                "file": "OS/Linux/Commands/Commands.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -147,7 +147,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Microservices.md",
+                "file": "OS/Linux/Commands/Commands.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -170,7 +170,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Microservices.md"
+                "file": "OS/Linux/Commands/Commands.md"
               }
             }
           }
@@ -191,14 +191,16 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "4db751f89d34867d",
+  "active": "10d55740767a2a3a",
   "lastOpenFiles": [
+    "GIS/Geospatial Dev Tools/QGIS.md",
+    "OS/Linux/Commands/Commands.md",
+    "Kubernetes/kubectl.md",
+    "GIS/WebGIS Engine/Sm@rtMapX/SmartMapX JS.md",
+    "Microservices.md",
     "Nginx.md",
     "README.md",
     "Kubernetes/Kubernetes.md",
-    "Kubernetes/kubectl.md",
-    "OS/Linux/Commands/Commands.md",
-    "Microservices.md",
     "Docker/Docker.md",
     "OS/OS.md",
     "OS/Linux/NFS.md",
@@ -223,8 +225,6 @@
     "Git/Git.md",
     "DataStructuresAlgorithms/DataStructures.md",
     "未命名.canvas",
-    "GIS/Spec/Simple Features Interface Standard-SFS.md",
-    "GIS/WebGIS Engine/Available Checking.md",
     "DB/PostgreSQL",
     "DB",
     "Kubernetes",
