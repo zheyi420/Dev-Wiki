@@ -25,6 +25,8 @@ Pod 内运行 free 用于显示内存状态
 
 #### readinessProbe 就绪态探针
 
+#### startupProbe 启动探针
+
 ## PV
 
 ### PVC - PersistentVolumeClaim

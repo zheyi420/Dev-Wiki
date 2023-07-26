@@ -59,13 +59,39 @@
 ## `rm`
 > remove file or directory.
 
+## `chmod`
+> change mode
+
 
 ## `chown`
 
 使用示例
-- `chown user:usergroup filename.txt`
+- `chown user:usergroup file`
+
+## 查看文件编码字符集
+
+
 
 ## 空文件创建方法
+
+- `echo '' > file` 文件大小为 1 Byte，含有一个 `LF` 换行符
+- `touch file` 创建空文件
+- `: > file` 创建空文件
+- `> file` 创建空文件，bash 下可用，tcsh 下不能使用。
+- `& > file` 创建空文件，bash 下可用，tcsh 下不能使用。
+- `cat /dev/null > file`
+- `mktemp`
+
+
+## 清空不断增长的日志文件
+
+> 背景：
+> 现有一个不断写入的 `nginx_access.log` 日志文件，大小为 509GB。
+> 执行 `echo '' > nginx_access.log` 后，仅减小几 G，后又停止，继续写入。
+
+
+
+
 
 # Disk management
 
@@ -104,4 +130,5 @@
 
 - `sed -n '100,200p' filename`
   > 查看文件中间一段，你可以使用sed命令，如上，这样你就可以只查看文件的第100行到第200行。  
+
 
