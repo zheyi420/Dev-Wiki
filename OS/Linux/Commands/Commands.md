@@ -65,8 +65,8 @@
 
 ## `chown`
 
-使用示例
 - `chown user:usergroup file`
+- `chown -R uid:gid .` 修改所在目录下所有文件及子目录内文件。
 
 ## 查看文件编码字符集
 
@@ -131,4 +131,59 @@
 - `sed -n '100,200p' filename`
   > 查看文件中间一段，你可以使用sed命令，如上，这样你就可以只查看文件的第100行到第200行。  
 
+
+# Backup compression
+
+## `tar`
+> GNU  `tar` 将许多文件一起保存到单个磁带或磁盘归档中，并且可以从存档中恢复单个文件。
+
+### 备份 压缩
+
+tar 默认只是打包不压缩
+- `tar -cvf test.tar ./test` 得到 test.tar 备份文件
+
+参数 -z 打包后进行 gzip 压缩
+- `tar -zcvf test.tar.gz ./test` 得到 test.tar.gz 备份文件
+
+参数 -j 打包后进行 bzip2 压缩
+- `tar -jcvf test.tar.bz2 ./test` 得到 test.tar.bz2 备份文件
+
+### 解压缩
+
+- `tar -zxvf file_name.tar.gz`
+
+解压缩到指定目录下
+- `tar -zxvf file_name.tar.gz -C /dir/`
+
+### 列出归档内容
+
+在不解压的情况下查看压缩包内的内容详情
+- `tar -tvf file_name.tar.gz`
+
+详细列出 archive.tar 中的所有文件。
+- `tar -tvf archive.tar`
+
+
+Usage
+```sh
+-c, --create               create a new archive
+
+压缩选项:
+-a, --auto-compress        use archive suffix to determine the compression
+                             program
+-j, --bzip2                filter the archive through bzip2
+-z, --gzip, --gunzip, --ungzip   filter the archive through gzip
+    --zstd                 filter the archive through zstd
+-Z, --compress, --uncompress   filter the archive through compress
+
+
+-v, --verbose              verbosely list files processed
+    --warning=KEYWORD      warning control
+-x, --extract, --get       extract files from an archive
+-t, --list                 list the contents of an archive
+    --test-label           test the archive volume label and exit
+-f, --file=ARCHIVE         use archive file or device ARCHIVE
+    --force-local          archive file is local even if it has a colon
+-C, --directory=DIR        change to directory DIR
+```
 
