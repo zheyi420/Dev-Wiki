@@ -4,60 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "6d13b2a0f23657f3",
+        "id": "141c81b5c9b917b4",
         "type": "tabs",
         "children": [
           {
-            "id": "f4803f9e8bafcb9c",
+            "id": "63c8109a5a2d0d20",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Nginx.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "1a290c56cbe0ead7",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Kubernetes/kubectl.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "b95bc0a54cee85e5",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "OS/Linux/Commands/Commands.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          }
-        ],
-        "currentTab": 2
-      },
-      {
-        "id": "b27c395e757cff51",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "a62a53e94dc49cbf",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Docker/Docker.md",
-                "mode": "preview",
+                "file": "Hash checksum.md",
+                "mode": "source",
                 "source": false
               }
             }
@@ -91,7 +48,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "chmod",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -136,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "OS/Linux/Commands/Commands.md",
+                "file": "Hash checksum.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -153,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "OS/Linux/Commands/Commands.md",
+                "file": "Hash checksum.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -176,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "OS/Linux/Commands/Commands.md"
+                "file": "Hash checksum.md"
               }
             }
           }
@@ -197,13 +154,19 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "4db751f89d34867d",
+  "active": "63c8109a5a2d0d20",
   "lastOpenFiles": [
-    "Docker/Docker.md",
+    "Windows10 计算文件的哈希校验值.md",
+    "Hash checksum.md",
+    "未命名.md",
     "OS/Linux/Commands/Commands.md",
+    "Docker/Docker.md",
+    "Nginx.md",
+    "091deed4-2832-4433-a9f1-4165f5e0f813_Export-417a974a-fbb8-4bdf-8569-004e3fe14318.zip",
+    "未确认 64557.crdownload",
+    "DataStructuresAlgorithms/DataStructures.md",
     "Kubernetes/kubectl.md",
     "OS/Linux/SSH client.md",
-    "Nginx.md",
     "CV/Face Alignment.md",
     "OS/Windows.md",
     "OS/OS.md",
@@ -224,19 +187,13 @@
     "DB/Greenplum",
     "GIS/Geospatial Data/Geospatial Data Type/GeoJSON.md",
     "Three-Dimensional/ThreeJS.md",
-    "Language/YAML.md",
-    "Three-Dimensional/3D.md",
     "Three-Dimensional/assets",
     "Three-Dimensional/assets/context-relation.png",
     "Three-Dimensional",
-    "Language/JavaScript/TheModernJavaScriptTutorial/TheModernJavaScriptTutorial.md",
-    "GIS/Geospatial Data/Geospatial Data Type/PBF Format.md",
     "未命名.canvas",
     "DB/PostgreSQL",
     "DB",
     "Kubernetes",
-    "ComputerGraphics/WebGPU",
-    "GIS/Geospatial Data/Layer",
     "Pasted image 20230326014904.png",
     "GIS/Geospatial Data/Geospatial Data Type/assets/MultiLineString.png",
     "GIS/Geospatial Data/Geospatial Data Type/assets/Polygon-with-hole.png",

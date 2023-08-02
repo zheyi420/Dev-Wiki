@@ -148,6 +148,11 @@ tar 默认只是打包不压缩
 参数 -j 打包后进行 bzip2 压缩
 - `tar -jcvf test.tar.bz2 ./test` 得到 test.tar.bz2 备份文件
 
+### 提取文件
+
+- `tar -xf archive.tar` 从 archive.tar 中提取所有文件。
+
+
 ### 解压缩
 
 - `tar -zxvf file_name.tar.gz`
