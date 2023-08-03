@@ -5,7 +5,7 @@
 
 # Category
 
-- [sudo & su](./sudo&su.md)
+- [sudo & su](sudo&su.md)
 
 # User management
 
@@ -20,6 +20,13 @@
 
 - `cat /etc/passwd|grep -v nologin|grep -v halt|grep -v shutdown|awk -F":" '{ print $1"|"$3"|"$4 }'|more`
   > 对于 `cat /etc/passwd` 的替换
+
+## sudo & su
+
+- [Exploring the differences between sudo and su commands in Linux](https://www.redhat.com/sysadmin/difference-between-sudo-su)
+- [introduction to Sudo](https://www.sudo.ws/about/intro)
+
+
 
 # System management
 

@@ -5,6 +5,11 @@ Hash 校验，通过文件生成并显示加密哈希。
 
 ## Get-FileHash
 
+Reference:
+- [Microsoft.PowerShell.Utility Get-FileHash](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/get-filehash)
+
+> 使用指定的散列算法计算文件的散列值。
+
 > 在 PowerShell 下可用，在 cmd 下不可用。
 
 使用说明 `Get-FileHash -?`
@@ -78,6 +83,8 @@ CertUtil: -hashfile 命令成功完成。
 
 
 ```
+
+
 
 
 # Linux
