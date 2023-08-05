@@ -25,14 +25,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Nginx.md",
+                "file": "GIS/Geospatial Database/spatial extension/SpatiaLite.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "0de5facf1c5bf381",
+            "id": "db79fcecea2530cb",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Kubernetes/Kubernetes.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "6993873b81835500",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -56,7 +68,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -85,7 +97,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "curl",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -130,7 +142,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Nginx.md",
+                "file": "OS/Linux/Commands.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -147,7 +159,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Nginx.md",
+                "file": "OS/Linux/Commands.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -170,7 +182,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Nginx.md"
+                "file": "OS/Linux/Commands.md"
               }
             }
           }
@@ -191,11 +203,20 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "aeab70be76d59532",
+  "active": "6993873b81835500",
   "lastOpenFiles": [
-    "Docker/Docker.md",
-    "Hash checksum.md",
+    "Kubernetes/Kubernetes.md",
+    "GIS/Geospatial Database/spatial extension/SpatiaLite.md",
+    "Nginx.md",
+    "GIS/Geospatial Database/spatial extension",
+    "GIS/未命名",
+    "Language/JavaScript/Note.md",
     "OS/Linux/Commands.md",
+    "Language/JavaScript/DeepShallowCopy.md",
+    "Hash checksum.md",
+    "config-data-File/YAML.md",
+    "config-data-File",
+    "Docker/Docker.md",
     "OS/Linux/NFS.md",
     "OS/Linux/WSL.md",
     "OS/Linux/disk mount.md",
@@ -204,7 +225,6 @@
     "OS/Linux/SSH connection closed too soon.md",
     "Windows10 计算文件的哈希校验值.md",
     "未命名.md",
-    "Nginx.md",
     "091deed4-2832-4433-a9f1-4165f5e0f813_Export-417a974a-fbb8-4bdf-8569-004e3fe14318.zip",
     "未确认 64557.crdownload",
     "DataStructuresAlgorithms/DataStructures.md",
@@ -213,24 +233,16 @@
     "OS/Windows.md",
     "OS/OS.md",
     "OS/Windows",
-    "Kubernetes/Kubernetes.md",
     "GIS/Geospatial Dev Tools/QGIS.md",
     "GIS/WebGIS Engine/Sm@rtMapX/SmartMapX JS.md",
     "Microservices.md",
     "README.md",
-    "Front-End/Vue.md",
     "Front-End",
-    "DB/Greenplum.md",
-    "DB/PostgreSQL.md",
     "DB/Greenplum",
-    "GIS/Geospatial Data/Geospatial Data Type/GeoJSON.md",
     "Three-Dimensional/assets",
     "Three-Dimensional/assets/context-relation.png",
     "Three-Dimensional",
     "未命名.canvas",
-    "DB/PostgreSQL",
-    "DB",
-    "Kubernetes",
     "Pasted image 20230326014904.png",
     "GIS/Geospatial Data/Geospatial Data Type/assets/MultiLineString.png",
     "GIS/Geospatial Data/Geospatial Data Type/assets/Polygon-with-hole.png",

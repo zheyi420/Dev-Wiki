@@ -17,7 +17,7 @@ Reference:
 Windows PowerShell 命令可以校验的 Hash 值类型，包括：
 `SHA1`, `SHA256`, `SHA384`, `SHA512`, `MACTripleDES`, `MD5`, `RIPEMD160`, 暂不支持校验 `CRC32` 值。
 
-常用命令格式：
+常用命令
 `Get-FileHash [文件路径] -Algorithm [校验的Hash值类型] | Format-List`
 
 ```sh
@@ -59,6 +59,10 @@ SHA256          6CA13D52CA70C883E0F0BB101E425A89E8624DE51DB2D2392593AF6A84118090
 > CertUtil 是证书相关的管理工具，涉及到证书的加解密，所以相关的 `MD5`/`SHA1` 之类的加密算法都是支持的，在 CertUtil 中有个参数 -hashfile 可以帮助我们计算任意文件的哈希校验值。
 
 使用说明 `CertUtil -hashfile -?`
+
+
+常用命令
+`CertUtil -hashfile [文件路径] [校验的Hash值类型]`
 
 ```sh
 D:\>CertUtil -hashfile .\file.txt MD5
