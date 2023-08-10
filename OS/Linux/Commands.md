@@ -69,6 +69,8 @@
 ## `chmod`
 > change mode
 
+- `chmod 777 file` 修改文件权限为 `rwxrwxrwx`
+
 
 ## `chown`
 
@@ -170,7 +172,7 @@ tar 默认只是打包不压缩
 ### 列出归档内容
 
 在不解压的情况下查看压缩包内的内容详情
-- `tar -tvf file_name.tar.gz`
+- `tar -ztvf file_name.tar.gz`
 
 详细列出 archive.tar 中的所有文件。
 - `tar -tvf archive.tar`

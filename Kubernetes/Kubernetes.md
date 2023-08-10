@@ -8,6 +8,17 @@
 
 # Concepts
 
+## Namespaces
+
+- [K8s 文档 - 名字空间（Namespace）](https://kubernetes.io/zh-cn/docs/concepts/overview/working-with-objects/namespaces/)
+- [K8s 文档 - 通过名字空间共享集群](https://kubernetes.io/zh-cn/docs/tasks/administer-cluster/namespaces/)
+
+Namespaces 是 Kubernetes 用来支持隔离单个集群中的资源组的一种抽象。
+- 它提供一种机制，将同一集群中的资源划分为相互隔离的组。
+- 同一名字空间内的资源名称要唯一，但跨名字空间时没有这个要求。
+- 名字空间作用域仅针对带有名字空间的[对象](https://kubernetes.io/zh-cn/docs/concepts/overview/working-with-objects/#kubernetes-objects)，（例如 Deployment、Service 等），这种作用域对集群范围的对象 （例如 StorageClass、Node、PersistentVolume 等）不适用。
+
+
 ## Pod
 
 Pod 内运行 free 用于显示内存状态
@@ -16,6 +27,7 @@ Pod 内运行 free 用于显示内存状态
 **重新部署服务** 和 **修改 Pod 数量为 0 后再增加** 的区别
 
 ### Container Probe 容器探针
+
 - [容器探针](https://kubernetes.io/zh-cn/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
 - [探针](https://kubernetes.io/zh-cn/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe)
 
