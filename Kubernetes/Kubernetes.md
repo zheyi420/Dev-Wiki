@@ -13,6 +13,8 @@
 - [K8s 文档 - 名字空间（Namespace）](https://kubernetes.io/zh-cn/docs/concepts/overview/working-with-objects/namespaces/)
 - [K8s 文档 - 通过名字空间共享集群](https://kubernetes.io/zh-cn/docs/tasks/administer-cluster/namespaces/)
 
+- [k8s实践(5）k8s的命名空间Namespace](http://t.csdn.cn/hrZUl)
+
 Namespaces 是 Kubernetes 用来支持隔离单个集群中的资源组的一种抽象。
 - 它提供一种机制，将同一集群中的资源划分为相互隔离的组。
 - 同一名字空间内的资源名称要唯一，但跨名字空间时没有这个要求。
