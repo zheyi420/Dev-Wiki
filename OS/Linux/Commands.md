@@ -5,9 +5,9 @@
 
 # Category
 
-- [sudo & su](sudo&su.md)
 
-# User management
+
+## User management
 
 - `cat /etc/passwd`
   > 查看用户
@@ -21,16 +21,16 @@
 - `cat /etc/passwd|grep -v nologin|grep -v halt|grep -v shutdown|awk -F":" '{ print $1"|"$3"|"$4 }'|more`
   > 对于 `cat /etc/passwd` 的替换
 
-## sudo & su
+### sudo & su
 
 - [Exploring the differences between sudo and su commands in Linux](https://www.redhat.com/sysadmin/difference-between-sudo-su)
 - [introduction to Sudo](https://www.sudo.ws/about/intro)
 
 
 
-# System management
+## System management
 
-## `top`
+### `top`
 
 `top -b -n 1 | grep nginx | awk '{print "VIRT:"$5,"RES:"$6,"cpu:"$9"%","mem:"$10"%"}'`
 > `top -b -n 1` 以批处理模式输出仅更新一次的进程状态。
@@ -38,50 +38,60 @@
 > - [What does "batch mode" mean for the top command?](https://unix.stackexchange.com/questions/138484/what-does-batch-mode-mean-for-the-top-command)
 
 
-## `free`
+### `free`
 > 显示内存状态。
 
-## `df`
+### `df`
 > 
 
 
 
-## `ps`
-`process status`
-
-### Common used
+### `ps`
+> `process status`
 
 `ps -aux`
 
-### 监控某段时间内运行的所有进程
+#### 监控某段时间内运行的所有进程
 
-## `id`
+### `id`
 > 打印每个指定用户的用户和组信息，
 > 或(当USER省略时)为当前用户。
 
 
 
-# File management
+## File management
 
-## `rm`
+### `cat`
+> Concatenate FILE(s) to standard output.
+
+- https://www.gnu.org/software/coreutils/cat
+
+#### 合并文件
+
+使用 `cat` 将多个 `.tar.gz` 文件合并到单个 `.tar.gz` 文件。
+- `cat a.tar.gz* > data.tar.gz`
+
+
+
+### `rm`
 > remove file or directory.
 
-## `chmod`
+### `chmod`
 > change mode
 
 - `chmod 777 file` 修改文件权限为 `rwxrwxrwx`
 
 
-## `chown`
+### `chown`
 
 - `chown user:usergroup file`
 - `chown -R uid:gid .` 修改所在目录下所有文件及子目录内文件。
 
-## 查看文件编码字符集
+### 查看文件编码字符集
 
 
 
-## 空文件创建方法
+### 空文件创建方法
 
 - `echo '' > file` 文件大小为 1 Byte，含有一个 `LF` 换行符
 - `touch file` 创建空文件
@@ -92,7 +102,7 @@
 - `mktemp`
 
 
-## 清空不断增长的日志文件
+### 清空不断增长的日志文件
 
 > 背景：
 > 现有一个不断写入的 `nginx_access.log` 日志文件，大小为 509GB。
@@ -102,9 +112,9 @@
 
 
 
-# Disk management
+## Disk management
 
-## `du`
+### `du`
 > ➡ disk usage
 > 用于显示目录或文件的大小。
 > 显示指定的目录或文件所占用的磁盘空间。
@@ -112,12 +122,12 @@
 - `du -s * | sort -nr`
   > 显示当前目录下各子目录及文件的大小，并从大到小排序。
 
-## `df`
+### `df`
 > ➡ disk free
 > 显示每个文件所在的文件系统的信息，
 > 默认为所有文件系统。
 
-## `mkdir`
+### `mkdir`
 > ➡ make directory
 
 
@@ -125,9 +135,9 @@
   > 如果存在，则没有错误，根据需要创建父目录。
 
 
-# Document editing
+## Document editing
 
-## `sed`
+### `sed`
 > sed (stream editor) is a non-interactive command-line text editor.
 > https://www.gnu.org/software/sed/manual/sed.html
 
@@ -141,35 +151,48 @@
   > 查看文件中间一段，你可以使用sed命令，如上，这样你就可以只查看文件的第100行到第200行。  
 
 
-# Backup compression
+## Backup compression
 
-## `tar`
+### `tar`
 > GNU  `tar` 将许多文件一起保存到单个磁带或磁盘归档中，并且可以从存档中恢复单个文件。
 
-### 备份 压缩
+- manual https://www.gnu.org/software/tar/manual/
+
+
+#### 备份 压缩
 
 tar 默认只是打包不压缩
 - `tar -cvf test.tar ./test` 得到 test.tar 备份文件
+- `tar -cf archive.tar foo bar` 从文件 foo 和 bar 创建 archive.tar。
 
-参数 -z 打包后进行 gzip 压缩
+
+参数 `-z` 打包后进行 gzip 压缩
 - `tar -zcvf test.tar.gz ./test` 得到 test.tar.gz 备份文件
 
-参数 -j 打包后进行 bzip2 压缩
+参数 `-j` 打包后进行 bzip2 压缩
 - `tar -jcvf test.tar.bz2 ./test` 得到 test.tar.bz2 备份文件
 
-### 提取文件
+打包压缩时，排除某些文件和文件夹
+- `tar -zcvf /dir/test.tar.gz test --exclude=conf.py --exclude=.git --exclude=config/*.json`
+  - 不打包 `conf.py` 文件
+  - 不打包 `.git` 文件夹
+  - 不打包 `config` 文件夹下的所有 `json` 文件 ➡ 切记不要加上顶级目录，比如 `--exclude=test/conf.py` 这样是错误的。
+  - 每个不打包的文件、文件夹、文件类型，都要用一个 `--exclude`。
+
+
+#### 提取文件
 
 - `tar -xf archive.tar` 从 archive.tar 中提取所有文件。
 
 
-### 解压缩
+#### 解压缩
 
 - `tar -zxvf file_name.tar.gz`
 
 解压缩到指定目录下
 - `tar -zxvf file_name.tar.gz -C /dir/`
 
-### 列出归档内容
+#### 列出归档内容
 
 在不解压的情况下查看压缩包内的内容详情
 - `tar -ztvf file_name.tar.gz`
