@@ -4,83 +4,35 @@
     "type": "split",
     "children": [
       {
-        "id": "9cdd697b61f46449",
+        "id": "f83c5f3f3cf17afe",
         "type": "tabs",
         "children": [
           {
-            "id": "35e8ad6851b2ed44",
+            "id": "c29c02949ff57ced",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "OS/Linux/Commands.md",
+                "file": "GIS/Geospatial Database/pgRouting.md",
                 "mode": "preview",
                 "source": false
               }
             }
           },
           {
-            "id": "e443d83a0e256a2d",
+            "id": "9cd903102a70c508",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Kubernetes/Kubernetes.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "dddbc5678063f08c",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "config-data-File/YAML.md",
+                "file": "Node/Nodejs.md",
                 "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "5d8ef7749afed082",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Kubernetes/kubectl.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "a3d1de8c55b38366",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "DB/PostgreSQL.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "d1ac8379c9bc8353",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Hash checksum.md",
-                "mode": "preview",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -109,7 +61,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "diff",
+                "query": "矢量切片",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -154,7 +106,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "config-data-File/YAML.md",
+                "file": "Node/Nodejs.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -171,7 +123,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "config-data-File/YAML.md",
+                "file": "Node/Nodejs.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -194,7 +146,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "config-data-File/YAML.md"
+                "file": "Node/Nodejs.md"
               }
             }
           }
@@ -215,25 +167,27 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "dddbc5678063f08c",
+  "active": "9cd903102a70c508",
   "lastOpenFiles": [
-    "Kubernetes/Kubernetes.md",
-    "Kubernetes/kubectl.md",
-    "DB/PostgreSQL.md",
-    "Hash checksum.md",
     "GIS/Geospatial Database/spatial extension/SpatiaLite.md",
-    "GIS/Geospatial Database/spatial extension/PostGIS.md",
+    "Node/Nodejs.md",
+    "GIS/Geospatial Database/pgRouting.md",
+    "DB/PostgreSQL.md",
+    "Node/npm.md",
+    "GIS/WebGIS Engine/Sm@rtMapX/SmartMapX JS.md",
+    "Hash checksum.md",
+    "Kubernetes/kubectl.md",
+    "StressTesting.md",
+    "Kubernetes/Kubernetes.md",
     "OS/Linux/Commands.md",
+    "GIS/WebGIS Engine/Mapbox/Mapbox GL JS.md",
+    "config-data-File/YAML.md",
+    "GIS/Geospatial Database/spatial extension/PostGIS.md",
     "Language/JavaScript/TheModernJavaScriptTutorial/TheModernJavaScriptTutorial.md",
     "Nginx.md",
-    "Node/npm.md",
-    "config-data-File/YAML.md",
     "OS/OS.md",
     "GIS/Geospatial Analysis/Turf.md",
-    "GIS/WebGIS Engine/Sm@rtMapX/SmartMapX JS.md",
     "Docker/Docker.md",
-    "GIS/WebGIS Engine/Mapbox/Mapbox GL JS.md",
-    "StressTesting.md",
     "GIS/Geospatial Database/spatial extension",
     "GIS/未命名",
     "Language/JavaScript/Note.md",
@@ -244,8 +198,6 @@
     "OS/Linux/disk mount.md",
     "OS/Linux/sudo&su.md",
     "OS/Linux/SSH client.md",
-    "OS/Linux/SSH connection closed too soon.md",
-    "Windows10 计算文件的哈希校验值.md",
     "091deed4-2832-4433-a9f1-4165f5e0f813_Export-417a974a-fbb8-4bdf-8569-004e3fe14318.zip",
     "未确认 64557.crdownload",
     "OS/Windows",
