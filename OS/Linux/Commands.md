@@ -1,7 +1,9 @@
 # Reference
 
 - [菜鸟教程 Linux 命令大全](https://www.runoob.com/linux/linux-command-manual.html)
-- [GNU Manuals Online](https://www.gnu.org/manual/)
+- [GNU Manuals Online](https://www.gnu.org/manual/) 
+- https://tldp.org/
+
 
 # Category
 
@@ -87,6 +89,14 @@
 - `chown user:usergroup file`
 - `chown -R uid:gid .` 修改所在目录下所有文件及子目录内文件。
 
+
+### `ln`
+> link files
+
+- [关于硬链接与软连接占用磁盘空间问题的分析研究](https://blog.51cto.com/jk6627/1949090) 
+
+
+
 ### 查看文件编码字符集
 
 
@@ -116,14 +126,15 @@
 
 ### `du`
 > ➡ disk usage
-> 用于显示目录或文件的大小。
-> 显示指定的目录或文件所占用的磁盘空间。
+> 递归显示（磁盘）文件使用情况。默认为当前工作目录，除非另有说明。
+
 
 - `du -s * | sort -nr`
   > 显示当前目录下各子目录及文件的大小，并从大到小排序。
 
 ### `df`
 > ➡ disk free
+> 以表格形式显示文件系统的使用情况。
 > 显示每个文件所在的文件系统的信息，
 > 默认为所有文件系统。
 
@@ -136,6 +147,13 @@
 
 
 ## Document editing
+
+### `grep`
+
+- 输出显示 `匹配到二进制文件（标准输入）` 时，添加参数如下
+	- `grep -a`
+	- `grep --binary-files=text`
+
 
 ### `sed`
 > sed (stream editor) is a non-interactive command-line text editor.

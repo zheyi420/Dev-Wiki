@@ -8,6 +8,14 @@
 
 # Concepts
 
+## Nodes
+
+- [节点](https://kubernetes.io/zh-cn/docs/concepts/architecture/nodes/) 
+- [查看 Pod 和节点](https://kubernetes.io/zh-cn/docs/tutorials/kubernetes-basics/explore/explore-intro/) 
+
+
+
+
 ## Namespaces
 
 - [K8s 文档 - 名字空间（Namespace）](https://kubernetes.io/zh-cn/docs/concepts/overview/working-with-objects/namespaces/)
@@ -27,19 +35,31 @@ Pod 内运行 free 用于显示内存状态
 内存关系为：`total` = `used` + `free` + `buff/cache`
 
 **重新部署服务** 和 **修改 Pod 数量为 0 后再增加** 的区别
+- 重新部署服务会待新的 Pod 处于 `Running` 状态后再移除旧的 Pod，不会影响服务。
+- 修改 Pod 数量为 0 后再增加会导致服务中断。
 
 ### Container Probe 容器探针
-
-- [容器探针](https://kubernetes.io/zh-cn/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
-- [探针](https://kubernetes.io/zh-cn/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe)
+> **probe** 是由 kubelet 对容器执行的定期诊断。 要执行诊断，kubelet 既可以在容器内执行代码，也可以发出一个网络请求。
 
 
+- [容器探针](https://kubernetes.io/zh-cn/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) 
+- [探针](https://kubernetes.io/zh-cn/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) 
 
-#### livenessProbe 存活态探针
+#### 检查机制
 
-#### readinessProbe 就绪态探针
+- `httpGet`
+	对容器的 IP 地址上指定端口和路径执行 HTTP `GET` 请求。如果响应的状态码大于等于 200 且小于 400，则诊断被认为是成功的。
 
-#### startupProbe 启动探针
+#### 探测类型
+##### livenessProbe 存活态探针
+
+##### readinessProbe 就绪态探针
+
+- 就绪探针在容器的整个生命周期中保持运行状态。
+- 存活探针**不等待**就绪性探针成功。 如果要在执行存活探针之前等待，应该使用 `initialDelaySeconds` 或 `startupProbe`。
+
+
+##### startupProbe 启动探针
 
 ## PV
 

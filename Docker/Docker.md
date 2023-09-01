@@ -19,9 +19,18 @@ Tutorial
 
 
 ## `docker exec`
+> Execute a command in a running container
+
+> Usage: `docker exec [OPTIONS] CONTAINER COMMAND [ARG...]`
+
 
 - 在正在运行的容器中执行命令，在容器上执行交互式 sh shell。
 	- `docker exec -it mycontainer /bin/bash`
+
+- OPTIONS
+	- `--interactive` `-i` Keep STDIN open even if not attached
+	- `--tty` `-t` Allocate a pseudo-TTY
+
 
 
 ## `docker run`
@@ -29,18 +38,22 @@ Tutorial
 
 > Usage: `docker run [OPTIONS] IMAGE [COMMAND] [ARG...]`
 
+> Description:
 > `docker run` 命令会在新容器中运行一个命令，必要时会调用镜像并启动容器。
+> 你可以使用 `docker start` 重启已停止的容器，并保留其之前的所有更改。使用 `docker ps -a `查看所有容器的列表，包括已停止的容器。
 
 - OPTIONS
 	- `--name` Assign a name to the container
 	- `--cpus` Number of CPUs
-	- `--ulimit` Ulimit options
+	- `--ulimit` Ulimit options 限制进程的资源使用量。
+		- [如何验证 ulimit 中的资源限制？如何查看当前使用量？](https://feichashao.com/ulimit_demo/) 
 	- `--volume` `-v` Bind mount a volume 绑定挂载卷
 		- [Add bind mounts or volumes using the --mount flag](https://docs.docker.com/engine/reference/commandline/run/#mount) 
 		- [Bind mounts](https://docs.docker.com/storage/bind-mounts/) 
 	- `--publish` `-p` Publish a container's port(s) to the host
 		- [Publish or expose port (-p, --expose)](https://docs.docker.com/engine/reference/commandline/run/#publish) 
 	- `--detach` `-d` Run container in background and print container ID
+
 
 
 ## `docker ps`
