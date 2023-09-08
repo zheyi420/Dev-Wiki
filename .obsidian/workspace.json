@@ -8,55 +8,19 @@
         "type": "tabs",
         "children": [
           {
-            "id": "5a5a7135bf1d05f6",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Docker/Docker.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "764da35bcd5fea81",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Kubernetes/kubectl.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "5abc5fbffbcf226e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Kubernetes/ExitCode.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "985c9d90e4baabdd",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
                 "file": "Kubernetes/Kubernetes.md",
-                "mode": "preview",
+                "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "f05d01339ee33907",
+            "id": "75e30585e539f667",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -66,21 +30,8 @@
                 "source": false
               }
             }
-          },
-          {
-            "id": "98b1427bbe4cb3a7",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "StressTesting.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -109,7 +60,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "grep",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -217,13 +168,15 @@
   },
   "active": "985c9d90e4baabdd",
   "lastOpenFiles": [
-    "Kubernetes/kubectl.md",
+    "OS/Linux/Commands.md",
+    "GIS/WebGIS Engine/Sm@rtMapX/SmartMapX JS.md",
     "Kubernetes/ExitCode.md",
     "Kubernetes/Kubernetes.md",
-    "StressTesting.md",
-    "OS/Linux/Commands.md",
-    "Kubernetes/kubelet.md",
+    "Kubernetes/kubectl.md",
     "Docker/Docker.md",
+    "StressTesting.md",
+    "-.md",
+    "Kubernetes/kubelet.md",
     "OS/OS.md",
     "GIS/Geospatial Dev Tools/Geospatial Dev Tools.md",
     "OS/Linux/shell.md",
@@ -241,9 +194,7 @@
     "GIS/Geospatial Database/pgRouting.md",
     "GIS/Geospatial Database/spatial extension/SpatiaLite.md",
     "DB/PostgreSQL.md",
-    "GIS/WebGIS Engine/Sm@rtMapX/SmartMapX JS.md",
     "GIS/WebGIS Engine/Mapbox/Mapbox GL JS.md",
-    "config-data-File/YAML.md",
     "GIS/Geospatial Database/spatial extension",
     "GIS/未命名",
     "config-data-File",

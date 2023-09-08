@@ -66,3 +66,11 @@
 
 
 `kubectl describe nodes <node-name>`
+
+### `top`
+> Display Resource (CPU/Memory) usage.
+
+
+`kubectl top pod -n=NAMESPACE POD_NAME --containers`
+> Show metrics for a given pod and its containers.
+

@@ -31,12 +31,16 @@ Namespaces 是 Kubernetes 用来支持隔离单个集群中的资源组的一种
 
 ## Pod
 
-Pod 内运行 free 用于显示内存状态
-内存关系为：`total` = `used` + `free` + `buff/cache`
 
 **重新部署服务** 和 **修改 Pod 数量为 0 后再增加** 的区别
 - 重新部署服务会待新的 Pod 处于 `Running` 状态后再移除旧的 Pod，不会影响服务。
 - 修改 Pod 数量为 0 后再增加会导致服务中断。
+
+### 资源配置
+
+- [k8s CPU limit和throttling的迷思](https://nanmu.me/zh-cn/posts/2021/myth-of-k8s-cpu-limit-and-throttle/) 
+- [为 Pod 和容器管理资源](https://kubernetes.io/zh-cn/docs/concepts/configuration/manage-resources-containers/) 
+
 
 ### Container Probe 容器探针
 > **probe** 是由 kubelet 对容器执行的定期诊断。 要执行诊断，kubelet 既可以在容器内执行代码，也可以发出一个网络请求。

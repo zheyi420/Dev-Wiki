@@ -3,6 +3,7 @@
 - [菜鸟教程 Linux 命令大全](https://www.runoob.com/linux/linux-command-manual.html)
 - [GNU Manuals Online](https://www.gnu.org/manual/) 
 - https://tldp.org/
+- https://www.kernel.org/
 
 
 # Category
@@ -39,6 +40,8 @@
 > about option `-b` :
 > - [What does "batch mode" mean for the top command?](https://unix.stackexchange.com/questions/138484/what-does-batch-mode-mean-for-the-top-command)
 
+`top -c`
+> `-c` 显示完整的命令行而不截断。
 
 ### `free`
 > 显示内存状态。
