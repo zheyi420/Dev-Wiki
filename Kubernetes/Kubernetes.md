@@ -40,6 +40,10 @@ Namespaces 是 Kubernetes 用来支持隔离单个集群中的资源组的一种
 
 - [k8s CPU limit和throttling的迷思](https://nanmu.me/zh-cn/posts/2021/myth-of-k8s-cpu-limit-and-throttle/) 
 - [为 Pod 和容器管理资源](https://kubernetes.io/zh-cn/docs/concepts/configuration/manage-resources-containers/) 
+- [为容器和 Pods 分配 CPU 资源](https://kubernetes.io/zh-cn/docs/tasks/configure-pod-container/assign-cpu-resource/) 
+- [管理内存、CPU 和 API 资源](https://kubernetes.io/zh-cn/docs/tasks/administer-cluster/manage-resources/) 
+- [限制范围](https://kubernetes.io/zh-cn/docs/concepts/policy/limit-range/) limit-range 
+- [资源配额](https://kubernetes.io/zh-cn/docs/concepts/policy/resource-quotas/) resource-quotas 
 
 
 ### Container Probe 容器探针
