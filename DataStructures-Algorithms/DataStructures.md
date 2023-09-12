@@ -146,7 +146,7 @@ djb2HashCode(key) {
 
 
 >最常见的散列函数，lose lose 散列函数，方法是简单地将每个键值中的每个字母的 ASCII 值相加；
->![HashTable_Function_lose_lose](./assets/HashTable_Function_lose_lose.png)
+>![HashTable_Function_lose_lose](HashTable_Function_lose_lose.png)
 
 
 >在一些编程语言中，还有一种叫作散列集合的实现。散列集合由一个集合构成，但是插入、移除或获取元素时，使用的是 hashCode 函数。我们可以复用散列表中实现的所有代码来实现散列集合，不同之处在于，不再添加键值对，而是只插入值而没有键。例如，可以使用散列集合来存储所有的英语单词（不包括它们的定义）。和集合相似，散列集合只存储不重复的唯一值；
@@ -159,7 +159,7 @@ djb2HashCode(key) {
 
 >分离链接法包括为散列表的每一个位置创建一个链表并将元素存储在里面。它是解决冲突的最简单的方法，但是在 HashTable 实例之外还需要额外的存储空间。
 
-![Separating_links](./assets/Separating_links.png)
+![Separating_links](Separating_links.png)
 
 ### 线性探查
 
@@ -167,7 +167,7 @@ djb2HashCode(key) {
 
 >当想向表中某个位置添加一个新元素的时候，如果索引为 position 的位置已经被占据了，就尝试 position+1 的位置。如果 position+1 的位置也被占据了，就尝试 position+2 的位置，以此类推，直到在散列表中找到一个空闲的位置；（迭代散列表，直到找到一个空闲的位置）
 
-![linear_probing](./assets/linear_probing.png)
+![linear_probing](linear_probing.png)
 
 #### 删除元素时的区别
 
@@ -176,14 +176,14 @@ djb2HashCode(key) {
 
 	缺点：效率会越来越低。
 
-	>![soft_deletion](./assets/soft_deletion.png)
+	>![soft_deletion](soft_deletion.png)
 
 2. 移动一个或多个元素到之前的位置
 	>需要检验是否有必要将一个或多个元素移动到之前的位置。当搜索一个键的时候，这种方法可以避免找到一个空位置。如果移动元素是必要的，我们就需要在散列表中挪动键值对。
 
 	缺点：删除效率低。
 
-	>![linear_probing_ele_deletion_2](./assets/linear_probing_ele_deletion_2.png)
+	>![linear_probing_ele_deletion_2](linear_probing_ele_deletion_2.png)
 
 ### 双散列法
 
@@ -239,7 +239,7 @@ djb2HashCode(key) {
 
 	但是**只允许你在左侧节点存储（比父节点）小的值，在右侧节点存储（比父节点）大的值。**
 
- >![BST](./assets/BST.png)
+ >![BST](BST.png)
 
 - 二叉搜索树的问题
 
@@ -533,7 +533,7 @@ removeNode(node, key) {
 
 > 图的最常见实现。
 
-![graph](./assets/graph.png)
+![graph](graph.png)
 
 结构：
 - 每个节点都和一个整数相关联，该整数将作为数组的索引。（如 C：2，G：6）
@@ -555,7 +555,7 @@ removeNode(node, key) {
 
 存在好几种方式来表示这种数据结构。可以用列表（数组）、链表，甚至是散列表或是字典来表示相邻顶点列表。
 
-![adjacency_list.png](./assets/adjacency_list.png)
+![adjacency_list.png](adjacency_list.png)
 
 
 ### 关联矩阵
@@ -566,7 +566,7 @@ removeNode(node, key) {
 
 如果顶点 *v* 是边 *e* 的入射点，则 array\[v\]\[e\] === 1；否则，array\[v\]\[e\] === 0。  
 
-![incidence_matrix.png](./assets/incidence_matrix.png)
+![incidence_matrix.png](incidence_matrix.png)
 
 关联矩阵通常用于边的数量比顶点多的情况，以节省空间和内存。
 

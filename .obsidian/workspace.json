@@ -4,71 +4,47 @@
     "type": "split",
     "children": [
       {
-        "id": "5815e874e07a889e",
+        "id": "f01c4b4135fbefde",
         "type": "tabs",
         "children": [
           {
-            "id": "4ebfe7a7264fed45",
+            "id": "54bb1bb5192d10a4",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Docker/Docker.md",
+                "file": "DataStructures-Algorithms/DataStructures.md",
                 "mode": "preview",
                 "source": false
               }
             }
           },
           {
-            "id": "66de5b7236a32ca9",
+            "id": "2166982e3eb8b419",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Kubernetes/kubectl.md",
+                "file": "Security/Encryption.md",
                 "mode": "preview",
                 "source": false
               }
             }
           },
           {
-            "id": "fea895c3949065d0",
+            "id": "cd773792958202c5",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "OS/Linux/Commands.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "467d5443cc82ddca",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "GIS/WebGIS Engine/Sm@rtMapX/SmartMapX JS.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "c5df0d1a90feeb6e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Git/Git.md",
+                "file": "Browser.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -142,7 +118,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Git/Git.md",
+                "file": "Browser.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -159,7 +135,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Git/Git.md",
+                "file": "Browser.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -182,7 +158,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Git/Git.md"
+                "file": "Browser.md"
               }
             }
           },
@@ -213,14 +189,19 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "c5df0d1a90feeb6e",
+  "active": "cd773792958202c5",
   "lastOpenFiles": [
-    "Git/GitHub/GitHub.md",
+    "Security/Encryption.md",
+    "Browser.md",
+    "Hash-Checksum.md",
+    "DataStructures-Algorithms/DataStructures.md",
+    "Security",
+    "Kubernetes/kubectl.md",
+    "OS/Linux/Commands.md",
     "Git/Git.md",
+    "Git/GitHub/GitHub.md",
     "Git/GitHub/fatal/Connection was reset.md",
     "GIS/WebGIS Engine/Sm@rtMapX/SmartMapX JS.md",
-    "OS/Linux/Commands.md",
-    "Kubernetes/kubectl.md",
     "Docker/Docker.md",
     "GIS/Geospatial Dev Tools/Geospatial Dev Tools.md",
     "OS/Linux/system.md",
@@ -235,13 +216,9 @@
     "OS/Linux/shell.md",
     "GIS/Geospatial Dev Tools/assets/FieldCalculator.png",
     "OS/Linux/NFS.md",
-    "Hash checksum.md",
     "OS/Linux/WSL.md",
     "Node/NVM.md",
     "Node/npm.md",
-    "Node/Nodejs.md",
-    "Language/JavaScript/DeepShallowCopy.md",
-    "GIS/Spec/CRS-SRS.md",
     "GIS/Geospatial Database/spatial extension",
     "GIS/未命名",
     "config-data-File",
@@ -252,7 +229,6 @@
     "DB/Greenplum",
     "Three-Dimensional/assets",
     "Three-Dimensional/assets/context-relation.png",
-    "Three-Dimensional",
     "未命名.canvas",
     "Pasted image 20230326014904.png",
     "GIS/Geospatial Data/Geospatial Data Type/assets/MultiLineString.png",
