@@ -66,6 +66,9 @@
 
 ## File management
 
+- [Linux文件权限属性后面的点的含义（ls -l）](https://blog.csdn.net/xinlongabc/article/details/46801641) 
+
+
 ### `cat`
 > Concatenate FILE(s) to standard output.
 
