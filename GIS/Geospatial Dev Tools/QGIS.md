@@ -62,7 +62,7 @@ Blog
 
 ## 矢量图层进行坐标系转换时，具有无效的几何图形
 
-[[Geometric Validity]]
+[[Geometric-Validity]]
 
 工具箱 → 矢量几何图形 → 修正几何图形 (fix geometries) 
 
