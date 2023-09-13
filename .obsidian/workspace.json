@@ -4,17 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "a0a738eb8a2faf3f",
+        "id": "c20448566172004c",
         "type": "tabs",
         "children": [
           {
-            "id": "e3e3e36d47931aab",
+            "id": "18254bc3f66ca1ff",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "GIS/Geospatial Database/spatial extension/PostGIS.md",
-                "mode": "preview",
+                "file": "GIS/GeoServer.md",
+                "mode": "source",
                 "source": false
               }
             }
@@ -93,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "GIS/Geospatial Database/spatial extension/PostGIS.md",
+                "file": "GIS/GeoServer.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "GIS/Geospatial Database/spatial extension/PostGIS.md",
+                "file": "GIS/GeoServer.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "GIS/Geospatial Database/spatial extension/PostGIS.md"
+                "file": "GIS/GeoServer.md"
               }
             }
           },
@@ -152,8 +152,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 394.5,
-    "collapsed": true
+    "width": 394.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -165,12 +164,12 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "e3e3e36d47931aab",
+  "active": "18254bc3f66ca1ff",
   "lastOpenFiles": [
+    "GIS/Geospatial Database/spatial extension/PostGIS.md",
     "DB/Greenplum.md",
     "DB/PostgreSQL.md",
     "GIS/Geospatial Dev Tools/QGIS.md",
-    "GIS/Geospatial Database/spatial extension/PostGIS.md",
     "GIS/Geospatial Database/Spatial index.md",
     "GIS/Data/Geometric-Validity.md",
     "GIS/Data/DataSet.md",
