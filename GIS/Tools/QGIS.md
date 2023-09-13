@@ -40,7 +40,7 @@ Blog
 
 > paste (E)WKT and WKB code and see it on the map
 
-采用 WKT 的格式输入数据打点 [[WKT & WKB & GeoJSON]] 
+采用 WKT 的格式输入数据打点 [[WKT-WKB-GeoJSON]] 
 
 
 ## 对两个 shp 图层如 a 图层和 b 图层，按照属性表增减数据行
@@ -89,7 +89,7 @@ Blog
 
 `num_points($geometry)` → 返回当前要素几何图形中的顶点数
 
-![Field Calculator](./assets/FieldCalculator.png)
+![Field Calculator](FieldCalculator.png)
 
 ## 查看几何的顶点 vertex
 

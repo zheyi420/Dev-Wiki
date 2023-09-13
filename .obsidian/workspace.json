@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "c20448566172004c",
+        "id": "54f75f6f77ad2aa5",
         "type": "tabs",
         "children": [
           {
-            "id": "18254bc3f66ca1ff",
+            "id": "5d398e4bb7f66cdf",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "GIS/GeoServer.md",
+                "file": "GIS/Styled-Layer-Descriptor(SLD).md",
                 "mode": "source",
                 "source": false
               }
@@ -48,7 +48,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "postgres",
+                "query": "gdal",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -93,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "GIS/GeoServer.md",
+                "file": "GIS/Styled-Layer-Descriptor(SLD).md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "GIS/GeoServer.md",
+                "file": "GIS/Styled-Layer-Descriptor(SLD).md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "GIS/GeoServer.md"
+                "file": "GIS/Styled-Layer-Descriptor(SLD).md"
               }
             }
           },
@@ -164,37 +164,38 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "18254bc3f66ca1ff",
+  "active": "5d398e4bb7f66cdf",
   "lastOpenFiles": [
-    "GIS/Geospatial Database/spatial extension/PostGIS.md",
-    "DB/Greenplum.md",
-    "DB/PostgreSQL.md",
-    "GIS/Geospatial Dev Tools/QGIS.md",
-    "GIS/Geospatial Database/Spatial index.md",
-    "GIS/Data/Geometric-Validity.md",
-    "GIS/Data/DataSet.md",
-    "GIS/Data/Data-Spec/GeoJSON.md",
-    "GIS/Data/Data-Spec/PBF Format.md",
-    "GIS/Spec/CRS-SRS.md",
-    "GIS/Spec/OGC Spec.md",
-    "GIS/WebGIS-Case.md",
-    "GIS/WebGIS Engine/Available Checking.md",
-    "Browser.md",
-    "Git/Git.md",
-    "GIS/Spec/Simple Features Interface Standard-SFS.md",
-    "GIS/Spec/WGS.md",
-    "GIS/GeoServer.md",
+    "config-data-File/XML.md",
+    "GIS/Styled-Layer-Descriptor(SLD).md",
+    "GIS/WebGIS/CesiumJS.md",
     "Three-Dimensional/ThreeJS.md",
+    "GIS/Data/Data-Spec/WKT-WKB-GeoJSON.md",
+    "GIS/Data/Geometric-Validity.md",
+    "GIS/Data/Data-Spec/3D-Tiles.md",
     "Three-Dimensional/3D.md",
-    "DataStructures-Algorithms/DataStructures.md",
-    "DataStructures-Algorithms/Recursion.md",
-    "DataStructures-Algorithms/Algorithms.md",
-    "Security/Encryption.md",
-    "Hash-Checksum.md",
+    "GIS/WebGIS/OpenLayers.md",
+    "GIS/Data/Data-Processing.md",
+    "gdal.org.md",
+    "GIS/WebGIS/Turf.md",
+    "GIS/WebGIS/WebGIS-Case.md",
+    "GIS/Tools/Geospatial Dev Tools.md",
+    "GIS/Tools/QGIS.md",
+    "GIS/Spec/WGS.md",
+    "GIS/Spec/Simple Features Interface Standard-SFS.md",
+    "GIS/Spec/OGC Spec.md",
+    "GIS/Spec/CRS-SRS.md",
+    "GIS/Data/Data-Spec/PBF-Format.md",
+    "GIS/Data/Data-Spec/WKT-GeoJSON.md",
+    "GIS/GIS技术.jpeg",
+    "GIS/WebGIS/Mapbox-GL-JS.md",
+    "GIS/WebGIS/SmartMapX-JS.md",
+    "GIS/WebGIS/Mapbox/Access-tokens-usage.md",
+    "GIS/WebGIS/Available Checking.md",
+    "GIS/Database/Spatial-Index.md",
     "Security",
-    "Kubernetes/kubectl.md",
-    "GIS/Geospatial Dev Tools/assets/FieldCalculator.png",
-    "GIS/Geospatial Database/spatial extension",
+    "GIS/Tools/assets/FieldCalculator.png",
+    "GIS/Database/spatial-extension",
     "GIS/未命名",
     "config-data-File",
     "091deed4-2832-4433-a9f1-4165f5e0f813_Export-417a974a-fbb8-4bdf-8569-004e3fe14318.zip",
@@ -211,7 +212,6 @@
     "GIS/Data/Data-Spec/assets/Polygon.png",
     "GIS/Data/Data-Spec/assets/MultiPolygon-with-hole.png",
     "GIS/Data/Data-Spec/assets/MultiPolygon.png",
-    "GIS/Data/Data-Spec/assets/MultiPoint.png",
-    "GIS/Data/Data-Spec/assets/linestring.png"
+    "GIS/Data/Data-Spec/assets/MultiPoint.png"
   ]
 }

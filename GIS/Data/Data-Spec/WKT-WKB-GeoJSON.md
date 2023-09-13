@@ -3,7 +3,7 @@
 3. GeoJSON 一种 JSON 格式的 Feature 信息输出格式，它便于被 JavaScript 等脚本语言处理，OpenLayers 等地理库便是采用 GeoJSON 格式。此外，TopoJSON 等更精简的扩展格式。
 
 对比
-- 数据格式对比 [[WKT vs GeoJSON]]
+- 数据格式对比 [[WKT-GeoJSON]]
 
 
 ---

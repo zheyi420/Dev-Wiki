@@ -1,0 +1,16 @@
+
+- Guides: https://docs.mapbox.com/mapbox-gl-js/guides/
+- Web Services APIs: https://docs.mapbox.com/mapbox-gl-js/api/
+- Help: https://docs.mapbox.com/help/
+	- Getting Started
+	- Tutorials
+	- Troubleshooting
+	- Glossary
+
+Available Checking
+- [Test whether the browser supports Mapbox GL JS.](https://docs.mapbox.com/mapbox-gl-js/api/properties/#supported) 
+
+Access-tokens-usage
+- account: https://account.mapbox.com/
+- token management: https://docs.mapbox.com/accounts/guides/tokens/
+- access tokens: https://account.mapbox.com/access-tokens/
