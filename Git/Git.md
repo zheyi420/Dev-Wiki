@@ -124,6 +124,10 @@ fa19989 dev@{3}: branch: Created from HEAD
 1. `git remote rm origin` 先删除
 2. `git remote add origin https://github.com/xxx/xxx.git` 再增加
 
+如果是新建的仓库，可能有了默认的初始提交，则需要强制推送。
+不然会被 rejected
+使用 `git push -f origin <branch-name>`
+
 
 ## 大项目如 ol 拉取失败
 
