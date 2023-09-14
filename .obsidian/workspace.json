@@ -14,7 +14,7 @@
               "type": "markdown",
               "state": {
                 "file": "Git/Git.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false
               }
             }
@@ -25,8 +25,8 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Git/GitHub/GitHub.md",
-                "mode": "source",
+                "file": "Git/GitHub.md",
+                "mode": "preview",
                 "source": false
               }
             }
@@ -43,8 +43,7 @@
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -118,7 +117,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Git/GitHub/GitHub.md",
+                "file": "Git/Git.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -135,7 +134,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Git/GitHub/GitHub.md",
+                "file": "Git/Git.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -158,7 +157,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Git/GitHub/GitHub.md"
+                "file": "Git/Git.md"
               }
             }
           },
@@ -189,8 +188,10 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "1237dd6f60bcf40b",
+  "active": "7bc767228bb13c59",
   "lastOpenFiles": [
+    "Git/GitHub.md",
+    "Git/GitHub/fatal/Connection was reset.md",
     "Git/Git.md",
     "GIS/WebGIS/Mapbox-GL-JS.md",
     "DB/Greenplum.md",
@@ -215,8 +216,6 @@
     "GIS/WebGIS/CesiumJS.md",
     "Three-Dimensional/ThreeJS.md",
     "GIS/Data/Data-Spec/WKT-WKB-GeoJSON.md",
-    "GIS/Data/Geometric-Validity.md",
-    "Three-Dimensional/3D.md",
     "GIS/GIS技术.jpeg",
     "Security",
     "GIS/Tools/assets/FieldCalculator.png",
