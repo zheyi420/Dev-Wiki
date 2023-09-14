@@ -2,7 +2,7 @@
 - [GeoServer User Manual](https://docs.geoserver.org/latest/en/user/index.html) 
 - https://github.com/geoserver/geoserver
 
-- [GeoServer用户手册](https://www.osgeo.cn/geoserver-user-manual/) 
+- [osgeo.cn GeoServer用户手册](https://www.osgeo.cn/geoserver-user-manual/) 
 
 # Win10 本地运行
 
@@ -68,3 +68,6 @@ url: http://localhost:8080/geoserver/web/
 > GetFeatureInfo 的一个优点是，该请求使用一个来自返回的 WMS 图像的（x,y）像素值。这对于无法执行真正的地理参考的原始客户端来说，更容易使用。
 
 
+# ECQL
+
+- [ECQL Reference](https://docs.geoserver.org/latest/en/user/filter/ecql_reference.html#filter-ecql-reference) 

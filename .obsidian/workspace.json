@@ -4,17 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "54f75f6f77ad2aa5",
+        "id": "31d8132c4b57130c",
         "type": "tabs",
         "children": [
           {
-            "id": "5d398e4bb7f66cdf",
+            "id": "e4747ae3ac8a7cd7",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "GIS/Styled-Layer-Descriptor(SLD).md",
-                "mode": "source",
+                "file": "DB/Greenplum.md",
+                "mode": "preview",
                 "source": false
               }
             }
@@ -93,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "GIS/Styled-Layer-Descriptor(SLD).md",
+                "file": "DB/Greenplum.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "GIS/Styled-Layer-Descriptor(SLD).md",
+                "file": "DB/Greenplum.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "GIS/Styled-Layer-Descriptor(SLD).md"
+                "file": "DB/Greenplum.md"
               }
             }
           },
@@ -164,35 +164,35 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "5d398e4bb7f66cdf",
+  "active": "e4747ae3ac8a7cd7",
   "lastOpenFiles": [
-    "config-data-File/XML.md",
+    "GIS/Data/Data.md",
+    "GIS/Data/Layer-Source.md",
+    "GIS/GIS.md",
+    "GIS/Spec/OGC-Spec.md",
+    "DB/DataBase.md",
+    "GIS/Spec/CRS-SRS.md",
+    "GIS/Data/Data-Spec/Shapefile.md",
+    "GIS/Data/Data-Spec/glTF.md",
+    "GIS/Data/Data-Spec/3D-Tiles.md",
+    "GIS/Data/Data-Processing.md",
+    "GIS/Data/DataSet.md",
+    "GIS/WebGIS/WebGIS-Case.md",
+    "GIS/WebGIS/SmartMapX-JS.md",
+    "GIS/WebGIS/Mapbox-GL-JS.md",
+    "GIS/GeoServer.md",
+    "GIS/Tools/QGIS.md",
+    "DB/PostgreSQL.md",
     "GIS/Styled-Layer-Descriptor(SLD).md",
+    "config-data-File/XML.md",
     "GIS/WebGIS/CesiumJS.md",
     "Three-Dimensional/ThreeJS.md",
     "GIS/Data/Data-Spec/WKT-WKB-GeoJSON.md",
     "GIS/Data/Geometric-Validity.md",
-    "GIS/Data/Data-Spec/3D-Tiles.md",
     "Three-Dimensional/3D.md",
     "GIS/WebGIS/OpenLayers.md",
-    "GIS/Data/Data-Processing.md",
     "gdal.org.md",
-    "GIS/WebGIS/Turf.md",
-    "GIS/WebGIS/WebGIS-Case.md",
-    "GIS/Tools/Geospatial Dev Tools.md",
-    "GIS/Tools/QGIS.md",
-    "GIS/Spec/WGS.md",
-    "GIS/Spec/Simple Features Interface Standard-SFS.md",
-    "GIS/Spec/OGC Spec.md",
-    "GIS/Spec/CRS-SRS.md",
-    "GIS/Data/Data-Spec/PBF-Format.md",
-    "GIS/Data/Data-Spec/WKT-GeoJSON.md",
     "GIS/GIS技术.jpeg",
-    "GIS/WebGIS/Mapbox-GL-JS.md",
-    "GIS/WebGIS/SmartMapX-JS.md",
-    "GIS/WebGIS/Mapbox/Access-tokens-usage.md",
-    "GIS/WebGIS/Available Checking.md",
-    "GIS/Database/Spatial-Index.md",
     "Security",
     "GIS/Tools/assets/FieldCalculator.png",
     "GIS/Database/spatial-extension",
