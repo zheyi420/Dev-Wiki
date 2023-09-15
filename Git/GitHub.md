@@ -7,6 +7,46 @@
 - [GitHub Pages](https://docs.github.com/pages) 
 	- [从分支进行发布](https://docs.github.com/zh/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-from-a-branch) 
 
+## GitHub Pages Deployment
+
+```bash
+#!/usr/bin/env sh
+
+# 当发生错误时中止脚本
+set -e
+
+# 构建
+npm run build
+
+# cd 到构建输出的目录下
+cd dist
+
+# place .nojekyll to bypass Jekyll processing
+touch .nojekyll
+
+# 部署到自定义域域名
+# echo 'www.example.com' > CNAME
+git init
+
+git add .
+
+git commit -m 'deploy'
+
+git config http.proxy "127.0.0.1:10809"
+
+git config https.proxy "127.0.0.1:10809"
+
+# 部署到 https://<USERNAME>.github.io
+# git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master
+
+# 部署到 https://<USERNAME>.github.io/<REPO>
+# git push -f git@github.com:<USERNAME>/<REPO>.git master:gh-pages
+git push -f https://github.com/zheyi420/smartmapx-webgis-examples.git master:gh-pages
+
+cd -
+```
+
+
 # ⚠ fatal
 
 ## Failed to connect to github.com port 443: Timed out

@@ -180,7 +180,7 @@ fa19989 dev@{3}: branch: Created from HEAD
 
 - [工具系列 | git checkout 可替换命令 git switch 和 git restore](https://www.cnblogs.com/tinywan/p/12344267.html) 
 
-- `git checkout <分支名>` 切换分支
+- `git checkout <分支名>` 切换到本地已有分支。
 - `git checkout -b <new-branch> [<start-point>]`
 	[`git checkout -b|-B <new-branch> [<start-point>]`](https://git-scm.com/docs/git-checkout#Documentation/git-checkout.txt-emgitcheckoutem-b-Bltnew-branchgtltstart-pointgt) 
 	- `git checkout -b <new-branch>` 创建新分支且切换到其上。

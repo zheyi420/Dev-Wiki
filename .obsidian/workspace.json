@@ -20,6 +20,18 @@
             }
           },
           {
+            "id": "925048fdc33bf7a0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "OS/Linux/Commands.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
             "id": "1237dd6f60bcf40b",
             "type": "leaf",
             "state": {
@@ -43,7 +55,8 @@
               }
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -117,7 +130,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Git/Git.md",
+                "file": "Git/GitHub.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -134,7 +147,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Git/Git.md",
+                "file": "Git/GitHub.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -157,7 +170,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Git/Git.md"
+                "file": "Git/GitHub.md"
               }
             }
           },
@@ -188,11 +201,15 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "7bc767228bb13c59",
+  "active": "4db751f89d34867d",
   "lastOpenFiles": [
-    "Git/GitHub.md",
-    "Git/GitHub/fatal/Connection was reset.md",
+    "assets",
     "Git/Git.md",
+    "Git/GitHub.md",
+    "Git/deploy.sh.md",
+    "Git/deploy.sh",
+    "OS/Linux/Commands.md",
+    "Git/GitHub/fatal/Connection was reset.md",
     "GIS/WebGIS/Mapbox-GL-JS.md",
     "DB/Greenplum.md",
     "GIS/Data/Data.md",
@@ -213,9 +230,6 @@
     "DB/PostgreSQL.md",
     "GIS/Styled-Layer-Descriptor(SLD).md",
     "config-data-File/XML.md",
-    "GIS/WebGIS/CesiumJS.md",
-    "Three-Dimensional/ThreeJS.md",
-    "GIS/Data/Data-Spec/WKT-WKB-GeoJSON.md",
     "GIS/GIS技术.jpeg",
     "Security",
     "GIS/Tools/assets/FieldCalculator.png",
@@ -227,7 +241,6 @@
     "OS/Windows",
     "Front-End",
     "DB/Greenplum",
-    "Three-Dimensional/assets",
     "Three-Dimensional/assets/context-relation.png",
     "未命名.canvas",
     "Pasted image 20230326014904.png",
