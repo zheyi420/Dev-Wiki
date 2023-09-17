@@ -15,9 +15,9 @@ Node NPM 版本对应关系：[以往的版本 nodejs.org/zh-cn/download/release
     - 博客：[Semver(语义化版本号)扫盲](https://juejin.cn/post/6844903591690534926) 
 
 
-### 下载源
+# 下载源
 
-#### 查看下载源
+## 查看下载源
 
 ```powershell
 PS D:\> npm config get registry
@@ -25,13 +25,13 @@ https://registry.npmjs.org/
 ```
 
 
-#### 修改下载源
+## 修改下载源
 
 - 设置npm镜像源为淘宝镜像
 	`npm config set registry https://registry.npm.taobao.org/`
 
 
-### 安装位置
+## 安装位置
 
 - 获取 npm 包的全局安装路径
 	`npm config get prefix`
@@ -50,7 +50,7 @@ https://registry.npmjs.org/
 	```
 
 
-# pkgs
+# Pkgs
 
 - [rimraf](https://www.npmjs.com/package/rimraf) 
 	快速删除项目中的 node_modules 文件夹，于项目根目录下运行：`rimraf .\node_modules\`
@@ -64,7 +64,7 @@ https://registry.npmjs.org/
 - [npm-windows-upgrade](https://www.npmjs.com/package/npm-windows-upgrade) 
     Upgrading npm on Windows.
 
-# using
+# Using
 
 ## 查找包的安装版本及位置
 - [Where does npm install packages?](https://stackoverflow.com/questions/5926672/where-does-npm-install-packages/5926706#5926706) 
@@ -72,16 +72,16 @@ https://registry.npmjs.org/
 
 ## npm install
 - [v8 npm-install](https://docs.npmjs.com/cli/v8/commands/npm-install) 
-    `npm install -save-dev pkg_name` 包将出现在`devDependencies`中。
-    `npm i pkg_name@13.x -save-dev` 下载某大版本下最新的小版本到`devDependencies`下。
-    `npm install pkg_name@3.6.2 --save` 安装指定版本号的包到“dependencies”中：`"pkg_name": "^3.6.2”` 
-    `npm install cesium@latest --save` 安装指定 TAG 版本的包到“dependencies”中。
-    `npm i -g npm@latest` 全局更新本地 npm 版本。
+    - `npm install -save-dev pkg_name` 包将出现在`devDependencies`中。
+    - `npm i pkg_name@13.x -save-dev` 下载某大版本下最新的小版本到`devDependencies`下。
+    - `npm install pkg_name@3.6.2 --save` 安装指定版本号的包到“dependencies”中：`"pkg_name": "^3.6.2”` 
+    - `npm install cesium@latest --save` 安装指定 TAG 版本的包到“dependencies”中。
+    - `npm i -g npm@latest` 全局更新本地 npm 版本。
 
 ## npm uninstall
 - [v8 npm-uninstall](https://docs.npmjs.com/cli/v8/commands/npm-uninstall) 
-    `npm uninstall pkg_name` 删除项目内的依赖包
-    `npm uninstall -g pkg_name` 删除全局依赖包
+    - `npm uninstall pkg_name` 删除项目内的依赖包
+    - `npm uninstall -g pkg_name` 删除全局依赖包
 
 ## npm run
 - [v8 npm-run-script](https://docs.npmjs.com/cli/v8/commands/npm-run-script) 
@@ -97,7 +97,7 @@ https://registry.npmjs.org/
 
 - `npm view pkg_name versions` 
 
-# problems
+# Problems
 
 ## npm 与 node 安装目录下的 npm 的区别与冲突。
 
