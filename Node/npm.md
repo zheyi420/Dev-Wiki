@@ -135,7 +135,7 @@ npm 全局安装配置。
 ## `package.json` 中版本号前的 `^` 表示什么？
 
 ```json
-dependencies": {
+dependencies: {
   "core-js": "^3.6.5",
   "ol": "^6.9.0",
   "vue": "^3.0.0"
