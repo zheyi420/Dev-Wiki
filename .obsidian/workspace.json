@@ -8,49 +8,37 @@
         "type": "tabs",
         "children": [
           {
-            "id": "7bc767228bb13c59",
+            "id": "78a1a8b5fe35c52f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Git/Git.md",
-                "mode": "preview",
+                "file": "GIS/WebGIS/L7.md",
+                "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "925048fdc33bf7a0",
+            "id": "5cd5c837e80e39d1",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "OS/Linux/Commands.md",
-                "mode": "preview",
+                "file": "yarn.md",
+                "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "1237dd6f60bcf40b",
+            "id": "aef88321cf4abaa5",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Git/GitHub.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "452230d7f0686d99",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "GIS/WebGIS/Mapbox-GL-JS.md",
-                "mode": "preview",
+                "file": "Node/npm.md",
+                "mode": "source",
                 "source": false
               }
             }
@@ -85,7 +73,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "gdal",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -130,7 +118,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Git/GitHub.md",
+                "file": "Node/npm.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -147,7 +135,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Git/GitHub.md",
+                "file": "Node/npm.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -170,7 +158,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Git/GitHub.md"
+                "file": "Node/npm.md"
               }
             }
           },
@@ -201,11 +189,16 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "4db751f89d34867d",
+  "active": "aef88321cf4abaa5",
   "lastOpenFiles": [
-    "assets",
-    "Git/Git.md",
     "Git/GitHub.md",
+    "Node/npm.md",
+    "Node/NVM.md",
+    "GIS/WebGIS/L7.md",
+    "Git/Git.md",
+    "Node/Nodejs.md",
+    "yarn.md",
+    "assets",
     "Git/deploy.sh.md",
     "Git/deploy.sh",
     "OS/Linux/Commands.md",
@@ -226,10 +219,6 @@
     "GIS/WebGIS/WebGIS-Case.md",
     "GIS/WebGIS/SmartMapX-JS.md",
     "GIS/GeoServer.md",
-    "GIS/Tools/QGIS.md",
-    "DB/PostgreSQL.md",
-    "GIS/Styled-Layer-Descriptor(SLD).md",
-    "config-data-File/XML.md",
     "GIS/GIS技术.jpeg",
     "Security",
     "GIS/Tools/assets/FieldCalculator.png",
@@ -240,7 +229,6 @@
     "未确认 64557.crdownload",
     "OS/Windows",
     "Front-End",
-    "DB/Greenplum",
     "Three-Dimensional/assets/context-relation.png",
     "未命名.canvas",
     "Pasted image 20230326014904.png",

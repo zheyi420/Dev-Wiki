@@ -23,7 +23,7 @@
 
 查询 Nodejs 安装路径
 ```cmd
-C:\Users\21632>where node
+C:\Users\user_name>where node
 C:\Program Files\nodejs\node.exe
 ```
 
