@@ -7,5 +7,6 @@
   "readableLineLength": false,
   "useMarkdownLinks": true,
   "showUnsupportedFiles": true,
-  "livePreview": true
+  "livePreview": true,
+  "strictLineBreaks": false
 }

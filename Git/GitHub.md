@@ -129,3 +129,12 @@ Reference:
 - [解决OpenSSL SSL_read: Connection was reset, errno 10054问题](https://blog.51cto.com/u_15326986/3328947) 
 - [git clone ：unable to access github: OpenSSL SSL_read: Connection was reset, errno 10054](https://blog.csdn.net/Jxianxu/article/details/115598869) 
 - [无法连接github](https://www.cnblogs.com/xym4869/p/13262061.html) 
+
+
+# Others
+
+- 在仓库 url 的 `github` 后添加 `1s` 切换到在线代码查看页面【非官方】；
+
+- [如何在 GitHub 上托管 PWA 页面](https://christianheilmann.com/2022/01/13/turning-a-github-page-into-a-progressive-web-app/) 
+	PWA 指的是离线也能使用的网页应用。本文给出简单的设置步骤，让托管在 GitHub 上面的页面变成 PWA，离线也能使用。
+
