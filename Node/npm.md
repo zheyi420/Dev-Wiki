@@ -88,10 +88,13 @@ https://registry.npmjs.org/
 
 ## npm update
 - [v8 npm-update](https://docs.npmjs.com/cli/v8/commands/npm-update) 
-    `npm update -g @vue/cli` 升级全局的 Vue CLI 包。
+
+- `npm update -g @vue/cli` 升级全局的 Vue CLI 包。
     > 注意：全局安装的软件包会被当作是在指定了 caret semver 范围的情况下安装的。因此，如果你需要更新到最新的，你可能需要运行 `npm install -g pkg_name@latest` 。
 
     > [Vue] 如需升级项目中的 Vue CLI 相关模块（以 `@vue/cli-plugin-` 或 `vue-cli-plugin-` 开头），请在项目目录下运行 `vue upgrade` 
+
+
 
 ## 查看可供下载的包版本。
 

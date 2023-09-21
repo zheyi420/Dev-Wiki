@@ -649,13 +649,13 @@ console.log( !!null ); // false // Boolean(null) 实现同样的效果
 
 ### 4.8 Object to primitive conversion
 
-## 5. Data types
+## 5 - Data types
 
-## 6. Advanced working with functions
+## 6 - Advanced working with functions
 
-## 7. Object properties configuration
+## 7 - Object properties configuration
 
-## 8. Prototypes, inheritance
+## 8 - Prototypes, inheritance
 
 ### 8.1 Prototypal inheritance
 
@@ -667,9 +667,9 @@ console.log( !!null ); // false // Boolean(null) 实现同样的效果
 
 
 
-## 9. Classes
+## 9 - Classes
 
-## 10. Error handling
+## 10 - Error handling
 
 
 
@@ -721,7 +721,7 @@ console.log( !!null ); // false // Boolean(null) 实现同样的效果
 
 
 
-## 11. Promises, async/await
+## 11 - Promises, async/await
 
 
 
@@ -1802,11 +1802,13 @@ new Promise(function(resolve, reject) {
 
 
 
-## 12. Generators, advanced iteration
+## 12 - Generators, advanced iteration
 
-## 13. Modules
+## 13 - Modules
 
-## 14. Miscellaneous
+## 14 - Miscellaneous
+
+### 14.1 Proxy and Reflect
 
 
 
