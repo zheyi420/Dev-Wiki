@@ -1,4 +1,4 @@
-
+- https://yarnpkg.com/
 - [Installation](https://classic.yarnpkg.com/en/docs/install#windows-stable) 
 - [Usage](https://classic.yarnpkg.com/en/docs/usage) 
 
@@ -7,6 +7,8 @@
 - https://classic.yarnpkg.com/en/docs/cli/workspace
 
 Yarn workspace 初始化
+
+# Config
 
 
 
@@ -17,6 +19,8 @@ Yarn workspace 初始化
 `yarn run [script] [<args>]`
 
 - `[script]` 也可以是安装在 `node_modules/.bin/` 内的任何本地可执行文件。
+- 也可以省略命令中的 `run`，每个 `script` 都可以用其名称执行。
+
 
 # Error
 

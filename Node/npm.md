@@ -64,6 +64,12 @@ https://registry.npmjs.org/
 - [npm-windows-upgrade](https://www.npmjs.com/package/npm-windows-upgrade) 
     Upgrading npm on Windows.
 
+- [npx](https://www.npmjs.com/package/npx) 
+	npx https://docs.npmjs.com/cli/v8/commands/npx
+	Run a command from a local or remote npm package
+
+
+
 # Using
 
 ## 查找包的安装版本及位置

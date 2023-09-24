@@ -9,7 +9,7 @@ import * as path from 'path'
 //最大同时http请求数量
 var maxDownload: number = 10
 //文件保存的路径
-var filePath = 'D:\\data\\cesium\\1240402\\'
+var filePath = 'D:\\data\\'
 /*
 baseUrl:http的url地址
 version：cesiumicon需要加上
@@ -17,11 +17,12 @@ urlType：要下载tile名称，不需要填写，程序自动设置
 Authorization:token的校验，cesiumicon需要填写
 */
 class cesiumUrl {
-  baseUrl: string = 'https://assets.cesium.com/1240402/' // 'https://assets.cesium.com/75343/'
-  version: string = '?v=1'
+  baseUrl: string = 'https://sandcastle.cesium.com/SampleData/Cesium3DTiles/Instanced/InstancedOrientation/' // 'https://assets.cesium.com/75343/'
+  version: string = '' // '?v=1'
   urlType: string
   Authorization: string =
-    'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIwODUwZTY5Mi0xZWJmLTRlZTAtYTY2NS03NDFkYmMzOTZkN2YiLCJpZCI6MjU5LCJhc3NldHMiOnsiMTI0MDQwMiI6eyJ0eXBlIjoiM0RUSUxFUyJ9fSwic3JjIjoiNzg2ZDA0MzktN2RiYy00M2VlLWI5ZmMtOGZjOWNlMDczYTJmIiwiaWF0IjoxNjcxODUxMDMwLCJleHAiOjE2NzE4NTQ2MzB9.H3iq9pNE4BtvgmmAbePYXDl5CRw9IEXJzRV6dzqp350'
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzNmU5ZTZhOS1lOThmLTRlM2QtYjg2NS1iMGQ1Y2JiZGQyYzUiLCJpZCI6MTA4NDQ0LCJpYXQiOjE2NjM1Njc5OTR9.CuE8Bqn8X02o64kfjVHZUiUU1bKiNeqWYXoY7e5_BCc'
+    // 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIwODUwZTY5Mi0xZWJmLTRlZTAtYTY2NS03NDFkYmMzOTZkN2YiLCJpZCI6MjU5LCJhc3NldHMiOnsiMTI0MDQwMiI6eyJ0eXBlIjoiM0RUSUxFUyJ9fSwic3JjIjoiNzg2ZDA0MzktN2RiYy00M2VlLWI5ZmMtOGZjOWNlMDczYTJmIiwiaWF0IjoxNjcxODUxMDMwLCJleHAiOjE2NzE4NTQ2MzB9.H3iq9pNE4BtvgmmAbePYXDl5CRw9IEXJzRV6dzqp350'
   ToString(): string {
     return this.baseUrl + this.urlType + this.version
   }

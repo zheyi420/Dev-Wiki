@@ -4,83 +4,22 @@
     "type": "split",
     "children": [
       {
-        "id": "b5e455b11362d4e8",
+        "id": "52011d793a05162e",
         "type": "tabs",
         "children": [
           {
-            "id": "42c31f6ce029209e",
+            "id": "b7100120a75a90b1",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Git/Git.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "f018e1ed9354c0d8",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Node/npm.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "6f03aee612a60310",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "GIS/WebGIS/CesiumJS.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "991b0d15afd331ac",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "GIS/Cesium-Sandcastle-3DTiles-Download/README.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "5cd5c837e80e39d1",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "yarn.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "36face10851624f7",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Git/Collaborative Dev.md",
+                "file": "GIS/Data/Data.md",
                 "mode": "preview",
                 "source": false
               }
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -109,7 +48,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "npx",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -154,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "GIS/Cesium-Sandcastle-3DTiles-Download/README.md",
+                "file": "GIS/Data/Data.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -171,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "GIS/Cesium-Sandcastle-3DTiles-Download/README.md",
+                "file": "GIS/Data/Data.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -194,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "GIS/Cesium-Sandcastle-3DTiles-Download/README.md"
+                "file": "GIS/Data/Data.md"
               }
             }
           },
@@ -213,7 +152,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 394.5
+    "width": 394.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -225,53 +165,54 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "991b0d15afd331ac",
+  "active": "b7100120a75a90b1",
   "lastOpenFiles": [
-    "Language/JavaScript/TheModernJavaScriptTutorial/TheModernJavaScriptTutorial.md",
-    "GIS/Cesium-Sandcastle-3DTiles-Download/src/httprequest.ts",
-    "GIS/Cesium-Sandcastle-3DTiles-Download/README.md",
-    "GIS/Cesium-Sandcastle-3DTiles-Download/package.json",
-    "GIS/Cesium-Sandcastle-3DTiles-Download/package-lock.json",
-    "GIS/Cesium-Sandcastle-3DTiles-Download/src",
-    "GIS/Cesium-Sandcastle-3DTiles-Download",
-    "Git/Git.md",
-    "GIS/WebGIS/CesiumJS.md",
-    "OS/Windows.md",
-    "Language/JavaScript/Note.md",
-    "Node/npm.md",
-    "OS/Linux/Commands.md",
-    "未命名.canvas",
-    "Language/JavaScript/DeepShallowCopy.md",
-    "Git/GitHub.md",
     "yarn.md",
-    "Git/Collaborative Dev.md",
-    "Node/Nodejs.md",
-    "GIS/WebGIS/L7.md",
-    "Git/LICENSE.md",
     "Node/NVM.md",
-    "assets",
-    "Git/deploy.sh.md",
-    "Git/deploy.sh",
-    "Git/GitHub/fatal/Connection was reset.md",
-    "GIS/WebGIS/Mapbox-GL-JS.md",
-    "DB/Greenplum.md",
-    "GIS/Data/Data.md",
-    "GIS/Data/Layer-Source.md",
-    "GIS/GIS.md",
-    "GIS/Spec/OGC-Spec.md",
-    "DB/DataBase.md",
+    "Node/npm.md",
+    "GIS/WebGIS/L7.md",
+    "Git/GitHub.md",
+    "Git/Git.md",
+    "Git/Collaborative Dev.md",
+    "GIS/WebGIS/CesiumJS.md",
+    "GIS/Cesium-Sandcastle-3DTiles-Download/README.md",
+    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/performance-now/lib/performance-now.js.map",
+    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/performance-now/lib/performance-now.js",
+    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/performance-now/lib",
+    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/delayed-stream/lib/delayed_stream.js",
+    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/delayed-stream/lib",
+    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/combined-stream/lib/combined_stream.js",
+    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/combined-stream/lib",
+    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/core-util-is/lib/util.js",
+    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/core-util-is/lib",
+    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/verror/lib/verror.js",
+    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/ajv/README.md",
+    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/diff/release-notes.md",
+    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/diff/CONTRIBUTING.md",
+    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/request/README.md",
+    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/psl/browserstack-logo.svg",
+    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/ts-node/dist-raw/README.md",
+    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/typescript/lib/README.md",
+    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/extend/README.md",
+    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/ajv/lib/dotjs/README.md",
+    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/mime-db/README.md",
+    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/source-map-support/README.md",
+    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/mime-types/README.md",
+    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/arg/README.md",
+    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/assert-plus/CHANGES.md",
+    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/create-require/README.md",
+    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/aws4/README.md",
+    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/make-error/README.md",
+    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/is-typedarray/LICENSE.md",
+    "未命名.canvas",
     "GIS/GIS技术.jpeg",
-    "Security",
     "GIS/Tools/assets/FieldCalculator.png",
-    "GIS/Database/spatial-extension",
-    "GIS/未命名",
     "Three-Dimensional/assets/context-relation.png",
     "Pasted image 20230326014904.png",
     "GIS/Data/Data-Spec/assets/MultiLineString.png",
     "GIS/Data/Data-Spec/assets/Polygon-with-hole.png",
     "GIS/Data/Data-Spec/assets/Polygon.png",
     "GIS/Data/Data-Spec/assets/MultiPolygon-with-hole.png",
-    "GIS/Data/Data-Spec/assets/MultiPolygon.png",
-    "GIS/Data/Data-Spec/assets/MultiPoint.png"
+    "GIS/Data/Data-Spec/assets/MultiPolygon.png"
   ]
 }
