@@ -14,7 +14,7 @@
               "type": "markdown",
               "state": {
                 "file": "ComputerGraphics/ThreeJS.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false
               }
             }
@@ -32,19 +32,31 @@
             }
           },
           {
-            "id": "a3e954388ac81d47",
+            "id": "9876f055ce35dcb1",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ComputerGraphics/Courses/CMU.md",
-                "mode": "preview",
+                "file": "Language/JavaScript/Note.md",
+                "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "9ba47576c4392bea",
+            "id": "a3e954388ac81d47",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "ComputerGraphics/courses.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "eaca2e29f131f2d3",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -54,9 +66,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "f3114e03957ba10b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Node/npm.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -201,12 +225,16 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "9ba47576c4392bea",
+  "active": "eaca2e29f131f2d3",
   "lastOpenFiles": [
-    "ComputerGraphics/Courses/CMU.md",
+    "ComputerGraphics/courses.md",
+    "Git/Git.md",
+    "Node/npm.md",
+    "Language/JavaScript/Note.md",
     "ComputerGraphics/WebGL.md",
     "Language/JavaScript/TheModernJavaScriptTutorial/TheModernJavaScriptTutorial.md",
     "ComputerGraphics/ThreeJS.md",
+    "ComputerGraphics/Courses/CMU.md",
     "Three-Dimensional/3D.md",
     "GIS/GIS.md",
     "GIS/WebGIS/OpenLayers.md",
@@ -215,10 +243,8 @@
     "GIS/Data/Data.md",
     "yarn.md",
     "Node/NVM.md",
-    "Node/npm.md",
     "GIS/WebGIS/L7.md",
     "Git/GitHub.md",
-    "Git/Git.md",
     "Git/Collaborative Dev.md",
     "GIS/WebGIS/CesiumJS.md",
     "GIS/Cesium-Sandcastle-3DTiles-Download/README.md",
@@ -239,8 +265,6 @@
     "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/psl/browserstack-logo.svg",
     "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/ts-node/dist-raw/README.md",
     "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/typescript/lib/README.md",
-    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/extend/README.md",
-    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/ajv/lib/dotjs/README.md",
     "未命名.canvas",
     "GIS/GIS技术.jpeg",
     "GIS/Tools/assets/FieldCalculator.png",

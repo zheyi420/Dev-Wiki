@@ -12,5 +12,5 @@
 - 
 
 ## Broswer
-- Chrome: chrome://gpu/
-- Firefox: about:config
+- Chrome: `chrome://gpu/`
+- Firefox: `about:config`
