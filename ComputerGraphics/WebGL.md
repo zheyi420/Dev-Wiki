@@ -1,7 +1,7 @@
 - https://www.khronos.org/webgl/
-- [WebGL Fundamentals](https://webglfundamentals.org/)
-- [WebGL2 Fundamentals](https://webgl2fundamentals.org/)
-- [MDN - WebGL API](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API)
+- [WebGL Fundamentals](https://webglfundamentals.org/) 
+- [WebGL2 Fundamentals](https://webgl2fundamentals.org/) 
+- [MDN - WebGL API](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API) 
 
 
 # Availability

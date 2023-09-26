@@ -916,11 +916,11 @@ function step3(error, script) {
 
 *detail:*
 
-- [[JAVASCRIPT.INFO] Promise](https://javascript.info/promise-basics)
-- [[MDN] Using Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises)
-- [[MDN] Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
-- [[MDN] Promise() constructor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/Promise)
-- [[web.dev] JavaScript Promises](https://web.dev/promises/)
+- [[JAVASCRIPT.INFO] Promise](https://javascript.info/promise-basics) 
+- [[MDN] Using Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) 
+- [[MDN] Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) 
+- [[MDN] Promise() constructor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/Promise) 
+- [[web.dev] JavaScript Promises](https://web.dev/promises/) 
 
 
 
@@ -1774,7 +1774,7 @@ new Promise(function(resolve, reject) {
 
 ### 11.8 async/await
 
-
+- [MDN JavaScript/Asynchronous/Promises#async_and_await](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Promises#async_and_await) 
 
 #### async functions
 
