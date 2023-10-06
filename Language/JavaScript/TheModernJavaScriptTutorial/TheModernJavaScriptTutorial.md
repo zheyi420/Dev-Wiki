@@ -65,7 +65,7 @@
 
 
 
-## 2. JavaScript Fundamentals
+## 2 - JavaScript Fundamentals
 
 
 

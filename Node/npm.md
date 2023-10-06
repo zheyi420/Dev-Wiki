@@ -72,13 +72,16 @@ https://registry.npmjs.org/
 
 # Using
 
-## 查找包的安装版本及位置
+## npm list
 - [Where does npm install packages?](https://stackoverflow.com/questions/5926672/where-does-npm-install-packages/5926706#5926706) 
     `npm list -g pkg_name`
+    查找包的安装版本及位置
 
 ## npm install
 - [v8 npm-install](https://docs.npmjs.com/cli/v8/commands/npm-install) 
+
     - `npm install -save-dev pkg_name` 包将出现在`devDependencies`中。
+	    - `-save-dev` 缩写 `-D` 
     - `npm i pkg_name@13.x -save-dev` 下载某大版本下最新的小版本到`devDependencies`下。
     - `npm install pkg_name@3.6.2 --save` 安装指定版本号的包到“dependencies”中：`"pkg_name": "^3.6.2”` 
     - `npm install cesium@latest --save` 安装指定 TAG 版本的包到“dependencies”中。
@@ -102,9 +105,10 @@ https://registry.npmjs.org/
 
 
 
-## 查看可供下载的包版本。
+## npm view
 
 - `npm view pkg_name versions` 
+	查看可供下载的包版本。
 
 # Problems
 
