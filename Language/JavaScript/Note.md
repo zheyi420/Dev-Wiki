@@ -17,3 +17,39 @@ node testDate.js
 		- 由于require是一个接受任何类型参数的普通函数调用，而不仅仅是一个字符串字面量，因此在不运行其代码的情况下很难确定模块的依赖关系。
 	- ES 模块导入发生在模块脚本开始运行之前。这意味着 `import` 声明不能出现在函数或块中，依赖项的名称必须是带引号的字符串，而不是任意表达式。
 
+# 循环遍历
+
+- 使用 `for(elem of collection)` 而不是 `for(elem in collection)` 
+	- `for...of` 解决了 `for...in` 的问题。`for...in` 还需要判断是否是对象本身的而不是原型的属性。
+	- 使用 `for (const [key, value] of Object.entries(someObject)) { console.log(key, value); }`
+
+
+
+# Closures
+
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
+
+闭包
+- 提供了许多与面向对象编程相关的好处 —— 特别是数据隐藏和封装。（通过使用闭包模拟私有方法）
+
+# this
+
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this
+
+# Classes
+
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
+
+# getter
+
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get
+
+
+# setter
+
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set
+
+# Promises
+
+- [Using promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) 
+- [How to use promises](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Promises) 

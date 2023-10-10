@@ -138,6 +138,13 @@ fa19989 dev@{3}: branch: Created from HEAD
 `git pull --allow-unrelated-histories`
 	[--allow-unrelated-histories](https://git-scm.com/docs/git-pull#Documentation/git-pull.txt---allow-unrelated-histories) 
 
+## 清除旧的提交，只保留最近的几次
+
+目的：缩小 git 大小
+
+
+
+
 ---
 
 # Commands

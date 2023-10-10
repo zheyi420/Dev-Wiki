@@ -44,6 +44,11 @@
 ### `get`
 > 列出资源
 
+获取资源使用情况。
+`kubectl get resourcequotas -n=<namespace-name>`
+`kubectl get resourcequotas NAME -n=<namespace-name> -o=yaml`
+
+
 `kubectl get all -n=<namespace-name> -o=wide`
 
 
