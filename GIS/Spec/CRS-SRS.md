@@ -12,8 +12,12 @@
 # Blog
 
 - [GIS基础知识 - 坐标系、投影、EPSG:4326、EPSG:3857](https://e7868a.com/gis-coordinate-project)
-- [EPSG 4326 vs EPSG 3857 (投影，数据集，坐标系统等等)](https://github.com/penouc/blog/issues/1)
-- [A Short Guide To The Chinese Coordinate System. GCJ-02(gcj 02) Explained.](https://abstractkitchen.com/blog/a-short-guide-to-chinese-coordinate-system/)
+- [EPSG 4326 vs EPSG 3857 (投影，数据集，坐标系统等等)](https://github.com/penouc/blog/issues/1) 
+	- [EPSG 4326 vs EPSG 3857 (projections, datums, coordinate systems, and more!) ](https://lyzidiamond.github.io/posts/4326-vs-3857) 
+- [地图投影到底是什么](https://github.com/lyj289/lyj289.github.io/issues/8) 
+- [EPSG4326到底是地理坐标还是投影坐标](https://github.com/lyj289/lyj289.github.io/issues/6) 
+- [A Short Guide To The Chinese Coordinate System. GCJ-02(gcj 02) Explained.](https://abstractkitchen.com/blog/a-short-guide-to-chinese-coordinate-system/) 
+- [Mercator vs. well…not Mercator (Platte Carre)](https://idvux.wordpress.com/2007/06/06/mercator-vs-well-not-mercator-platte-carre/) 
 
 
 ---
@@ -136,7 +140,7 @@
 ---
 
 # EPSG
-- [Wikipedia - EPSG Geodetic Parameter Dataset (also EPSG registry)](https://en.wikipedia.org/wiki/EPSG_Geodetic_Parameter_Dataset)
+- [Wikipedia - EPSG Geodetic Parameter Dataset (also EPSG registry)](https://en.wikipedia.org/wiki/EPSG_Geodetic_Parameter_Dataset) 
 - Most GIS use ESPG codes as Spatial Reference System Identifiers (SRIDs)
 - EPSG: European Petroleum Survey Group 欧洲石油调查组织
 
@@ -148,4 +152,8 @@
 **说明**
 - web mapping standard CRS.
 
-## EPSG:6326
+
+
+
+
+---

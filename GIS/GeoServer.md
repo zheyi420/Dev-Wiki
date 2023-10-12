@@ -24,12 +24,17 @@ url: http://localhost:8080/geoserver/web/
 ## WFS
 > Web 要素服务（WFS）支持对地理要素数据（具有矢量几何和属性）的请求。
 > - [Web Feature Service (WFS)](https://docs.geoserver.org/latest/en/user/services/wfs/index.html) 
+> - [OGC - Web Feature Service](https://www.ogc.org/standard/wfs/) 
+
+### GetFeature
+[doc ref: GetFeature](https://docs.geoserver.org/maintain/en/user/services/wfs/reference.html#getfeature) 
 
 
 
 ## WMS
 > Web 地图服务（WMS）支持对由地理数据生成的地图图像（和其他格式）的请求。
 > - [Web Map Service (WMS)](https://docs.geoserver.org/latest/en/user/services/wms/index.html) 
+> - [OGC - Web Map Service](http://www.opengeospatial.org/standards/wms) 
 
 
 ### GetCapabilities

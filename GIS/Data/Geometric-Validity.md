@@ -9,7 +9,7 @@ Reference
 
 不同的软件系统*实现不同的几何有效性*概念。
 
-但是用于 GIS 的几何模型的主要标准是 [[Simple Features Interface Standard-SFS]]【OGC简单要素规范(SFS)】。
+但是用于 GIS 的几何模型的主要标准是 [Simple-Features-Interface-Standard(SFS)](../Spec/Simple-Features-Interface-Standard(SFS).md)【OGC简单要素规范(SFS)】。
 
 ---
 
