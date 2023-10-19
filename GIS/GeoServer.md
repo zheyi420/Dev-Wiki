@@ -1,5 +1,5 @@
 - https://docs.geoserver.org/
-- [GeoServer User Manual](https://docs.geoserver.org/latest/en/user/index.html) 
+- [GeoServer User Manual](https://docs.geoserver.org/stable/en/user/index.html) 
 - https://github.com/geoserver/geoserver
 
 - [osgeo.cn GeoServer用户手册](https://www.osgeo.cn/geoserver-user-manual/) 
@@ -17,13 +17,13 @@ url: http://localhost:8080/geoserver/web/
 
 ## WMTS
 > Web 地图瓦片服务
-> - [Web Map Tile Service (WMTS)](https://docs.geoserver.org/latest/en/user/services/wmts/index.html) 
+> - [Web Map Tile Service (WMTS)](https://docs.geoserver.org/stable/en/user/services/wmts/index.html) 
 
 
 
 ## WFS
 > Web 要素服务（WFS）支持对地理要素数据（具有矢量几何和属性）的请求。
-> - [Web Feature Service (WFS)](https://docs.geoserver.org/latest/en/user/services/wfs/index.html) 
+> - [Web Feature Service (WFS)](https://docs.geoserver.org/stable/en/user/services/wfs/index.html) 
 > - [OGC - Web Feature Service](https://www.ogc.org/standard/wfs/) 
 
 ### GetFeature
@@ -33,7 +33,7 @@ url: http://localhost:8080/geoserver/web/
 
 ## WMS
 > Web 地图服务（WMS）支持对由地理数据生成的地图图像（和其他格式）的请求。
-> - [Web Map Service (WMS)](https://docs.geoserver.org/latest/en/user/services/wms/index.html) 
+> - [Web Map Service (WMS)](https://docs.geoserver.org/stable/en/user/services/wms/index.html) 
 > - [OGC - Web Map Service](http://www.opengeospatial.org/standards/wms) 
 
 
@@ -75,4 +75,4 @@ url: http://localhost:8080/geoserver/web/
 
 # ECQL
 
-- [ECQL Reference](https://docs.geoserver.org/latest/en/user/filter/ecql_reference.html#filter-ecql-reference) 
+- [ECQL Reference](https://docs.geoserver.org/stable/en/user/filter/ecql_reference.html#filter-ecql-reference) 

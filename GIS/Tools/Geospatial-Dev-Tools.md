@@ -19,7 +19,7 @@
 ---
 
 # Desktop tools
-- [[QGIS]]
+- [QGIS](QGIS.md) 
 
 
 ## Reference

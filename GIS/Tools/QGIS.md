@@ -40,7 +40,7 @@ Blog
 
 > paste (E)WKT and WKB code and see it on the map
 
-采用 WKT 的格式输入数据打点 [[WKT-WKB-GeoJSON]] 
+采用 WKT 的格式输入数据打点 [WKT-WKB-GeoJSON](../Data/Data-Spec/WKT-WKB-GeoJSON.md) 
 
 
 ## 对两个 shp 图层如 a 图层和 b 图层，按照属性表增减数据行
@@ -62,7 +62,7 @@ Blog
 
 ## 矢量图层进行坐标系转换时，具有无效的几何图形
 
-[[Geometric-Validity]]
+[Geometric-Validity](../Data/Geometric-Validity.md) 
 
 工具箱 → 矢量几何图形 → 修正几何图形 (fix geometries) 
 

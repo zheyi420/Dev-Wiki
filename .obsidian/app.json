@@ -8,5 +8,6 @@
   "useMarkdownLinks": true,
   "showUnsupportedFiles": true,
   "livePreview": true,
-  "strictLineBreaks": false
+  "strictLineBreaks": false,
+  "newLinkFormat": "relative"
 }

@@ -4,59 +4,18 @@
     "type": "split",
     "children": [
       {
-        "id": "b06d24de26b9c4e8",
+        "id": "a2066928499d55ae",
         "type": "tabs",
         "children": [
           {
-            "id": "e87282773b06e1a4",
+            "id": "6367d29283051def",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "GIS/Spec/CRS-SRS.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "6711038119d1b7cc",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "GIS/Spec/OGC-Spec.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "15c9d3e76e67ef4a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "GIS/Database/PostGIS.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "e7e229b5f29db027",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "GIS/Data/Geometric-Validity.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -85,7 +44,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "idvux.wordpress.com",
+                "query": "tag:#typescript",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -130,7 +89,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "GIS/Data/Geometric-Validity.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -147,7 +105,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "GIS/Data/Geometric-Validity.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -169,9 +126,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "GIS/Data/Geometric-Validity.md"
-              }
+              "state": {}
             }
           },
           {
@@ -201,34 +156,35 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "e7e229b5f29db027",
+  "active": "6367d29283051def",
   "lastOpenFiles": [
-    "GIS/Spec/Simple-Features-Interface-Standard(SFS).md",
-    "GIS/Data/Geometric-Validity.md",
-    "GIS/Database/PostGIS.md",
+    "Kubernetes/Kubernetes.md",
     "GIS/Tools/Geospatial-Dev-Tools.md",
-    "GIS/Spec/OGC-Spec.md",
-    "GIS/Spec/CRS-SRS.md",
-    "GIS/GeoServer.md",
-    "GIS/Spec/WGS.md",
-    "GIS/Database/SpatiaLite.md",
-    "GIS/Database/Spatial-Index.md",
-    "DataStructures-Algorithms/DataStructures.md",
-    "GIS/Styled-Layer-Descriptor(SLD).md",
-    "GIS/Data/Layer-Source.md",
+    "GIS/Data/Data-Spec/WKT-WKB-GeoJSON.md",
+    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/typescript/CODE_OF_CONDUCT.md",
     "GIS/Tools/QGIS.md",
-    "Language/JavaScript/Note.md",
-    "Git/Git.md",
-    "GIS/Data/Data.md",
-    "Browser.md",
-    "Language/JavaScript/TheModernJavaScriptTutorial/TheModernJavaScriptTutorial.md",
-    "Node/npm.md",
-    "ComputerGraphics/ThreeJS.md",
-    "ComputerGraphics/courses.md",
-    "Language/JavaScript/ESLint.md",
     "Kubernetes/kubectl.md",
-    "ComputerGraphics/WebGL.md",
-    "OS/Windows.md",
+    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/ts-node/README.md",
+    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/har-validator/README.md",
+    "README_js.md",
+    "2023-10-20.md",
+    "未命名.canvas",
+    "GIS/Data/Data.md",
+    "GIS/GIS.md",
+    "GIS/Data/Data-Spec/3D-Tiles.md",
+    "GIS/WebGIS/Mapbox-GL-JS.md",
+    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/typescript/README.md",
+    "GIS/WebGIS/Turf.md",
+    "GIS/WebGIS/SmartMapX-JS.md",
+    "GIS/Data/Data-Spec/WKT-GeoJSON.md",
+    "GIS/Spec/CRS-SRS.md",
+    "GIS/Data/Data-Spec/glTF.md",
+    "GIS/WebGIS/OpenLayers.md",
+    "GIS/WebGIS/WebGIS-Case.md",
+    "GIS/Styled-Layer-Descriptor(SLD).md",
+    "GIS/Database/PostGIS.md",
+    "GIS/GeoServer.md",
+    "GIS/Data/Geometric-Validity.md",
     "ComputerGraphics/assets/context-relation.png",
     "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/performance-now/lib/performance-now.js.map",
     "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/performance-now/lib/performance-now.js",
@@ -241,7 +197,6 @@
     "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/core-util-is/lib",
     "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/verror/lib/verror.js",
     "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/psl/browserstack-logo.svg",
-    "未命名.canvas",
     "GIS/GIS技术.jpeg",
     "GIS/Tools/assets/FieldCalculator.png",
     "Pasted image 20230326014904.png",
