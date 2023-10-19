@@ -4,6 +4,9 @@
 Docker.com
 - https://www.docker.com/
 	- https://docs.docker.com/
+	- [docs.docker.com - Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/) 
+- [hub.docker.com - Docker Hub](https://hub.docker.com/) 提供了庞大的镜像集合供使用。
+- [www.digitalocean.com - How To Install and Use Docker on Ubuntu 18.04](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04) 
 
 Tutorial
 - [yeasy.gitbook.io - Docker - 从入门到实践](https://yeasy.gitbook.io/docker_practice/)

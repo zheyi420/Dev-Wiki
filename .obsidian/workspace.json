@@ -4,18 +4,59 @@
     "type": "split",
     "children": [
       {
-        "id": "a2066928499d55ae",
+        "id": "85fefd678f77168c",
         "type": "tabs",
         "children": [
           {
-            "id": "6367d29283051def",
+            "id": "fe6dfe3df86075f3",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "Language/Python/CUDA.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "60d670ee58cd1cad",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Language/Python/PyTorch.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "e96fb03580cdb871",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Docker/Docker.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "7c6ade2daac16a09",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "OS/Windows.md",
+                "mode": "preview",
+                "source": false
+              }
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -89,6 +130,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "OS/Windows.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -105,6 +147,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "OS/Windows.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +169,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "OS/Windows.md"
+              }
             }
           },
           {
@@ -156,8 +201,20 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "6367d29283051def",
+  "active": "7c6ade2daac16a09",
   "lastOpenFiles": [
+    "Docker/Docker.md",
+    "OS/OS.md",
+    "Language/language.md",
+    "Language/TypeScript.md",
+    "Language/Python/Python.md",
+    "Language/Python/pip.md",
+    "Language/Python/PyTorch.md",
+    "Language/Python/CUDA.md",
+    "Language/Python/Anaconda.md",
+    "Language/Python",
+    "Language/Markdown.md",
+    "Language/JAVA.md",
     "Kubernetes/Kubernetes.md",
     "GIS/Tools/Geospatial-Dev-Tools.md",
     "GIS/Data/Data-Spec/WKT-WKB-GeoJSON.md",
@@ -174,17 +231,6 @@
     "GIS/Data/Data-Spec/3D-Tiles.md",
     "GIS/WebGIS/Mapbox-GL-JS.md",
     "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/typescript/README.md",
-    "GIS/WebGIS/Turf.md",
-    "GIS/WebGIS/SmartMapX-JS.md",
-    "GIS/Data/Data-Spec/WKT-GeoJSON.md",
-    "GIS/Spec/CRS-SRS.md",
-    "GIS/Data/Data-Spec/glTF.md",
-    "GIS/WebGIS/OpenLayers.md",
-    "GIS/WebGIS/WebGIS-Case.md",
-    "GIS/Styled-Layer-Descriptor(SLD).md",
-    "GIS/Database/PostGIS.md",
-    "GIS/GeoServer.md",
-    "GIS/Data/Geometric-Validity.md",
     "ComputerGraphics/assets/context-relation.png",
     "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/performance-now/lib/performance-now.js.map",
     "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/performance-now/lib/performance-now.js",
@@ -195,7 +241,6 @@
     "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/combined-stream/lib",
     "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/core-util-is/lib/util.js",
     "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/core-util-is/lib",
-    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/verror/lib/verror.js",
     "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/psl/browserstack-logo.svg",
     "GIS/GIS技术.jpeg",
     "GIS/Tools/assets/FieldCalculator.png",
