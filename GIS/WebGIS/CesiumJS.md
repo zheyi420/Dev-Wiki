@@ -18,8 +18,9 @@ Concept
     - [Interpolation](https://sandcastle.cesium.com/?src=Interpolation.html) 
 - [Improving Performance with Explicit Rendering](https://cesium.com/blog/2018/01/24/cesium-scene-rendering-performance/) 
 
-[Cesium Global 3D Content](https://cesium.com/platform/cesium-ion/content/) 
 
+
+[Cesium Global 3D Content](https://cesium.com/platform/cesium-ion/content/) 
 
 > Coordinates in CesiumJS are expressed in [ECEF](https://en.wikipedia.org/wiki/ECEF) using the [Cartesian3](https://cesium.com/learn/cesiumjs/ref-doc/Cartesian3.html) class. In this system, the origin (0, 0, 0) is the center of the Earth.
 > 
@@ -41,5 +42,4 @@ Concept
 - https://github.com/dvgis/dc-home-cli
 - https://github.com/zouyaoji/vue-cesium-demo
 	使用的 cesium 为另外封装的 vue-cesium 包，暂不考虑。
-
 

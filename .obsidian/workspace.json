@@ -4,59 +4,34 @@
     "type": "split",
     "children": [
       {
-        "id": "85fefd678f77168c",
+        "id": "926e0f7223e7a12c",
         "type": "tabs",
         "children": [
           {
-            "id": "fe6dfe3df86075f3",
+            "id": "9e9ce3aa9e87dd88",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Language/Python/CUDA.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "60d670ee58cd1cad",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Language/Python/PyTorch.md",
+                "file": "yarn.md",
                 "mode": "preview",
                 "source": false
               }
             }
           },
           {
-            "id": "e96fb03580cdb871",
+            "id": "922833793d4e9138",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Docker/Docker.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "7c6ade2daac16a09",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "OS/Windows.md",
+                "file": "GIS/WebGIS/Mapbox-GL-JS.md",
                 "mode": "preview",
                 "source": false
               }
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -130,7 +105,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "OS/Windows.md",
+                "file": "yarn.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -147,7 +122,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "OS/Windows.md",
+                "file": "yarn.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -170,7 +145,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "OS/Windows.md"
+                "file": "yarn.md"
               }
             }
           },
@@ -201,16 +176,20 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "7c6ade2daac16a09",
+  "active": "9e9ce3aa9e87dd88",
   "lastOpenFiles": [
+    "GIS/WebGIS/CesiumJS.md",
+    "GIS/WebGIS/SmartMapX-JS.md",
+    "GIS/WebGIS/Mapbox-GL-JS.md",
+    "Language/Python/CUDA.md",
+    "Language/Python/PyTorch.md",
     "Docker/Docker.md",
+    "OS/Windows.md",
     "OS/OS.md",
     "Language/language.md",
     "Language/TypeScript.md",
     "Language/Python/Python.md",
     "Language/Python/pip.md",
-    "Language/Python/PyTorch.md",
-    "Language/Python/CUDA.md",
     "Language/Python/Anaconda.md",
     "Language/Python",
     "Language/Markdown.md",
@@ -227,10 +206,6 @@
     "2023-10-20.md",
     "未命名.canvas",
     "GIS/Data/Data.md",
-    "GIS/GIS.md",
-    "GIS/Data/Data-Spec/3D-Tiles.md",
-    "GIS/WebGIS/Mapbox-GL-JS.md",
-    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/typescript/README.md",
     "ComputerGraphics/assets/context-relation.png",
     "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/performance-now/lib/performance-now.js.map",
     "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/performance-now/lib/performance-now.js",
