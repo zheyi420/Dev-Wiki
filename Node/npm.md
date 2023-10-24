@@ -112,6 +112,15 @@ https://registry.npmjs.org/
 
 # Problems
 
+## npm ERR! code ETIMEOUT
+
+
+1. 将网络代理设置为全局
+2. `npm config set proxy false`
+3. `npm cache clean`
+4. 再执行 `npm i`
+
+
 ## npm 与 node 安装目录下的 npm 的区别与冲突。
 
 npm 全局安装配置。
@@ -123,7 +132,7 @@ npm 全局安装配置。
 
 若本地 npm 版本高于原本安装生成 `package-lock.json` 的人使用的 npm，则警告：    
 > npm `WARN` old lockfile The package-lock.json file was created with an old version of npm, so supplemental metadata must be fetched from the registry.
-    
+
 会继续运行安装依赖，会直接覆盖 package-lock.json，按照当前的npm版本生成新的一份文件。
 - 参考 [Is there any way to fix package-lock.json lockfileVersion so npm uses a specific format?](https://stackoverflow.com/questions/64813775/is-there-any-way-to-fix-package-lock-json-lockfileversion-so-npm-uses-a-specific) 
 

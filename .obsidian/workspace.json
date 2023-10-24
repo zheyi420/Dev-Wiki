@@ -4,29 +4,29 @@
     "type": "split",
     "children": [
       {
-        "id": "926e0f7223e7a12c",
+        "id": "461087783dbc10ea",
         "type": "tabs",
         "children": [
           {
-            "id": "9e9ce3aa9e87dd88",
+            "id": "80154f3869703d8a",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "yarn.md",
-                "mode": "preview",
+                "file": "GIS/WebGIS/Cesium/Dev.md",
+                "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "922833793d4e9138",
+            "id": "6c54a7097d27bcbe",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "GIS/WebGIS/Mapbox-GL-JS.md",
-                "mode": "preview",
+                "file": "GIS/WebGIS/Cesium/Resource.md",
+                "mode": "source",
                 "source": false
               }
             }
@@ -60,7 +60,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:#typescript",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -105,7 +105,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "yarn.md",
+                "file": "GIS/WebGIS/Cesium/Dev.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -122,7 +122,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "yarn.md",
+                "file": "GIS/WebGIS/Cesium/Dev.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -145,7 +145,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "yarn.md"
+                "file": "GIS/WebGIS/Cesium/Dev.md"
               }
             }
           },
@@ -176,16 +176,23 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "9e9ce3aa9e87dd88",
+  "active": "80154f3869703d8a",
   "lastOpenFiles": [
-    "GIS/WebGIS/CesiumJS.md",
-    "GIS/WebGIS/SmartMapX-JS.md",
+    "GIS/WebGIS/Cesium/Resource.md",
+    "GIS/WebGIS/Cesium/Dev.md",
+    "Node/npm.md",
+    "OS/OS.md",
+    "OS/Windows.md",
+    "GIS/WebGIS/Cesium",
+    "ComputerGraphics/ThreeJS.md",
+    "未命名.canvas",
     "GIS/WebGIS/Mapbox-GL-JS.md",
+    "OS/Linux/NFS.md",
+    "yarn.md",
+    "GIS/WebGIS/SmartMapX-JS.md",
     "Language/Python/CUDA.md",
     "Language/Python/PyTorch.md",
     "Docker/Docker.md",
-    "OS/Windows.md",
-    "OS/OS.md",
     "Language/language.md",
     "Language/TypeScript.md",
     "Language/Python/Python.md",
@@ -200,12 +207,6 @@
     "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/typescript/CODE_OF_CONDUCT.md",
     "GIS/Tools/QGIS.md",
     "Kubernetes/kubectl.md",
-    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/ts-node/README.md",
-    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/har-validator/README.md",
-    "README_js.md",
-    "2023-10-20.md",
-    "未命名.canvas",
-    "GIS/Data/Data.md",
     "ComputerGraphics/assets/context-relation.png",
     "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/performance-now/lib/performance-now.js.map",
     "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/performance-now/lib/performance-now.js",
@@ -215,7 +216,6 @@
     "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/combined-stream/lib/combined_stream.js",
     "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/combined-stream/lib",
     "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/core-util-is/lib/util.js",
-    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/core-util-is/lib",
     "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/psl/browserstack-logo.svg",
     "GIS/GIS技术.jpeg",
     "GIS/Tools/assets/FieldCalculator.png",
