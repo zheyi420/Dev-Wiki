@@ -11,25 +11,54 @@
 
 # Blog
 
-- [GIS基础知识 - 坐标系、投影、EPSG:4326、EPSG:3857](https://e7868a.com/gis-coordinate-project)
-- [EPSG 4326 vs EPSG 3857 (投影，数据集，坐标系统等等)](https://github.com/penouc/blog/issues/1) 
+- [GIS基础知识 - 坐标系、投影、EPSG:4326、EPSG:3857](https://e7868a.com/gis-coordinate-project) 
 	- [EPSG 4326 vs EPSG 3857 (projections, datums, coordinate systems, and more!) ](https://lyzidiamond.github.io/posts/4326-vs-3857) 
+		中译 [EPSG 4326 vs EPSG 3857 (投影，数据集，坐标系统等等)](https://github.com/penouc/blog/issues/1) 
+	- [Mercator vs. well…not Mercator (Platte Carre)](https://idvux.wordpress.com/2007/06/06/mercator-vs-well-not-mercator-platte-carre/) 
+- [大地水准面、椭圆体、椭球体和基准面及其相互关系—ArcMap | 文档](https://desktop.arcgis.com/zh-cn/arcmap/latest/map/projections/about-the-geoid-ellipsoid-spheroid-and-datum-and-h.htm) 
 - [地图投影到底是什么](https://github.com/lyj289/lyj289.github.io/issues/8) 
 - [EPSG4326到底是地理坐标还是投影坐标](https://github.com/lyj289/lyj289.github.io/issues/6) 
+	解释了 [OpenLayers](../WebGIS/OpenLayers.md) 是如何处理地理坐标的投影的。
 - [A Short Guide To The Chinese Coordinate System. GCJ-02(gcj 02) Explained.](https://abstractkitchen.com/blog/a-short-guide-to-chinese-coordinate-system/) 
-- [Mercator vs. well…not Mercator (Platte Carre)](https://idvux.wordpress.com/2007/06/06/mercator-vs-well-not-mercator-platte-carre/) 
 
 
 ---
 
 # 大地测量学 Geodesy
 
+- https://en.wikipedia.org/wiki/Geodesy
+
+> 测量和表示地球形状和大小以及研究地球引力场和磁场的科学。
+
 ## 大地水准面 Geoid
 
+- https://en.wikipedia.org/wiki/Geoid
 
+> 大地水准面（/ˈdʒiː.ɔɪd/）是**海洋表面**在排除风和潮汐等其他影响，只考虑地球引力和地球自转影响下的形状。
+> 该表面通过大陆延伸，是一个光滑但不规则的表面，其形状是地球内部和表面质量分布不均造成的。
+
+> 虽然大地水准面不规则，但是可以近似地表示为一个椭球体，这个椭球体被称为[参考椭球体 Reference ellipsoid](##参考椭球体%20Reference%20ellipsoid)。
+> 大地水准面相对于参考椭球体的高度被称为 **Undulation of the geoid** 。
 
 ## 参考椭球体 Reference ellipsoid
 
+- https://en.wikipedia.org/wiki/Earth_ellipsoid#Reference_ellipsoid
+
+> 在大地测量学中，参考椭球面是一个数学定义的近似大地水准面的表面，
+> 参考椭球体相对简单，因此被用作首选表面，在此基础上进行大地测量网络计算，并定义纬度、经度和海拔等点坐标。
+> 
+> 在标准化和地理应用方面，大地参考椭球体是空间参考系统或大地基准定义的基础数学模型。
+
+
+- 对地球形状的测量随着时间迁移而不断精确。
+- 因为大地水准面并不规则，地球上不同地区往往需要使用不同的参考椭球体，来尽可能适合当地的大地水准面。
+⤵
+国内过去及现在使用的有：
+- **北京54坐标系** 
+	- 参考椭球体：克拉索夫斯基椭球体 - Krassowsky 1940 - EPSG:7024
+- **1980西安坐标系** 
+	- 参考椭球体：1975年国际大地测量与地球物理联合会第16届大会推荐的参考椭球。
+- **CGCS2000** （2000国家大地坐标系）
 
 
 ---
