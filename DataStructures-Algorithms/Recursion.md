@@ -75,8 +75,74 @@ factorial(5, 1);
 
 ### 斐波那契数列的三种实现：迭代，递归，记忆化
 
-Fibonacci: Iteration, Recursion, Memoization
+Fibonacci: Iteration, Recursion, Memorization
 
 >**迭代的版本比递归的版本快很多，所以这表示递归更慢**。但是，再看看三个不同版本的代码。
->递归版本更容易理解，需要的代码通常也更少。另外，**对一些算法来说，迭代的解法可能不可用**，~~而且有了尾调用优化，递归的多余消耗甚至可能被消除。~~
+>递归版本更容易理解，需要的代码通常也更少。另外，**对一些算法来说，迭代的解法可能不可用**，~~而且有了尾调用优化，递归的多余消耗甚至可能被消除。~~ 
+
+数学上，斐波那契数列是以递归的方法来定义的。
+- F<sub>0</sub> = 0 （0 不是第一项，而是第零项）
+- F<sub>1</sub> = 1
+- F<sub>n</sub> = F<sub>n-2</sub> + F<sub>n-1</sub> (n ≥ 2)
+用文字来说，斐波那契数列由 `0` 和 `1` 开始，之后的斐波那契数就是由之前的两数相加而得出。
+
+
+#### 迭代版
+
+```js
+function fibonacciIteration(n) {
+  if (n < 1) return 0;
+  if (n <= 2) return 1;
+
+  let fibNMinus2 = 0;
+  let fibNMinus1 = 1;
+  let fibN;
+  for (let i = 2; i <= n; i++) { // n > 2
+    fibN = fibNMinus1 + fibNMinus2; // f(n-1) + f(n-2)
+    fibNMinus2 = fibNMinus1;
+    fibNMinus1 = fibN;
+  }
+  return fibN;
+}
+```
+
+
+#### 递归版
+
+```js
+function fibonacciRecursion(n){
+  if (n < 1) return 0; // [1] 基线条件
+  if (n <= 2) return 1; // [2] 基线条件
+  return fibonacciRecursion(n - 2) + fibonacciRecursion(n - 1);
+}
+```
+
+
+```js
+function fib(n) {
+    const fib_n = (curr, next, n) => {
+        if (n == 0) { // 基线条件
+            return curr;
+        }
+        else {
+            return fib_n(next, curr + next, n - 1);
+        }
+    }
+    return fib_n(0, 1, n);
+}
+```
+
+
+#### 记忆化递归
+
+```js
+function fibonacciMemorization(n) {
+  const memo = [0, 1]; // [1]
+  const fibonacci = (n) => {
+    if (memo[n] != null) return memo[n]; // [2]
+    return memo[n] = fibonacci(n - 2) + fibonacci(n - 1); // [3]
+  };
+  return fibonacci(n);
+}
+```
 

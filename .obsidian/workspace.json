@@ -20,25 +20,13 @@
             }
           },
           {
-            "id": "e09e43078e293a13",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Git/Git.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "e5cb2b8b73005299",
+            "id": "c9e865aae350d29e",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
                 "file": "DataStructures-Algorithms/Recursion.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false
               }
             }
@@ -66,21 +54,8 @@
                 "source": false
               }
             }
-          },
-          {
-            "id": "451ecfffed381a2c",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "OS/Windows.md",
-                "mode": "source",
-                "source": false
-              }
-            }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -154,7 +129,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "DataStructures-Algorithms/Recursion.md",
+                "file": "GIS/WebGIS/Cesium/Dev-Tutorial.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -171,7 +146,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "DataStructures-Algorithms/Recursion.md",
+                "file": "GIS/WebGIS/Cesium/Dev-Tutorial.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -194,7 +169,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "DataStructures-Algorithms/Recursion.md"
+                "file": "GIS/WebGIS/Cesium/Dev-Tutorial.md"
               }
             }
           },
@@ -225,19 +200,20 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "e5cb2b8b73005299",
+  "active": "eab45cccc3dedd74",
   "lastOpenFiles": [
-    "Git/Git.md",
-    "DataStructures-Algorithms/Algorithms.md",
     "DataStructures-Algorithms/Recursion.md",
-    "DataStructures-Algorithms/Iteration.md",
-    "DataStructures-Algorithms/Backtrack.md",
-    "DataStructures-Algorithms/DataStructures.md",
     "GIS/WebGIS/Cesium/Dev-Tutorial.md",
-    "StressTesting.md",
-    "OS/Windows.md",
-    "GIS/WebGIS/Cesium/Resource.md",
     "GIS/WebGIS/Cesium/Concept.md",
+    "GIS/WebGIS/Cesium/Resource.md",
+    "DataStructures-Algorithms/Iteration.md",
+    "Language/JavaScript/TheModernJavaScriptTutorial/TheModernJavaScriptTutorial.md",
+    "DataStructures-Algorithms/DataStructures.md",
+    "DataStructures-Algorithms/Backtracking.md",
+    "DataStructures-Algorithms/Algorithms.md",
+    "Git/Git.md",
+    "OS/Windows.md",
+    "StressTesting.md",
     "ComputerGraphics/ThreeJS.md",
     "Language/JAVA.md",
     "GIS/Data/Data-Spec/glTF.md",
@@ -252,7 +228,6 @@
     "GIS/Tools/Geospatial-Dev-Tools.md",
     "GIS/WebGIS/L7.md",
     "GIS/Data/Geometric-Validity.md",
-    "GIS/Data/Layer-Source.md",
     "GIS/WebGIS/Cesium",
     "未命名.canvas",
     "Language/Python",
