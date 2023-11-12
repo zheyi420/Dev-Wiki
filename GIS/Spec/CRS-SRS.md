@@ -3,8 +3,9 @@
 
 # Site
 
-- [epsg.io](https://epsg.io)
-- [epsg.org](https://epsg.org)
+- [epsg.io](https://epsg.io) 
+	- [Transform coordinates - epsg.io](https://epsg.io/transform#s_srs=4326&t_srs=3857) 
+- [epsg.org](https://epsg.org) 
 - [Spatial Reference](https://spatialreference.org/)
 - [Map Projection](http://www.geo.hunter.cuny.edu/mp/index.html)
 
@@ -40,6 +41,7 @@
 > 虽然大地水准面不规则，但是可以近似地表示为一个椭球体，这个椭球体被称为[参考椭球体 Reference ellipsoid](##参考椭球体%20Reference%20ellipsoid)。
 > 大地水准面相对于参考椭球体的高度被称为 **Undulation of the geoid** 。
 
+
 ## 参考椭球体 Reference ellipsoid
 
 - https://en.wikipedia.org/wiki/Earth_ellipsoid#Reference_ellipsoid
@@ -63,11 +65,13 @@
 
 ---
 
-# 坐标系
+# 坐标/空间参考系
 
 - [QGIS - 8. Coordinate Reference Systems](https://docs.qgis.org/3.22/en/docs/gentle_gis_introduction/coordinate_reference_systems.html#coordinate-reference-systems)
+- [Wikipedia - Spatial reference system](https://en.wikipedia.org/wiki/Spatial_reference_system) 
 
-## 地理坐标系 Geographic Coordinate Systems
+
+## 地理坐标系 Geographic Coordinate Systems (or geodetic)
 
 地理坐标系是球面坐标，参考平面是椭球面，坐标单位是经纬度。
 
@@ -75,7 +79,7 @@
 - [ArcGIS - Well-known ID - Geographic Coordinate Systems](https://developers.arcgis.com/javascript/3/jshelp/gcs.htm)
 
 
-## 投影坐标系 Projected Coordinate Systems
+## 投影坐标系 Projected Coordinate Systems (or planar, grid)
 
 投影坐标系是平面坐标系，参考平面是水平面，坐标单位是米、千米等。
 
@@ -145,6 +149,16 @@
 - [ArcGIS - 高斯-克吕格 (Gauss-Krüger) 投影](https://desktop.arcgis.com/zh-cn/arcmap/latest/map/projections/gauss-kruger.htm)
 
 
+## 地心坐标系 Geocentric coordinate system (or Earth-centered Earth-fixed [ECEF])
+
+
+### 笛卡尔坐标系 Cartesian Coordinate System
+
+
+## Engineering coordinate system (or local, custom)
+
+
+
 ---
 
 # 投影
@@ -170,7 +184,7 @@
 
 # EPSG
 - [Wikipedia - EPSG Geodetic Parameter Dataset (also EPSG registry)](https://en.wikipedia.org/wiki/EPSG_Geodetic_Parameter_Dataset) 
-- Most GIS use ESPG codes as Spatial Reference System Identifiers (SRIDs)
+- Most GIS use ESPG codes as Spatial Reference System Identifier (SRID)
 - EPSG: European Petroleum Survey Group 欧洲石油调查组织
 
 ## ESPG:4326
