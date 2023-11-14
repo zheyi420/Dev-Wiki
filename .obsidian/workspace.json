@@ -20,30 +20,6 @@
             }
           },
           {
-            "id": "34a3d3c218a3dfcd",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Git/Git.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "2c36d0b7b84e99af",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Node/npm.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "6ea7a7277192a8c0",
             "type": "leaf",
             "state": {
@@ -56,43 +32,19 @@
             }
           },
           {
-            "id": "3351a8a5d224e4d1",
+            "id": "cc90e4c070323659",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "GIS/GeoServer.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "40ac6fca88c31957",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "GIS/Spec/OGC-Spec.md",
+                "file": "GIS/WebGIS/Cesium/坐标拾取方式.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "eab45cccc3dedd74",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "GIS/WebGIS/Cesium/Dev-Tutorial.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "cc90e4c070323659",
+            "id": "b38b6ea033697010",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -104,7 +56,7 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -178,7 +130,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "GIS/Spec/OGC-Spec.md",
+                "file": "GIS/WebGIS/Cesium/Concept.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -195,7 +147,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "GIS/Spec/OGC-Spec.md",
+                "file": "GIS/WebGIS/Cesium/Concept.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -218,7 +170,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "GIS/Spec/OGC-Spec.md"
+                "file": "GIS/WebGIS/Cesium/Concept.md"
               }
             }
           },
@@ -249,10 +201,13 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "40ac6fca88c31957",
+  "active": "b38b6ea033697010",
   "lastOpenFiles": [
-    "GIS/GeoServer.md",
+    "GIS/WebGIS/Cesium/坐标拾取方式.md",
     "GIS/Spec/CRS-SRS.md",
+    "GIS/WebGIS/Cesium/Concept.md",
+    "GIS/WebGIS/Cesium/Resource.md",
+    "GIS/GeoServer.md",
     "GIS/Spec/OGC-Spec.md",
     "GIS/Spec/assets/04-094_Web_Feature_Service_Implementation_Specification_V1.1.pdf",
     "GIS/Spec/assets/未确认 345411.crdownload",
@@ -265,11 +220,9 @@
     "GIS/Spec/Simple-Features-Interface-Standard(SFS).md",
     "GIS/Tools/Geospatial-Dev-Tools.md",
     "GIS/WebGIS/Cesium/Dev-Tutorial.md",
-    "GIS/WebGIS/Cesium/Concept.md",
     "Git/Git.md",
     "Node/npm.md",
     "GIS/WebGIS/OpenLayers.md",
-    "GIS/WebGIS/Cesium/Resource.md",
     "DataStructures-Algorithms/Recursion.md",
     "DataStructures-Algorithms/Iteration.md",
     "Language/JavaScript/TheModernJavaScriptTutorial/TheModernJavaScriptTutorial.md",
