@@ -2,7 +2,8 @@
 
 # Doc
 
-- [SFS-简单要素标准](https://www.osgeo.cn/doc_ogcstd/ogc_standard/ch02_chapter1/chapter.html) 包括两部分内容。
+[SFS-简单要素标准](https://www.osgeo.cn/doc_ogcstd/ogc_standard/ch02_chapter1/chapter.html) 包括两部分内容。
+
 - [Part 1: Common architecture](https://www.ogc.org/standards/sfa) 第一部分是描述简单要素的通用模型。
 
 	- 几何对象模型 Geometry object model

@@ -9,5 +9,6 @@
   "showUnsupportedFiles": true,
   "livePreview": true,
   "strictLineBreaks": false,
-  "newLinkFormat": "relative"
+  "newLinkFormat": "relative",
+  "attachmentFolderPath": "./assets"
 }

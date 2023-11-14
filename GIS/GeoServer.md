@@ -29,6 +29,8 @@ url: http://localhost:8080/geoserver/web/
 ### GetFeature
 [doc ref: GetFeature](https://docs.geoserver.org/maintain/en/user/services/wfs/reference.html#getfeature) 
 
+**Response**: 格式由 `outputFormat` 控制，默认为 MIME type `text/xml; subtype=gml/3.1.1`
+
 
 
 ## WMS

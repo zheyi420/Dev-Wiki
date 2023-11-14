@@ -50,19 +50,31 @@
               "type": "markdown",
               "state": {
                 "file": "GIS/Spec/CRS-SRS.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false
               }
             }
           },
           {
-            "id": "5499b5c6724b255c",
+            "id": "3351a8a5d224e4d1",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "GIS/Tools/Geospatial-Dev-Tools.md",
+                "file": "GIS/GeoServer.md",
                 "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "40ac6fca88c31957",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "GIS/Spec/OGC-Spec.md",
+                "mode": "source",
                 "source": false
               }
             }
@@ -92,7 +104,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -166,7 +178,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "GIS/Spec/CRS-SRS.md",
+                "file": "GIS/Spec/OGC-Spec.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -183,7 +195,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "GIS/Spec/CRS-SRS.md",
+                "file": "GIS/Spec/OGC-Spec.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -206,7 +218,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "GIS/Spec/CRS-SRS.md"
+                "file": "GIS/Spec/OGC-Spec.md"
               }
             }
           },
@@ -237,10 +249,21 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "6ea7a7277192a8c0",
+  "active": "40ac6fca88c31957",
   "lastOpenFiles": [
-    "GIS/Tools/Geospatial-Dev-Tools.md",
+    "GIS/GeoServer.md",
     "GIS/Spec/CRS-SRS.md",
+    "GIS/Spec/OGC-Spec.md",
+    "GIS/Spec/assets/04-094_Web_Feature_Service_Implementation_Specification_V1.1.pdf",
+    "GIS/Spec/assets/未确认 345411.crdownload",
+    "GIS/Spec/assets/06-042_OpenGIS_Web_Map_Service_WMS_Implementation_Specification.pdf",
+    "GIS/Spec/06-042_OpenGIS_Web_Map_Service_WMS_Implementation_Specification.pdf",
+    "GIS/Spec/assets/Pasted image 20231114114444.png",
+    "GIS/Spec/assets",
+    "GIS/Spec/Pasted image 20231114114343.png",
+    "Pasted image 20231114114227.png",
+    "GIS/Spec/Simple-Features-Interface-Standard(SFS).md",
+    "GIS/Tools/Geospatial-Dev-Tools.md",
     "GIS/WebGIS/Cesium/Dev-Tutorial.md",
     "GIS/WebGIS/Cesium/Concept.md",
     "Git/Git.md",
@@ -258,13 +281,9 @@
     "ComputerGraphics/ThreeJS.md",
     "Language/JAVA.md",
     "GIS/Data/Data-Spec/glTF.md",
-    "GIS/GeoServer.md",
     "GIS/Tools/QGIS.md",
     "GIS/Database/PostGIS.md",
     "GIS/Data/Data-Spec/3D-Tiles.md",
-    "GIS/Data/Data.md",
-    "DB/PostgreSQL.md",
-    "GIS/Spec/OGC-Spec.md",
     "GIS/WebGIS/Cesium",
     "未命名.canvas",
     "Language/Python",
@@ -272,19 +291,11 @@
     "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/performance-now/lib/performance-now.js.map",
     "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/performance-now/lib/performance-now.js",
     "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/performance-now/lib",
-    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/delayed-stream/lib/delayed_stream.js",
-    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/delayed-stream/lib",
-    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/combined-stream/lib/combined_stream.js",
-    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/combined-stream/lib",
-    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/core-util-is/lib/util.js",
     "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/psl/browserstack-logo.svg",
     "GIS/GIS技术.jpeg",
     "GIS/Tools/assets/FieldCalculator.png",
     "Pasted image 20230326014904.png",
     "GIS/Data/Data-Spec/assets/MultiLineString.png",
-    "GIS/Data/Data-Spec/assets/Polygon-with-hole.png",
-    "GIS/Data/Data-Spec/assets/Polygon.png",
-    "GIS/Data/Data-Spec/assets/MultiPolygon-with-hole.png",
-    "GIS/Data/Data-Spec/assets/MultiPolygon.png"
+    "GIS/Data/Data-Spec/assets/Polygon-with-hole.png"
   ]
 }
