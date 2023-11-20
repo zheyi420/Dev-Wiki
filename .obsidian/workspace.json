@@ -44,6 +44,30 @@
             }
           },
           {
+            "id": "b730efeb63089a8e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Browser.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "cef724f901041d36",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Info-Searching.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
             "id": "1154ac583b9c7aa9",
             "type": "leaf",
             "state": {
@@ -80,7 +104,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -154,7 +178,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "GIS/WebGIS/Cesium/坐标转换.md",
+                "file": "Info-Searching.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -171,7 +195,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "GIS/WebGIS/Cesium/坐标转换.md",
+                "file": "Info-Searching.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -194,7 +218,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "GIS/WebGIS/Cesium/坐标转换.md"
+                "file": "Info-Searching.md"
               }
             }
           },
@@ -206,6 +230,14 @@
               "state": {
                 "sortOrder": "frequency"
               }
+            }
+          },
+          {
+            "id": "75e56597499204ff",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {}
             }
           }
         ],
@@ -222,13 +254,17 @@
       "graph:查看关系图谱": false,
       "daily-notes:打开/创建今天的日记": false,
       "templates:插入模板": false,
-      "command-palette:打开命令面板": false
+      "command-palette:打开命令面板": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "cc90e4c070323659",
+  "active": "cef724f901041d36",
   "lastOpenFiles": [
-    "Language/JavaScript/Note.md",
+    "test",
+    "Browser.md",
+    "Info-Searching.md",
     "GIS/WebGIS/Cesium/坐标转换.md",
+    "Language/JavaScript/Note.md",
     "GIS/Spec/CRS-SRS.md",
     "GIS/WebGIS/Cesium/坐标拾取方式.md",
     "GIS/WebGIS/Cesium/Concept.md",
@@ -258,9 +294,6 @@
     "OS/Windows.md",
     "StressTesting.md",
     "ComputerGraphics/ThreeJS.md",
-    "Language/JAVA.md",
-    "GIS/Data/Data-Spec/glTF.md",
-    "GIS/Tools/QGIS.md",
     "GIS/WebGIS/Cesium",
     "未命名.canvas",
     "Language/Python",
