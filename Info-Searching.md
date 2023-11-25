@@ -1,18 +1,42 @@
-# Google
+# 搜索
+
+- 考虑信息/知识所在的**载体**，来对应搜索渠道。
+
+## Google
+
+- [优化 Google 搜索范围](https://support.google.com/websearch/answer/2466433) 
+- [Google Search Operators: The Complete List (44 Advanced Operators)](https://ahrefs.com/blog/google-advanced-search-operators/) 
+- https://www.google.com/advanced_search
+	[在 Google 上进行高级搜索](https://support.google.com/websearch/answer/35890) 
 
 
-| 功能               | 语法         |
-|:------------------ |:------------ |
-| 限定关键词         | `""`         |
-| 限定标题           | `intitle`    |
-| 限定标题多个关键词 | `allintitle` |
-| 限定内容关键词     | `intext`     |
-| 限定网址关键词     | `inurl`      |
-| 限定网址来源       | `site`       |
-| 限定图片尺寸       | `imagesize`  |
-| 限定文件格式       | `file`       |
+
+| 功能               | 语法         | 示例1                            | 示例2                 |
+|:------------------ |:------------ | -------------------------------- | --------------------- |
+| 限定关键词         | `""`         | `"数字城市"`                     |                       |
+| 限定标题           | `intitle`    | `intitle:Cesium`                 | `intitle:"Elon Musk"` | 
+| 限定标题多个关键词 | `allintitle` | `allintitle:GIS 数字城市 Cesium` |                       |
+| 限定内容关键词     | `intext`     | `intext:Cesium`                  |                       |
+| 限定网址关键词     | `inurl`      | `inurl:baogao.com`               |                       |
+| 限定网址来源       | `site`       | `site:zhihu.com`                 |                       |
+| 限定图片尺寸       | `imagesize`  | `imagesize:2560x1440`            |                       |
+| 限定文件格式       | `filetype`   | `filetype:pdf`                   |                       |
 
 
+### 示例
+
+#### 报告类文件搜索
+
+- 限定 PDF 格式：`filetype:pdf`
+- 限定报告网站域名：`inurl:baogao`
+- 寻找类似网站：SimilarSites
+
+
+## SimilarSites
+
+https://www.similarsites.com/
+> 搜索和某网站类似功能的平台。
+> 以聚合某个垂类的所有头部网站。
 
 # 数字图书馆
 
