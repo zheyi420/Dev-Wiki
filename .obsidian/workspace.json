@@ -4,23 +4,47 @@
     "type": "split",
     "children": [
       {
-        "id": "fc9636665b309854",
+        "id": "4207a215fb3308f4",
         "type": "tabs",
         "children": [
           {
-            "id": "0b5a54cade43c71d",
+            "id": "9c315d4670d7d4f4",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "GIS/WebGIS/Cesium/Resource.md",
+                "file": "Git/GitLab.md",
                 "mode": "preview",
                 "source": false
               }
             }
           },
           {
-            "id": "9adf970440298247",
+            "id": "efb919b6933367de",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Git/Git.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "230990cd0bcfe824",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "OS/Windows/Windows.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "5c5ed31347d92bf7",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -32,79 +56,30 @@
             }
           },
           {
-            "id": "6ea7a7277192a8c0",
+            "id": "4244d807672d0b51",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "GIS/Spec/CRS-SRS.md",
+                "file": "Node/npm.md",
                 "mode": "preview",
                 "source": false
               }
             }
           },
           {
-            "id": "cc90e4c070323659",
+            "id": "4396f00a15c81afa",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "GIS/WebGIS/Cesium/坐标转换.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "63c3a7b4b98c228d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Language/TypeScript/Dev-Tutorial.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "4bb2d5bc5e7074ab",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Language/TypeScript/Learning-Syntax.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "503128b1f388e0b9",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Git/Collaborative-Dev.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "71cf6781e105e219",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "GIS/WebGIS/Cesium/Concept.md",
+                "file": "Node/NVM.md",
                 "mode": "preview",
                 "source": false
               }
             }
           }
-        ],
-        "currentTab": 6
+        ]
       }
     ],
     "direction": "vertical"
@@ -178,7 +153,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Git/Collaborative-Dev.md",
+                "file": "Git/GitLab.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -195,7 +170,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Git/Collaborative-Dev.md",
+                "file": "Git/GitLab.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -218,7 +193,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Git/Collaborative-Dev.md"
+                "file": "Git/GitLab.md"
               }
             }
           },
@@ -258,16 +233,23 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "503128b1f388e0b9",
+  "active": "9c315d4670d7d4f4",
   "lastOpenFiles": [
-    "Language/TypeScript/Learning-Syntax.md",
-    "Language/TypeScript/Dev-Tutorial.md",
-    "GIS/WebGIS/Cesium/坐标拾取方式.md",
+    "Git/Git.md",
+    "Git/GitLab.md",
+    "OS/Windows/Windows.md",
+    "GIS/WebGIS/Cesium/Dev-Tutorial.md",
+    "Node/npm.md",
+    "OS/Windows",
+    "Node/NVM.md",
     "GIS/WebGIS/Cesium/Concept.md",
+    "GIS/WebGIS/Cesium/Resource.md",
     "GIS/Spec/CRS-SRS.md",
     "GIS/WebGIS/Cesium/坐标转换.md",
-    "GIS/WebGIS/Cesium/Resource.md",
-    "GIS/WebGIS/Cesium/Dev-Tutorial.md",
+    "Language/TypeScript/Dev-Tutorial.md",
+    "Language/TypeScript/Learning-Syntax.md",
+    "Git/Collaborative-Dev.md",
+    "GIS/WebGIS/Cesium/坐标拾取方式.md",
     "Info-Searching.md",
     "DataStructures-Algorithms/DataStructures.md",
     "Browser.md",
@@ -285,22 +267,15 @@
     "Pasted image 20231114114227.png",
     "GIS/Spec/Simple-Features-Interface-Standard(SFS).md",
     "GIS/Tools/Geospatial-Dev-Tools.md",
-    "Git/Git.md",
-    "Node/npm.md",
     "GIS/WebGIS/OpenLayers.md",
     "DataStructures-Algorithms/Recursion.md",
     "DataStructures-Algorithms/Iteration.md",
     "Language/JavaScript/TheModernJavaScriptTutorial/TheModernJavaScriptTutorial.md",
-    "DataStructures-Algorithms/Backtracking.md",
-    "DataStructures-Algorithms/Algorithms.md",
-    "OS/Windows.md",
-    "StressTesting.md",
     "GIS/WebGIS/Cesium",
     "未命名.canvas",
     "Language/Python",
     "ComputerGraphics/assets/context-relation.png",
     "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/performance-now/lib/performance-now.js.map",
-    "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/performance-now/lib/performance-now.js",
     "GIS/Cesium-Sandcastle-3DTiles-Download/node_modules/psl/browserstack-logo.svg",
     "GIS/GIS技术.jpeg",
     "GIS/Tools/assets/FieldCalculator.png",

@@ -5,7 +5,7 @@
 
 - 将 Cesium 指定版本文档、示例本地部署。
 	- [Cesium文档和示例本地部署](https://zhuanlan.zhihu.com/p/558817178) 
-	- [Cesium：入门教程（一）之 Hello World](http://t.csdnimg.cn/qdRpk) 
+	- [Cesium：入门教程（一）之 Hello World](https://blog.csdn.net/sinat_36226553/article/details/105896271) 
 - win10 本地部署
 	- [win10 IIS服务开启并配置 目录浏览（本地）](https://blog.csdn.net/wqssh21/article/details/106223557) 
 

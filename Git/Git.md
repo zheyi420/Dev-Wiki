@@ -9,11 +9,6 @@
 	- [菜鸟 git - 简明指南](https://www.runoob.com/manual/git-guide/) 
 - [阮一峰 最简单的 Git 服务器](https://www.ruanyifeng.com/blog/2022/10/git-server.html) 
 
----
-
-# Config
-
-Git 全局配置文件路径（Win10）`C:\Users\${usrname}\.gitconfig`
 
 ---
 
@@ -169,6 +164,11 @@ fa19989 dev@{3}: branch: Created from HEAD
 ### `git config`
 > Get and set repository or global options.
 > - https://git-scm.com/docs/git-config
+
+查看配置文件本地路径
+- 查看仓库级别（最高优先级） `git config --local --list --show-origin` 需要在仓库路劲内执行。
+- 查看全局级别（中间优先级） `git config --global --list --show-origin`
+- 查看系统级别（最低优先级） `git config --system --list --show-origin`
 
 
 ### `git clone`
