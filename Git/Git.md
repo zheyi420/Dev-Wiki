@@ -138,6 +138,10 @@ fa19989 dev@{3}: branch: Created from HEAD
 目的：缩小 git 大小
 
 
+## git bash 中文乱码
+
+
+## 查看远程变更
 
 
 ---

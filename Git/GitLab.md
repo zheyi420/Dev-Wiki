@@ -16,7 +16,11 @@ fatal: repository 'http://xxx.git' not found
 本地未配置凭证
 
 解决：
-windows 系统添加凭据，或者直接命令行执行，如下⤵
+windows 系统添加凭据
+位置 `控制面板\所有控制面板项\凭据管理器`
+
+
+或者直接命令行执行，如下⤵
 ```shell
 $ git clone http://用户名@xxx.git
 ```

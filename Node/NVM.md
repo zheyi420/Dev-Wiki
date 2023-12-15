@@ -2,7 +2,9 @@
 
 
 
-# Use
+# Usage
+
+https://github.com/coreybutler/nvm-windows/?tab=readme-ov-file#usage
 
 ```powershell
 PS C:\Users\21632> nvm version

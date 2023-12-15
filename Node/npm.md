@@ -15,23 +15,35 @@ Node NPM 版本对应关系：[以往的版本 nodejs.org/zh-cn/download/release
     - 博客：[Semver(语义化版本号)扫盲](https://juejin.cn/post/6844903591690534926) 
 
 
-# 下载源
+# 配置
 
-## 查看下载源
+## 下载源
 
+查看下载源
 ```powershell
 PS D:\> npm config get registry
 https://registry.npmjs.org/
 ```
 
+修改下载源
 
-## 修改下载源
-
-- 设置npm镜像源为淘宝镜像
-	`npm config set registry https://registry.npm.taobao.org/`
+- 设置npm镜像源为淘宝镜像 `npm config set registry https://registry.npm.taobao.org/`
 
 
-## 安装位置
+## 各配置路径
+
+- 查看 npm 配置
+	- `npm config ls` / `npm config list` # 查看简单配置项
+	- `npm config ls -l` # 查看所有配置项
+
+
+- npm 配置文件 `.npmrc` 默认在用户目录 `C:\Users\用户\` 下。
+	查询命令：`npm config get userconfig`
+	```shell
+	PS E:\project> npm config get userconfig
+	C:\Users\PC\.npmrc
+	```
+
 
 - 获取 npm 包的全局安装路径
 	`npm config get prefix`
@@ -40,7 +52,8 @@ https://registry.npmjs.org/
 - 设置 npm 包安装位置
 	`npm config set prefix`
 
-- 查询 npm 安装路径
+
+- 查询 npm 安装路径（使用 cmd 查询）
 	```cmd
 	C:\Users\user_name>where npm
 	C:\Users\user_name\AppData\Roaming\npm\npm
@@ -48,6 +61,7 @@ https://registry.npmjs.org/
 	C:\Program Files\nodejs\npm
 	C:\Program Files\nodejs\npm.cmd
 	```
+
 
 
 # Pkgs
@@ -239,3 +253,7 @@ Ref：
 - [包应该放在devDependencies还是dependencies](https://guxinyan.github.io/2017/11/02/%E5%8C%85%E5%BA%94%E8%AF%A5%E6%94%BE%E5%9C%A8devDependencies%E8%BF%98%E6%98%AFdependencies/) 
 - [docs.npmjs - Specifics of npm's package.json handling](https://docs.npmjs.com/cli/v6/configuring-npm/package-json#devdependencies) 
 
+
+## node-sass 安装失败
+
+参考 [为什么node-sass总是安装失败？](https://segmentfault.com/a/1190000020993365) 
