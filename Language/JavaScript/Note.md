@@ -1,3 +1,7 @@
+# ES
+
+- ES6 features -> https://github.com/lukehoban/es6features
+
 # Date
 
 `console.log(new Date());`
@@ -53,3 +57,16 @@ node testDate.js
 
 - [Using promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) 
 - [How to use promises](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Promises) 
+
+# Utility library
+
+- Lodash
+	> 方便数组、对象、字符串、函数等操作。
+	> https://www.lodashjs.com/
+	> https://lodash.com/
+
+- moment.js
+	> 日期处理。
+	> https://momentjs.com/
+
+
