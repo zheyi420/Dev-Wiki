@@ -33,8 +33,8 @@ https://registry.npmjs.org/
 ## 各配置路径
 
 - 查看 npm 配置
-	- `npm config ls` / `npm config list` # 查看简单配置项
-	- `npm config ls -l` # 查看所有配置项
+	- `npm config ls` 或者 `npm config list` 查看简单配置项
+	- `npm config ls -l` 查看所有配置项
 
 
 - npm 配置文件 `.npmrc` 默认在用户目录 `C:\Users\用户\` 下。

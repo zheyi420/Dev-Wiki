@@ -46,11 +46,6 @@
 ### `free`
 > 显示内存状态。
 
-### `df`
-> 
-
-
-
 ### `ps`
 > `process status`
 
@@ -153,6 +148,9 @@
 > 显示每个文件所在的文件系统的信息，
 > 默认为所有文件系统。
 
+常用命令
+- `df -h` 将大小以易读格式打印。
+
 ### `mkdir`
 > ➡ make directory
 
@@ -185,6 +183,15 @@
 
 
 ## Backup compression
+
+### `unzip`
+
+常用命令
+- `unzip -d <DIR> dist.zip` 把文件解压到指定目录。
+- `unzip -l dist.zip` 查看 zip 压缩包内包含哪些文件，不执行解压。
+- `unzip -o dist.zip -d <DIR>` 解压到指定目录，若已有相同文件存在，覆盖且不提示。
+	- `-o`: overwrite files WITHOUT prompting
+
 
 ### `tar`
 > GNU  `tar` 将许多文件一起保存到单个磁带或磁盘归档中，并且可以从存档中恢复单个文件。
