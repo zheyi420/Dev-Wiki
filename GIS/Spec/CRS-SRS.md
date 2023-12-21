@@ -191,11 +191,40 @@
 
 
 ## EPSG:3857
+https://epsg.io/3857
+> WGS 84 / Pseudo-Mercator -- Spherical Mercator
+> 
+> Unit: metre
+> Center coordinates: 0.0 0.0
+
 
 **说明**
 - web mapping standard CRS.
 
+## EPSG:4490
+https://epsg.io/4490
+> China Geodetic Coordinate System 2000
+> 
+> Unit: degree (supplier to define representation)
+> Center coordinates: 104.2 35.13
 
+
+## EPSG:4479
+https://epsg.io/4479
+> China Geodetic Coordinate System 2000
+
+## EPSG:4529
+https://epsg.io/4529
+> CGCS2000 / 3-degree Gauss-Kruger zone 41
+> 
+> Unit: metre
+> Center coordinates: 41500000.0 4528357.48
+> 
+
+
+## EPSG:4546
+https://epsg.io/4546
+> CGCS2000 / 3-degree Gauss-Kruger CM 111E
 
 
 

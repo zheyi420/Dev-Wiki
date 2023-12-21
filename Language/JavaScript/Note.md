@@ -69,4 +69,8 @@ node testDate.js
 	> 日期处理。
 	> https://momentjs.com/
 
+# Case
 
+## `TypeError: Converting circular structure to JSON`
+
+- [TypeError: Converting circular structure to JSON](https://blog.csdn.net/qq_17627195/article/details/118543310)

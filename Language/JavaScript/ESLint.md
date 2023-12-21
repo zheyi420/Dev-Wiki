@@ -12,12 +12,12 @@ ESLint will lint your code.（ESLint会对你的代码进行提示）
 
 **Rules**
 
-- [https://eslint.org/docs/rules/](https://eslint.org/docs/rules/)
-- [https://cn.eslint.org/docs/rules](https://cn.eslint.org/docs/rules)
+- https://eslint.org/docs/latest/rules/
+- https://zh-hans.eslint.org/docs/latest/rules/
 
 **Airbnb Style Guide**
 
-- [https://www.npmjs.com/package/eslint-config-airbnb-base](https://www.npmjs.com/package/eslint-config-airbnb-base)
+- https://www.npmjs.com/package/eslint-config-airbnb-base
 - rule list:
 
 
