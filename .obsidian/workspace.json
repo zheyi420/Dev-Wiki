@@ -44,6 +44,18 @@
             }
           },
           {
+            "id": "3de2b21becd2c72e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "OS/Linux/Commands.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
             "id": "8713ba9b8fd333b7",
             "type": "leaf",
             "state": {
@@ -51,6 +63,18 @@
               "state": {
                 "file": "Language/JavaScript/TheModernJavaScriptTutorial/TheModernJavaScriptTutorial.md",
                 "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "ec8d99d063859818",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "GIS/WebGIS/ArcGIS/ArcGIS-JS.md",
+                "mode": "source",
                 "source": false
               }
             }
@@ -114,7 +138,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 335.5
+    "width": 335.5,
+    "collapsed": true
   },
   "right": {
     "id": "29194b246ca5af9b",
@@ -212,15 +237,16 @@
   },
   "active": "c47a1ba66079bc3d",
   "lastOpenFiles": [
+    "OS/Linux/Commands.md",
+    "Git/Git.md",
+    "GIS/WebGIS/ArcGIS/ArcGIS-JS.md",
+    "Language/JavaScript/TheModernJavaScriptTutorial/TheModernJavaScriptTutorial.md",
     "GIS/Spec/CRS-SRS.md",
     "Language/JavaScript/Note.md",
     "Language/JavaScript/ESLint.md",
-    "Language/JavaScript/TheModernJavaScriptTutorial/TheModernJavaScriptTutorial.md",
     "GIS/Database/PostGIS.md",
-    "GIS/WebGIS/ArcGIS/ArcGIS-JS.md",
     "Git/GitHub.md",
     "GIS/Data/Layer-Source.md",
-    "OS/Linux/Commands.md",
     "Node/npm.md",
     "GIS/WebGIS/ArcGIS/ArcGIS-Server.md",
     "DataStructures-Algorithms/DataStructures.md",
@@ -233,7 +259,6 @@
     "OS/Linux/shell.md",
     "OS/Linux/WSL.md",
     "OS/Linux/system.md",
-    "Git/Git.md",
     "GIS/Data/Data-Spec/WKT-GeoJSON.md",
     "GIS/Data/Data-Spec/GeoJSON.md",
     "GIS/Data/Data.md",
