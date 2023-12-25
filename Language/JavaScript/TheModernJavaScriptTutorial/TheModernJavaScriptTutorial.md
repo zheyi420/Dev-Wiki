@@ -1,10 +1,12 @@
-# The Modern JavaScript Tutorial
+***The Modern JavaScript Tutorial***
+> https://javascript.info/
+
 
 # PART 1 The JavaScript language
 
 
 
-## 1. An introduction
+## 1 - An introduction
 
 
 
@@ -629,9 +631,9 @@ console.log( !!null ); // false // Boolean(null) 实现同样的效果
 
 ### 2.18 JavaScript specials
 
-## 3. Code quality
+## 3 - Code quality
 
-## 4. Objects: the basics
+## 4 - Objects: the basics
 
 ### 4.1 Objects
 
@@ -652,6 +654,28 @@ console.log( !!null ); // false // Boolean(null) 实现同样的效果
 ## 5 - Data types
 
 ## 6 - Advanced working with functions
+
+### 6.5 Global object
+
+- [MDN Global object](https://developer.mozilla.org/en-US/docs/Glossary/Global_object) 
+- [MDN globalThis](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/globalThis) 
+- [MDN Window](https://developer.mozilla.org/zh-CN/docs/Web/API/Window) 
+
+
+全局对象提供可在任何地方使用的变量和函数。
+
+**特点**
+- 全局对象的所有属性都可以被直接访问。
+- 全局对象有一个通用名称 `globalThis`。
+	> ……但是更常见的是使用“老式”的环境特定（environment-specific）的名字，例如 `window`（浏览器）和 `global`（Node.js）。
+- 在浏览器中，使用 `var`（而不是 `let/const`！）声明的全局函数和变量会成为全局对象的属性。
+- 函数声明（特指在主代码流中具有 `function` 关键字的语句，而不是函数表达式）也有这样的效果。
+
+
+**使用**
+- 一般不建议使用全局变量。全局变量应尽可能的少。
+- 应当使用直接的方式访问全局对象的属性，如 `window.x`。
+
 
 ## 7 - Object properties configuration
 
