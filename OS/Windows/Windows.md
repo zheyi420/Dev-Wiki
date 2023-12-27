@@ -1,9 +1,30 @@
 
-**启动项目录**
-用户 `C:\Users\user_name\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`
+# 系统目录/文件
+
+## 启动项目录
+
+用户 `C:\Users\<用户名>\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`
 系统 `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp`
 
-**系统录音文件目录**
+## 本地 DNS
+
+路径 `C:\Windows\System32\drivers\etc\hosts`
+
+打开 cmd，更新DNS缓存，执行 `ipconfig /flushdns` ，执行 `ping xxx.com`，可通即可用。
+
+# 查询
+
+`wins` + `R` + `%temp%`: 查看电脑缓存，查询目录 `C:\Users\<用户名>\AppData\Local\Temp`
+
+`wins` + `R` + `mrt`: windows 自带恶意软件删除工具
+
+`wins` + `R` + `dxdiag`: 查看电脑相关硬件配置
+
+`wins` + `R` + `regedit`：打开注册表编辑器
+
+`wins` + `R` + `msconfig`: 系统配置 → 引导 → 高级选项 → 处理器个数增加
+> 如果不启用，则默认使用全部核心，如果选中，则不一定会使用最大核心数量。需要查看设备管理器处理器个数。建议不启用。
+
 
 
 # 工具
@@ -20,6 +41,11 @@
     - win10 自带的画图3D
 
 # Case
+
+## Win10 磁盘管理
+
+[Win10磁盘管理教程：新建、合并分区，添加和修改盘符](https://www.pcoic.com/system/windows/218.html) 
+
 
 ## 删除被占用的 dll 文件
 
@@ -99,4 +125,10 @@ Windows Registry Editor Version 5.00
 
 
 ## 设置文件资源管理器所有布局为"详细信息"
+
+
+
+## 卸载 小娜 Cortana
+
+win键 → 搜索 Cortana → 显示的小娜应用可进行的操作里有卸载。
 

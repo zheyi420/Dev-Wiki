@@ -1840,15 +1840,15 @@ new Promise(function(resolve, reject) {
 
 # PART 2 Browser: Document, Events, Interfaces
 
-## 1. Document
+## 1 - Document
 
-## 2. Introduction to Events
+## 2 - Introduction to Events
 
-## 3. UI Events
+## 3 - UI Events
 
-## 4. Forms, controls
+## 4 - Forms, controls
 
-## 5. Document and resource loading
+## 5 - Document and resource loading
 
 ### 5.1 Page: DOMContentLoaded, load, beforeunload, unload
 
@@ -1858,7 +1858,7 @@ new Promise(function(resolve, reject) {
 
 
 
-## 6. Miscellaneous
+## 6 - Miscellaneous
 
 
 
@@ -1866,11 +1866,11 @@ new Promise(function(resolve, reject) {
 
 # PART 3 Additional articles
 
-## 1. Frames and windows
+## 1 - Frames and windows
 
-## 2. Binary data, files
+## 2 - Binary data, files
 
-## 3. Network requests
+## 3 - Network requests
 
 
 
@@ -1946,13 +1946,26 @@ new Promise(function(resolve, reject) {
 
 
 
-## 4. Storing data in the browser
+## 4 - Storing data in the browser
 
-## 5. Animation
+### 4.1 Cookie, document.cookie
 
-## 6. Web components
+### 4.2 LocalStorage, sessionStorage
 
-## 7. Regular expressions
+https://developer.mozilla.org/zh-CN/docs/Web/API/Window/localStorage
+https://developer.mozilla.org/zh-CN/docs/Web/API/Window/sessionStorage
+https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API
+
+
+
+### 4.3 IndexedDB
+
+
+## 5 - Animation
+
+## 6 - Web components
+
+## 7 - Regular expressions
 
 
 

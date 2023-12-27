@@ -158,8 +158,8 @@ fa19989 dev@{3}: branch: Created from HEAD
 - `git branch -d <分支名>` 删除本地分支。
 - `git branch -d -r origin/<分支名>` 删除远程跟踪分支。
 - 为新的本地分支设置跟踪信息。
-	- `git branch --set-upstream-to=origin/远程分支名 本地分支名`
-	- `git branch -u origin/远程分支名`
+	- `git branch --set-upstream-to=origin/远程分支名 本地分支名` 
+	- `git branch -u origin/远程分支名` 
 	新的本地分支与远程分支未关联。上述两条都可。
 	使用 `git status` 查看当前分支的状态，未显示 `Your branch is up to date with 'origin/branch_name'`。
 	使用 `git branch -vv` 查看本地分支关联（跟踪）的远程分支时，发现创建的新分支未关联远程分支。
@@ -258,7 +258,9 @@ fa19989 dev@{3}: branch: Created from HEAD
 	发布新分支
 	把新建的本地分支上传到远程服务器，建议远程分支与本地分支同名（也可以随意起名）
 
-
+- `git push --set-upstream origin <远程分支名>` 
+	> fatal: 当前分支 xxx 没有上游分支。
+	> 要推送当前分支并将远程设置为上游，请使用上述命令
 
 
 ### `git switch`
