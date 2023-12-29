@@ -184,7 +184,7 @@
 
 # EPSG
 - [Wikipedia - EPSG Geodetic Parameter Dataset (also EPSG registry)](https://en.wikipedia.org/wiki/EPSG_Geodetic_Parameter_Dataset) 
-- Most GIS use ESPG codes as Spatial Reference System Identifier (SRID)
+- Most GIS use EPSG codes as Spatial Reference System Identifier (SRID)
 - EPSG: European Petroleum Survey Group 欧洲石油调查组织
 
 ## ESPG:4326
