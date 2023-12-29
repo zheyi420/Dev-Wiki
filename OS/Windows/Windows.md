@@ -132,3 +132,83 @@ Windows Registry Editor Version 5.00
 
 win键 → 搜索 Cortana → 显示的小娜应用可进行的操作里有卸载。
 
+
+
+## 提高应用的 CPU 使用率
+
+**问题**
+> 运行高层级的汉诺塔问题时，chrome.exe 及本地的 Node.js: Server-side JavaScript 的 CPU 利用率都没有高于 30% 多少。是否可以设置呢。
+
+
+## win7(x64) 升级为 win10(x64)
+
+[下载 Windows 10](https://www.microsoft.com/zh-cn/software-download/windows10) 
+
+1. 在上面的官方链接下载工具 MediaCreationTool21H1.exe （20210913时下载为该版本）；
+2. 将工具复制到桌面后，在桌面以管理员身份运行；
+3. 之后按上面链接中指向的 MicroSoft 文档操作；
+4. 若为 win7 本机安装，进行到「选择要保留的内容」这一步时，要选「保留个人文件与应用程序」一项，因为这样程序会将 Win7 的授权转换为 Win10 的数字授权。选「不保留任何项目」，则可能丧失原有的 windows 激活状态。
+
+
+## 信息查看
+
+### 查看应用调用内容及网络传输
+
+- [HTTP Toolkit](https://httptoolkit.tech/)
+	> 一个桌面软件，用于拦截本机的 HTTP 通信。
+
+
+### 查询端口占用
+
+[Windows下如何查看某个端口被谁占用](https://www.runoob.com/w3cnote/windows-finds-port-usage.html) 
+
+查找所有运行的端口
+
+```powershell
+netstat -ano
+```
+
+查看被占用端口对应的 PID
+
+```powershell
+netstat -ano | findstr "端口号"
+
+netstat -ano | findstr "PID"
+```
+
+查看指定 PID 的进程
+
+```powershell
+tasklist | findstr 'PID'
+```
+
+
+### 硬盘健康状态查看
+
+#### 方法一 Windows 内置磁盘检查工具 Windows Chkdsk
+
+扫描和检测文件系统错误和扇区问题。修复损坏的文件系统。
+
+- 图形界面：‘我的电脑’ 内右键驱动器 → 设置 → 工具（驱动器属性窗口）→ 检查
+- 命令行界面：Chkdsk 命令行操作：cmd 管理员方式运行 → `chkdsk D: /f /R /X` 检查驱动器 D 盘
+
+![](assets/a.png)
+
+![](assets/b.png)
+
+#### 方法二 WMIC 分析磁盘的 S.M.A.R.T. 状态（Win 10 已内置该工具）
+
+只输出健康与否，无详细信息。
+
+- 命令行界面：Chkdsk 命令行操作：cmd 管理员方式运行 → `wmic diskdrive get model,status` → 返回当前所有驱动器的健康状态
+
+#### 方法三 第三方检测工具 (S.M.A.R.T.)
+
+- CrystalDiskInfo
+- Hard Disk Sentinel
+- HDDScan
+- HD Tune Pro
+
+硬盘维护和数据安全知识
+
+- RAID
