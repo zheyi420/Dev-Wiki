@@ -5,8 +5,38 @@
 - https://tldp.org/
 - https://www.kernel.org/
 
+# Case
+
+## jar 包运行，挂起，进程查看，杀掉
+
+```bash
+ps aux | grep XXX.jar
+kill -9 PID号
+
+# -- 挂起并写入日志
+nohup <java编译器地址> -jar XXX.jar --spring.profiles.active=prd > log.log &
+```
+
 
 # Category
+
+### `echo`
+
+- 在 csv 文件首行增加一行
+	```shell
+	echo 'id,name,geom' > temp.csv
+	cat targetFile.csv >> temp.csv
+	mv temp.csv targetFile.csv
+	```
+
+### `ssh`
+- [Linux 远程登录](https://www.runoob.com/linux/linux-remote-login.html) 
+
+```bash
+# ssh: Secure Shell
+# Linux 系统中是通过 ssh 服务实现的远程登录功能，默认 ssh 服务端口号为 22。
+ssh -p 22 服务器用户名@xxx.xxx.xxx.xxx # -p 后面是端口
+```
 
 
 
@@ -61,7 +91,23 @@
 
 ## File management
 
-- [Linux文件权限属性后面的点的含义（ls -l）](https://blog.csdn.net/xinlongabc/article/details/46801641) 
+
+### `file`
+
+- `file -bi filename.csv` 查看文件 MIME 类型及 MIME 编码。
+
+
+
+### `cp`
+
+- `cp -ri ./ /dir_name/` 复制目录内所有文件到指定目录。
+
+
+### `scp`
+
+- 跨域复制文件
+	- `scp local_file remote_username@remote_ip:remote_file`
+	- `scp test.csv root@172.24.160.1:/home/jarvismusk/`
 
 
 ### `cat`
@@ -69,15 +115,20 @@
 
 - https://www.gnu.org/software/coreutils/cat
 
+- `cat a.csv >> b.csv` 将 a.csv 的内容追加到 b.csv
+
+
 #### 合并文件
 
 使用 `cat` 将多个 `.tar.gz` 文件合并到单个 `.tar.gz` 文件。
 - `cat a.tar.gz* > data.tar.gz`
 
 
-
 ### `rm`
 > remove file or directory.
+
+- `rm file.log`
+- `rm -rf` 删除目录及目录下文件。
 
 ### `chmod`
 > change mode
@@ -87,7 +138,7 @@
 
 ### `chown`
 
-- `chown user:usergroup file`
+- `chown user:usergroup file` 更改文件的拥有者及用户组
 - `chown -R uid:gid .` 修改所在目录下所有文件及子目录内文件。
 
 
@@ -134,6 +185,17 @@
 
 ## Disk management
 
+### `ls`
+> list directory contents
+
+- [Linux文件权限属性后面的点的含义（ls -l）](https://blog.csdn.net/xinlongabc/article/details/46801641) 
+
+
+- 按文件大小、时间等排序
+	- `ls -S` 或者 `ls --sort=size` 按文件大小排序，最大的最先。
+	- `ls -t` 或者 `ls --sort=time` 按文件时间排序，最新的最先。
+
+
 ### `du`
 > ➡ disk usage
 > 递归显示（磁盘）文件使用情况。默认为当前工作目录，除非另有说明。
@@ -166,6 +228,8 @@
 - 输出显示 `匹配到二进制文件（标准输入）` 时，添加参数如下
 	- `grep -a`
 	- `grep --binary-files=text`
+- 搜索目录下所有符合正则匹配的 csv 文件内是否存在某个字符串。
+	- `grep '309383_5,' *road*.csv`
 
 
 ### `sed`
@@ -182,6 +246,11 @@
   > 查看文件中间一段，你可以使用sed命令，如上，这样你就可以只查看文件的第100行到第200行。  
 
 
+### `tail`
+
+- `tail -f file.log` 跟踪文件新增情况，`-f` 随着文件的增长，输出附加的数据。
+
+
 ## Backup compression
 
 ### `unzip`
@@ -191,6 +260,11 @@
 - `unzip -l dist.zip` 查看 zip 压缩包内包含哪些文件，不执行解压。
 - `unzip -o dist.zip -d <DIR>` 解压到指定目录，若已有相同文件存在，覆盖且不提示。
 	- `-o`: overwrite files WITHOUT prompting
+
+### `zip`
+
+- `zip /dir_a/file.zip /dir_b/file1.csv /dir_b/file2.csv` 压缩文件
+- `zip -m file.zip ./file2.csv` 向压缩文件file.zip中添加file2.csv文件，该命令会删除源文件，可以添加后再解压缩 :-|
 
 
 ### `tar`
