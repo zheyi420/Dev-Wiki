@@ -16,7 +16,7 @@
 
 下载 https://github.com/CesiumGS/cesium/releases/tag/1.110
 Assets
-- Cesium-1.110.zip  分发包  有 Build。
+- Cesium-1.110.zip  分发包  有 Build。(**若只是需要指定版本的 API 文档，下载这个就足够了**)
 - Source code (zip) 源码包  需要自己打包 Build。
 
 ## 获取 Cesium ion Token

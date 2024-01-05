@@ -8,24 +8,84 @@
         "type": "tabs",
         "children": [
           {
-            "id": "1803c96bd03ecea8",
+            "id": "7133fde36bb9546a",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "GIS/WebGIS/ArcGIS/ArcGIS-JS.md",
+                "file": "GIS/WebGIS/Cesium/Dev-Tutorial.md",
                 "mode": "preview",
                 "source": false
               }
             }
           },
           {
-            "id": "cd3e1599281fd89c",
+            "id": "370699dd28e74df0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Node/NVM.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "86aeaeb2e9d5bca1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Node/npm.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "f5c512aee876d87d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
                 "file": "Git/Git.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "b334e750a94e5168",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Node/Nodejs.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "26bdc0d833659c01",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "GIS/WebGIS/Cesium/坐标拾取方式.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "e46b207199aeeaa3",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "GIS/WebGIS/Cesium/坐标转换.md",
                 "mode": "preview",
                 "source": false
               }
@@ -38,61 +98,13 @@
               "type": "markdown",
               "state": {
                 "file": "Git/Collaborative-Dev.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "0ad4bc45b0f61cb6",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "GIS/Tools/QGIS.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "accf5989771501ec",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "GIS/Spec/CRS-SRS.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "3349793eaafe73ed",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "GIS/WebGIS/ArcGIS/ArcGIS-REST-Services.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "62b52b139ca278fe",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Language/JavaScript/TheModernJavaScriptTutorial/TheModernJavaScriptTutorial.md",
                 "mode": "preview",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -166,7 +178,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Language/JavaScript/TheModernJavaScriptTutorial/TheModernJavaScriptTutorial.md",
+                "file": "Git/Git.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -183,7 +195,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Language/JavaScript/TheModernJavaScriptTutorial/TheModernJavaScriptTutorial.md",
+                "file": "Git/Git.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -218,7 +230,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Language/JavaScript/TheModernJavaScriptTutorial/TheModernJavaScriptTutorial.md"
+                "file": "Git/Git.md"
               }
             }
           }
@@ -240,17 +252,26 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "62b52b139ca278fe",
+  "active": "f5c512aee876d87d",
   "lastOpenFiles": [
-    "GIS/WebGIS/ArcGIS/ArcGIS-JS.md",
-    "GIS/Tools/QGIS.md",
-    "Git/Collaborative-Dev.md",
+    "GIS/WebGIS/Cesium/Dev-Tutorial.md",
     "Git/Git.md",
-    "GIS/WebGIS/ArcGIS/ArcGIS-REST-Services.md",
+    "Node/npm.md",
+    "Node/NVM.md",
+    "Node/Nodejs.md",
+    "GIS/WebGIS/Cesium/Resource.md",
+    "GIS/WebGIS/Cesium/Concept.md",
+    "Git/Collaborative-Dev.md",
     "Language/JavaScript/TheModernJavaScriptTutorial/TheModernJavaScriptTutorial.md",
-    "GIS/Tools/Geospatial-Dev-Tools.md",
-    "GIS/GIS.md",
+    "GIS/WebGIS/ArcGIS/ArcGIS-REST-Services.md",
     "GIS/Spec/CRS-SRS.md",
+    "GIS/Tools/QGIS.md",
+    "GIS/WebGIS/Cesium/坐标转换.md",
+    "GIS/WebGIS/Cesium/坐标拾取方式.md",
+    "GIS/WebGIS/ArcGIS/ArcGIS-JS.md",
+    "GIS/GIS.md",
+    "REST-API.md",
+    "GIS/Tools/Geospatial-Dev-Tools.md",
     "GIS/Spec/Simple-Features-Interface-Standard(SFS).md",
     "GIS/Spec/WGS.md",
     "InterentProxy/Security.md",
@@ -260,18 +281,9 @@
     "OS/Linux/SSH client.md",
     "OS/Linux/system.md",
     "OS/Linux/WSL.md",
-    "OS/Linux/shell.md",
-    "OS/Linux/NFS.md",
-    "OS/Linux/Linux.md",
-    "OS/Linux/Commands.md",
     "OS/Windows/assets/b.png",
     "OS/Windows/assets/a.png",
     "OS/Windows/assets",
-    "RESR-API.md",
-    "OS/Windows/Windows.md",
-    "Git/GitHub.md",
-    "GIS/Data/Layer-Source.md",
-    "Docker/Docker.md",
     "GIS/WebGIS/ArcGIS",
     "OS/Windows",
     "test",
