@@ -22,7 +22,8 @@ Assets
 ## 获取 Cesium ion Token
 
 - [Step 1: Create an account and get a token](https://cesium.com/learn/cesiumjs-learn/cesiumjs-quickstart/#step-1-create-an-account-and-get-a-token) 
-
+从分发包运行本地的文档、沙盒服务时，需要修改 `Cesium.Ion.defaultAccessToken` 为自己的 Token。
+1.95版本的 Cesium 的修改位置在 `/Source/Core/Ion.js`
 
 ## 配置 `CESIUM_BASE_URL`
 

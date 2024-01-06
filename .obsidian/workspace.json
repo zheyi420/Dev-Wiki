@@ -56,6 +56,18 @@
             }
           },
           {
+            "id": "d8c613646d3aae81",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "GIS/WebGIS/Cesium/坐标拾取方式.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
             "id": "b334e750a94e5168",
             "type": "leaf",
             "state": {
@@ -254,20 +266,20 @@
   },
   "active": "f5c512aee876d87d",
   "lastOpenFiles": [
-    "GIS/WebGIS/Cesium/Dev-Tutorial.md",
+    "GIS/WebGIS/Cesium/坐标拾取方式.md",
     "Git/Git.md",
+    "GIS/WebGIS/Cesium/Dev-Tutorial.md",
+    "GIS/WebGIS/Cesium/坐标转换.md",
+    "GIS/WebGIS/Cesium/Resource.md",
+    "GIS/WebGIS/Cesium/Concept.md",
     "Node/npm.md",
     "Node/NVM.md",
     "Node/Nodejs.md",
-    "GIS/WebGIS/Cesium/Resource.md",
-    "GIS/WebGIS/Cesium/Concept.md",
     "Git/Collaborative-Dev.md",
     "Language/JavaScript/TheModernJavaScriptTutorial/TheModernJavaScriptTutorial.md",
     "GIS/WebGIS/ArcGIS/ArcGIS-REST-Services.md",
     "GIS/Spec/CRS-SRS.md",
     "GIS/Tools/QGIS.md",
-    "GIS/WebGIS/Cesium/坐标转换.md",
-    "GIS/WebGIS/Cesium/坐标拾取方式.md",
     "GIS/WebGIS/ArcGIS/ArcGIS-JS.md",
     "GIS/GIS.md",
     "REST-API.md",
