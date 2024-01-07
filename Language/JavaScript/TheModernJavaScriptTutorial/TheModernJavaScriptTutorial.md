@@ -670,8 +670,9 @@ https://zh.javascript.info/advanced-functions
 - 全局对象的所有属性都可以被直接访问。
 - 全局对象有一个通用名称 `globalThis`。
 	> ……但是更常见的是使用“老式”的环境特定（environment-specific）的名字，例如 `window`（浏览器）和 `global`（Node.js）。
-- 在浏览器中，使用 `var`（而不是 `let/const`！）声明的全局函数和变量会成为全局对象的属性。
-- 函数声明（特指在主代码流中具有 `function` 关键字的语句，而不是函数表达式）也有这样的效果。
+- 在浏览器中，
+	- 使用 `var`（而不是 `let/const`！）声明的全局函数和变量会成为全局对象的属性。
+	- 函数声明（特指在主代码流中具有 `function` 关键字的语句，而不是函数表达式）也有这样的效果，即成为全局对象的属性。
 
 
 **使用**
@@ -681,8 +682,82 @@ https://zh.javascript.info/advanced-functions
 
 ## 7 - Object properties configuration
 
+https://zh.javascript.info/object-basics
 
 ### 7.6 可选链 "?." Optional chaining
+
+- [MDN 可选链运算符（?.）](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Optional_chaining) 
+
+🚩常见报错：
+```js
+let user = {}; // 一个没有 "address" 属性的 user 对象
+
+console.log(user.address.street); // Uncaught TypeError: Cannot read properties of undefined (reading 'street')
+```
+➡在很多实际场景中，我们更希望得到的是 `undefined`（表示没有 `street` 属性）而不是一个错误。
+所以，我们经常会这么写来解决⤵
+```js
+let user = {};
+
+console.log(user.address ? user.address.street : undefined);
+```
+😥但是这么写不优雅
+🕺特别对于嵌套层次更深的属性，代码会变得更丑，因为需要更多的重复。如⤵
+```js
+let user = {}; // user 没有 address 属性
+
+console.log(user.address ? user.address.street ? user.address.street.name : null : null);
+```
+😠太扯淡了😕很难让人理解
+所以有时我们用 `&&` 这么写⤵
+```js
+let user = {}; // user 没有 address 属性
+
+console.log( user.address && user.address.street && user.address.street.name ); // undefined（不报错）
+```
+😞但还是不够优雅
+
+🎏 🏹`?.`
+**如果可选链 `?.` 前面的值为 `undefined` 或者 `null`，它会停止运算并返回 `undefined`。**
+```js
+let user = {}; // user 没有 address 属性
+
+console.log(user?.address?.street); // undefined（不报错）
+console.log(user.address?.street); // undefined（不报错）
+console.log(user.address.street); // Uncaught TypeError: Cannot read properties of undefined (reading 'street')
+```
+即使 对象 `user` 不存在，使用 `user?.address` 来读取地址也没问题：
+```js
+let user = null;
+
+console.log( user?.address ); // undefined
+console.log( user?.address.street ); // undefined
+```
+🔺**请注意：`?.` 语法使其前面的值成为可选值，但不会对其后面的起作用。** ⤵
+```js
+let user = {};
+
+console.log( user?.address ); // undefined
+console.log( user?.address.street ); // Uncaught TypeError: Cannot read properties of undefined (reading 'street')
+```
+更深层次的属性是通过常规方式访问的。如果我们希望它们中的一些也是可选的，那么我们需要使用更多的 `?.` 来替换 `.`。
+
+#### 短路效应
+
+
+#### 其他变体 `?.()` `?.[]`
+
+
+
+#### 使用 / 总结
+- 不过度使用可选链，应只使用在一些东西可以不存在的地方。以避免编程错误被消除，使调试更加困难。
+- `?.` 前的变量必须已声明（例如 `let/const/var user` 或作为一个函数参数）。可选链仅适用于已声明的变量。
+	```js
+	// 如果未声明变量 `user`，那么 `user?.anything` 会触发一个错误：
+	// let user = {};
+	console.log( user?.address ); // Uncaught ReferenceError: user is not defined
+	```
+
 
 
 ## 8 - Prototypes, inheritance
