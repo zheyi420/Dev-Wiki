@@ -655,6 +655,8 @@ console.log( !!null ); // false // Boolean(null) 实现同样的效果
 
 ## 6 - Advanced working with functions
 
+https://zh.javascript.info/advanced-functions
+
 ### 6.5 Global object
 
 - [MDN Global object](https://developer.mozilla.org/en-US/docs/Glossary/Global_object) 
@@ -678,6 +680,10 @@ console.log( !!null ); // false // Boolean(null) 实现同样的效果
 
 
 ## 7 - Object properties configuration
+
+
+### 7.6 可选链 "?." Optional chaining
+
 
 ## 8 - Prototypes, inheritance
 
@@ -1947,6 +1953,8 @@ new Promise(function(resolve, reject) {
 
 
 ## 4 - Storing data in the browser
+
+https://zh.javascript.info/data-storage
 
 ### 4.1 Cookie, document.cookie
 

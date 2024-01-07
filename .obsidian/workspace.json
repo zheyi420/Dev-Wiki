@@ -4,119 +4,18 @@
     "type": "split",
     "children": [
       {
-        "id": "d01376c6d52bb8b5",
+        "id": "d9c167e362a2f837",
         "type": "tabs",
         "children": [
           {
-            "id": "7133fde36bb9546a",
+            "id": "51619aa0bf89b579",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "GIS/WebGIS/Cesium/Dev-Tutorial.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "370699dd28e74df0",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Node/NVM.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "86aeaeb2e9d5bca1",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Node/npm.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "f5c512aee876d87d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Git/Git.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "d8c613646d3aae81",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "GIS/WebGIS/Cesium/坐标拾取方式.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "b334e750a94e5168",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Node/Nodejs.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "26bdc0d833659c01",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "GIS/WebGIS/Cesium/坐标拾取方式.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "e46b207199aeeaa3",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "GIS/WebGIS/Cesium/坐标转换.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "265517a1688b1d17",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Git/Collaborative-Dev.md",
-                "mode": "preview",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -190,7 +89,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Git/Git.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -207,7 +105,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Git/Git.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -241,9 +138,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Git/Git.md"
-              }
+              "state": {}
             }
           }
         ],
@@ -260,19 +155,18 @@
       "graph:查看关系图谱": false,
       "daily-notes:打开/创建今天的日记": false,
       "templates:插入模板": false,
-      "command-palette:打开命令面板": false,
-      "table-editor-obsidian:Advanced Tables Toolbar": false
+      "command-palette:打开命令面板": false
     }
   },
-  "active": "f5c512aee876d87d",
+  "active": "51619aa0bf89b579",
   "lastOpenFiles": [
-    "GIS/WebGIS/Cesium/坐标拾取方式.md",
+    "Node/npm.md",
     "Git/Git.md",
+    "GIS/WebGIS/Cesium/坐标拾取方式.md",
     "GIS/WebGIS/Cesium/Dev-Tutorial.md",
     "GIS/WebGIS/Cesium/坐标转换.md",
     "GIS/WebGIS/Cesium/Resource.md",
     "GIS/WebGIS/Cesium/Concept.md",
-    "Node/npm.md",
     "Node/NVM.md",
     "Node/Nodejs.md",
     "Git/Collaborative-Dev.md",
