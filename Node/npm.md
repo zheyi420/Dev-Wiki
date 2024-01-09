@@ -4,7 +4,7 @@ NPM是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署�
 - 允许用户从NPM服务器下载并安装别人编写的命令行程序到本地使用。
 - 允许用户将自己编写的包或命令行程序上传到NPM服务器供别人使用。
 
-Node NPM 版本对应关系：[以往的版本 nodejs.org/zh-cn/download/releases/#ref-1](https://nodejs.org/zh-cn/download/releases/#ref-1) 
+Node-NPM 版本对应关系 https://nodejs.org/en/about/previous-releases
 
 - [npmjs.com](https://www.npmjs.com/) 
 - [npm Docs](https://docs.npmjs.com/) 
@@ -133,6 +133,13 @@ https://registry.npmjs.org/
 2. `npm config set proxy false`
 3. `npm cache clean`
 4. 再执行 `npm i`
+
+
+## npm ERR! cb() never called!
+
+1. 删掉文件 `package-lock.json` 文件夹 `node_module` 。
+2. `npm cache clean -f` 清除 npm 缓存。
+3. `npm i` 下载依赖包。
 
 
 ## npm 与 node 安装目录下的 npm 的区别与冲突。

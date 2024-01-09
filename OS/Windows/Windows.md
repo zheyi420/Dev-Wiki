@@ -83,6 +83,16 @@ tag #本地部署
 ## 设置 BIOS 密码
 
 
+## Win 10 开启/关闭 Ctrl+Alt+Del 组合键解锁屏幕
+
+- https://support.hp.com/cn-zh/document/c01582010
+1. `Win` + `R`
+2. input `control userpasswords2`
+3. select `高级`
+4. select or not `要求用户按Ctrl+Alt+Delete(R)`
+
+
+
 ## ftp 访问文件
 
 - [windows10 ftp文件夹错误](https://www.cnblogs.com/santia-god/p/16834375.html) 
