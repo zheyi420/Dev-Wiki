@@ -39,3 +39,13 @@ C:\Program Files\nodejs\node.exe
 > 为了简单起见，我们建议在Windows上使用NVM之前卸载所有现有版本的Node.js。删除任何现有的Node.js安装目录(例如，`%ProgramFiles%\nodejs`)。
 
 
+# Problems
+
+## MaxListenersExceededWarning
+
+```sh
+(node:3612) MaxListenersExceededWarning: Possible EventEmitter memory leak detected.
+11 upgrade listeners added to [Server].
+Use emitter.setMaxListeners() to increase limit
+```
+

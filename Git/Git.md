@@ -144,6 +144,17 @@ fa19989 dev@{3}: branch: Created from HEAD
 ## 查看远程变更
 
 
+## git 远程分支不显示问题
+
+1. 若 `git branch -r` 只列出了远程部分分支。
+2. `git config --local --list` 查看 `fetch` 配置。
+	- 如果是 `remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*` 则可以拉取到所有分支。
+	- 如果是 `remote.origin.fetch=+refs/heads/main:refs/remotes/origin/main` 则只可以拉取到 `main` 分支。
+3. 配置 `git config remote.origin.fetch +refs/heads/*:refs/remotes/origin/*`
+
+
+
+
 ---
 
 # Commands
@@ -186,6 +197,7 @@ fa19989 dev@{3}: branch: Created from HEAD
 	`--depth`
 		创建一个浅克隆，其历史记录截断到指定的提交次数。
 		除非给出 `--no-single-branch` 以获取所有分支顶端附近的历史，否则会隐含 `--single-branch`。
+	🔺会导致 git 本地配置 `remote.origin.fetch=+refs/heads/<指定分支>:refs/remotes/origin/<指定分支>` 而 fetch 不到其他分支。
 
 
 ### `git checkout`
@@ -218,7 +230,7 @@ fa19989 dev@{3}: branch: Created from HEAD
 > - https://git-scm.com/docs/git-fetch
 
 
-
+- 拉取特定分支 `git fetch origin <远程分支名>`
 
 
 ### `git log`
