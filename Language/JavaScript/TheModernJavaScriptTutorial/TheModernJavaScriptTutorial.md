@@ -718,7 +718,7 @@ console.log( user.address && user.address.street && user.address.street.name ); 
 ```
 😞但还是不够优雅
 
-🎏 🏹`?.`
+🎏 🏹`?.` ❗ ❗ ❗ ❗ ❗ ❗
 **如果可选链 `?.` 前面的值为 `undefined` 或者 `null`，它会停止运算并返回 `undefined`。**
 ```js
 let user = {}; // user 没有 address 属性

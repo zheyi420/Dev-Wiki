@@ -53,6 +53,8 @@ PS C:\Users\21632> nvm ls
 
     18.17.1
   * 16.16.0 (Currently using 64-bit executable)
+
+
 PS C:\Users\21632> nvm use 18.17.1
 Now using node v18.17.1 (64-bit)
 PS C:\Users\21632> nvm ls
