@@ -886,7 +886,7 @@ alert( user2?.[key] ); // undefined
 
 ## 11 - Promises, async/await
 
-
+https://zh.javascript.info/async
 
 ### 11.1 Introduction: callbacks
 
@@ -1464,7 +1464,7 @@ loadScript("./script_1.js").then(script1 => {
 >
 > :grey_exclamation:有时候直接写 `.then` 也是可以的，因为嵌套的函数可以访问外部作用域。在上面的例子中，嵌套在最深层的那个回调（callback）可以访问所有变量 `script1`，`script2` 和 `script3`。但这是一个例外，而不是一条规则。
 
-##### :information_source:Thenables
+##### ℹ Thenables
 
 *details:*
 

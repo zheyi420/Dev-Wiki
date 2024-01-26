@@ -119,9 +119,24 @@ fa19989 dev@{3}: branch: Created from HEAD
 1. `git remote rm origin` 先删除
 2. `git remote add origin https://github.com/xxx/xxx.git` 再增加
 
-如果是新建的仓库，可能有了默认的初始提交，则需要强制推送。
-不然会被 rejected
-使用 `git push -f origin <branch-name>`
+- 如果是新建的仓库，可能有了默认的初始提交，则需要强制推送。
+	不然会被 rejected
+	使用 `git push -f origin <branch-name>`
+- 如果远程无本地对应分支
+	使用 [git-push](#^7d51d8) 中的方法。
+
+
+## 本地为 shallow repo，推送到新远程仓库未建的分支
+
+- [Fix for Remote rejected shallow update not allowed after changing Git remote URL](https://gist.github.com/gobinathm/96e27a588bb447154604963e09c38ddc) 
+	- [If you have not access to old repository, you can use](https://gist.github.com/gobinathm/96e27a588bb447154604963e09c38ddc?permalink_comment_id=3918060#gistcomment-3918060) 
+		1. `git rebase -i --root`
+		2. in first commit change `pick` to `edit`
+		3. `git commit --amend --no-edit`
+		4. `git rebase --continue`
+
+
+
 
 
 ## 大项目如 ol 拉取失败
@@ -132,6 +147,11 @@ fa19989 dev@{3}: branch: Created from HEAD
 
 `git pull --allow-unrelated-histories`
 	[--allow-unrelated-histories](https://git-scm.com/docs/git-pull#Documentation/git-pull.txt---allow-unrelated-histories) 
+
+`git merge 分支名 --allow-unrelated-histories`
+	[git-merge --allow-unrelated-histories](https://git-scm.com/docs/git-merge/2.30.0#Documentation/git-merge.txt---allow-unrelated-histories) 
+
+
 
 ## 清除旧的提交，只保留最近的几次
 
@@ -151,7 +171,6 @@ fa19989 dev@{3}: branch: Created from HEAD
 	- 如果是 `remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*` 则可以拉取到所有分支。
 	- 如果是 `remote.origin.fetch=+refs/heads/main:refs/remotes/origin/main` 则只可以拉取到 `main` 分支。
 3. 配置 `git config remote.origin.fetch +refs/heads/*:refs/remotes/origin/*`
-
 
 
 
@@ -211,7 +230,7 @@ fa19989 dev@{3}: branch: Created from HEAD
 - `git checkout -b <new-branch> [<start-point>]`
 	[`git checkout -b|-B <new-branch> [<start-point>]`](https://git-scm.com/docs/git-checkout#Documentation/git-checkout.txt-emgitcheckoutem-b-Bltnew-branchgtltstart-pointgt) 
 	- `git checkout -b <new-branch>` 创建新分支且切换到其上。
-	- `git checkout -b user_order origin/user_order`
+	- `git checkout -b 本地分支名 origin/远程分支名` 将远程git仓库里的指定分支拉取到本地（本地不存在的分支）
 		```
 		$ git checkout -b user_order origin/user_order
 		Updating files: 100% (1155/1155), done.
@@ -263,7 +282,10 @@ fa19989 dev@{3}: branch: Created from HEAD
 	- `git merge FETCH_HEAD` // 将拉取下来的最新内容合并到当前所在的分支中。
 
 
-### `git push`
+### git-push
+
+^7d51d8
+
 > Update remote refs along with associated objects.
 > - https://git-scm.com/docs/git-push
 
@@ -276,6 +298,14 @@ fa19989 dev@{3}: branch: Created from HEAD
 - `git push --set-upstream origin <远程分支名>` 
 	> fatal: 当前分支 xxx 没有上游分支。
 	> 要推送当前分支并将远程设置为上游，请使用上述命令
+
+
+### `git rebase`
+
+- [git rebase 用法详解与工作原理](https://waynerv.com/posts/git-rebase-intro/) 
+
+
+
 
 
 ### `git switch`
