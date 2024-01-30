@@ -130,10 +130,14 @@ fa19989 dev@{3}: branch: Created from HEAD
 
 - [Fix for Remote rejected shallow update not allowed after changing Git remote URL](https://gist.github.com/gobinathm/96e27a588bb447154604963e09c38ddc) 
 	- [If you have not access to old repository, you can use](https://gist.github.com/gobinathm/96e27a588bb447154604963e09c38ddc?permalink_comment_id=3918060#gistcomment-3918060) 
-		1. `git rebase -i --root`
-		2. in first commit change `pick` to `edit`
-		3. `git commit --amend --no-edit`
-		4. `git rebase --continue`
+		[修复 git 中不允许浅层更新的错误](https://r-morozov.ru/git/ispravlyaem-oshibku-shallow-update-not-allowed-v-git/) 
+		- 最简单的方法就是重新创建git
+			最简单的就是删除git并重新创建。这样我们将丢失提交的历史记录，但 git 已经完整，并且可以将其推送到任何地方。
+		- 重新建立历史基础
+			1. `git rebase -i --root` 
+			2. in first commit change `pick` to `edit` 
+			3. `git commit --amend --no-edit` 
+			4. `git rebase --continue` 
 
 
 
