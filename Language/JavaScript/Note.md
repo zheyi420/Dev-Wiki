@@ -58,6 +58,18 @@ node testDate.js
 - [Using promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) 
 - [How to use promises](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Promises) 
 
+
+# 内存管理 - 内存泄漏
+
+- [构力 - 内存管理](https://cloud.pkpm.cn/devcenter/help/development-guide/docs/memory-management/docs/) 
+
+
+# Factory Function 工厂函数
+
+- [javascript工厂函数(factory function)vs构造函数(constructor function)](https://www.cnblogs.com/kidsitcn/p/11569803.html) 
+
+
+
 # Utility library
 
 - Lodash

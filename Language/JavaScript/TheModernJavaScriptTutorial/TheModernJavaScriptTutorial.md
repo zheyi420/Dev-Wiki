@@ -635,6 +635,8 @@ console.log( !!null ); // false // Boolean(null) 实现同样的效果
 
 ## 4 - Objects: the basics
 
+https://zh.javascript.info/object-basics
+
 ### 4.1 Objects
 
 ### 4.2 Object references and copying
@@ -645,49 +647,14 @@ console.log( !!null ); // false // Boolean(null) 实现同样的效果
 
 ### 4.5 Constructor, operator “new”
 
-### 4.6 Optional chaining ‘?.’
-
-### 4.7 Symbol type
-
-### 4.8 Object to primitive conversion
-
-## 5 - Data types
-
-## 6 - Advanced working with functions
-
-https://zh.javascript.info/advanced-functions
-
-### 6.5 Global object
-
-- [MDN Global object](https://developer.mozilla.org/en-US/docs/Glossary/Global_object) 
-- [MDN globalThis](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/globalThis) 
-- [MDN Window](https://developer.mozilla.org/zh-CN/docs/Web/API/Window) 
 
 
-全局对象提供可在任何地方使用的变量和函数。
-
-**特点**
-- 全局对象的所有属性都可以被直接访问。
-- 全局对象有一个通用名称 `globalThis`。
-	> ……但是更常见的是使用“老式”的环境特定（environment-specific）的名字，例如 `window`（浏览器）和 `global`（Node.js）。
-- 在浏览器中，
-	- 使用 `var`（而不是 `let/const`！）声明的全局函数和变量会成为全局对象的属性。
-	- 函数声明（特指在主代码流中具有 `function` 关键字的语句，而不是函数表达式）也有这样的效果，即成为全局对象的属性。
-
-
-**使用**
-- 一般不建议使用全局变量。全局变量应尽可能的少。
-- 应当使用直接的方式访问全局对象的属性，如 `window.x`。
-
-
-## 7 - Object properties configuration
-
-https://zh.javascript.info/object-basics
-
-### 7.6 可选链 "?." Optional chaining
+### 4.6 可选链 "?." Optional chaining
 
 - [javascript.info - 可选链 "?."](https://zh.javascript.info/optional-chaining) 
 - [MDN 可选链运算符（?.）](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Optional_chaining) 
+
+#### 1 - 不使用 `?.` 可选链的写法
 
 🚩常见报错：
 ```js
@@ -718,6 +685,8 @@ console.log( user.address && user.address.street && user.address.street.name ); 
 ```
 😞但还是不够优雅
 
+#### 2 - 引入 `?.` 可选链
+
 🎏 🏹`?.` ❗ ❗ ❗ ❗ ❗ ❗
 **如果可选链 `?.` 前面的值为 `undefined` 或者 `null`，它会停止运算并返回 `undefined`。**
 ```js
@@ -743,13 +712,14 @@ console.log( user?.address.street ); // Uncaught TypeError: Cannot read properti
 ```
 更深层次的属性是通过常规方式访问的。如果我们希望它们中的一些也是可选的，那么我们需要使用更多的 `?.` 来替换 `.`。
 
-#### 短路效应
+
+#### 3 - 短路效应
 
 如果 `?.` 左边部分不存在，就会立即停止运算（“短路效应”）。
 ⏬
 因此，如果在 `?.` 的右侧有任何进一步的函数调用或操作，它们均不会执行。
 
-#### 其他变体 `?.()` `?.[]`
+#### 4 - 其他变体 `?.()` `?.[]`
 
 ❌ 可选链 `?.` 不是一个运算符。
 ✔️ 而是一个特殊的语法结构。还可以与函数和方括号一起使用。
@@ -787,7 +757,8 @@ alert( user2?.[key] ); // undefined
 ```
 
 
-#### 使用 / 总结
+#### 5 - 使用 / 总结
+
 - 不过度使用可选链，仅在当**左侧部分不存在也可接受**的情况下使用。以避免编程错误被消除，使调试更加困难。
 - `?.` 前的变量必须已声明（例如 `let/const/var user` 或作为一个函数参数）。可选链仅适用于已声明的变量。
 	`obj?.prop` —— 如果 `obj` 存在则返回 `obj.prop`，否则返回 `undefined`。
@@ -818,6 +789,45 @@ alert( user2?.[key] ); // undefined
 - `?.` 检查左边部分是否为 `null/undefined`，如果不是则继续运算。
 
 
+
+### 4.7 Symbol type
+
+### 4.8 Object to primitive conversion
+
+## 5 - Data types
+
+## 6 - Advanced working with functions
+
+https://zh.javascript.info/advanced-functions
+
+### 6.5 Global object
+
+- [MDN Global object](https://developer.mozilla.org/en-US/docs/Glossary/Global_object) 
+- [MDN globalThis](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/globalThis) 
+- [MDN Window](https://developer.mozilla.org/zh-CN/docs/Web/API/Window) 
+
+
+全局对象提供可在任何地方使用的变量和函数。
+
+**特点**
+- 全局对象的所有属性都可以被直接访问。
+- 全局对象有一个通用名称 `globalThis`。
+	> ……但是更常见的是使用“老式”的环境特定（environment-specific）的名字，例如 `window`（浏览器）和 `global`（Node.js）。
+- 在浏览器中，
+	- 使用 `var`（而不是 `let/const`！）声明的全局函数和变量会成为全局对象的属性。
+	- 函数声明（特指在主代码流中具有 `function` 关键字的语句，而不是函数表达式）也有这样的效果，即成为全局对象的属性。
+
+
+**使用**
+- 一般不建议使用全局变量。全局变量应尽可能的少。
+- 应当使用直接的方式访问全局对象的属性，如 `window.x`。
+
+
+## 7 - Object properties configuration 对象属性配置
+
+https://zh.javascript.info/object-properties
+
+
 ## 8 - Prototypes, inheritance
 
 ### 8.1 Prototypal inheritance
@@ -832,11 +842,17 @@ alert( user2?.[key] ); // undefined
 
 ## 9 - Classes
 
+### 9.3 Static properties and methods 静态属性和静态方法
+
+
+
 ## 10 - Error handling
 
 
 
 ### 10.1 Error handling, "try...catch"
+
+^c6140c
 
 
 
@@ -1790,7 +1806,7 @@ new Promise(function() {
 
 
 
-*案例：* [setTimeout 中的错误](https://zh.javascript.info/task/error-async)
+#### 案例： [setTimeout 中的错误](https://zh.javascript.info/task/error-async)
 
 ```javascript
 new Promise(function(resolve, reject) {
@@ -1801,7 +1817,7 @@ new Promise(function(resolve, reject) {
 }).catch(alert);
 ```
 
-上面的 `.catch` 不会被触发。控制台会出现：`Uncaught Error: Whoops! at ......`
+上面的 `.catch` 不会被触发。控制台会出现：`Uncaught Error: Whoops 111! at...`
 
 如本节解释的，<u>promise 的执行者（executor）和 promise 的处理程序</u>周围有个“隐式的 `try..catch`”。所以，所有同步错误都会得到处理。
 
@@ -1809,7 +1825,7 @@ new Promise(function(resolve, reject) {
 
 :question: 那为什么错误是稍后生成的，promise 就无法处理了呢。
 
-参考回顾 `try...catch` 同步执行原理 *PART 1 - 10.1 Error handling, "try...catch"* :arrow_heading_down:
+参考回顾 `try...catch` 同步执行原理 [PART 1 - 10.1 Error handling, "try...catch"](#^c6140c) ⤵
 
 发现
 
@@ -1866,8 +1882,11 @@ new Promise(function(resolve, reject) {
 
 
 #### Promise.all
-
-
+- 并行执行多个 promise，并等待所有 promise 都准备就绪。
+- `Promise.all` 接受一个可迭代对象（通常是一个数组项为 promise 的数组），并返回一个新的 promise。
+- 当所有给定的 promise 都 resolve 时，新的 promise 才会 resolve，并且其结果数组将成为新 promise 的结果。
+	- 结果数组中元素的顺序与其在源 promise 中的顺序相同。即使第一个 promise 花费了最长的时间才 resolve，但它仍是结果数组中的第一个。
+- 
 
 
 
@@ -1889,7 +1908,11 @@ new Promise(function(resolve, reject) {
 
 
 
-#### Promise.resolve/reject
+#### Promise.resolve
+
+
+
+#### Promise.reject
 
 
 

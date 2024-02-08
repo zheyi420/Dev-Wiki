@@ -27,7 +27,9 @@ https://registry.npmjs.org/
 
 修改下载源
 
-- 设置npm镜像源为淘宝镜像 `npm config set registry https://registry.npm.taobao.org/`
+- 设置npm镜像源为淘宝镜像
+	- `npm config set registry https://registry.npm.taobao.org/` 旧的
+	- `npm config set registry https://registry.npmmirror.com/` 新的
 
 
 ## 各配置路径

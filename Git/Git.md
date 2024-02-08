@@ -263,7 +263,7 @@ fa19989 dev@{3}: branch: Created from HEAD
 > Show commit logs.
 > - https://git-scm.com/docs/git-log
 
-- `git log -n <number>` 限制输出的提交记录数量。
+- `git log [<指定分支名>] -n <number>` 限制输出的提交记录数量。
 - `git log --pretty=oneline`
 - 显示其他分支的提交记录，在不切换过去的情况下。
 
