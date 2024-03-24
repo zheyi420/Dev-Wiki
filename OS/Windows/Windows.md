@@ -33,6 +33,7 @@
 - [Microsoft PowerToys](https://docs.microsoft.com/zh-cn/windows/powertoys/) 
 - [revo Uninstaller](https://www.revouninstaller.com/) 用于卸载正常途径没法卸载的应用
 - [Geek Uninstaller](https://geekuninstaller.com/) 用于删除软件，扫描残留文件及软件注册表
+- 截图工具 PixPin https://pixpinapp.com/ 功能强大。
 - WizTree
 - 轻便的图标、图像编辑器
     - paint.net

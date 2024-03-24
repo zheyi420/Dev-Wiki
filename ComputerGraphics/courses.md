@@ -1,3 +1,4 @@
+Computer Graphics -> the area of geometric algorithms
 
 # CMU
 - course webpage: http://15462.courses.cs.cmu.edu/fall2020/
