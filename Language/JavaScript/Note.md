@@ -28,6 +28,9 @@ node testDate.js
 	- 使用 `for (const [key, value] of Object.entries(someObject)) { console.log(key, value); }`
 
 
+# `setInterval() & setTimeout()`
+
+- `setInterval()` 和 `setTimeout()` 共享同一个 ID 池，并且 `clearInterval()` 和 `clearTimeout()` 在技术上是可互换使用的。
 
 # Closures
 

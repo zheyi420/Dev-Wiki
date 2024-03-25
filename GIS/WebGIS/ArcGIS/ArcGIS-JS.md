@@ -7,6 +7,13 @@
 	变更为
 	`import Query from "@arcgis/core/rest/support/Query.js";`
 
+# 控制台常用检查命令
+
+###### 查看现有图层
+```js
+viewer.map.allLayers.items.forEach((item, idx) => {console.log(`layerId ${idx}: ${item.id}`)})
+```
+
 
 # 坐标转换
 

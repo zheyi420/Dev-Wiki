@@ -51,7 +51,7 @@ https://registry.npmjs.org/
 	`npm config get prefix`
 	如 `C:\Users\user_name\AppData\Roaming\npm`
 
-- 设置 npm 包安装位置
+- 设置 npm 包安装位置为当前位置
 	`npm config set prefix`
 
 
