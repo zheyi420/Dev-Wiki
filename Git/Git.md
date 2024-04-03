@@ -10,7 +10,13 @@
 - [阮一峰 最简单的 Git 服务器](https://www.ruanyifeng.com/blog/2022/10/git-server.html) 
 
 
+
 ---
+# 杂项
+
+- 添加 git bash 到 terminal 后中文显示异常的问题
+	解决办法：在命令行中添加参数 --login -i ，完整的命令行内容 `C:\Program Files\Git\bin\bash.exe --login -i`
+
 
 # Case
 

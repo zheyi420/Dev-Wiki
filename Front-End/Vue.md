@@ -22,6 +22,11 @@
 
 ### `beforeDestroy()`
 
+## 变量
+
+变量申明在 `data() {}` 中与 vue 模块外的脚本的区别。
+
+## `$EventBus`
 
 
 # Vue 3
