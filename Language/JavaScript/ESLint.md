@@ -30,3 +30,11 @@ ESLint will lint your code.（ESLint会对你的代码进行提示）
 
 - VS CODE 中文件保存后自动 eslint fix 是在哪里配置实现的。
 
+# 常用
+
+The first value is the error level of the rule and can be one of these values:
+
+- "off" or 0 - turn the rule off
+- "warn" or 1 - turn the rule on as a warning (doesn’t affect exit code)
+- "error" or 2 - turn the rule on as an error (exit code will be 1)
+

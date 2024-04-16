@@ -1,6 +1,39 @@
 
 # Viewer
 
+# Camera
+
+## 视角
+
+```js
+// 3. Change heading, pitch and roll with the camera position remaining the same.
+viewer.camera.setView({
+    orientation: {
+        heading : Cesium.Math.toRadians(90.0), // east, default value is 0.0 (north)
+        pitch : Cesium.Math.toRadians(-90),    // default value (looking down)
+        roll : 0.0                             // default value
+    }
+});
+```
+
+### heading 方位角
+
+朝东 ➡️ `Cesium.Math.toRadians(90.0)`
+
+### pitch 俯仰角（弧度）
+
+朝地面 ➡️ `Cesium.Math.toRadians(-90)`
+
+### roll 倾斜角（弧度）
+可以理解为镜头左右倒的角度。
+- `(Math.PI / 2)` 向右倒 45°
+- `-(Math.PI / 2)` | `(Math.PI * 1.5)`  向左倒 45°
+
+
+### direction
+
+
+
 
 # CRS
 
