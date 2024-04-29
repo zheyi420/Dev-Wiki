@@ -131,6 +131,21 @@ fa19989 dev@{3}: branch: Created from HEAD
 - 如果远程无本地对应分支
 	使用 [git-push](#^7d51d8) 中的方法。
 
+## 仓库迁移
+
+- [GitHub Docs - Duplicating a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/duplicating-a-repository) 
+
+## Maximum push limit
+
+- [GitHub Docs - Troubleshooting the 2 GB push limit](https://docs.github.com/en/get-started/using-git/troubleshooting-the-2-gb-push-limit) 
+- [记一次Git仓库同步时大小超限问题的解决](https://www.banyudu.com/posts/fix-git-pack-exceeds-maximum-allowed-size-problem.b5bac6) 
+- [Github remote push pack size exceeded](https://stackoverflow.com/a/51468389) 
+- [git怎么删除已经提交的文件](https://worktile.com/kb/ask/239451.html) 
+> 里面的命令有误应为
+> `git filter-branch --force --index-filter "git rm --cached --ignore-unmatch [文件路径]" --prune-empty --tag-name-filter cat -- --all`
+- [Github删除某个文件的所有提交记录](https://cloud.tencent.com/developer/article/1665810) 
+
+
 
 ## 本地为 shallow repo，推送到新远程仓库未建的分支
 
@@ -271,6 +286,7 @@ fa19989 dev@{3}: branch: Created from HEAD
 
 - `git log [<指定分支名>] -n <number>` 限制输出的提交记录数量。
 - `git log --pretty=oneline`
+		`git log --pretty=oneline | wc -l` 计算输出行数
 - 显示其他分支的提交记录，在不切换过去的情况下。
 
 
