@@ -128,8 +128,10 @@ fa19989 dev@{3}: branch: Created from HEAD
 - 如果是新建的仓库，可能有了默认的初始提交，则需要强制推送。
 	不然会被 rejected
 	使用 `git push -f origin <branch-name>`
+- 如果是迁移过去的仓库，历史 commit ID 一致
 - 如果远程无本地对应分支
 	使用 [git-push](#^7d51d8) 中的方法。
+	
 
 ## 仓库迁移
 
