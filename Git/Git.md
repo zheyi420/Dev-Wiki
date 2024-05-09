@@ -291,6 +291,10 @@ fa19989 dev@{3}: branch: Created from HEAD
 		`git log --pretty=oneline | wc -l` 计算输出行数
 - 显示其他分支的提交记录，在不切换过去的情况下。
 
+### `git merge`
+
+如果你想在合并时退出，你可以使用 `git merge --abort` 来取消合并操作。 这会使 Git 回到未合并之前的状态。 
+如果您已经提交了合并，那么可以使用 `git reset --hard HEAD^` 来撤销合并。
 
 ### `git pull`
 > Fetch from and integrate with another repository or a local branch.

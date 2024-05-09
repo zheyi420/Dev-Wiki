@@ -55,6 +55,45 @@ Cartographic 和 Cartesian3 直接可以相互转换。
 - Cartesian4
 
 
+# Matrix
+
+## Matrix2
+> 一个 2x2 矩阵，可作为列主序数组进行索引。为便于代码阅读，构造函数参数按行主次排列。
+
+```js
+new Cesium.Matrix2(
+	column0Row0, column1Row0,
+	column0Row1, column1Row1
+)
+```
+
+
+## Matrix3
+> 一个 3x3 矩阵，可作为列主序数组索引。为便于代码阅读，构造函数参数按行主序排列。
+
+```js
+new Cesium.Matrix3(
+	column0Row0, column1Row0, column2Row0,
+	column0Row1, column1Row1, column2Row1,
+	column0Row2, column1Row2, column2Row2
+)
+```
+
+
+## Matrix4
+> 一个 4x4 矩阵，可作为列主序数组索引。为便于代码阅读，构造函数参数按行主序排列。
+
+```js
+new Cesium.Matrix4(
+	column0Row0, column1Row0, column2Row0, column3Row0,
+	column0Row1, column1Row1, column2Row1, column3Row1,
+	column0Row2, column1Row2, column2Row2, column3Row2,
+	column0Row3, column1Row3, column2Row3, column3Row3
+)
+```
+
+
+
 ---
 
 # 属性意义
