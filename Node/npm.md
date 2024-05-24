@@ -266,3 +266,13 @@ Ref：
 ## node-sass 安装失败
 
 参考 [为什么node-sass总是安装失败？](https://segmentfault.com/a/1190000020993365) 
+
+## PowerShell 执行npm 报错
+
+![](Node/assets/Pasted%20image%2020240509192823.png)
+
+1. 执行 `get-ExecutionPolicy`，显示 `Restricted`，表示状态是禁止的，如果是 `RemoteSigned`，那么就不用往下执行了
+2. 以管理员启动 PowerShell
+3. 执行：`set-ExecutionPolicy RemoteSigned`
+4. 这时再执行 `get-ExecutionPolicy`，就显示 `RemoteSigned`
+

@@ -107,7 +107,8 @@ return [coordWGS84Lon, coordWGS84Lat, coordWGS84Height];
 单个坐标转换
 - [cartesianToCartographic(cartesian, result) → Cartographic](https://cesium.com/learn/cesiumjs/ref-doc/Ellipsoid.html?classFilter=Ellipsoid#cartesianToCartographic) 
 ```js
-const coordCartographic = Cesium.Ellipsoid.WGS84.cartesianToCartographic(coordCartesian3);
+// const coordCartographic = Cesium.Ellipsoid.WGS84.cartesianToCartographic(coordCartesian3);
+const coordCartographic = viewer.scene.globe.ellipsoid.cartesianToCartographic(coordCartesian3); // 这个更好，采用当前椭球体
 
 const coordWGS84Lon = Cesium.Math.toDegrees(coordCartographic.longitude);
 const coordWGS84Lat = Cesium.Math.toDegrees(coordCartographic.latitude);
