@@ -12,10 +12,6 @@
 
 
 ---
-# 杂项
-
-- 添加 git bash 到 terminal 后中文显示异常的问题
-	解决办法：在命令行中添加参数 --login -i ，完整的命令行内容 `C:\Program Files\Git\bin\bash.exe --login -i`
 
 
 # Case
@@ -187,6 +183,11 @@ fa19989 dev@{3}: branch: Created from HEAD
 
 ## git bash 中文乱码
 
+添加 git bash 到 terminal 后中文显示异常的问题
+
+解决办法：在命令行中添加参数 --login -i ，完整的命令行内容 `C:\Program Files\Git\bin\bash.exe --login -i`
+
+
 
 ## 查看远程变更
 
@@ -199,6 +200,7 @@ fa19989 dev@{3}: branch: Created from HEAD
 	- 如果是 `remote.origin.fetch=+refs/heads/main:refs/remotes/origin/main` 则只可以拉取到 `main` 分支。
 3. 配置 `git config remote.origin.fetch +refs/heads/*:refs/remotes/origin/*`
 
+## 取消对某个目录的跟踪
 
 
 ---

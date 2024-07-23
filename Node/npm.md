@@ -265,9 +265,12 @@ Ref：
 
 ## node-sass 安装失败
 
+- [node-sass - Node version support policy](https://github.com/sass/node-sass?tab=readme-ov-file#node-version-support-policy) 
+
 参考 [为什么node-sass总是安装失败？](https://segmentfault.com/a/1190000020993365) 
 
-## PowerShell 执行npm 报错
+
+## PowerShell 执行全局 npm 包 报错 .ps1 文件无法加载
 
 ![](Node/assets/Pasted%20image%2020240509192823.png)
 

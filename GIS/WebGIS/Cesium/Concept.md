@@ -21,8 +21,9 @@ viewer.camera.setView({
 朝东 ➡️ `Cesium.Math.toRadians(90.0)`
 
 ### pitch 俯仰角（弧度）
-
+俯仰是相对于地平线的旋转角度，
 朝地面 ➡️ `Cesium.Math.toRadians(-90)`
+这里设置的俯仰角度是-90度，表示相机会向下倾斜90度。
 
 ### roll 倾斜角（弧度）
 可以理解为镜头左右倒的角度。
