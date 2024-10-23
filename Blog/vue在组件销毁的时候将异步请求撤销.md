@@ -14,11 +14,11 @@ Vue 2 + ArcGIS JS
 
 ### 方法 1. Vue 声明变量标记组件是否被销毁
 
-![](Blog/assets/1681636-20240401175427050-1153728528.png)
+![](./assets/1681636-20240401175427050-1153728528.png)
 
 ### 方法 2. 使用 AbortController 终止请求
 
-![](Blog/assets/1681636-20240401180404380-1809158510.png)
+![](./assets/1681636-20240401180404380-1809158510.png)
 
 参考：
 - [FeatureLayer.queryFeatures(query, options)](https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-FeatureLayer.html#queryFeatures) 

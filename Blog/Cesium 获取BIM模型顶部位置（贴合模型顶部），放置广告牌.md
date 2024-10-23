@@ -1,8 +1,8 @@
 # 实现前后对比
 
-![](Blog/assets/1681636-20240507143320263-1842548177.png)
+![](./assets/1681636-20240507143320263-1842548177.png)
 
-![](Blog/assets/1681636-20240507143743779-182819297.png)
+![](./assets/1681636-20240507143743779-182819297.png)
 
 # 背景
 ```
@@ -53,11 +53,11 @@ viewer.screenSpaceEventHandler.setInputAction((event) => {
 })
 ```
 发现广告牌置于建筑模型的上空，并未贴合。
-![](Blog/assets/1681636-20240506193506194-1366676876.png)
+![](./assets/1681636-20240506193506194-1366676876.png)
 这是由于上方代码块【1】处计算的 boundingSphere 并不贴合建筑模型。为建筑模型的外接球体。
 
 PS: BillBoard 设置 img，未设置垂直方向偏移量，原图如下，
-![](Blog/assets/1681636-20240507112548516-1634567275.png)
+![](./assets/1681636-20240507112548516-1634567275.png)
 
 
 # 解决
@@ -172,7 +172,7 @@ addOBBCorner(viewer, labelText, center, xShift, x, yShift, y, zShift, z) {
 ```
 
 
-![](Blog/assets/1681636-20240507112308320-349332085.png)
+![](./assets/1681636-20240507112308320-349332085.png)
 
 参考上述位置的观看角度，如下图
 ```
@@ -186,7 +186,7 @@ Pt, x, y, z
 '7', +, +, -
 '8', -, +, -
 ```
-![](Blog/assets/1681636-20240507115654761-1221642098.png)
+![](./assets/1681636-20240507115654761-1221642098.png)
 
 ### 步骤二 计算 billboard 落在 OrientedBoundingBox 上的位置
 
@@ -273,7 +273,7 @@ displayLocalAxis(viewer, center, x, y, z) {
 	viewer.entities.add(zAxis)
 },
 ```
-![](Blog/assets/1681636-20240507144857426-1171262806.png)
+![](./assets/1681636-20240507144857426-1171262806.png)
 
 
 ### 显示 OrientedBoundingBox
@@ -323,7 +323,7 @@ displayOrientedBoundingBox(viewer, tileset) {
 },
 ```
 
-![](Blog/assets/1681636-20240507160339109-1767708929.png)
+![](./assets/1681636-20240507160339109-1767708929.png)
 
 上面代码块，可以满足显示 OrientedBoundingBox。
 
@@ -334,14 +334,14 @@ displayOrientedBoundingBox(viewer, tileset) {
 不解的地方是：
 例如：`height` 的值也可以通过计算 `(z 轴的向量值) * 2` 来获得。
 
-![](Blog/assets/1681636-20240507165351724-808683032.png)
+![](./assets/1681636-20240507165351724-808683032.png)
 
 但是为何 `Cesium.Matrix3.getColumn(a, 2, z)` 获得的 Cartesian3 为 `OrientedBoundingBox.halfAxes` 这个 Cesium.Matrix3 第三行的值，而不是第三列的值。
 > 因为文档里有如下：
 > [<u><strong>static</strong> Cesium.Matrix3.getColumn(matrix, index, result) → Cartesian3</u>](https://cesium.com/learn/cesiumjs/ref-doc/Matrix3.html?classFilter=Matrix3#.getColumn)
 > Retrieves a copy of the matrix column at the provided index as a Cartesian3 instance.
 > 读取的是索引处矩阵列
-> ![](Blog/assets/1681636-20240507164751952-2087204485.png)
+> ![](./assets/1681636-20240507164751952-2087204485.png)
 >
 > ---
 >
@@ -349,7 +349,7 @@ displayOrientedBoundingBox(viewer, tileset) {
 > 定义如下
 > A 3x3 matrix, indexable as a column-major order array. Constructor parameters are in row-major order for code readability.
 > 一个 3x3 矩阵，可作为列主序数组索引。为便于代码阅读，构造函数参数按行主序排列。
-> ![](Blog/assets/1681636-20240507171713124-875059785.png)
+> ![](./assets/1681636-20240507171713124-875059785.png)
 
 搞不懂...以后再看
 

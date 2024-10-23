@@ -9,7 +9,7 @@
 	```bash
 	remote: fatal: pack exceeds maximum allowed size (150.00 MiB)
 	```
-	![](Blog/assets/1681636-20240429201354478-642678881.png)
+	![](./assets/1681636-20240429201354478-642678881.png)
 
 采用的迁移方式：[GitHub Docs - Duplicating a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/duplicating-a-repository)
 ```bash
@@ -67,9 +67,9 @@ git push -f origin <branch-name>
 
 如下图：
 - 新旧仓库
-![](Blog/assets/1681636-20240429194752388-1041013380.png)
+![](./assets/1681636-20240429194752388-1041013380.png)
 - 提交（A）变更
-![](Blog/assets/1681636-20240429201221024-1650211434.png)
+![](./assets/1681636-20240429201221024-1650211434.png)
 
 
 
