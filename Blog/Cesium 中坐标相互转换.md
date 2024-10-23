@@ -1,0 +1,156 @@
+# 坐标类型
+
+## Cartographic
+> https://cesium.com/learn/cesiumjs/ref-doc/Cartographic.html
+> A position defined by longitude, latitude, and height.
+
+| Name      | Type   | Default | Description                    | Unit    |
+| --------- | ------ | ------- | ------------------------------ | ------- |
+| longitude | number | 0.0     |                                | radians |
+| latitude  | number | 0.0     |                                | radians |
+| height    | number | 0.0     | the height above the ellipsoid | meters  | 
+
+
+## Cartesian3
+> https://cesium.com/learn/cesiumjs/ref-doc/Cartesian3.html
+> A 3D Cartesian point.
+
+| Name | Type   | Default | Desciption | Unit |
+| ---- | ------ | ------- | ---------- | ---- |
+| x    | number | 0.0     |            |      |
+| y    | number | 0.0     |            |      |
+| z    | number | 0.0     |            |      | 
+
+
+# Cesium 中坐标相互转换
+
+
+## 经纬度 degree <-> 弧度 radian
+
+### radians -> degrees
+- [[static] Cesium.Math.toDegrees(radians) → number](https://cesium.com/learn/cesiumjs/ref-doc/Math.html#.toDegrees) 
+```js
+const coordWGS84Lon = Cesium.Math.toDegrees(coordCartographic.longitude);
+const coordWGS84Lat = Cesium.Math.toDegrees(coordCartographic.latitude);
+```
+
+### degrees -> radians
+- [[static] Cesium.Math.toRadians(degrees) → number](https://cesium.com/learn/cesiumjs/ref-doc/Math.html#.toRadians) 
+```js
+const coordCartographicLon = Cesium.Math.toRadians(coordWGS84Lon);
+const coordCartographicLat = Cesium.Math.toRadians(coordWGS84Lat);
+```
+
+
+## 1. Cartographic <-> GCS(WGS84)
+
+### 1.1 Cartographic -> GCS(WGS84)
+- [[static] Cesium.Math.toDegrees(radians) → number](https://cesium.com/learn/cesiumjs/ref-doc/Math.html#.toDegrees) 
+```js
+const coordWGS84Lon = Cesium.Math.toDegrees(coordCartographic.longitude);
+const coordWGS84Lat = Cesium.Math.toDegrees(coordCartographic.latitude);
+const coordWGS84Height = coordCartographic.height;
+
+return [coordWGS84Lon, coordWGS84Lat, coordWGS84Height];
+```
+
+
+### 1.2 GCS(WGS84) -> Cartographic
+- [[static] Cesium.Cartographic.fromDegrees(longitude, latitude, height, result) → Cartographic](https://cesium.com/learn/cesiumjs/ref-doc/Cartographic.html#.fromDegrees) 
+```js
+const coordCartographic = Cesium.Cartographic.fromDegrees(coordWGS84Lon, coordWGS84Lat, coordWGS84Height, resultCartographic);
+```
+
+
+## 2. Cartesian3 <-> Cartographic
+
+### 2.1 Cartesian3 -> Cartographic
+- [[static] Cesium.Cartographic.fromCartesian(cartesian, ellipsoid, result) → Cartographic](https://cesium.com/learn/cesiumjs/ref-doc/Cartographic.html#.fromCartesian) 
+```js
+const coordCartographic = Cesium.Cartographic.fromCartesian(coordCartesian3);
+```
+
+- [cartesianToCartographic(cartesian, result) → Cartographic](https://cesium.com/learn/cesiumjs/ref-doc/Ellipsoid.html?classFilter=Ellipsoid#cartesianToCartographic) 
+```js
+const coordCartographic = Cesium.Ellipsoid.WGS84.cartesianToCartographic(coordCartesian3);
+```
+
+### 2.2 Cartographic -> Cartesian3
+- [[static] Cesium.Cartographic.toCartesian(cartographic, ellipsoid, result) → Cartesian3](https://cesium.com/learn/cesiumjs/ref-doc/Cartographic.html#.toCartesian) 
+```js
+const coordCartesian3 = Cesium.Cartographic.toCartesian(coordCartographic);
+```
+
+
+## 3. Cartesian3 <-> GCS(WGS84)
+### 3.1 Cartesian3 -> GCS(WGS84)
+
+> 需要通过 Cartographic 做过渡
+> Cartesian3 -> Cartographic -> WGS84
+
+
+#### 3.1.1 通过 Cesium.Cartographic.fromCartesian
+- [[static] Cesium.Cartographic.fromCartesian(cartesian, ellipsoid, result) → Cartographic](https://cesium.com/learn/cesiumjs/ref-doc/Cartographic.html#.fromCartesian) 
+```js
+const coordCartographic = Cesium.Cartographic.fromCartesian(coordCartesian3);
+
+const coordWGS84Lon = Cesium.Math.toDegrees(coordCartographic.longitude);
+const coordWGS84Lat = Cesium.Math.toDegrees(coordCartographic.latitude);
+const coordWGS84Height = coordCartographic.height;
+
+return [coordWGS84Lon, coordWGS84Lat, coordWGS84Height];
+```
+
+
+#### 3.1.2 通过 Cesium.Ellipsoid.WGS84.cartesianToCartographic
+
+单个坐标转换
+- [cartesianToCartographic(cartesian, result) → Cartographic](https://cesium.com/learn/cesiumjs/ref-doc/Ellipsoid.html?classFilter=Ellipsoid#cartesianToCartographic) 
+```js
+const coordCartographic = Cesium.Ellipsoid.WGS84.cartesianToCartographic(coordCartesian3);
+
+const coordWGS84Lon = Cesium.Math.toDegrees(coordCartographic.longitude);
+const coordWGS84Lat = Cesium.Math.toDegrees(coordCartographic.latitude);
+const coordWGS84Height = coordCartographic.height;
+
+return [coordWGS84Lon, coordWGS84Lat, coordWGS84Height];
+```
+
+多个坐标转换
+- [cartesianArrayToCartographicArray(cartesians, result) → Cartographic Array](https://cesium.com/learn/cesiumjs/ref-doc/Ellipsoid.html?classFilter=Ellipsoid#cartesianArrayToCartographicArray) 
+```js
+const coordCartographicArray = Cesium.Ellipsoid.WGS84.cartesianArrayToCartographicArray(coordCartesian3Array);
+
+const coordWGS84Array = new Array(coordCartographicArray.length)
+coordCartographicArray.forEach((coordCartographic, index) => {
+	const coordWGS84Lon = Cesium.Math.toDegrees(coordCartographic.longitude);
+	const coordWGS84Lat = Cesium.Math.toDegrees(coordCartographic.latitude);
+	const coordWGS84Height = coordCartographic.height;
+	coordWGS84Array[index] = [coordWGS84Lon, coordWGS84Lat, coordWGS84Height];
+})
+
+return coordWGS84Array;
+```
+
+
+### 3.2 GCS(WGS84) -> Cartesian3
+
+
+#### WGS84 -> Cartesian3
+- [[static] Cesium.Cartesian3.fromDegrees(longitude, latitude, height, ellipsoid, result) → Cartesian3](https://cesium.com/learn/cesiumjs/ref-doc/Cartesian3.html#.fromDegrees) 
+```javascript
+const position = Cesium.Cartesian3.fromDegrees(-115.0, 37.0);
+```
+
+
+
+#### WGS84 -> Cartographic -> Cartesian3
+- [[static] Cesium.Cartographic.fromDegrees(longitude, latitude, height, result) → Cartographic](https://cesium.com/learn/cesiumjs/ref-doc/Cartographic.html#.fromDegrees) 
+- [[static] Cesium.Cartographic.toCartesian(cartographic, ellipsoid, result) → Cartesian3](https://cesium.com/learn/cesiumjs/ref-doc/Cartographic.html#.toCartesian) 
+```js
+const coordCartographic = Cesium.Cartographic.fromDegrees(coordWGS84Lon, coordWGS84Lat, coordWGS84Height);
+
+const coordCartesian3 = Cesium.Cartographic.toCartesian(coordCartographic);
+
+return coordCartesian3;
+```
