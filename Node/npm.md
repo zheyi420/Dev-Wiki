@@ -93,6 +93,11 @@ https://registry.npmjs.org/
     `npm list -g pkg_name`
     查找包的安装版本及位置
 
+`npm list -g --depth=0`
+输出一个树形结构，显示所有全局安装的包及其版本，但不显示依赖项。
+
+`npm root -g` 可以直接获取全局包的安装路径。
+
 ## npm install
 - [v8 npm-install](https://docs.npmjs.com/cli/v8/commands/npm-install) 
 
