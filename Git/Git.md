@@ -272,6 +272,8 @@ fa19989 dev@{3}: branch: Created from HEAD
 - `git checkout -b <new-branch> [<start-point>]`
 	[`git checkout -b|-B <new-branch> [<start-point>]`](https://git-scm.com/docs/git-checkout#Documentation/git-checkout.txt-emgitcheckoutem-b-Bltnew-branchgtltstart-pointgt) 
 	- `git checkout -b <new-branch>` 创建新分支且切换到其上。
+		- 切换后，推送新分支到远程 `git push origin 新分支名`
+		- 若想在未来的推送中省略远程分支名称，可以设置上游分支。`git push -u origin 新分支名`
 	- `git checkout -b 本地分支名 origin/远程分支名` 将远程git仓库里的指定分支拉取到本地（本地不存在的分支）
 		```
 		$ git checkout -b user_order origin/user_order
@@ -385,10 +387,22 @@ fa19989 dev@{3}: branch: Created from HEAD
 ```bash
   git stash list  # 列出所有存储的状态
 ```
+这将显示类似于以下内容的输出：
+```bash
+  stash@{0}: WIP on master: 049d078 Create index file
+  stash@{1}: WIP on master: c264051 Revert "Add file_size"
+  stash@{2}: WIP on master: 21d80a5 Add number to log
+```
+
 - **恢复修改**：
 ```bash
-  git stash apply  # 应用最新的存储但不删除
+  git stash apply  # 应用最新的存储（即 `stash@{0}`）但不删除
   git stash pop    # 应用最新的存储并删除该存储
+```
+- **应用指定存储**：  
+要应用特定的存储（例如 `stash@{1}`），可以使用以下命令
+```bash
+  git stash apply stash@{1}
 ```
 - **删除存储**：
 ```bash
