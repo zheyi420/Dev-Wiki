@@ -3,7 +3,7 @@
 - [The GeoJSON Specification (RFC 7946)](https://tools.ietf.org/html/rfc7946)
 - https://geojson.org/
 - [[JSON]]
-
+- https://zh.wikipedia.org/wiki/GeoJSON
 ---
 
 # Data Structure

@@ -380,9 +380,20 @@ fa19989 dev@{3}: branch: Created from HEAD
 #### 常用命令
 
 - **保存修改**：
-```bash
-  git stash save "message"  # 保存当前修改并添加备注
-```
+	- 默认情况下，`git stash` 只会保存已跟踪文件的更改，而不会保存未跟踪的文件。因此，必须明确指定选项以包含这些未跟踪的文件。
+	```bash
+	  git stash save "message"  # 保存当前修改并添加备注
+	```
+	- 要将未跟踪的文件包括在暂存中。
+	```bash
+		git stash push --include-untracked --message "你的备注信息"
+		# 或者简写
+		git stash -u -m "你的备注信息"
+	```
+	- 同时保存未跟踪和被忽略的文件。
+	```bash
+		git stash push --all --message "你的备注信息" # 意味着会暂存 node_modules 里的变更
+	```
 - **查看存储列表**：
 ```bash
   git stash list  # 列出所有存储的状态
