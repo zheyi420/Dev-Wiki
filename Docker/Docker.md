@@ -17,6 +17,10 @@ Tutorial
 ---
 
 # Commands
+## `docker cp`
+复制文件到Docker容器
+`docker cp <本地文件路径> <容器ID或名称>:<容器内目标路径>`
+如`docker cp /path/to/local/file.txt my_container:/path/in/container/`
 
 ## `docker version`
 
