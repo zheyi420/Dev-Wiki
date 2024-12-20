@@ -15,13 +15,25 @@ Tutorial
 
 
 ---
+# 常见需求
+
+## 查看文件/目录-Docker挂载情况
+
+1. `docker ps -a` 获取容器ID或名称
+2. `docker inspect <容器ID或名称>` 查看容器的详细信息，包括挂载的目录
+3. `docker inspect <容器ID或名称> | grep Mounts -A 10` 查找挂载信息：在输出中，查找 "Mounts" 部分，这里会列出所有挂载的目录和文件
+	> `Source` 表示宿主机上的路径
+	> `Destination` 表示容器内的路径
 
 # Commands
 ## `docker cp`
-复制文件到Docker容器
-`docker cp <本地文件路径> <容器ID或名称>:<容器内目标路径>`
-如`docker cp /path/to/local/file.txt my_container:/path/in/container/`
 
+- 复制文件到Docker容器
+	`docker cp <本地文件路径> <容器ID或名称>:<容器内目标路径>`
+	如`docker cp /path/to/local/file.txt my_container:/path/in/container/`
+
+- 将Docker内文件复制到宿主机中
+	`docker cp <容器ID>:<容器内文件路径> <宿主机目标路径>`
 ## `docker version`
 
 
