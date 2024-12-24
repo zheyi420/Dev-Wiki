@@ -1,0 +1,2 @@
+查询表的数据行数
+`SELECT COUNT(*) FROM YOUR_TABLE_NAME;`

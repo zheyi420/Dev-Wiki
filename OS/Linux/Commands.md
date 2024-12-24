@@ -230,7 +230,9 @@ ssh -p 22 服务器用户名@xxx.xxx.xxx.xxx # -p 后面是端口
 	- `grep --binary-files=text`
 - 搜索目录下所有符合正则匹配的 csv 文件内是否存在某个字符串。
 	- `grep '309383_5,' *road*.csv`
-
+- 在匹配行之后显示指定数量的行
+	- `docker inspect <容器ID或名称> | grep Mounts -A 10`
+	> `-A 10` 表示在找到包含 "Mounts" 的行后，还会显示该行之后的10行内容。
 
 ### `sed`
 > sed (stream editor) is a non-interactive command-line text editor.
