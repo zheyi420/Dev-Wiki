@@ -27,7 +27,7 @@ url: http://localhost:8080/geoserver/web/
 > - [OGC - Web Feature Service](https://www.ogc.org/standard/wfs/) 
 
 ### GetFeature
-[doc ref: GetFeature](https://docs.geoserver.org/maintain/en/user/services/wfs/reference.html#getfeature) 
+[doc ref: GetFeature](https://docs.geoserver.org/stable/en/user/services/wfs/reference.html#getfeature) 
 
 **Response**: 格式由 `outputFormat` 控制，默认为 MIME type `text/xml; subtype=gml/3.1.1`
 
@@ -41,7 +41,7 @@ url: http://localhost:8080/geoserver/web/
 
 ### GetCapabilities
 
-[doc reference: GetCapabilities](https://docs.geoserver.org/maintain/en/user/services/wms/reference.html#getcapabilities) 
+[doc reference: GetCapabilities](https://docs.geoserver.org/stable/en/user/services/wms/reference.html#getcapabilities) 
 
 > GetCapabilities 操作请求关于由 WMS 服务器提供的操作、服务和数据（"能力"）的元数据。
 > 
@@ -56,19 +56,24 @@ url: http://localhost:8080/geoserver/web/
 
 ### GetMap
 
-[doc reference: GetMap](https://docs.geoserver.org/maintain/en/user/services/wms/reference.html#getmap) 
+[doc reference: GetMap](https://docs.geoserver.org/stable/en/user/services/wms/reference.html#getmap) 
 
 > GetMap 操作请求服务器生成一个地图。
 > 
-> 响应是一个地图图像，或其他地图输出工件（artifact），取决于请求的格式。
+> 根据所请求的格式，响应是地图图像或其他地图输出工件。GeoServer 提供多种输出格式，详见 [WMS 输出格式](https://docs.geoserver.org/stable/en/user/services/wms/outputformats.html) 。
 
-- 问题：
-    问：为什么 WMS GetMap 请求参数里的 BBOX 属性值不是固定的（在不移动视图的情况下）（使用 OpenLayers 时该参数属性值是自动动态设置的）
-    答：WMS GetMap 请求参数里的 BBOX 值是 256 * 256 那块区域的 BBOX，而不是整个 viewport 的 BBOX。
+参数：
+- GetMap 操作标准参数
+- 特定供应商参数。参考 [WMS vendor parameters](https://docs.geoserver.org/stable/en/user/services/wms/vendor.html#wms-vendor-parameters) 
+
+
+问题：
+> 问：为什么 WMS GetMap 请求参数里的 BBOX 属性值不是固定的（在不移动视图的情况下）（使用 OpenLayers 时该参数属性值是自动动态设置的）
+> 答：WMS GetMap 请求参数里的 BBOX 值是 256 * 256 那块区域的 BBOX，而不是整个 viewport 的 BBOX。
 
 ### GetFeatureInfo
 
-[doc reference: GetFeatureInfo](https://docs.geoserver.org/maintain/en/user/services/wms/reference.html#getfeatureinfo) 
+[doc reference: GetFeatureInfo](https://docs.geoserver.org/stable/en/user/services/wms/reference.html#getfeatureinfo) 
 
 > 该操作请求地图上某一特定位置的要素的空间和属性数据。它类似于 WFS 的 GetFeature 操作，但在输入和输出方面都不太灵活。由于 GeoServer 提供了一个WFS服务，我们建议尽可能地使用它而不是 GetFeatureInfo。
 
