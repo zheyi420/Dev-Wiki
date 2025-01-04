@@ -8,3 +8,12 @@ https://nginx.org/
 
 **keepalive_timeout**
 
+## 常见操作
+
+**测试 Nginx 配置**（可选）：  
+在容器内，可以先测试配置文件是否有错误：
+`nginx -t`
+
+**重新加载配置**：  
+如果配置没有问题，可以使用以下命令重新加载 Nginx 配置：
+`nginx -s reload`
