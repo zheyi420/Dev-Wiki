@@ -265,6 +265,8 @@ fa19989 dev@{3}: branch: Created from HEAD
 	新的本地分支与远程分支未关联。上述两条都可。
 	使用 `git status` 查看当前分支的状态，未显示 `Your branch is up to date with 'origin/branch_name'`。
 	使用 `git branch -vv` 查看本地分支关联（跟踪）的远程分支时，发现创建的新分支未关联远程分支。
+- 取消对特定分支的跟踪：
+	`git branch --unset-upstream 本地分支名`
 
 
 ### `git config`
