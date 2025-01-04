@@ -16,6 +16,28 @@
 
 # Case
 
+## 将一个git项目的指定本地分支复制到另一台电脑
+
+1. 创建备份：  
+	使用 Git bundle 命令将当前代码库备份到一个文件中：
+	`git bundle create <backup-file.bundle> <branch-name>` 
+	这将创建一个包含指定分支的备份文件。
+2. 传输备份文件，将生成的 `<backup-file.bundle>` 文件复制到新电脑上
+3. 在新电脑上克隆备份：  
+	在新电脑上，打开终端并使用以下命令克隆备份文件：
+	`git clone <backup-file-path> <new-repo-directory>`
+	这里 `<backup-file-path>` 是备份文件的路径，`<new-repo-directory>` 是你希望在新电脑上创建的新目录。
+4. 切换到指定分支：
+	进入新创建的目录后，使用以下命令切换到你要恢复的分支：
+	`git checkout <branch-name>`
+5. 关联远程分支（如果需要）：  
+	如果你希望将新分支与远程仓库关联，可以使用以下命令：
+	`git branch --set-upstream-to=origin/<branch-name> <branch-name>`
+6. 拉取远程更新（可选）：  
+	最后，如果需要从远程仓库拉取最新的更新，可以执行：
+	`git pull origin <branch-name>` 
+
+
 ## 开发中，要从远程仓库拉取更新，而本地的工作尚未完成
 
 1. 暂存当前工作进度
