@@ -17,3 +17,6 @@ https://nginx.org/
 **重新加载配置**：  
 如果配置没有问题，可以使用以下命令重新加载 Nginx 配置：
 `nginx -s reload`
+
+**如果nginx部署在docker内：**
+`docker exec -it nginx-container-name nginx -s reload`
