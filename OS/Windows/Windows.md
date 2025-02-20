@@ -193,6 +193,17 @@ netstat -ano | findstr "PID"
 tasklist | findstr 'PID'
 ```
 
+### 关闭某个进程
+
+1. 使用 PowerShell
+	- `Stop-Process -Name 进程名称`
+	- `Stop-Process -Id 进程ID`
+	> - 使用`-Force`参数可以强制关闭进程.
+	> - 使用`-Confirm`参数可以在停止进程之前进行确认.
+	> - 使用`-PassThru`参数可以在命令后显示进程对象.
+2. CMD 或者 PowerShell
+	- `taskkill /f /im 进程名称.exe`
+	- `taskkill /PID 进程ID`
 
 ### 硬盘健康状态查看
 
