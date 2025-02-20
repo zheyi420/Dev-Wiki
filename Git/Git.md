@@ -340,7 +340,11 @@ fa19989 dev@{3}: branch: Created from HEAD
 ### `git merge`
 
 如果你想在合并时退出，你可以使用 `git merge --abort` 来取消合并操作。 这会使 Git 回到未合并之前的状态。 
+
 如果您已经提交了合并，那么可以使用 `git reset --hard HEAD^` 来撤销合并。
+
+使用`git merge`命令将远程分支 A 合并到当前的本地分支 B。这里可以使用完整的远程分支名称
+	`git merge origin/A`
 
 ### `git pull`
 > Fetch from and integrate with another repository or a local branch.
