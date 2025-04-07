@@ -385,6 +385,9 @@ fa19989 dev@{3}: branch: Created from HEAD
 - 本地处于分支B，使用`git merge`命令将远程分支 A 合并到当前的本地分支 B。这里可以使用完整的远程分支名称
 	`git merge origin/A`
 
+使用`git merge`命令将远程分支 A 合并到当前的本地分支 B。这里可以使用完整的远程分支名称
+	`git merge origin/A`
+
 ### `git pull`
 > Fetch from and integrate with another repository or a local branch.
 - https://git-scm.com/docs/git-pull
