@@ -35,3 +35,5 @@ style=6 为影像图；style=7 为矢量图（2.5D）；style=8 为影像路图
 
 `https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png`
 
+## 天地图
+

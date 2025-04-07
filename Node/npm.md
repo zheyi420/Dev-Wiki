@@ -80,7 +80,8 @@ https://registry.npmjs.org/
 - [npm-windows-upgrade](https://www.npmjs.com/package/npm-windows-upgrade) 
     Upgrading npm on Windows.
 
-- [npx](https://www.npmjs.com/package/npx) 
+- [npx](https://www.npmjs.com/package/npx) **This package has been deprecated**
+		**This package is now part of the npm CLI.**
 	npx https://docs.npmjs.com/cli/v8/commands/npx
 	Run a command from a local or remote npm package
 

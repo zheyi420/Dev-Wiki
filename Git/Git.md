@@ -16,6 +16,19 @@
 
 # Case
 
+## 过滤出指定作者的提交记录
+
+1. 获取所有作者列表（便于确认准确姓名）
+	```bash
+		git shortlog -sne
+	```
+
+2. 查看指定时间范围内的提交
+	```bash
+		git log --author="张三" --since="2024-01-01" --until="2024-12-31"
+	```
+
+
 ## git账密管理
 
 
@@ -226,7 +239,9 @@ fa19989 dev@{3}: branch: Created from HEAD
 
 解决办法：在命令行中添加参数 --login -i ，完整的命令行内容 `C:\Program Files\Git\bin\bash.exe --login -i`
 
+## terminal git 图标
 
+一般位置在下载路径，参考路径： `C:/AIRace/Software/Git/Git/mingw64/share/git/git-for-windows.ico` 
 
 ## 查看远程变更
 
@@ -237,7 +252,18 @@ fa19989 dev@{3}: branch: Created from HEAD
 2. `git config --local --list` 查看 `fetch` 配置。
 	- 如果是 `remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*` 则可以拉取到所有分支。
 	- 如果是 `remote.origin.fetch=+refs/heads/main:refs/remotes/origin/main` 则只可以拉取到 `main` 分支。
-3. 配置 `git config remote.origin.fetch +refs/heads/*:refs/remotes/origin/*`
+3. 配置拉取分支
+	- 拉取所有 `git config remote.origin.fetch +refs/heads/*:refs/remotes/origin/*` 
+	- 拉取指定的几个分支
+		1. 执行 `git config --list --local` 查看当前的 `fetch` 配置。
+		2. 假设想拉取的三个分支分别是`master`、`dev`和`release`，通过以下命令修改配置：
+			```bash
+			git config remote.origin.fetch +refs/heads/master:refs/remotes/origin/master
+			git config --add remote.origin.fetch +refs/heads/dev:refs/remotes/origin/dev
+			git config --add remote.origin.fetch +refs/heads/release:refs/remotes/origin/release
+			```
+		3. 执行 `git fetch` 
+
 
 ## 取消对某个目录的跟踪
 
@@ -327,6 +353,19 @@ fa19989 dev@{3}: branch: Created from HEAD
 
 - 拉取特定分支 `git fetch origin <远程分支名>`
 
+#### `git fetch origin develop:develop`与`git fetch origin develop`的区别
+
+1. **`git fetch origin develop`**
+   - 这个命令从远程仓库 `origin` 中拉取 `develop` 分支的更新，并将其保存在本地的 `origin/develop` 引用中。
+   - 本地的 `develop` 分支不会被自动更新或修改。它只是更新了远程跟踪分支的信息。
+
+1. **`git fetch origin develop:develop`**
+   - 这个命令不仅从远程仓库 `origin` 中拉取 `develop` 分支的更新，还会将这些更新直接合并到本地的 `develop` 分支中。
+   - 这意味着本地的 `develop` 分支将被更新为与远程 `origin/develop` 分支相同的状态。
+   - **注意**: 这个命令实际上等同于先执行 `git fetch origin develop` 然后再执行 `git reset --hard origin/develop`（或使用 `git merge`/`git rebase` 更新本地分支），但它更直接地更新了本地分支。
+
+因此，前者只是更新了远程跟踪分支的信息，而后者则直接更新了本地分支。使用 `git fetch origin develop:develop` 时要小心，因为它会覆盖本地的更改，如果本地有未提交的修改，可能会导致数据丢失。
+
 
 ### `git log`
 > Show commit logs.
@@ -339,11 +378,11 @@ fa19989 dev@{3}: branch: Created from HEAD
 
 ### `git merge`
 
-如果你想在合并时退出，你可以使用 `git merge --abort` 来取消合并操作。 这会使 Git 回到未合并之前的状态。 
+- 如果你想在合并时退出，你可以使用 `git merge --abort` 来取消合并操作。 这会使 Git 回到未合并之前的状态。 
 
-如果您已经提交了合并，那么可以使用 `git reset --hard HEAD^` 来撤销合并。
+- 如果您已经提交了合并，那么可以使用 `git reset --hard HEAD^` 来撤销合并。
 
-使用`git merge`命令将远程分支 A 合并到当前的本地分支 B。这里可以使用完整的远程分支名称
+- 本地处于分支B，使用`git merge`命令将远程分支 A 合并到当前的本地分支 B。这里可以使用完整的远程分支名称
 	`git merge origin/A`
 
 ### `git pull`
@@ -351,6 +390,14 @@ fa19989 dev@{3}: branch: Created from HEAD
 - https://git-scm.com/docs/git-pull
 
 #### `git fetch` 与 `git pull` 的区别
+
+- 只需要更新本地 Git 的远程分支的进度，而不需要合并到本地分支
+	- 更新特定远程分支
+		- `git fetch origin <远程分支名>` 
+			这个命令会从远程仓库中获取指定分支的最新提交记录，并更新本地仓库中的远程分支信息，但不会自动合并到任何本地分支
+	- 更新所有远程分支
+		- `git fetch origin` 
+		- 或者 `git remote update origin` 
 
 - `git fetch <远程主机名> <分支名>` // 注意之间有空格
 	是将远程主机的最新内容拉到本地，用户在检查了以后决定是否合并到工作本机分支中。
