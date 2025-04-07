@@ -173,7 +173,7 @@ win键 → 搜索 Cortana → 显示的小娜应用可进行的操作里有卸�
 
 [Windows下如何查看某个端口被谁占用](https://www.runoob.com/w3cnote/windows-finds-port-usage.html) 
 
-查找所有运行的端口
+查找所有运行的端口，显示所有网络连接和监听端口
 
 ```powershell
 netstat -ano
@@ -187,7 +187,7 @@ netstat -ano | findstr "端口号"
 netstat -ano | findstr "PID"
 ```
 
-查看指定 PID 的进程
+查看指定 PID 的进程，查看进程的详细信息
 
 ```powershell
 tasklist | findstr 'PID'
