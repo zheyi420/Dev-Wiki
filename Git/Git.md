@@ -438,6 +438,13 @@ fa19989 dev@{3}: branch: Created from HEAD
 
 
 
+### `git reset`
+
+- 使用 `git reset --hard` 会丢失当前工作目录中未提交的更改，但不会直接影响 stash 列表。stash 是存储在 `.git/refs/stash` 中的临时更改，使用 `git reset --hard` 不会删除 stash。
+
+### `git revert`
+
+- 使用 `git revert <commit_id>` 来回退指定提交中的修改不会导致 stash 丢失。`git revert` 命令创建一个新的 commit，以撤销指定 commit 中的更改，而不会改变历史记录或影响 stash 列表。
 
 
 ### `git switch`

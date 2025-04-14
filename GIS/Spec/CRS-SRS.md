@@ -211,25 +211,41 @@ https://epsg.io/4490
 > China Geodetic Coordinate System 2000
 > 
 > Unit: degree (supplier to define representation)
-> Center coordinates: 104.2 35.13
+> Geodetic CRS: China Geodetic Coordinate System 2000
+> Datum: China 2000
+> Ellipsoid: CGCS2000
 
 
 ## EPSG:4479
 https://epsg.io/4479
 > China Geodetic Coordinate System 2000
+> 
+> Unit: metre
+> Geodetic CRS: China Geodetic Coordinate System 2000
+
+
+## EPSG:4547
+https://epsg.io/4547
+> CGCS2000 / 3-degree Gauss-Kruger CM 114E
+> 
+> Unit: metre
+> Geodetic CRS: China Geodetic Coordinate System 2000
+
 
 ## EPSG:4529
 https://epsg.io/4529
 > CGCS2000 / 3-degree Gauss-Kruger zone 41
 > 
 > Unit: metre
-> Center coordinates: 41500000.0 4528357.48
-> 
+> Geodetic CRS: China Geodetic Coordinate System 2000
 
 
 ## EPSG:4546
 https://epsg.io/4546
 > CGCS2000 / 3-degree Gauss-Kruger CM 111E
+> 
+> Unit: metre
+> Geodetic CRS: China Geodetic Coordinate System 2000
 
 
 
