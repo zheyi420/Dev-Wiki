@@ -304,6 +304,8 @@ fa19989 dev@{3}: branch: Created from HEAD
 - 查看全局级别（中间优先级） `git config --global --list --show-origin`
 - 查看系统级别（最低优先级） `git config --system --list --show-origin`
 
+移除本地仓库的 `user.name` 配置
+- `git config --unset user.name`
 
 ### `git clone`
 > Clone a repository into a new directory.
