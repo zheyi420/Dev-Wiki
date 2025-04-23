@@ -339,6 +339,164 @@ fa19989 dev@{3}: branch: Created from HEAD
 		Branch 'user_order' set up to track remote branch 'user_order' from 'origin'.
 	   ```
 
+### `git cherry-pick`
+
+#### cherry-pick hotfix分支
+
+如果 `hotfix` 分支包含多个提交，但需要将其改动同步到 `develop` 分支，以下是具体的 Git 操作步骤和策略：
+
+---
+
+##### **方案 1：逐个 `cherry-pick` 提交（精准控制）**
+适用于需要**选择性合并某些提交**的场景。
+
+###### **操作步骤**
+1. **查看 `hotfix` 分支的提交历史**：
+   ```bash
+   git checkout hotfix/xxx
+   git log --oneline  # 示例输出：
+                      # abc1234 修复地图图层问题
+                      # def5678 调整配置文件
+                      # ghi9012 更新文档
+   ```
+
+2. **切换到 `develop` 分支并逐个 `cherry-pick`**：
+   ```bash
+   git checkout develop
+   git cherry-pick abc1234   # 只合并关键修复提交
+   git cherry-pick def5678   # 按需继续合并其他提交
+   ```
+
+3. **解决冲突（如有）**：
+   - 如果某个 `cherry-pick` 触发冲突，手动解决后：
+     ```bash
+     git add .
+     git cherry-pick --continue
+     ```
+
+###### **适用场景**
+- 只需合并部分提交（如跳过文档更新）。
+- `develop` 分支与 `hotfix` 差异较大，直接合并可能冲突较多。
+
+---
+
+##### **方案 2：合并所有提交（`cherry-pick` 提交范围）**
+适用于**需要完整同步 `hotfix` 所有提交**的场景。
+
+###### **操作步骤**
+1. **找到 `hotfix` 的起始和结束提交**：
+   ```bash
+   git checkout hotfix/xxx
+   git log --oneline
+   # 假设提交历史：
+   # abc1234 (分支起点，基于 master 的提交)
+   # def5678 修复问题A
+   # ghi9012 修复问题B
+   ```
+
+2. **在 `develop` 分支上合并从 `def5678` 到 `ghi9012` 的所有提交**：
+   ```bash
+   git checkout develop
+   git cherry-pick abc1234..ghi9012  
+   # 注意：范围 `A..B` 包含 B 但不包含 A
+   ```
+
+###### **注意事项**
+- 若提交之间有依赖关系（如 `ghi9012` 依赖 `def5678`），必须按顺序合并。
+- 冲突可能需要逐次解决。
+
+---
+
+##### **方案 3：压缩（Squash）为单个提交再合并**
+适用于**希望保持 `develop` 历史简洁**的场景。
+
+###### **操作步骤**
+1. **在 `hotfix` 分支压缩提交**：
+   ```bash
+   git checkout hotfix/xxx
+   git rebase -i HEAD~3  # 假设要压缩最后3个提交
+   ```
+   - 在交互界面中，保留第一个提交为 `pick`，后续改为 `squash`（或 `fixup` 丢弃提交信息）：
+     ```
+     pick def5678 修复问题A
+     squash ghi9012 修复问题B
+     ```
+
+2. **切换到 `develop` 分支并 `cherry-pick` 压缩后的提交**：
+   ```bash
+   git checkout develop
+   git cherry-pick abc1234  # 压缩后的新提交哈希
+   ```
+
+###### **优点**
+- `develop` 分支仅新增一个清晰的提交，避免历史混乱。
+
+---
+
+##### **方案 4：直接合并（`merge`）并处理冲突**
+适用于**`develop` 分支与 `hotfix` 差异较小**的场景。
+
+###### **操作步骤**
+```bash
+git checkout develop
+git merge hotfix/xxx   # 直接合并整个 hotfix 分支
+```
+- 如果有冲突，手动解决后提交：
+  ```bash
+  git add .
+  git commit
+  ```
+
+###### **适用场景**
+- `hotfix` 的多个提交均需同步到 `develop`。
+- 冲突较少，或团队允许合并提交历史。
+
+---
+
+##### **关键问题与解决方案**
+| 问题                          | 解决方案                                                                 |
+|-------------------------------|--------------------------------------------------------------------------|
+| **提交之间有依赖关系**        | 按顺序 `cherry-pick` 或直接 `merge`，避免遗漏中间提交。                  |
+| **只需部分提交**              | 手动 `cherry-pick` 需要的提交，跳过无关提交（如文档更新）。              |
+| **`develop` 分支历史需简洁**  | 先在 `hotfix` 分支压缩提交（`git rebase -i`），再 `cherry-pick` 到 `develop`。 |
+| **冲突频繁**                  | 优先使用 `cherry-pick` 逐个提交，而非一次性合并，降低冲突复杂度。        |
+
+---
+
+##### **WebGIS 项目示例**
+###### **场景**
+- `hotfix` 分支有 3 个提交：  
+  1. `def5678`：修复 OpenLayers 地图渲染。  
+  2. `ghi9012`：更新瓦片服务配置。  
+  3. `jkl3456`：更新文档（无需同步到 `develop`）。
+
+###### **操作选择**
+- **若只需修复代码**：
+  ```bash
+  git checkout develop
+  git cherry-pick def5678 ghi9012   # 跳过文档更新
+  ```
+- **若需保持历史完整**：
+  ```bash
+  git merge hotfix/xxx              # 合并所有提交（包括文档）
+  ```
+- **若需简洁历史**：
+  ```bash
+  # 先在 hotfix 分支压缩提交
+  git rebase -i HEAD~3  # 保留 def5678 和 ghi9012，丢弃 jkl3456
+  git checkout develop
+  git cherry-pick abc1234           # 压缩后的新提交
+  ```
+
+---
+
+##### **总结**
+- **优先保持 `hotfix` 提交精简**（单一提交最佳）。  
+- **多提交时**：根据需求选择 `cherry-pick`、`merge` 或 `squash`。  
+- **冲突处理**：小步操作（如逐个 `cherry-pick`）更易解决冲突。  
+- **历史管理**：通过 `rebase -i` 或 `--squash` 保持 `develop` 分支整洁。
+
+---
 
 ### `git diff`
 > Show changes between commits, commit and working tree, etc
@@ -377,6 +535,7 @@ fa19989 dev@{3}: branch: Created from HEAD
 - `git log --pretty=oneline`
 		`git log --pretty=oneline | wc -l` 计算输出行数
 - 显示其他分支的提交记录，在不切换过去的情况下。
+- `git log --graph --oneline` 可视化分支拓扑
 
 ### `git merge`
 
@@ -437,6 +596,14 @@ fa19989 dev@{3}: branch: Created from HEAD
 ### `git rebase`
 
 - [git rebase 用法详解与工作原理](https://waynerv.com/posts/git-rebase-intro/) 
+
+#### 合并多个提交为单个（尚未推送时）
+如果 `hotfix` 分支已有多个提交，可以用 `git rebase -i` 压缩（Squash）为一个：
+> 在交互界面中，保留第一个提交为 `pick`，后续改为 `squash`。
+```bash
+git checkout hotfix/xxx
+git rebase -i HEAD~3   # 合并最近3个提交
+```
 
 
 
