@@ -193,6 +193,12 @@
 - EPSG: European Petroleum Survey Group 欧洲石油调查组织
 
 ## EPSG:4326
+https://epsg.io/4326
+> WGS 84 -- WGS84 - World Geodetic System 1984, used in GPS
+> 
+> Unit: degree
+> 
+
 
 
 ## EPSG:3857
