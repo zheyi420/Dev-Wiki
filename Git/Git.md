@@ -16,18 +16,6 @@
 
 # Case
 
-## 过滤出指定作者的提交记录
-
-1. 获取所有作者列表（便于确认准确姓名）
-	```bash
-		git shortlog -sne
-	```
-
-2. 查看指定时间范围内的提交
-	```bash
-		git log --author="张三" --since="2024-01-01" --until="2024-12-31"
-	```
-
 
 ## git账密管理
 
@@ -246,24 +234,6 @@ fa19989 dev@{3}: branch: Created from HEAD
 ## 查看远程变更
 
 
-## git 远程分支不显示问题
-
-1. 若 `git branch -r` 只列出了远程部分分支。
-2. `git config --local --list` 查看 `fetch` 配置。
-	- 如果是 `remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*` 则可以拉取到所有分支。
-	- 如果是 `remote.origin.fetch=+refs/heads/main:refs/remotes/origin/main` 则只可以拉取到 `main` 分支。
-3. 配置拉取分支
-	- 拉取所有 `git config remote.origin.fetch +refs/heads/*:refs/remotes/origin/*` 
-	- 拉取指定的几个分支
-		1. 执行 `git config --list --local` 查看当前的 `fetch` 配置。
-		2. 假设想拉取的三个分支分别是`master`、`dev`和`release`，通过以下命令修改配置：
-			```bash
-			git config remote.origin.fetch +refs/heads/master:refs/remotes/origin/master
-			git config --add remote.origin.fetch +refs/heads/dev:refs/remotes/origin/dev
-			git config --add remote.origin.fetch +refs/heads/release:refs/remotes/origin/release
-			```
-		3. 执行 `git fetch` 
-
 
 ## 取消对某个目录的跟踪
 
@@ -300,12 +270,35 @@ fa19989 dev@{3}: branch: Created from HEAD
 > - https://git-scm.com/docs/git-config
 
 查看配置文件本地路径
-- 查看仓库级别（最高优先级） `git config --local --list --show-origin` 需要在仓库路劲内执行。
+- 查看仓库级别（最高优先级） `git config --local --list --show-origin` 需要在仓库路径内执行。
 - 查看全局级别（中间优先级） `git config --global --list --show-origin`
 - 查看系统级别（最低优先级） `git config --system --list --show-origin`
 
 移除本地仓库的 `user.name` 配置
 - `git config --unset user.name`
+
+
+#### git 远程分支不显示问题
+
+1. 若 `git branch -r` 只列出了远程部分分支。
+2. `git config --local --list` 查看 `fetch` 配置。
+	- 如果是 `remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*` 则可以拉取到所有分支。
+	- 如果是 `remote.origin.fetch=+refs/heads/main:refs/remotes/origin/main` 则只可以拉取到 `main` 分支。
+3. 配置拉取分支
+	- 拉取所有 `git config remote.origin.fetch +refs/heads/*:refs/remotes/origin/*` 
+	- 拉取指定的几个分支
+		1. 执行 `git config --list --local` 查看当前的 `fetch` 配置。
+		2. 假设想拉取的三个分支分别是`master`、`dev`和`release`，通过以下命令修改配置：
+			```bash
+			git config remote.origin.fetch +refs/heads/master:refs/remotes/origin/master
+			git config --add remote.origin.fetch +refs/heads/dev:refs/remotes/origin/dev
+			git config --add remote.origin.fetch +refs/heads/release:refs/remotes/origin/release
+			```
+		3. 执行 `git fetch` 
+
+移除所有 `remote.origin.fetch` 的配置项：
+`git config --unset-all remote.origin.fetch`
+
 
 ### `git clone`
 > Clone a repository into a new directory.
@@ -625,6 +618,19 @@ https://git-scm.com/docs/git-ls-files
 - 显示其他分支的提交记录，在不切换过去的情况下。
 - `git log --graph --oneline` 可视化分支拓扑
 
+#### 过滤出指定作者的提交记录
+
+1. 获取所有作者列表（便于确认准确姓名）
+	```bash
+		git shortlog -sne
+	```
+
+2. 查看指定时间范围内的提交
+	```bash
+		git log --author="张三" --since="2024-01-01" --until="2024-12-31"
+	```
+
+
 ### `git merge`
 
 - 如果你想在合并时退出，你可以使用 `git merge --abort` 来取消合并操作。 这会使 Git 回到未合并之前的状态。 
@@ -640,6 +646,23 @@ https://git-scm.com/docs/git-ls-files
 ### `git pull`
 > Fetch from and integrate with another repository or a local branch.
 - https://git-scm.com/docs/git-pull
+
+#### 将远程分支 next 合并至当前分支
+
+```bash
+$ git pull origin next
+```  
+
+该操作会临时将 next 分支的副本存入 `FETCH_HEAD`，并更新远程跟踪分支 `origin/next`。你也可以分两步完成，先拉取再合并：  
+
+```bash
+$ git fetch origin
+$ git merge origin/next
+```  
+
+如果拉取 (`pull`) 导致复杂冲突，并希望重新开始，可以使用 `git reset` 恢复。  
+
+
 
 #### `git fetch` 与 `git pull` 的区别
 
