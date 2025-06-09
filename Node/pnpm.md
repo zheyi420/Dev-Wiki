@@ -4,6 +4,13 @@
 
 # Using
 
+## Monorepo根目录执行安装packages中项目作为apps下项目的依赖
+
+```powershell
+pnpm --filter @taiyi/yunyan-web add @taiyi/geolocation --workspace
+```
+
+
 ## `pnpm exec`
 
 https://pnpm.io/zh/cli/exec
@@ -15,8 +22,7 @@ https://pnpm.io/zh/cli/exec
 
 这里 `pnpm exec` 会帮你调用本地安装的 `vite`，并传递后面的参数 `build --mode production`，无需在 `package.json` 里定义脚本。
 
-## Monorepo根目录执行安装packages中项目作为apps下项目的依赖
 
-```powershell
-pnpm --filter @taiyi/yunyan-web add @taiyi/geolocation --workspace
-```
+## `pnpm outdated`
+
+检查过时依赖

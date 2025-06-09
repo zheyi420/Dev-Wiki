@@ -231,8 +231,6 @@ fa19989 dev@{3}: branch: Created from HEAD
 
 一般位置在下载路径，参考路径： `C:/AIRace/Software/Git/Git/mingw64/share/git/git-for-windows.ico` 
 
-## 查看远程变更
-
 
 
 ## 取消对某个目录的跟踪
