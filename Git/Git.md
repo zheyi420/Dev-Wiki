@@ -720,6 +720,51 @@ git rebase -i HEAD~3   # 合并最近3个提交
 
 - 使用 `git reset --hard` 会丢失当前工作目录中未提交的更改，但不会直接影响 stash 列表。stash 是存储在 `.git/refs/stash` 中的临时更改，使用 `git reset --hard` 不会删除 stash。
 
+#### 放弃当前Git项目所有修改
+
+要放弃当前Git项目中所有未提交的更改（包括已修改、已暂存和未跟踪的文件），可以使用以下几种常用命令：
+
+1. **放弃所有已修改和已暂存的文件更改，恢复到最近一次提交状态：**
+
+```bash
+git reset --hard HEAD
+```
+
+此命令会重置当前分支的指针到最近一次提交，并强制覆盖工作区和暂存区的所有修改，彻底放弃未提交的更改。
+
+2. **删除所有未跟踪的文件和目录（即新添加但未纳入版本管理的文件）：**
+
+```bash
+git clean -fd
+```
+
+该命令会删除所有未跟踪的文件和目录，配合`git reset --hard`使用，可以彻底清理工作区。
+
+3. **如果只想放弃所有已修改但未暂存的文件，可以使用：**
+
+```bash
+git checkout .
+```
+
+该命令将所有已修改文件恢复到最近一次提交的状态，但不会删除未跟踪文件。
+
+
+**推荐完整流程（彻底放弃所有本地修改）**
+
+```bash
+# 将未跟踪的文件包括在stash中。
+git stash push --include-untracked --message "你的备注信息"
+# 或者简写
+git stash -u -m "你的备注信息"
+
+# 彻底放弃所有本地修改
+git reset --hard HEAD      # 放弃所有已修改和已暂存的更改
+git clean -fd              # 删除所有未跟踪的文件和目录
+```
+
+> 执行以上命令后，项目将回到最近一次提交的干净状态，所有本地更改都会被丢弃，请确保重要修改已备份或提交，否则无法恢复。
+
+
 ### `git revert`
 
 - 使用 `git revert <commit_id>` 来回退指定提交中的修改不会导致 stash 丢失。`git revert` 命令创建一个新的 commit，以撤销指定 commit 中的更改，而不会改变历史记录或影响 stash 列表。
@@ -752,7 +797,7 @@ git rebase -i HEAD~3   # 合并最近3个提交
 	```bash
 	  git stash save "message"  # 保存当前修改并添加备注
 	```
-	- 要将未跟踪的文件包括在暂存中。
+	- 要将未跟踪的文件包括在stash存储中。
 	```bash
 		git stash push --include-untracked --message "你的备注信息"
 		# 或者简写
