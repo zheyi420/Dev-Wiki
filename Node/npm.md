@@ -89,6 +89,25 @@ https://registry.npmjs.org/
 
 # Using
 
+## npm exec
+
+直接使用 `npm exec` 后接指定命令：
+
+`npm exec -- vite build --mode production`
+相当于
+`npx vite build --mode production`
+相当于
+`pnpm exec vite build --mode production`
+
+三者的区别主要在于：
+
+| 命令                     | 说明                        | 依赖管理工具 |
+| ---------------------- | ------------------------- | ------ |
+| `pnpm exec vite ...`   | pnpm 环境下执行，使用 pnpm 的包管理机制 | pnpm   |
+| `npx vite ...`         | npm 附带的执行工具，临时执行或本地执行     | npm    |
+| `npm exec -- vite ...` | npm 8.3.0+ 的新命令，功能类似 npx  | npm    |
+
+
 ## npm list
 - [Where does npm install packages?](https://stackoverflow.com/questions/5926672/where-does-npm-install-packages/5926706#5926706) 
     `npm list -g pkg_name`

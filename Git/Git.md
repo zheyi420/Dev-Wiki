@@ -16,18 +16,6 @@
 
 # Case
 
-## 过滤出指定作者的提交记录
-
-1. 获取所有作者列表（便于确认准确姓名）
-	```bash
-		git shortlog -sne
-	```
-
-2. 查看指定时间范围内的提交
-	```bash
-		git log --author="张三" --since="2024-01-01" --until="2024-12-31"
-	```
-
 
 ## git账密管理
 
@@ -243,26 +231,6 @@ fa19989 dev@{3}: branch: Created from HEAD
 
 一般位置在下载路径，参考路径： `C:/AIRace/Software/Git/Git/mingw64/share/git/git-for-windows.ico` 
 
-## 查看远程变更
-
-
-## git 远程分支不显示问题
-
-1. 若 `git branch -r` 只列出了远程部分分支。
-2. `git config --local --list` 查看 `fetch` 配置。
-	- 如果是 `remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*` 则可以拉取到所有分支。
-	- 如果是 `remote.origin.fetch=+refs/heads/main:refs/remotes/origin/main` 则只可以拉取到 `main` 分支。
-3. 配置拉取分支
-	- 拉取所有 `git config remote.origin.fetch +refs/heads/*:refs/remotes/origin/*` 
-	- 拉取指定的几个分支
-		1. 执行 `git config --list --local` 查看当前的 `fetch` 配置。
-		2. 假设想拉取的三个分支分别是`master`、`dev`和`release`，通过以下命令修改配置：
-			```bash
-			git config remote.origin.fetch +refs/heads/master:refs/remotes/origin/master
-			git config --add remote.origin.fetch +refs/heads/dev:refs/remotes/origin/dev
-			git config --add remote.origin.fetch +refs/heads/release:refs/remotes/origin/release
-			```
-		3. 执行 `git fetch` 
 
 
 ## 取消对某个目录的跟踪
@@ -300,9 +268,34 @@ fa19989 dev@{3}: branch: Created from HEAD
 > - https://git-scm.com/docs/git-config
 
 查看配置文件本地路径
-- 查看仓库级别（最高优先级） `git config --local --list --show-origin` 需要在仓库路劲内执行。
+- 查看仓库级别（最高优先级） `git config --local --list --show-origin` 需要在仓库路径内执行。
 - 查看全局级别（中间优先级） `git config --global --list --show-origin`
 - 查看系统级别（最低优先级） `git config --system --list --show-origin`
+
+移除本地仓库的 `user.name` 配置
+- `git config --unset user.name`
+
+
+#### git 远程分支不显示问题
+
+1. 若 `git branch -r` 只列出了远程部分分支。
+2. `git config --local --list` 查看 `fetch` 配置。
+	- 如果是 `remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*` 则可以拉取到所有分支。
+	- 如果是 `remote.origin.fetch=+refs/heads/main:refs/remotes/origin/main` 则只可以拉取到 `main` 分支。
+3. 配置拉取分支
+	- 拉取所有 `git config remote.origin.fetch +refs/heads/*:refs/remotes/origin/*` 
+	- 拉取指定的几个分支
+		1. 执行 `git config --list --local` 查看当前的 `fetch` 配置。
+		2. 假设想拉取的三个分支分别是`master`、`dev`和`release`，通过以下命令修改配置：
+			```bash
+			git config remote.origin.fetch +refs/heads/master:refs/remotes/origin/master
+			git config --add remote.origin.fetch +refs/heads/dev:refs/remotes/origin/dev
+			git config --add remote.origin.fetch +refs/heads/release:refs/remotes/origin/release
+			```
+		3. 执行 `git fetch` 
+
+移除所有 `remote.origin.fetch` 的配置项：
+`git config --unset-all remote.origin.fetch`
 
 
 ### `git clone`
@@ -337,6 +330,238 @@ fa19989 dev@{3}: branch: Created from HEAD
 		Branch 'user_order' set up to track remote branch 'user_order' from 'origin'.
 	   ```
 
+### `git cherry-pick`
+
+#### cherry-pick hotfix分支
+
+如果 `hotfix` 分支包含多个提交，但需要将其改动同步到 `develop` 分支，以下是具体的 Git 操作步骤和策略：
+
+---
+
+##### **方案 1：逐个 `cherry-pick` 提交（精准控制）**
+适用于需要**选择性合并某些提交**的场景。
+
+###### **操作步骤**
+1. **查看 `hotfix` 分支的提交历史**：
+   ```bash
+   git checkout hotfix/xxx
+   git log --oneline  # 示例输出：
+                      # abc1234 修复地图图层问题
+                      # def5678 调整配置文件
+                      # ghi9012 更新文档
+   ```
+
+2. **切换到 `develop` 分支并逐个 `cherry-pick`**：
+   ```bash
+   git checkout develop
+   git cherry-pick abc1234   # 只合并关键修复提交
+   git cherry-pick def5678   # 按需继续合并其他提交
+   ```
+
+3. **解决冲突（如有）**：
+   - 如果某个 `cherry-pick` 触发冲突，手动解决后：
+     ```bash
+     git add .
+     git cherry-pick --continue
+     ```
+
+###### **适用场景**
+- 只需合并部分提交（如跳过文档更新）。
+- `develop` 分支与 `hotfix` 差异较大，直接合并可能冲突较多。
+
+---
+
+##### **方案 2：合并所有提交（`cherry-pick` 提交范围）**
+适用于**需要完整同步 `hotfix` 所有提交**的场景。
+
+###### **操作步骤**
+1. **找到 `hotfix` 的起始和结束提交**：
+   ```bash
+   git checkout hotfix/xxx
+   git log --oneline
+   # 假设提交历史：
+   # abc1234 (分支起点，基于 master 的提交)
+   # def5678 修复问题A
+   # ghi9012 修复问题B
+   ```
+
+2. **在 `develop` 分支上合并从 `def5678` 到 `ghi9012` 的所有提交**：
+   ```bash
+   git checkout develop
+   git cherry-pick abc1234..ghi9012  
+   # 注意：范围 `A..B` 包含 B 但不包含 A
+   ```
+
+###### **注意事项**
+- 若提交之间有依赖关系（如 `ghi9012` 依赖 `def5678`），必须按顺序合并。
+- 冲突可能需要逐次解决。
+
+---
+
+##### **方案 3：压缩（Squash）为单个提交再合并**
+适用于**希望保持 `develop` 历史简洁**的场景。
+
+###### **操作步骤**
+1. **在 `hotfix` 分支压缩提交**：
+   ```bash
+   git checkout hotfix/xxx
+   git rebase -i HEAD~3  # 假设要压缩最后3个提交
+   ```
+   - 在交互界面中，保留第一个提交为 `pick`，后续改为 `squash`（或 `fixup` 丢弃提交信息）：
+     ```
+     pick def5678 修复问题A
+     squash ghi9012 修复问题B
+     ```
+
+2. **切换到 `develop` 分支并 `cherry-pick` 压缩后的提交**：
+   ```bash
+   git checkout develop
+   git cherry-pick abc1234  # 压缩后的新提交哈希
+   ```
+
+###### **优点**
+- `develop` 分支仅新增一个清晰的提交，避免历史混乱。
+
+---
+
+##### **方案 4：直接合并（`merge`）并处理冲突**
+适用于**`develop` 分支与 `hotfix` 差异较小**的场景。
+
+###### **操作步骤**
+```bash
+git checkout develop
+git merge hotfix/xxx   # 直接合并整个 hotfix 分支
+```
+- 如果有冲突，手动解决后提交：
+  ```bash
+  git add .
+  git commit
+  ```
+
+###### **适用场景**
+- `hotfix` 的多个提交均需同步到 `develop`。
+- 冲突较少，或团队允许合并提交历史。
+
+---
+
+##### **关键问题与解决方案**
+| 问题                          | 解决方案                                                                 |
+|-------------------------------|--------------------------------------------------------------------------|
+| **提交之间有依赖关系**        | 按顺序 `cherry-pick` 或直接 `merge`，避免遗漏中间提交。                  |
+| **只需部分提交**              | 手动 `cherry-pick` 需要的提交，跳过无关提交（如文档更新）。              |
+| **`develop` 分支历史需简洁**  | 先在 `hotfix` 分支压缩提交（`git rebase -i`），再 `cherry-pick` 到 `develop`。 |
+| **冲突频繁**                  | 优先使用 `cherry-pick` 逐个提交，而非一次性合并，降低冲突复杂度。        |
+
+---
+
+##### **WebGIS 项目示例**
+###### **场景**
+- `hotfix` 分支有 3 个提交：  
+  1. `def5678`：修复 OpenLayers 地图渲染。  
+  2. `ghi9012`：更新瓦片服务配置。  
+  3. `jkl3456`：更新文档（无需同步到 `develop`）。
+
+###### **操作选择**
+- **若只需修复代码**：
+  ```bash
+  git checkout develop
+  git cherry-pick def5678 ghi9012   # 跳过文档更新
+  ```
+- **若需保持历史完整**：
+  ```bash
+  git merge hotfix/xxx              # 合并所有提交（包括文档）
+  ```
+- **若需简洁历史**：
+  ```bash
+  # 先在 hotfix 分支压缩提交
+  git rebase -i HEAD~3  # 保留 def5678 和 ghi9012，丢弃 jkl3456
+  git checkout develop
+  git cherry-pick abc1234           # 压缩后的新提交
+  ```
+
+---
+
+##### **总结**
+- **优先保持 `hotfix` 提交精简**（单一提交最佳）。  
+- **多提交时**：根据需求选择 `cherry-pick`、`merge` 或 `squash`。  
+- **冲突处理**：小步操作（如逐个 `cherry-pick`）更易解决冲突。  
+- **历史管理**：通过 `rebase -i` 或 `--squash` 保持 `develop` 分支整洁。
+
+---
+
+#### 指定范围 D^..F
+
+
+##### **1. 核心区别**
+| 命令                   | 范围                | 包含的提交                          |
+|------------------------|---------------------|-----------------------------------|
+| **`git cherry-pick D^..F`** | 从 `D` 的父提交到 `F` | **不包含 `C`**，但包含 `D、E、F`    |
+| **`git cherry-pick C..F`**  | 从 `C` 到 `F`         | **包含 `D、E、F`**（与 `D^..F` 结果相同） |
+
+###### **为什么结果相同？**
+- `D^` 表示 `D` 的父提交（即 `C`），所以 `D^..F` 和 `C..F` 实际覆盖的提交范围完全一致（都是 `D` 到 `F`）。  
+- Git 的 `X..Y` 语法本质是 **“包含 `Y`，但不包含 `X`”**，因此两者均不包含 `C`，但会选中 `D、E、F`。
+
+---
+
+##### **2. 验证示例**
+假设分支历史如下：
+```
+C (master)
+ \
+  D — E — F (hotfix)
+```
+- **`git cherry-pick D^..F`**：  
+  - `D^` = `C`，范围 `C..F` → 提交 `D、E、F`。
+- **`git cherry-pick C..F`**：  
+  - 范围 `C..F` → 提交 `D、E、F`。
+
+两者实际选中的提交完全相同！
+
+---
+
+##### **3. 为什么推荐用 `D^..F`？**
+虽然结果相同，但 `D^..F` 更符合语义：
+1. **明确表达意图**：  
+   “我要从 `hotfix` 的第一个新提交（`D`）开始复制，直到 `F`”。  
+2. **避免混淆**：  
+   如果未来 `C` 被其他分支修改（如重置历史），`D^` 仍能准确指向 `D` 的父提交，而 `C` 可能已变化。
+
+---
+
+##### **4. 注意事项**
+- **提交顺序**：  
+  Git 会按提交顺序（`D→E→F`）依次应用改动，如果中间有冲突需逐步解决。  
+- **空提交**：  
+  如果 `D^..F` 或 `C..F` 范围内存在空提交（如仅修改注释），默认会被跳过。强制包含需加 `--allow-empty`。
+
+---
+
+##### **5. WebGIS 项目中的使用建议**
+###### **场景**  
+从旧版 `master` 切出的 `hotfix` 有 3 个提交：  
+1. `D`：修复地图图层加载  
+2. `E`：调整配置  
+3. `F`：更新文档  
+
+###### **操作**  
+需将修复同步到新版 `dev` 分支（含 20 个新提交）：
+```bash
+git checkout dev
+git cherry-pick D^..F  # 或 git cherry-pick C..F
+# 等同于合并 D、E、F 的改动
+```
+- **优先用 `D^..F`**：语义更清晰，避免依赖具体提交 `C` 的哈希值。
+
+---
+
+##### **6. 总结**
+- **`D^..F` 和 `C..F` 在功能上等价**（选中 `D、E、F`）。  
+- **`D^..F` 更健壮**：不依赖 `C` 的哈希值，直接通过父子关系定位。  
+- **关键原则**：  
+  确保合并范围仅包含你需要的提交（尤其当 `master` 落后 `dev` 时）！
+
+---
 
 ### `git diff`
 > Show changes between commits, commit and working tree, etc
@@ -367,6 +592,20 @@ fa19989 dev@{3}: branch: Created from HEAD
 因此，前者只是更新了远程跟踪分支的信息，而后者则直接更新了本地分支。使用 `git fetch origin develop:develop` 时要小心，因为它会覆盖本地的更改，如果本地有未提交的修改，可能会导致数据丢失。
 
 
+### `git ls-tree`
+https://git-scm.com/docs/git-ls-tree
+- `git ls-tree HEAD`
+	查看当前分支的目录结构（即当前分支下有哪些文件和文件夹）
+	会列出当前分支根目录下的文件和文件夹信息，包括文件模式、类型和SHA-1值。
+
+
+### `git ls-files`
+https://git-scm.com/docs/git-ls-files
+- `git ls-files`
+	查看当前暂存区（即将要提交的文件列表）
+	会列出所有被Git跟踪的文件，也就是提交时会包括的文件。
+
+
 ### `git log`
 > Show commit logs.
 > - https://git-scm.com/docs/git-log
@@ -375,6 +614,20 @@ fa19989 dev@{3}: branch: Created from HEAD
 - `git log --pretty=oneline`
 		`git log --pretty=oneline | wc -l` 计算输出行数
 - 显示其他分支的提交记录，在不切换过去的情况下。
+- `git log --graph --oneline` 可视化分支拓扑
+
+#### 过滤出指定作者的提交记录
+
+1. 获取所有作者列表（便于确认准确姓名）
+	```bash
+		git shortlog -sne
+	```
+
+2. 查看指定时间范围内的提交
+	```bash
+		git log --author="张三" --since="2024-01-01" --until="2024-12-31"
+	```
+
 
 ### `git merge`
 
@@ -391,6 +644,23 @@ fa19989 dev@{3}: branch: Created from HEAD
 ### `git pull`
 > Fetch from and integrate with another repository or a local branch.
 - https://git-scm.com/docs/git-pull
+
+#### 将远程分支 next 合并至当前分支
+
+```bash
+$ git pull origin next
+```  
+
+该操作会临时将 next 分支的副本存入 `FETCH_HEAD`，并更新远程跟踪分支 `origin/next`。你也可以分两步完成，先拉取再合并：  
+
+```bash
+$ git fetch origin
+$ git merge origin/next
+```  
+
+如果拉取 (`pull`) 导致复杂冲突，并希望重新开始，可以使用 `git reset` 恢复。  
+
+
 
 #### `git fetch` 与 `git pull` 的区别
 
@@ -436,8 +706,68 @@ fa19989 dev@{3}: branch: Created from HEAD
 
 - [git rebase 用法详解与工作原理](https://waynerv.com/posts/git-rebase-intro/) 
 
+#### 合并多个提交为单个（尚未推送时）
+如果 `hotfix` 分支已有多个提交，可以用 `git rebase -i` 压缩（Squash）为一个：
+> 在交互界面中，保留第一个提交为 `pick`，后续改为 `squash`。
+```bash
+git checkout hotfix/xxx
+git rebase -i HEAD~3   # 合并最近3个提交
+```
 
 
+
+### `git reset`
+
+- 使用 `git reset --hard` 会丢失当前工作目录中未提交的更改，但不会直接影响 stash 列表。stash 是存储在 `.git/refs/stash` 中的临时更改，使用 `git reset --hard` 不会删除 stash。
+
+#### 放弃当前Git项目所有修改
+
+要放弃当前Git项目中所有未提交的更改（包括已修改、已暂存和未跟踪的文件），可以使用以下几种常用命令：
+
+1. **放弃所有已修改和已暂存的文件更改，恢复到最近一次提交状态：**
+
+```bash
+git reset --hard HEAD
+```
+
+此命令会重置当前分支的指针到最近一次提交，并强制覆盖工作区和暂存区的所有修改，彻底放弃未提交的更改。
+
+2. **删除所有未跟踪的文件和目录（即新添加但未纳入版本管理的文件）：**
+
+```bash
+git clean -fd
+```
+
+该命令会删除所有未跟踪的文件和目录，配合`git reset --hard`使用，可以彻底清理工作区。
+
+3. **如果只想放弃所有已修改但未暂存的文件，可以使用：**
+
+```bash
+git checkout .
+```
+
+该命令将所有已修改文件恢复到最近一次提交的状态，但不会删除未跟踪文件。
+
+
+**推荐完整流程（彻底放弃所有本地修改）**
+
+```bash
+# 将未跟踪的文件包括在stash中。
+git stash push --include-untracked --message "你的备注信息"
+# 或者简写
+git stash -u -m "你的备注信息"
+
+# 彻底放弃所有本地修改
+git reset --hard HEAD      # 放弃所有已修改和已暂存的更改
+git clean -fd              # 删除所有未跟踪的文件和目录
+```
+
+> 执行以上命令后，项目将回到最近一次提交的干净状态，所有本地更改都会被丢弃，请确保重要修改已备份或提交，否则无法恢复。
+
+
+### `git revert`
+
+- 使用 `git revert <commit_id>` 来回退指定提交中的修改不会导致 stash 丢失。`git revert` 命令创建一个新的 commit，以撤销指定 commit 中的更改，而不会改变历史记录或影响 stash 列表。
 
 
 ### `git switch`
@@ -467,7 +797,7 @@ fa19989 dev@{3}: branch: Created from HEAD
 	```bash
 	  git stash save "message"  # 保存当前修改并添加备注
 	```
-	- 要将未跟踪的文件包括在暂存中。
+	- 要将未跟踪的文件包括在stash存储中。
 	```bash
 		git stash push --include-untracked --message "你的备注信息"
 		# 或者简写
