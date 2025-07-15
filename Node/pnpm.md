@@ -31,3 +31,27 @@ https://pnpm.io/zh/cli/exec
 ## `pnpm outdated`
 
 检查过时依赖
+
+## `pnpm update`
+
+更新指定依赖到最新版本（不使用简写）：
+```bash
+pnpm update <包名> --latest
+```
+
+如果你要一次更新多个包，也可以：
+```bash
+pnpm update react react-dom --latest
+```
+
+更新某个**指定的包**，但只在你当前 `package.json` 文件中**已有的版本范围内更新**（而不是最新版本），可以使用：
+```bash
+pnpm update <包名>
+```
+不加 `--latest`，它就会遵循 `package.json` 中定义的版本范围来更新。
+
+
+| 命令                          | 作用                                 |
+| --------------------------- | ---------------------------------- |
+| `pnpm update <包名>`          | 只更新到 `package.json` 中版本范围内的最新版本    |
+| `pnpm update <包名> --latest` | 忽略 `package.json`，直接更新到最新版本，并更新版本号 |
