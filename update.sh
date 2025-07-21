@@ -3,6 +3,7 @@
 # abort on errors
 # set -e
 
+echo "git status"
 git status
 
 # navigate into the build output directory
@@ -16,8 +17,11 @@ git status
 
 # git init
 # # git checkout -B master
+echo "git add ."
 git add .
+echo "git commit -m 'bak'"
 git commit -m 'bak'
+echo "git push"
 git push
 
 # # if you are deploying to https://<USERNAME>.github.io
