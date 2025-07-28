@@ -148,7 +148,7 @@ https://registry.npmjs.org/
 
 ## npm view
 
-- `npm view pkg_name versions` 
+- `npm view <pkg_name> versions` 
 	查看可供下载的包版本。
 
 # Problems
