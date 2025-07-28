@@ -1,4 +1,7 @@
-# Monorepo（单体仓库）结构
+# Monorepo单体仓库/单仓库多包结构
+> Monolithic Repository
+
+`pnpm` 的 monorepo 是一种 **多包管理结构**，常用于大型项目中，它可以让多个相关但独立的包/模块在一个仓库中统一管理、协同开发。
 
 ## workspace
 
