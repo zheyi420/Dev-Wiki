@@ -8,7 +8,9 @@
 
 ## `pnpm add`
 
+
 Monorepo根目录执行安装packages中项目作为apps下项目的依赖
+
 如下在指定应用的目录的`package.json`中增加的是 `"@taiyi/geo-utils": "workspace:^"`
 ```powershell
 pnpm --filter @taiyi/yunyan-web add @taiyi/geo-utils --workspace
