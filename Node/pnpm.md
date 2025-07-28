@@ -1,10 +1,15 @@
 # Monorepo（单体仓库）结构
 
+## workspace
+
+作为依赖时，`"workspace:^"` 与 `"workspace:*"` 的区别。
+
+# Commands
+
+## `pnpm add`
 
 
-# Using
-
-## Monorepo根目录执行安装packages中项目作为apps下项目的依赖
+Monorepo根目录执行安装packages中项目作为apps下项目的依赖
 
 如下在指定应用的目录的`package.json`中增加的是 `"@taiyi/geo-utils": "workspace:^"`
 ```powershell
