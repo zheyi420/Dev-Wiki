@@ -64,6 +64,22 @@ PS C:\Users\21632> nvm ls
 PS C:\Users\21632> node -v
 v18.17.1
 PS C:\Users\21632>
+
+# 移除某个版本
+PS D:\dev\project\GeoDataVis> nvm ls
+
+    20.19.4
+    20.18.0
+  * 18.20.4 (Currently using 64-bit executable)
+PS D:\dev\project\GeoDataVis> nvm uninstall 20.18.0
+Uninstalling node v20.18.0... done
+PS D:\dev\project\GeoDataVis> nvm ls
+
+    20.19.4
+  * 18.20.4 (Currently using 64-bit executable)
+PS D:\dev\project\GeoDataVis>
+
+
 ```
 
 
