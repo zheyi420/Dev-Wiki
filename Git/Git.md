@@ -639,8 +639,12 @@ git cherry-pick D^..F  # 或 git cherry-pick C..F
 #### 分批获取增量记录
 
 - 逐步增加深度（示例：每次追加100条）
-	`git fetch --depth=100 origin main`
+	`git fetch --deepen=100 origin main`
 	> 本地最初clone时，只有depth=10条记录（未clone全部历史），fetch 想仅追加新的远程记录而不获取完整历史。
+
+#### 比对 --depth --deepen
+[`--depth=<depth>`](https://git-scm.com/docs/git-fetch#Documentation/git-fetch.txt---depthdepth) 
+[`--deepen=<depth>`](https://git-scm.com/docs/git-fetch#Documentation/git-fetch.txt---deependepth) 
 
 ### `git ls-files`
 https://git-scm.com/docs/git-ls-files
@@ -754,6 +758,7 @@ $ git merge origin/next
 	把新建的本地分支上传到远程服务器，建议远程分支与本地分支同名（也可以随意起名）
 
 - `git push --set-upstream origin <远程分支名>` 
+	简写 `git push -u origin <远程分支名>`
 	> fatal: 当前分支 xxx 没有上游分支。
 	> 要推送当前分支并将远程设置为上游，请使用上述命令
 
