@@ -47,6 +47,8 @@ https://pnpm.io/zh/cli/exec
 更新指定依赖到最新版本（不使用简写）：
 ```bash
 pnpm update <包名> --latest
+#或者
+pnpm add <包名>@latest
 ```
 
 如果你要一次更新多个包，也可以：
@@ -65,3 +67,10 @@ pnpm update <包名>
 | --------------------------- | ---------------------------------- |
 | `pnpm update <包名>`          | 只更新到 `package.json` 中版本范围内的最新版本    |
 | `pnpm update <包名> --latest` | 忽略 `package.json`，直接更新到最新版本，并更新版本号 |
+| `pnpm update <包名>@2`        | 更新包到v2的最新版本                        |
+
+## `pnpm prune`
+
+- 自动移除所有不在 package.json 中声明的包
+- 清理孤立的依赖（之前安装但现在不再需要的包）
+- 不需要指定包名，会自动清理所有无用依赖

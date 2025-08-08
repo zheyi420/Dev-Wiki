@@ -363,7 +363,7 @@ fa19989 dev@{3}: branch: Created from HEAD
 	- `git checkout -b <new-branch>` 创建新分支且切换到其上。
 		- 切换后，推送新分支到远程 `git push origin 新分支名`
 		- 若想在未来的推送中省略远程分支名称，可以设置上游分支。`git push -u origin 新分支名`
-	- `git checkout -b 本地分支名 origin/远程分支名` 将远程git仓库里的指定分支拉取到本地（本地不存在的分支）
+	- `git checkout -b 本地分支名 origin/远程分支名` 切换到本地远程git分支建立的本地分支（本地不存在的分支）
 		```
 		$ git checkout -b user_order origin/user_order
 		Updating files: 100% (1155/1155), done.
@@ -636,6 +636,27 @@ git cherry-pick D^..F  # 或 git cherry-pick C..F
 
 因此，前者只是更新了远程跟踪分支的信息，而后者则直接更新了本地分支。使用 `git fetch origin develop:develop` 时要小心，因为它会覆盖本地的更改，如果本地有未提交的修改，可能会导致数据丢失。
 
+#### 分批获取增量记录
+
+- 逐步增加深度（示例：每次追加100条）
+	`git fetch --deepen=100 origin main`
+	> 本地最初clone时，只有depth=10条记录（未clone全部历史），fetch 想仅追加新的远程记录而不获取完整历史。
+
+#### 比对 --depth --deepen
+[`--depth=<depth>`](https://git-scm.com/docs/git-fetch#Documentation/git-fetch.txt---depthdepth) 
+[`--deepen=<depth>`](https://git-scm.com/docs/git-fetch#Documentation/git-fetch.txt---deependepth) 
+
+### `git ls-files`
+https://git-scm.com/docs/git-ls-files
+- `git ls-files`
+	查看当前暂存区（即将要提交的文件列表）
+	会列出所有被Git跟踪的文件，也就是提交时会包括的文件。
+
+### `git ls-remote`
+
+- 先查看当前远程最新提交（不下载）
+	`git ls-remote origin main`
+
 
 ### `git ls-tree`
 https://git-scm.com/docs/git-ls-tree
@@ -643,12 +664,6 @@ https://git-scm.com/docs/git-ls-tree
 	查看当前分支的目录结构（即当前分支下有哪些文件和文件夹）
 	会列出当前分支根目录下的文件和文件夹信息，包括文件模式、类型和SHA-1值。
 
-
-### `git ls-files`
-https://git-scm.com/docs/git-ls-files
-- `git ls-files`
-	查看当前暂存区（即将要提交的文件列表）
-	会列出所有被Git跟踪的文件，也就是提交时会包括的文件。
 
 
 ### `git log`
@@ -743,6 +758,7 @@ $ git merge origin/next
 	把新建的本地分支上传到远程服务器，建议远程分支与本地分支同名（也可以随意起名）
 
 - `git push --set-upstream origin <远程分支名>` 
+	简写 `git push -u origin <远程分支名>`
 	> fatal: 当前分支 xxx 没有上游分支。
 	> 要推送当前分支并将远程设置为上游，请使用上述命令
 

@@ -202,8 +202,48 @@ djb2HashCode(key) {
 - 只能用对象作为键。 
 
 优点：
-- 性能。WeakSet 和 WeakMap 是弱化的（用对象作为键），没有强引用的键。这使得 JavaScript 的垃圾回收器可以从中清除整个入口；？？？
+- 性能。WeakSet 和 WeakMap 是弱化的（用对象作为键），没有强引用的键。这使得 JavaScript 的垃圾回收器可以从中清除整个入口；
+	> 垃圾回收机制
+	> - Map: 强引用，即使对象不再被其他地方引用，Map 仍然持有对它的引用，阻止垃圾回收
+	> - WeakMap: 弱引用，如果对象不再被其他地方引用，WeakMap 中的键值对会被自动垃圾回收
 - 必须用键才可以取出值；（实现使用 WeakMap 类封装 ES2015 类的私有属性） 
+
+## WeakMap
+
+### 使用场景
+#### Map 适用于：
+
+- 需要遍历键值对的场景
+- 需要知道集合大小的场景
+- 键可以是任何类型的场景
+- 需要清除所有元素的场景
+
+#### WeakMap 适用于：
+
+- 存储对象的私有数据
+- 避免内存泄漏的场景
+- 当对象被销毁时，相关的数据也应该被自动清理
+
+#### 内存泄漏示例
+
+```js
+// 使用 Map - 可能导致内存泄漏
+const map = new Map();
+let obj = { data: 'important' };
+map.set(obj, 'metadata');
+
+obj = null; // 对象仍然被 Map 引用，不会被垃圾回收
+
+// 使用 WeakMap - 不会导致内存泄漏
+const weakMap = new WeakMap();
+let obj2 = { data: 'important' };
+weakMap.set(obj2, 'metadata');
+
+obj2 = null; // 对象可以被垃圾回收，WeakMap 中的条目也会被清理
+```
+
+WeakMap 的主要优势是帮助避免内存泄漏，特别适合用于存储对象的元数据或私有信息。
+
 
 ---
 
