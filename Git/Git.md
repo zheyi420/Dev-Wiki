@@ -303,6 +303,10 @@ fa19989 dev@{3}: branch: Created from HEAD
 - 取消对特定分支的跟踪：
 	`git branch --unset-upstream 本地分支名`
 
+### `git commit`
+
+仅修改上次提交的备注信息（不更改文件）
+`git commit --amend -m "新的提交信息"`
 
 ### `git config`
 > Get and set repository or global options.
