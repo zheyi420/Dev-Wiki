@@ -3,7 +3,7 @@
 # abort on errors
 # set -e
 
-echo ">>>>>>>>> running >>>>>>>>> git status"
+echo -e "\n >>>>>>>>> running >>>>>>>>> git status \n"
 git status
 
 # navigate into the build output directory
@@ -17,11 +17,11 @@ git status
 
 # git init
 # # git checkout -B master
-echo ">>>>>>>>> running >>>>>>>>> git add ."
+echo -e "\n >>>>>>>>> running >>>>>>>>> git add . \n"
 git add .
-echo ">>>>>>>>> running >>>>>>>>> git commit -m 'bak'"
+echo -e "\n >>>>>>>>> running >>>>>>>>> git commit -m 'bak' \n"
 git commit -m 'bak'
-echo ">>>>>>>>> running >>>>>>>>> git push"
+echo -e "\n >>>>>>>>> running >>>>>>>>> git push \n"
 git push
 
 # # if you are deploying to https://<USERNAME>.github.io
