@@ -9,7 +9,8 @@
 	- [菜鸟 git - 简明指南](https://www.runoob.com/manual/git-guide/) 
 - [阮一峰 最简单的 Git 服务器](https://www.ruanyifeng.com/blog/2022/10/git-server.html) 
 
-
+浏览器打开本地 git 的文档，查询要查看的命令文档
+`git help --web <命令>`
 
 ---
 
@@ -704,6 +705,36 @@ https://git-scm.com/docs/git-ls-tree
 
 使用`git merge`命令将远程分支 A 合并到当前的本地分支 B。这里可以使用完整的远程分支名称
 	`git merge origin/A`
+
+#### `--no-ff`
+> 在使用 `--no-ff` 参数的情况下，无论是否存在快进（fast-forward）合并的可能，Git 都会强制创建一个新的合并提交（merge commit）。这样可以保留完整的合并历史记录。
+
+- `--no-ff` **只影响“能快进合并的情况”**；如果分支已经分叉（无法快进），它不会改变默认行为。
+使用 `--no-ff` 参数会**强制创建一个合并提交**，即使可以进行 fast-forward：
+```
+# 使用 --no-ff 合并后
+main:     A---B-------M
+               \     /
+feature:        C---D
+```
+
+
+#### 什么是 Fast-Forward 合并
+
+在默认情况下，如果目标分支（如 `main`）自创建功能分支以来没有新的提交，Git 会执行 "fast-forward" 合并：
+
+```
+# 合并前
+main:     A---B
+               \
+feature:        C---D
+
+# fast-forward 合并后
+main:     A---B---C---D
+```
+
+
+
 
 ### `git pull`
 > Fetch from and integrate with another repository or a local branch.
