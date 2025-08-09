@@ -32,8 +32,8 @@ git checkout master
 git pull origin master
 git checkout -b vinoniv420
 
-# 开发完成后推送分支
-git push origin vinoniv420
+# 开发完成后推送分支，初次推送时，设置上游分支，后续推送时，直接使用 `git push` 即可
+git push -u origin vinoniv420
 
 # 通过GitHub/GitLab创建Pull Request到master
 ```
