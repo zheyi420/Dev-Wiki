@@ -2,6 +2,27 @@
 命令参考 https://docs.conda.io/projects/conda/en/stable/commands/index.html
 用户指引 https://docs.conda.io/projects/conda/en/stable/user-guide/index.html
 
+# 概念
+
+## Channel
+```bash
+conda install -c conda-forge package_name
+```
+
+- `conda install`: conda的包安装命令
+- `-c`: 是 `--channel` 的缩写，用于指定软件包的来源渠道
+- `conda-forge`: 是一个特定的channel（渠道）名称
+
+Channel是conda包的分发渠道，类似于软件仓库的概念：
+
+### 默认渠道
+```bash
+# 不指定channel，使用默认渠道
+conda install numpy
+# 等同于
+conda install -c defaults numpy
+```
+
 # 命令
 
 ## 环境管理
@@ -21,12 +42,20 @@ conda activate myenv
 # 退出环境
 conda deactivate
 
-# 删除环境
+# 删除指定环境中的所有包，但**保留环境目录结构**
 conda remove -n myenv --all
+# **完全删除整个环境**，包括环境目录
+conda env remove -n myenv
 
 # 克隆环境
 conda create -n newenv --clone oldenv
 
+# 导出环境配置
+conda env export > environment.yml
+conda env export -n myenv > myenv.yml
+
+# 从配置文件创建环境
+conda env create -f environment.yml
 ```
 
 ## 包管理
@@ -49,9 +78,10 @@ conda update --all  # 更新所有包
 conda remove numpy
 conda remove -n myenv numpy  # 从指定环境卸载
 
-# 搜索包
-conda search numpy
-
+# 搜索包、搜索包在哪些channel中可用
+conda search geopandas
+# 查看特定channel中的包
+conda search -c conda-forge geopandas
 ```
 
 ## 信息查看/源配置
@@ -65,7 +95,7 @@ conda info
 # 查看配置
 conda config --show
 
-# 查看channels
+# 查看当前channels
 conda config --show channels
 
 # 添加channel
@@ -86,17 +116,6 @@ conda search python -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
 conda config --set show_channel_urls yes
 ```
 
-## 环境导出与导入
-
-```bash
-# 导出环境配置
-conda env export > environment.yml
-conda env export -n myenv > myenv.yml
-
-# 从配置文件创建环境
-conda env create -f environment.yml
-
-```
 
 ## 清理缓存
 
