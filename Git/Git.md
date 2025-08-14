@@ -12,8 +12,8 @@
 浏览器打开本地 git 的文档，查询要查看的命令文档
 `git help --web <命令>`
 
----
 
+---
 
 # Case
 
@@ -304,6 +304,21 @@ fa19989 dev@{3}: branch: Created from HEAD
 - 取消对特定分支的跟踪：
 	`git branch --unset-upstream 本地分支名`
 
+#### 关于远程跟踪分支
+
+- 如 `origin/dev` 在本地是对远程仓库 `origin` 上分支 `dev` 的“只读镜像”，学名是 `remote-tracking branch`，对应引用路径 `refs/remotes/origin/dev`。
+- 远程分支：指远程仓库上的分支本身（服务器那一侧）。
+- 远程跟踪分支：本地的 `origin/dev`，用来反映远程分支的最新已取回状态。
+- 它们不会因你在本地提交而改变，只会在 `fetch/pull` 时更新。
+- 跟踪分支/上游分支：本地分支配置的 `upstream`（通常指向某个远程跟踪分支），如本地 `main` 的上游是 `origin/main`。
+	```bash
+	$ git status
+	On branch main
+	Your branch is up to date with 'origin/main'.
+	
+	nothing to commit, working tree clean
+	```
+
 ### `git commit`
 
 仅修改上次提交的备注信息（不更改文件）
@@ -368,13 +383,19 @@ fa19989 dev@{3}: branch: Created from HEAD
 	- `git checkout -b <new-branch>` 创建新分支且切换到其上。
 		- 切换后，推送新分支到远程 `git push origin 新分支名`
 		- 若想在未来的推送中省略远程分支名称，可以设置上游分支。`git push -u origin 新分支名`
-	- `git checkout -b 本地分支名 origin/远程分支名` 切换到本地远程git分支建立的本地分支（本地不存在的分支）
-		```
+	- `git checkout -b 本地分支名 origin/远程分支名` 
+		> 创建一个新的本地分支并切换到该分支，同时让这个本地分支跟踪指定的远程分支
+		```bash
 		$ git checkout -b user_order origin/user_order
 		Updating files: 100% (1155/1155), done.
 		Switched to a new branch 'user_order'
 		Branch 'user_order' set up to track remote branch 'user_order' from 'origin'.
 	   ```
+	   该命令等价于以下命令的组合：
+	   ```bash
+	   $ git branch user_order origin/user_order # 创建分支并设置跟踪
+	   $ git checkout user_order # 切换到新分支
+		```
 
 ### `git cherry-pick`
 
@@ -623,12 +644,16 @@ git cherry-pick D^..F  # 或 git cherry-pick C..F
 
 
 - 拉取特定分支 `git fetch origin <远程分支名>`
+	- `git fetch origin dev --depth=50` 远程跟踪分支先只 fetch 最新指定深度的提交
 
 - `git fetch --prune`
 	用于从远程仓库获取最新的分支和标签信息，并且会自动删除本地已经不存在于远程仓库的远程跟踪分支（remote-tracking branches）
 
+#### `git fetch` 与 `git fetch origin main` 
+- 如果你将 `remote.origin.fetch` 改成只抓 `main`，那么 `git fetch` 与 `git fetch origin main` 的效果就会一致（都只抓 `main`）。
+- `git fetch` 会按照 `remote.origin.fetch` 的配置（默认是 `+refs/heads/*:refs/remotes/origin/*` ）更新 origin 的所有远端跟踪分支，比如 `origin/dev`、`origin/feature/*` 等都会被刷新。
 
-#### `git fetch origin develop:develop`与`git fetch origin develop`的区别
+#### `git fetch origin develop:develop` 与 `git fetch origin develop` 
 
 1. **`git fetch origin develop`**
    - 这个命令从远程仓库 `origin` 中拉取 `develop` 分支的更新，并将其保存在本地的 `origin/develop` 引用中。

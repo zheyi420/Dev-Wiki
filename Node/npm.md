@@ -127,6 +127,8 @@ https://registry.npmjs.org/
     - `npm install pkg_name@3.6.2 --save` 安装指定版本号的包到“dependencies”中：`"pkg_name": "^3.6.2”` 
     - `npm install cesium@latest --save` 安装指定 TAG 版本的包到“dependencies”中。
     - `npm i -g npm@latest` 全局更新本地 npm 版本。
+    - `npm install konva@^9.3.18` 
+	    > `konva` 库的最新版本为 `9.3.22`，为保持一致，期望 `package.json` 依赖显示为 `"konva": "^9.3.18",` 
 
 ## npm uninstall
 - [v8 npm-uninstall](https://docs.npmjs.com/cli/v8/commands/npm-uninstall) 
