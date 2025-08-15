@@ -82,14 +82,14 @@ PS D:\dev\project\GeoDataVis>
 
 ```
 
-设置镜像源
+## 设置镜像源
 
 - **`nvm node_mirror <node_mirror_url>`**: Set the node mirror.People in China can use `https://npmmirror.com/mirrors/node/` 
 	- 默认镜像地址 `https://nodejs.org/dist/` 
 - **`nvm npm_mirror <npm_mirror_url>`**: Set the npm mirror.People in China can use `https://npmmirror.com/mirrors/npm/` 
 	- 默认镜像地址 `https://github.com/npm/npm/archive/` 🚨 已不存在该地址
 
-安装 LTS 版本的方法
+## 安装 LTS 版本的方法
 
 ```powershell
 # 安装最新的 14.x LTS 版本

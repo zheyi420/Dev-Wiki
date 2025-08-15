@@ -1,6 +1,17 @@
+> 命令行工具，用于在 Windows、macOS 和 Linux 上进行包和环境管理。
+> 
+> Anaconda Navigator 是一个图形桌面应用程序，使您能够在不运行命令行命令的情况下使用 conda。
+
 文档 https://docs.conda.io/
 命令参考 https://docs.conda.io/projects/conda/en/stable/commands/index.html
 用户指引 https://docs.conda.io/projects/conda/en/stable/user-guide/index.html
+[Conda GitHub 发布页面](https://github.com/conda/conda/releases)
+conda 速查表 https://docs.conda.io/projects/conda/en/stable/user-guide/cheatsheet.html
+conda 命令索引 https://docs.conda.io/projects/conda/en/stable/commands/index.html
+
+
+
+---
 
 # 概念
 
@@ -24,6 +35,16 @@ conda install -c defaults numpy
 ```
 
 # 命令
+
+## conda 版本更新
+
+```bash
+# 搜索 conda 包的所有可用版本，通过渠道 conda-forge
+conda search conda -c conda-forge
+
+# 使用官方源更新
+conda update conda
+```
 
 ## 环境管理
 
@@ -49,6 +70,10 @@ conda env remove -n myenv
 
 # 克隆环境
 conda create -n newenv --clone oldenv
+
+# 显示环境配置
+conda env export # 当前激活环境
+conda env export -n 环境名称 # 指定环境
 
 # 导出环境配置
 conda env export > environment.yml
