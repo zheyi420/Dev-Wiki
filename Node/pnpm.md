@@ -9,6 +9,19 @@
 
 作为依赖时，`"workspace:^"` 与 `"workspace:*"` 的区别。
 
+## 递归清除依赖
+
+1. 在项目根目录打开 PowerShell
+2. 执行
+	```powershell
+	Get-ChildItem -Recurse -Directory -Filter "node_modules" -ErrorAction SilentlyContinue | Remove-Item -Recurse -Force
+	``` 
+3. 删除项目根目录的 `pnpm-lock.yaml` 
+	```powershell
+	Remove-Item pnpm-lock.yaml
+	```
+
+
 # Commands
 
 ## `pnpm add`
