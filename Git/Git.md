@@ -18,6 +18,46 @@
 # Case
 
 
+## 查询当前分支提交历史中是否包含某个 commit ID
+
+### 方法一：使用 `git branch --contains` 
+
+```bash
+git branch --contains <commit-id>
+```
+这个命令会列出包含指定 commit 的所有分支。如果当前分支包含该 commit，会在列表中显示。
+
+### 方法二：使用 `git merge-base` 
+```bash
+git merge-base --is-ancestor <commit-id> HEAD
+```
+- 如果命令执行成功（退出码为0），说明该 commit 是当前分支的祖先
+- 如果执行失败（退出码非0），说明该 commit 不在当前分支历史中
+
+可以结合 `echo $?` 查看退出码：
+```bash
+git merge-base --is-ancestor <commit-id> HEAD
+echo $?
+```
+
+
+### 方法三：使用 `git log` 搜索
+```bash
+git log --oneline --grep="<commit-id>" --all
+```
+或者更精确地搜索：
+```bash
+git log --oneline | grep <commit-id>
+```
+
+### 方法四：使用 `git rev-list` 
+```bash
+git rev-list HEAD | grep <commit-id>
+```
+如果有输出，说明该 commit 在当前分支历史中。
+
+
+
 ## 分支合并
 
 GitHub在执行Pull Request（PR）合并操作时，提供了三种主要的合并方式，每种方式的区别如下：
@@ -663,6 +703,12 @@ git cherry-pick D^..F  # 或 git cherry-pick C..F
    - 这个命令不仅从远程仓库 `origin` 中拉取 `develop` 分支的更新，还会将这些更新直接合并到本地的 `develop` 分支中。
    - 这意味着本地的 `develop` 分支将被更新为与远程 `origin/develop` 分支相同的状态。
    - **注意**: 这个命令实际上等同于先执行 `git fetch origin develop` 然后再执行 `git reset --hard origin/develop`（或使用 `git merge`/`git rebase` 更新本地分支），但它更直接地更新了本地分支。
+   - 即便工作树干净，当更新当前分支（`feat/YY_V2.6.1`）时，使用 `git fetch origin feat/YY_V2.6.1:feat/YY_V2.6.1` 报错 Git 拒绝执行：
+	   > Git 为了防止意外覆盖你的工作目录和暂存区，拒绝直接更新当前检出的分支
+	   ```bash
+		   fatal: refusing to fetch into branch 'refs/heads/feat/YY_V2.6.1' checked out at 'C:/dirTo/repo'
+		   ```
+		如果要更新当前分支，应当使用 `git pull origin feat/YY_V2.6.1`
 
 因此，前者只是更新了远程跟踪分支的信息，而后者则直接更新了本地分支。使用 `git fetch origin develop:develop` 时要小心，因为它会覆盖本地的更改，如果本地有未提交的修改，可能会导致数据丢失。
 
