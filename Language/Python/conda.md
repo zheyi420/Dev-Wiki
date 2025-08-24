@@ -88,6 +88,7 @@ conda env create -f environment.yml
 ```bash
 # 查看已安装的包
 conda list
+conda list 包名
 conda list -n myenv  # 查看指定环境的包
 
 # 安装包
