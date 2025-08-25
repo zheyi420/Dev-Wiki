@@ -9,6 +9,15 @@
 
 作为依赖时，`"workspace:^"` 与 `"workspace:*"` 的区别。
 
+参考 npm 依赖的 semver 语义控制
+```json
+"workspace:^"    // 兼容版本更新
+"workspace:~"    // 补丁版本更新
+"workspace:*"    // 任何版本
+"workspace:0.0.1" // 固定版本
+```
+
+
 ## 递归清除依赖
 
 1. 在项目根目录打开 PowerShell
@@ -33,6 +42,12 @@ Monorepo根目录执行安装packages中项目作为apps下项目的依赖
 ```powershell
 pnpm --filter @taiyi/yunyan-web add @taiyi/geo-utils --workspace
 ```
+
+如下在指定应用的目录的`package.json`中增加的是 `"@taiyi/geo-utils": "workspace:*"`
+```powershell
+pnpm --filter @taiyi/yunyan-web add @taiyi/geo-utils --workspace --save-prefix "*"
+```
+
 
 monorepo 根目录的 `package.json` 的 `dependencies` 中新增 `"@taiyi/geo-utils": "workspace:^"` 
 ```powershell
