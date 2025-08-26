@@ -84,7 +84,8 @@ conda env create -f environment.yml
 
 # 根据环境文件更新当前环境
 ## -f, --file: environment definition (default: environment.yml)
-conda env update -f environment.yml
+## --prune: remove installed packages not defined in environment.yml
+conda env update --file environment.yml
 ```
 
 ## 包管理

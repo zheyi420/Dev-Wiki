@@ -103,3 +103,39 @@ new Cesium.Matrix4(
 
 - https://cesium.com/learn/cesiumjs/ref-doc/Globe.html?classFilter=globe#depthTestAgainstTerrain
 
+
+---
+
+# 时钟系统
+
+CesiumJS 时钟系统架构，包含三个核心组件：
+```
+Clock ──────────> ClockViewModel ──────────> Viewer.render()
+  ↑                      ↑                        ↑
+  │                      │                        │
+shouldAnimate          multiplier              animation loop
+currentTime           subscribers              requestAnimationFrame
+```
+
+```javascript
+// 1. ClockViewModel.synchronize() 被调用
+ClockViewModel.synchronize() {
+  // 更新multiplier属性
+  this.multiplier = this._clock.multiplier;
+}
+
+// 2. multiplier属性有观察者
+set multiplier(value) {
+  this._multiplier = value;
+  // 通知所有订阅者
+  this.notifySubscribers(); // ← 这里触发订阅者
+}
+
+// 3. 订阅者中包含synchronize方法
+this.notifySubscribers() {
+  // 遍历所有订阅者并调用
+  subscribers.forEach(callback => callback());
+  // 其中一个callback就是synchronize方法
+  // 形成：synchronize → multiplier → notifySubscribers → synchronize
+}
+```
