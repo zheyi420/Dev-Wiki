@@ -81,12 +81,17 @@ conda env export -n myenv > myenv.yml
 
 # 从配置文件创建环境
 conda env create -f environment.yml
+
+# 根据环境文件更新当前环境
+## -f, --file: environment definition (default: environment.yml)
+conda env update -f environment.yml
 ```
 
 ## 包管理
 
 ```bash
 # 查看已安装的包
+# 只显示通过包管理器安装的第三方库，不会显示 Python 标准库模块
 conda list
 conda list 包名
 conda list -n myenv  # 查看指定环境的包
@@ -130,6 +135,8 @@ conda config --add channels conda-forge
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
+# 移除指定源
+conda config --remove channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
 # 添加中科大镜像源（备用）
 conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/main/
 conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free/

@@ -2,11 +2,20 @@
 
 下载 https://www.python.org/downloads/windows/
 
-[Google Python Style Guide](https://google.github.io/styleguide/pyguide.html) 中文：[菜鸟 Python 编码规范](https://www.runoob.com/w3cnote/google-python-styleguide.html) 
+
+文档
+- Python Documentation by Version
+	- https://www.python.org/doc/versions/
+- Google Python Style Guide
+	- https://google.github.io/styleguide/pyguide.html
+	- 中文：菜鸟 Python 编码规范
+		- https://www.runoob.com/w3cnote/google-python-styleguide.html
+
+
 
 教程
-
 - [中国大学MOOC Python语言程序设计](https://www.icourse163.org/course/BIT-268001) 
+
 
 ### python3 本地配置
 

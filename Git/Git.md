@@ -882,6 +882,36 @@ git rebase -i HEAD~3   # 合并最近3个提交
 ```
 
 
+### `git remote`
+
+- 修改当前仓库的 origin 远程仓库地址
+	```bash
+	git remote set-url origin <新的远程仓库URL>
+	```
+- 查看当前所有远程仓库 `git remote -v` 
+	```bash
+	21632@DESKTOP-37PC1UP MINGW64 /c/AIRace/Dev/zheyi420/Dev-Wiki (master)
+	$ git remote -v
+	origin  https://zheyi420@github.com/zheyi420/Dev-Wiki.git (fetch)
+	origin  https://zheyi420@github.com/zheyi420/Dev-Wiki.git (push)
+	```
+- 查看特定远程仓库的详细信息 `git remote show origin` 
+	```bash
+	21632@DESKTOP-37PC1UP MINGW64 /c/AIRace/Dev/zheyi420/Dev-Wiki (master)
+	$ git remote show origin
+	* remote origin
+	  Fetch URL: https://zheyi420@github.com/zheyi420/Dev-Wiki.git
+	  Push  URL: https://zheyi420@github.com/zheyi420/Dev-Wiki.git
+	  HEAD branch: master
+	  Remote branch:
+	    master tracked
+	  Local branch configured for 'git pull':
+	    master merges with remote master
+	  Local ref configured for 'git push':
+	    master pushes to master (up to date)
+	```
+
+
 
 ### `git reset`
 
