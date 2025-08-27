@@ -89,7 +89,7 @@ https://registry.npmjs.org/
 
 # Using
 
-## npm exec
+## `npm exec`
 
 直接使用 `npm exec` 后接指定命令：
 
@@ -108,7 +108,7 @@ https://registry.npmjs.org/
 | `npm exec -- vite ...` | npm 8.3.0+ 的新命令，功能类似 npx  | npm    |
 
 
-## npm list
+## `npm list`
 - [Where does npm install packages?](https://stackoverflow.com/questions/5926672/where-does-npm-install-packages/5926706#5926706) 
     `npm list -g pkg_name`
     查找包的安装版本及位置
@@ -118,7 +118,7 @@ https://registry.npmjs.org/
 
 `npm root -g` 可以直接获取全局包的安装路径。
 
-## npm install
+## `npm install`
 - [v8 npm-install](https://docs.npmjs.com/cli/v8/commands/npm-install) 
 
     - `npm install -save-dev pkg_name` 包将出现在`devDependencies`中。
@@ -130,15 +130,30 @@ https://registry.npmjs.org/
     - `npm install konva@^9.3.18` 
 	    > `konva` 库的最新版本为 `9.3.22`，为保持一致，期望 `package.json` 依赖显示为 `"konva": "^9.3.18",` 
 
-## npm uninstall
+## `npm ci`
+> Clean install a project
+- https://docs.npmjs.com/cli/v10/commands/npm-ci
+
+这个命令与npm install类似，但它的目的是⤵
+	用于自动化环境，例如测试平台、持续集成和部署——或者任何你需要确保干净安装依赖项的情况。
+
+- 项目必须已存在 `package-lock.json` 或 `npm-shrinkwrap.json` 文件
+- 当包锁文件中的依赖与 `package.json` 不匹配时，`npm ci` 会直接报错退出（而非更新包锁文件）
+- `npm ci` 只能一次性安装整个项目依赖，无法通过该命令单独添加依赖项
+- 若已存在 `node_modules` 目录，`npm ci` 会在安装前自动删除该目录 📁
+- 永远不会改写 `package.json` 或任何包锁文件：安装过程是完全冻结的
+
+
+
+## `npm uninstall`
 - [v8 npm-uninstall](https://docs.npmjs.com/cli/v8/commands/npm-uninstall) 
     - `npm uninstall pkg_name` 删除项目内的依赖包
     - `npm uninstall -g pkg_name` 删除全局依赖包
 
-## npm run
+## `npm run`
 - [v8 npm-run-script](https://docs.npmjs.com/cli/v8/commands/npm-run-script) 
 
-## npm update
+## `npm update`
 - [v8 npm-update](https://docs.npmjs.com/cli/v8/commands/npm-update) 
 
 - `npm update -g @vue/cli` 升级全局的 Vue CLI 包。
@@ -148,7 +163,7 @@ https://registry.npmjs.org/
 
 
 
-## npm view
+## `npm view`
 
 - `npm view <pkg_name> versions` 
 	查看可供下载的包版本。

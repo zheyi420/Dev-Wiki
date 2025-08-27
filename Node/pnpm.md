@@ -1,3 +1,5 @@
+官方文档 https://pnpm.io/zh/motivation
+
 # Monorepo单体仓库/单仓库多包结构
 > Monolithic Repository
 > 
@@ -33,6 +35,8 @@
 
 # Commands
 
+
+
 ## `pnpm add`
 
 
@@ -43,7 +47,7 @@ Monorepo根目录执行安装packages中项目作为apps下项目的依赖
 pnpm --filter @taiyi/yunyan-web add @taiyi/geo-utils --workspace
 ```
 
-如下在指定应用的目录的`package.json`中增加的是 `"@taiyi/geo-utils": "workspace:*"`
+如下在指定应用的目录的`package.json`中增加的是 `"@taiyi/geo-utils": "workspace:*"` 🚩未解决🚩
 ```powershell
 pnpm --filter @taiyi/yunyan-web add @taiyi/geo-utils --workspace --save-prefix "*"
 ```
@@ -65,6 +69,12 @@ https://pnpm.io/zh/cli/exec
 
 这里 `pnpm exec` 会帮你调用本地安装的 `vite`，并传递后面的参数 `build --mode production`，无需在 `package.json` 里定义脚本。
 
+
+## `pnpm install`
+
+`--frozen-lockfile` 
+
+`pnpm i --frozen-lockfile` 与 `npm ci` 类似
 
 ## `pnpm outdated`
 
@@ -96,6 +106,7 @@ pnpm update <包名>
 | `pnpm update <包名>`          | 只更新到 `package.json` 中版本范围内的最新版本    |
 | `pnpm update <包名> --latest` | 忽略 `package.json`，直接更新到最新版本，并更新版本号 |
 | `pnpm update <包名>@2`        | 更新包到v2的最新版本                        |
+| `pnpm update <包名>@1.120.0`  | 更改指定包到指定版本                         |
 
 ## `pnpm prune`
 
