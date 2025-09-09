@@ -35,7 +35,7 @@ Python会在以下情况下自动更新字节码文件（`.pyc`）：
 
 ## 自动更新触发条件
 
-### 1. 文件修改时间检查
+### 1. 文件修改时间检查 ❓ 待验证
 - Python会比较 `.py` 文件和对应 `.pyc` 文件的**修改时间戳**
 - 如果 `.py` 文件比 `.pyc` 文件**更新**，Python会重新编译
 
@@ -76,7 +76,11 @@ SessionManager.pyc    修改时间: 2025-01-20 15:25:00
    # 这会触发检查和可能的重新编译
    from SessionManager import SessionManager
    ```
-4. **查看 `__pycache__` 目录** - 此时 `.pyc` 文件的修改时间已更新
+4. **查看 `__pycache__` 目录** - 此时 `.pyc` 文件的修改时间并不会更新
+	```cmd
+	dir /T:W dirTo\__pycache__\SessionManager.cpython-311.pyc
+	```
+5. 对于 `.ipynb` 文件，**要重启  Jupyter Kernel**，再执行含有对应导入的单位格（cell），`.pyc` 文件的修改时间才会更新
 
 ## 强制重新编译
 
@@ -103,13 +107,6 @@ importlib.reload(SessionManager)
 ### 方法3：重启Python解释器
 - 重启Jupyter Notebook内核
 - 或重新启动Python脚本
-
-## 注意事项
-
-1. **自动性**：这个过程完全自动，无需手动干预
-2. **透明性**：用户通常感知不到这个过程
-3. **性能优化**：只有在必要时才重新编译，避免不必要的开销
-4. **版本兼容**：不同Python版本的字节码不兼容，会自动重新编译
 
 
 ---
