@@ -1028,6 +1028,15 @@ git clean -fd              # 删除所有未跟踪的文件和目录
 > 执行以上命令后，项目将回到最近一次提交的干净状态，所有本地更改都会被丢弃，请确保重要修改已备份或提交，否则无法恢复。
 
 
+#### `git reset --hard HEAD^`
+
+如果执行了类似`git merge --no-ff feat/login-redirect`的操作，即产生新的合并提交，
+- 若想彻底恢复到合并前，丢弃合并产生的更改：
+	- `git reset --hard HEAD^` 或者 `git reset --hard <合并前的提交哈希>` 
+- 若想保留合并后修改在工作区（仅移动分支指针），以便手动处理：
+	- `git reset --soft <合并前的提交哈希>` 
+
+
 ### `git revert`
 
 - 使用 `git revert <commit_id>` 来回退指定提交中的修改不会导致 stash 丢失。`git revert` 命令创建一个新的 commit，以撤销指定 commit 中的更改，而不会改变历史记录或影响 stash 列表。
