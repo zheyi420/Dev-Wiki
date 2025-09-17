@@ -436,6 +436,72 @@ fa19989 dev@{3}: branch: Created from HEAD
 	   $ git branch user_order origin/user_order # 创建分支并设置跟踪
 	   $ git checkout user_order # 切换到新分支
 		```
+#### 切到某个历史提交的状态
+`git checkout <commit-hash>`
+```bash
+21632@DESKTOP-37PC1UP MINGW64 /c/AIRace/Dev/316-Project/316-wrj (feat/login-redirect)
+$ git checkout 90b1d8465600c3ff778dc414144e30376e221271
+Note: switching to '90b1d8465600c3ff778dc414144e30376e221271'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD is now at 90b1d846 fix: 编辑征询服务内容成功提示
+
+21632@DESKTOP-37PC1UP MINGW64 /c/AIRace/Dev/316-Project/316-wrj ((90b1d846...))
+21632@DESKTOP-37PC1UP MINGW64 /c/AIRace/Dev/316-Project/316-wrj ((90b1d846...))
+$ git status
+HEAD detached at 90b1d846
+nothing to commit, working tree clean
+
+21632@DESKTOP-37PC1UP MINGW64 /c/AIRace/Dev/316-Project/316-wrj ((90b1d846...))
+$ git branch -l
+* (HEAD detached at 90b1d846)
+  feat/homepage-metrics
+  feat/login-redirect
+  main
+
+21632@DESKTOP-37PC1UP MINGW64 /c/AIRace/Dev/316-Project/316-wrj ((90b1d846...))
+$ git checkout -
+Previous HEAD position was 90b1d846 fix: 编辑征询服务内容成功提示
+Switched to branch 'feat/login-redirect'
+Your branch is up to date with 'origin/feat/login-redirect'.
+
+21632@DESKTOP-37PC1UP MINGW64 /c/AIRace/Dev/316-Project/316-wrj (feat/login-redirect)
+```
+
+翻译：
+```bash
+注意：已切换到 '90b1d8465600c3ff778dc414144e30376e221271'
+
+当前处于 '分离头指针' 状态。您可以查看代码、进行实验性修改并提交，
+
+在此状态下创建的任何提交都不会影响任何分支，切换回分支即可丢弃这些提交。
+
+若想创建新分支保留当前提交，可随时使用带 -c 参数的 switch 命令。例如：
+
+git switch -c <新分支名>
+
+或通过以下命令撤销本次操作：
+
+git switch -
+
+通过设置配置变量 advice.detachedHead 为 false 可关闭此提示
+
+当前 HEAD 指针位于 90b1d846 提交：fix: 编辑征询服务内容成功提示
+```
 
 ### `git cherry-pick`
 
