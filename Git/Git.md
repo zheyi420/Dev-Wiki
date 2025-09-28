@@ -939,14 +939,31 @@ $ git merge origin/next
 
 - [git rebase 用法详解与工作原理](https://waynerv.com/posts/git-rebase-intro/) 
 
-#### 合并多个提交为单个（尚未推送时）
-如果 `hotfix` 分支已有多个提交，可以用 `git rebase -i` 压缩（Squash）为一个：
-> 在交互界面中，保留第一个提交为 `pick`，后续改为 `squash`。
+#### 合并多个提交为单个
+
+如果 `hotfix`/`feat` 分支已有多个提交，功能为同一个但需要提交历史整洁，
+
+可以用 `git rebase -i` 压缩（Squash）为一个：
+> 在交互界面中，保留第一个提交为 `pick`（`p`），后续改为 `squash`（`s`）
 ```bash
 git checkout hotfix/xxx
 git rebase -i HEAD~3   # 合并最近3个提交
 ```
-
+如果 `hotfix`/`feat` 分支，例如从 `release` 分支切出，可以直接：
+```bash
+git rebase -i origin/release
+# 或者
+git rebase -i release
+```
+- `git rebase -i release`
+    - 以 release 的当前指针作为“上游”。
+    - Git 会从“当前分支与 release 的分叉点”之后的提交开始列出可编辑的提交列表。
+    - 这是最常用、最安全的写法，能自动定位正确的起点，避免把公共祖先之前的提交也拉进来。
+- `git rebase -i <commit-hash>`
+    - 明确指定一个提交作为“上游”。Git 会把“当前分支中位于该提交之后的提交”列出来。
+    - 是否等价取决于你选的 commit-hash 是否正好是“当前分支与 release 的分叉点”或其父提交。
+    - 如果你误选为 release 的 HEAD（而不是分叉点），且你的当前分支包含一些在分叉点之后、但不在 release 上的提交，那么会把“从该 HEAD 到你分支 HEAD 的所有额外提交”都列出来，通常仍是你想要的；但在某些复杂合并历史里，容易遗漏/包含多余提交或造成意外冲突。
+    - 只有当你非常明确想从某个特定提交开始重写历史（不一定是分叉点）时，才使用具体 commit-hash。
 
 ### `git remote`
 
