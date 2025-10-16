@@ -916,7 +916,7 @@ $ git merge origin/next
 	- `git merge FETCH_HEAD` // 将拉取下来的最新内容合并到当前所在的分支中。
 
 
-### git-push
+### `git push` 
 
 ^7d51d8
 
@@ -935,7 +935,7 @@ $ git merge origin/next
 	> 要推送当前分支并将远程设置为上游，请使用上述命令
 
 
-### `git rebase`
+### `git rebase` 
 
 - [git rebase 用法详解与工作原理](https://waynerv.com/posts/git-rebase-intro/) 
 

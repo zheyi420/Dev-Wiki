@@ -3,10 +3,10 @@
 ## Reference
 
 ### Doc
-- [Windows Subsystem for Linux Documentation](https://learn.microsoft.com/en-us/windows/wsl/)
+- [Windows Subsystem for Linux 文档](https://learn.microsoft.com/zh-cn/windows/wsl/)
 
 ### Install
-- [Install Linux on Windows with WSL](https://learn.microsoft.com/en-us/windows/wsl/install)
+- [如何使用 WSL 在 Windows 上安装 Linux](https://learn.microsoft.com/zh-cn/windows/wsl/install)
 
 ### 安装指南
 
