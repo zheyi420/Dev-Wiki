@@ -7,7 +7,17 @@
 
 Chrome 浏览器中，你可以访问 `chrome://flags/#enable-javascript-harmony`，开启 Experimental JavaScript 标志，启用新功能。
 
-# Tor(the onion router) Browser
+# DevTools (F12)
+
+## Network
+
+### Filter
+
+- 同时过滤含有多个参数的
+	- `/wms|getRegionRoadMapServer/`
+
+# Browser Product
+## Tor(the onion router) Browser
 
 - official site: [https://www.torproject.org/](https://www.torproject.org/) 
 - download page: [https://www.torproject.org/download/](https://www.torproject.org/download/) 
