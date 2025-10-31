@@ -1092,7 +1092,7 @@ git clean -fd              # 删除所有未跟踪的文件和目录
 		# 或者简写
 		git stash -u -m "你的备注信息"
 	```
-	- 同时保存未跟踪和被忽略的文件。
+	- 同时保存未跟踪和被忽略的文件。🚨会导致`.gitignore`声明的文件都被stash，特别是 node_modules 目录🚨
 	```bash
 		git stash push --all --message "你的备注信息" # 意味着会暂存 node_modules 里的变更
 	```
