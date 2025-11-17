@@ -1,6 +1,6 @@
 # Reference
 
-- [Git Doc Reference](https://git-scm.com/docs) 
+- Git Doc Reference https://git-scm.com/docs
 	- [Git Book](https://git-scm.com/book/zh/v2) 
 - [GitHub Training Kit](https://training.github.com/) 
 	- [Git Cheat Sheets 速查表](https://training.github.com/downloads/zh_CN/github-git-cheat-sheet/) 
@@ -871,6 +871,11 @@ main:     A---B---C---D
 ```
 
 
+### `git merge-base`
+> 寻找合并可能的最优共同祖先
+
+- 查看分支的分叉点
+	`git merge-base <分支名1> <分支名2>`
 
 
 ### `git pull`
