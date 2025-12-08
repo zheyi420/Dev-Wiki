@@ -58,6 +58,16 @@ monorepo 根目录的 `package.json` 的 `dependencies` 中新增 `"@taiyi/geo-u
 pnpm add @taiyi/geo-utils --workspace-root --workspace
 ```
 
+已经有 `ol@8.2.0` 和 `ol@10.7.0` 在项目中，想要下载 `ol@9` 查看源码对比
+```
+# 在项目根目录执行
+# -w 表示安装到 workspace 根目录，-D 表示作为开发依赖。
+pnpm add ol@9 -w -D
+
+# 再移除，不会影响 node_modules\.pnpm\ ，依旧会留存该依赖且不会变更当前 git 工作状态
+pnpm remove ol -w
+```
+
 ## `pnpm exec`
 
 https://pnpm.io/zh/cli/exec
