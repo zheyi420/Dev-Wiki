@@ -212,6 +212,7 @@ ssh -p 22 服务器用户名@xxx.xxx.xxx.xxx # -p 后面是端口
 
 常用命令
 - `df -h` 将大小以易读格式打印。
+- `df -h /dir/dir1/dir2/` 对目录查询所属文件系统、磁盘用量
 
 ### `mkdir`
 > ➡ make directory

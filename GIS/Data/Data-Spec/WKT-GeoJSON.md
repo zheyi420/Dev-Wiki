@@ -68,7 +68,7 @@
 ![Polygon](Polygon.png)
 - WKT
 	`POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))`
-- GeoJSON
+- GeoJSON https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.6
 ```json
 {
 	"type": "Polygon",
