@@ -1,6 +1,9 @@
 # Spec
 
 - [The GeoJSON Specification (RFC 7946)](https://tools.ietf.org/html/rfc7946)
+	- 喂给AI用
+		- https://www.rfc-editor.org/rfc/rfc7946.txt
+		- https://www.rfc-editor.org/rfc/rfc7946.html
 - https://geojson.org/
 - [[JSON]]
 - https://zh.wikipedia.org/wiki/GeoJSON
