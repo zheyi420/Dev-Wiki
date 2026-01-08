@@ -1128,6 +1128,19 @@ git clean -fd              # 删除所有未跟踪的文件和目录
   git stash clear            # 清空所有存储
 ```
 
+- **查看存储项的变更详情**:
+	- 查看变更摘要（文件列表） `git stash show stash@{1}` 
+		```bash
+		$ git stash show stash@{0}
+		 .../miniprogram/features/map-tools/panorama.ts     | 147 +++++++++++++++++++--
+		 .../miniprogram/shared/utils/geoJsonToPolygons.ts  |  84 ++++++++----
+		 2 files changed, 196 insertions(+), 35 deletions(-)
+		```
+	- 查看详细的变更内容（具体代码） `git stash show -p stash@{1}`
+		会如同 `git diff` 显示具体修改
+	- 包含未跟踪的文件 `git stash show -p -u stash@{0}` （如果 stash 时用了 `-u`）
+	- 只查看某个文件的变更  `git diff stash@{0} -- path/to/file` 
+	- 对比 stash 与当前分支  `git diff stash@{0} HEAD` 
 #### 高级用法
 
 - **部分文件存储**：如果只想暂存某些文件，可以先使用 `git add` 将不想暂存的文件添加到暂存区，然后使用：
