@@ -38,12 +38,28 @@ viewer.camera.setView({
 
 # CRS
 
-- [3D Tiles - Coordinate reference system (CRS)](https://github.com/CesiumGS/3d-tiles/blob/main/specification/README.adoc#coordinate-reference-system-crs) 
 - [Cesium坐标系及坐标转换详解](https://www.cnblogs.com/matanzhang/p/11846929.html) 
 - [Cesium中的几种坐标和相互转换](https://github.com/AJJackGIS/Cesium/blob/master/doc/Cesium%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E5%9D%90%E6%A0%87%E5%92%8C%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2.md) 
 
 
-3D Tiles 使用右手笛卡尔坐标系，即 _x_ 和 _y_ 的交乘产生 _z_ 轴。3D Tiles 将 _z_ 轴定义为本地直角坐标系的向上轴。TileSet 的全球坐标系通常采用 [WGS 84](https://epsg.org/ellipsoid_7030/WGS-84.html)地心地固（[ECEF](https://en.wikipedia.org/wiki/Earth-centered,_Earth-fixed_coordinate_system)）参考框架 ([EPSG 4978](https://epsg.org/crs_4978/WGS-84.html))
+```
+            Z  ↑  （指向北极）
+               |
+               |
+               O─────→ X （赤道上，0°经线）
+              /
+             /
+            Y （赤道上，90°E）
+```
+坐标轴含义：
+
+| 轴   | 含义                             |
+| --- | ------------------------------ |
+| X   | 指向 **经度 0°、纬度 0°**（赤道与本初子午线交点） |
+| Y   | 指向 **经度 90°E、纬度 0°**           |
+| Z   | 指向 **北极**                      |
+
+
 
 Cesium 中没有对象来表示以 `degrees` 为单位的 WGS 84 坐标。
 表示坐标使用：
