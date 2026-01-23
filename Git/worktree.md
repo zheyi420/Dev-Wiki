@@ -85,14 +85,14 @@ error: failed to delete 'C:/AIRace/Dev/Project/yunyan-panorama-frontend_wt_branc
 会出现执行 `git worktree list` 后找不到该工作树，但是该目录又会存在（部分内部文件/目录被删除）。
 1. 手动删除文件夹：
 	- `npx rimraf ../dir_to_dir`
+	- `rm -rf ../dir_to_dir`
 	- 或者直接系统文件资源管理器删除。
 2. 在主工作树中 `git worktree prune` 清理。
 3. 在主工作树中 `git worktree list` 检查。
 4. 执行 `git config --system core.longpaths true` 解决 Windows 上的路径过长问题。
 5. 下次再移除应该可行，但也能会再遇到新的类似 `error: failed to delete 'C:/AIRace/Dev/Project/yunyan-test-4': Directory not empty`
 	- 遇到的是 文件占用（File Locking） 或 非受控文件残留 的问题。
-		- 程序占用（最常见）
-		- 
+		没找到解决办法ℹ️
 
 ## `git worktree prune`
 
