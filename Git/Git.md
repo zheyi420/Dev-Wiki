@@ -773,7 +773,7 @@ git cherry-pick D^..F  # 或 git cherry-pick C..F
 	   > Git 为了防止意外覆盖你的工作目录和暂存区，拒绝直接更新当前检出的分支
 	   ```bash
 		   fatal: refusing to fetch into branch 'refs/heads/feat/YY_V2.6.1' checked out at 'C:/dirTo/repo'
-		   ```
+	   ```
 		如果要更新当前分支，应当使用 `git pull origin feat/YY_V2.6.1`
 
 因此，前者只是更新了远程跟踪分支的信息，而后者则直接更新了本地分支。使用 `git fetch origin develop:develop` 时要小心，因为它会覆盖本地的更改，如果本地有未提交的修改，可能会导致数据丢失。
@@ -882,17 +882,17 @@ main:     A---B---C---D
 > Fetch from and integrate with another repository or a local branch.
 - https://git-scm.com/docs/git-pull
 
-#### 将远程分支 next 合并至当前分支
+#### 更新本地指定分支，只拉取远程指定分支合并至当前分支
 
 ```bash
-$ git pull origin next
+$ git pull origin <分支名>
 ```  
 
-该操作会临时将 next 分支的副本存入 `FETCH_HEAD`，并更新远程跟踪分支 `origin/next`。你也可以分两步完成，先拉取再合并：  
+该操作会临时将 `<分支名>` 分支的副本存入 `FETCH_HEAD`，并更新远程跟踪分支 `origin/<分支名>`。你也可以分两步完成，先拉取再合并：  
 
 ```bash
 $ git fetch origin
-$ git merge origin/next
+$ git merge origin/<分支名>
 ```  
 
 如果拉取 (`pull`) 导致复杂冲突，并希望重新开始，可以使用 `git reset` 恢复。  
