@@ -100,6 +100,8 @@ error: failed to delete 'C:/AIRace/Dev/Project/yunyan-panorama-frontend_wt_branc
 
 # 注意点
 
+- 一个分支在同一时间只能被一个 worktree 使用。
+
 ## lock 文件
 
 `pnpm-lock.yaml`（或 `package-lock.json`）是不应该放入 `.gitignore` 的。

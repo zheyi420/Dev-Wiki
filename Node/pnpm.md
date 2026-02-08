@@ -123,3 +123,14 @@ pnpm update <包名>
 - 自动移除所有不在 package.json 中声明的包
 - 清理孤立的依赖（之前安装但现在不再需要的包）
 - 不需要指定包名，会自动清理所有无用依赖
+
+```
+警告
+
+prune 命令目前不支持在 monorepo 上递归执行。 要仅在 monorepo 中安装生产依赖关系， `node_modules` 文件夹可以被删除，然后通过 `pnpm install --prod` 重新安装。
+```
+在 pnpm monorepo 中，`pnpm prune` 目前**不支持递归执行**，  
+因此**不能**通过在仓库根目录执行 `pnpm prune` 来可靠地移除所有 workspace 的 devDependencies。  
+官方推荐的做法是删除 `node_modules` 后，使用 `pnpm install --prod` 重新安装生产依赖。
+
+如果曾经在子包目录单独执行过依赖下载，就需要递归删除。

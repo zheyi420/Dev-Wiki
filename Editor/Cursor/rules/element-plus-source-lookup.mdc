@@ -1,0 +1,179 @@
+---
+description: Element-Plus 依赖源码查询指南 (pnpm monorepo)
+alwaysApply: false
+---
+
+# Element-Plus 源码查询规则
+
+在 pnpm monorepo 项目中查询 Element-Plus 依赖源码的完整流程。
+
+## 🎯 适用场景
+
+- 排查 `el-*` 组件行为异常 (如 `el-dialog`、`el-button` 等)
+- 深入了解组件内部实现逻辑
+- 查看组件 props、emits、hooks 等定义
+- 调试与 Element-Plus 组件相关的问题
+
+## 📋 源码查询流程
+
+### 第一步: 确定 Element-Plus 版本
+
+**1. 查看应用/包的 `package.json`**
+
+如果依赖声明为 `"element-plus": "catalog:"`，表示使用 pnpm workspace catalog 统一管理版本。
+
+示例: `packages/map-sulan/package.json`
+
+```json
+{
+  "dependencies": {
+    "element-plus": "catalog:"
+  }
+}
+```
+
+**2. 在 `pnpm-workspace.yaml` 中查找实际版本**
+
+```yaml
+catalog:
+  "element-plus": "2.11.7"
+```
+
+➡️ **结论**: 实际使用的版本为 `2.11.7`
+
+### 第二步: 定位依赖源码路径
+
+pnpm 的 `.pnpm` 目录命名规则 (参考 [How peers are resolved](https://pnpm.io/how-peers-are-resolved)):
+
+```
+node_modules/.pnpm/{包名}@{版本}_{peerDep1}@{版本}+{peerDep2}@{版本}/node_modules/{包名}/
+```
+
+- 下划线 `_` 分隔包自身版本与 peer dependencies 后缀
+- 多个 peer dependencies 之间用 `+` 或 `_` 分隔
+- 后缀部分是**已解析的 peer dependencies 的名称和版本**
+
+**实际路径示例**:
+
+```
+node_modules/.pnpm/element-plus@2.11.7_vue@3.5.13_typescript@5.9.3_/node_modules/element-plus/
+```
+
+> 其中 `vue@3.5.13` 和 `typescript@5.9.3` 是 element-plus 的 peer dependencies 实际解析版本，可在 element-plus 的 `package.json` 的 `peerDependencies` 字段中确认
+
+**关键文件位置**:
+
+- 📦 `package.json` - 查看依赖元信息、入口点、exports 配置
+- 📁 `lib/` - CommonJS 编译后代码
+- 📁 `es/` - ES Module 编译后代码
+- 📁 `lib/components/` - 组件源码目录
+
+### 第三步: 定位具体组件源码
+
+#### 组件目录结构
+
+```
+lib/components/{组件名}/
+├── index.js           # 组件入口文件（关键：从这里追踪）
+├── index.d.ts         # TypeScript 类型定义
+└── src/               # 具体实现文件目录
+    ├── {组件名}.js    # 通常是 props/emits 定义
+    ├── *.js           # 其他实现文件
+    └── use-*.js       # 组合式函数
+```
+
+#### 如何从入口文件追踪实现
+
+**步骤 1**: 查看 `lib/components/{组件名}/index.js`
+
+**步骤 2**: 识别关键引用模式
+
+- `require('./src/xxx.js')` - 引入的实现文件
+- `install.withInstall(xxx["default"])` - 参数通常是主组件实现
+- 导出的 `xxxProps`/`xxxEmits` - props 和事件定义所在文件
+
+**步骤 3**: 根据引用路径追踪到具体文件
+
+#### 实际案例: `el-dialog` 组件
+
+**第一步**: 查看 `lib/components/dialog/index.js`
+
+```javascript
+var dialog$1 = require("./src/dialog2.js")
+var dialog = require("./src/dialog.js")
+const ElDialog = install.withInstall(dialog$1["default"])
+exports.dialogProps = dialog.dialogProps
+```
+
+**分析**:
+
+- `dialog$1` (来自 `./src/dialog2.js`) 被传入 `withInstall()` → 这是主组件实现
+- `dialog.dialogProps` 从 `./src/dialog.js` 导出 → 这是 props 定义文件
+
+**第二步**: 根据追踪结果查看对应文件
+
+- 主要实现: `lib/components/dialog/src/dialog2.js` - 组件渲染逻辑、draggable/modal/appendToBody 等功能、Vue Teleport 实现
+- Props/Emits: `lib/components/dialog/src/dialog.js` - dialogProps/dialogEmits/dialogContextKey 等定义
+
+**相关 Hooks**: `lib/hooks/use-draggable/index.js`
+
+- `el-dialog` 的拖拽功能实现
+- 边界限制逻辑 (基于 `document.documentElement.clientWidth`)
+
+### 第四步: 查看 package.json 关键字段
+
+```json
+{
+  "main": "lib/index.js", // CommonJS 入口
+  "module": "es/index.mjs", // ES Module 入口
+  "types": "es/index.d.ts", // TypeScript 类型入口
+  "exports": {
+    ".": {
+      "types": "./es/index.d.ts",
+      "import": "./es/index.mjs",
+      "require": "./lib/index.js"
+    },
+    "./lib/components/*/": "./lib/components/*/" // 支持按需引入
+  }
+}
+```
+
+## 🔍 通用查询策略
+
+无论查询什么组件，均遵循以下思路：
+
+1. **排查组件行为异常** — 从入口文件追踪到主实现文件，搜索相关功能关键词（如 `draggable`、`loading`），必要时进一步追踪到 `lib/hooks/use-{功能名}/index.js`
+2. **了解 Props / Emits** — 在入口文件中找到 `exports.{组件名}Props` / `exports.{组件名}Emits` 的来源文件，查看详细定义（类型、默认值、校验等）
+3. **追踪事件触发** — 在主实现文件中搜索 `ctx.emit` 或 `emit(` 调用，了解事件触发时机和参数
+4. **理解 DOM 结构** — 在主实现文件中分析 `render` 函数或 `setup` 返回的渲染逻辑
+
+## ⚠️ 注意事项
+
+1. **不要修改源码**: 升级 Element-Plus 时会丢失修改
+2. **优先使用组件 API**: 通过 props/slots/events 实现需求
+3. **必要时封装**: 创建包装组件而非修改源码
+4. **版本差异**: 不同版本的实现可能不同,确认当前版本
+
+## 📚 快速参考
+
+| 查询目标     | 文件路径                               | 说明                              |
+| ------------ | -------------------------------------- | --------------------------------- |
+| 组件入口     | `lib/components/{组件名}/index.js`     | **从这里开始追踪**                |
+| 主要实现     | 通过入口文件的 `require()` 追踪        | 通常是传入 `withInstall()` 的参数 |
+| Props/Emits  | 通过入口文件的 `exports.xxxProps` 追踪 | 查看导出语句的来源文件            |
+| Hooks        | `lib/hooks/use-{功能名}/index.js`      | 组合式函数                        |
+| 类型定义     | `lib/components/{组件名}/index.d.ts`   | TypeScript 类型                   |
+| Package 信息 | `package.json`                         | 依赖元信息、入口点、exports 配置  |
+
+## 完整查询路径摘要
+
+以任意 `el-{组件名}` 为例，完整追踪路径：
+
+1. 版本: `pnpm-workspace.yaml` → `catalog` → 确认 element-plus 版本号
+2. 源码根目录: `node_modules/.pnpm/element-plus@{版本}_{peers}/node_modules/element-plus/`
+3. 组件入口: `lib/components/{组件名}/index.js`
+4. 从入口文件的 `require()` 追踪：
+   - 传入 `withInstall()` 的参数 → 主实现文件
+   - `exports.{组件名}Props` 来源 → Props/Emits 定义文件
+   - 其他 `require` 引用 → 相关 hooks 或子组件
+5. 根据追踪结果查看对应的实现文件
