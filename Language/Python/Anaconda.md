@@ -23,14 +23,14 @@ Anaconda 安装时**没有**将 Python 添加到系统 PATH 中，这是**推荐
 	`C:\AIRace\Software\Anaconda\pythonw.exe C:\AIRace\Software\Anaconda\cwp.py C:\AIRace\Software\Anaconda C:\AIRace\Software\Anaconda\pythonw.exe C:\AIRace\Software\Anaconda\Scripts\anaconda-navigator-script.py` 
 
 - Anaconda PowerShell Prompt
-	`%WINDIR%\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy ByPass -NoExit -Command "& 'C:\AIRace\Software\Anaconda\shell\condabin\conda-hook.ps1' ; conda activate 'C:\AIRace\Software\Anaconda' "` 
+	`%WINDIR%\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy ByPass -NoExit -Command "& 'D:\Tools\Anaconda\anaconda3\shell\condabin\conda-hook.ps1' ; conda activate 'D:\Tools\Anaconda\anaconda3' "` 
 	💡
 	```cmd
 	C:\>echo %WINDIR%
 	C:\Windows
 	```
 - Anaconda Prompt
-	`%WINDIR%\System32\cmd.exe "/K" C:\AIRace\Software\Anaconda\Scripts\activate.bat C:\AIRace\Software\Anaconda` 
+	`%WINDIR%\System32\cmd.exe "/K" D:\Tools\Anaconda\anaconda3\Scripts\activate.bat D:\Tools\Anaconda\anaconda3` 
 - Jupyter Notebook
 	`C:\AIRace\Software\Anaconda\python.exe C:\AIRace\Software\Anaconda\cwp.py C:\AIRace\Software\Anaconda C:\AIRace\Software\Anaconda\python.exe C:\AIRace\Software\Anaconda\Scripts\jupyter-notebook-script.py %USERPROFILE%` 
 	💡
