@@ -1,4 +1,19 @@
+# Case
 
+## 在 Windows 系统层级解除长路径限制
+
+**通过 PowerShell 开启（需管理员权限）：**
+
+1. **右键**点击开始菜单，选择“Windows PowerShell (管理员)”。
+2. 执行以下命令：
+	```Powershell
+    New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
+    ```
+3. 执行成功后，**重启电脑**（或重启终端和你的代码编辑器），即可永久解决该问题。你就可以像平时一样直接 ls '长路径' 了。
+4. 检查
+	```powershell
+	Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled"
+	```
 # Command
 
 ## `Test-NetConnection` 

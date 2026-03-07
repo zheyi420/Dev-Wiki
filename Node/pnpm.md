@@ -24,12 +24,19 @@
 
 1. 在项目根目录打开 PowerShell
 2. 执行
-	```powershell
-	Get-ChildItem -Recurse -Directory -Filter "node_modules" -ErrorAction SilentlyContinue | Remove-Item -Recurse -Force
-	``` 
+	常见问题点在于：
+	- 如果父级 node_modules 先被删除，管道后续尝试删除子级（例如 packages/pkg-a/node_modules）时就会因为路径已不存在而报错。
+	- **层级冲突**：Get-ChildItem 会同时抓取根目录的 node_modules 和子包的 node_modules。如果先删除了根目录，再去删子目录会引发异常。
+
+方案：使用 Node 生态的标准工具 rimraf
+	不需要全局、项目级安装该依赖工具，直接执行会临时下载并执行。
+	会安装 tag latest 的包，v6 参数如下执行
+```
+pnpm dlx rimraf --glob "**/node_modules"
+```
 3. 删除项目根目录的 `pnpm-lock.yaml` 
 	```powershell
-	Remove-Item pnpm-lock.yaml
+	rm pnpm-lock.yaml
 	```
 
 
