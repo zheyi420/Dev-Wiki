@@ -42,6 +42,15 @@ pnpm dlx rimraf --glob "**/node_modules"
 
 # Commands
 
+## `pnpm audit`
+
+> 检查已安装程序包的已知安全问题。
+
+仅打印严重性大于或等于 "high" 的警告
+```
+pnpm audit --audit-level high
+```
+
 
 
 ## `pnpm add`
