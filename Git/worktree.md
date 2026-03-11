@@ -66,11 +66,18 @@ $ git branch -a
 不干净的工作树或包含子模块的工作树可以使用 `--force` 删除。主工作树不能被删除。
 
 ```bash
+# 为了避免下面说的异常，先进入到工作树目录，执行依赖删除
+cd ../worktree_dir_going_to_delete/
+pnpm dlx rimraf --glob "**/node_modules"
+
 # **回到原主目录**（或者任何地方，只要不是要删除的那个目录）：
 cd ../my-project
 
 # **执行删除 Worktree 命令**：
 git worktree remove ../my-project-feature-test
+
+🚩'若要删除该工作树分支，如果是临时的本地分支'
+git branch -D <分支名>
 ```
 - 这会删除该文件夹。
 - 这**不会**删除 `my-project-feature-tes` 分支本身，只是删除了这个工作区。分支依然存在于 Git 中。
