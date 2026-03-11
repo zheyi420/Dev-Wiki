@@ -812,13 +812,29 @@ https://git-scm.com/docs/git-ls-tree
 > Show commit logs.
 > - https://git-scm.com/docs/git-log
 
+#### 参数
+- `--follow` 继续列出文件的历史记录，不仅限于重命名操作（仅适用于单个文件）。
+
+#### 常用
 - `git log [<指定分支名>] -n <number>` 限制输出的提交记录数量。
 - `git log --pretty=oneline`
 		`git log --pretty=oneline | wc -l` 计算输出行数
 - 显示其他分支的提交记录，在不切换过去的情况下。
 - `git log --graph --oneline` 可视化分支拓扑
 
-#### 过滤出指定作者的提交记录
+#### 场景
+##### 1. 查看某个特定文件的所有提交记录
+```bash
+git log <文件路径>
+
+ℹ️若该文件过去被重命名过或者移动过文件夹
+git log --follow <文件路径>
+
+ℹ️查看每次提交的具体代码差异 (-p)
+git log -p --follow <文件路径>
+```
+
+##### 2. 过滤出指定作者的提交记录
 
 1. 获取所有作者列表（便于确认准确姓名）
 	```bash
@@ -1063,6 +1079,18 @@ git clean -fd              # 删除所有未跟踪的文件和目录
 
 - 使用 `git revert <commit_id>` 来回退指定提交中的修改不会导致 stash 丢失。`git revert` 命令创建一个新的 commit，以撤销指定 commit 中的更改，而不会改变历史记录或影响 stash 列表。
 
+### `git show`
+
+临时查看文件内容（不覆盖本地文件）
+```bash
+git show <commit_id>:<文件路径> <新文件名>
+
+ℹ️示例
+git show 5f3e1a2:config.json > config_old.json
+
+找不到可能是路径错误，如反斜杠错误，可以这样查来复制
+git ls-files | grep "匹配名"
+```
 
 ### `git switch`
 
