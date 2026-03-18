@@ -9,15 +9,15 @@
 # 规范
 ## OGC KML 2.2 XSD
 >  KML 文件的“内容规范”
+
 - 用于 XML 解析器
-	- http://www.opengis.net/kml/2.2 会重定向到 http://schemas.opengis.net/kml/2.2.0/ogckml22.xsd
+	- http://www.opengis.net/kml/2.2 会重定向到 http://schemas.opengis.net/kml/2.2.0/ogckml22.xsd （定义标签规则的 `.xsd` 机器校验文件）
+	- `.xsd` 代表 **XML Schema Definition（XML 模式定义）**。
+	- KML 是基于 XML 的，而 XSD 就是用来**定义 XML 文件结构的“代码级说明书”**。
 - 解释文档
 	- https://www.ogc.org/standards/kml/
 		- https://portal.ogc.org/files/?artifact_id=27810 PDF 下载地址（KML 2.2 官方标准文档 OGC Doc No. 07-147r2）
 	- https://developers.google.com/kml/documentation/kmlreference **📃喂 AI 用这个** 
-
-上述 `.xsd` 代表 **XML Schema Definition（XML 模式定义）**。
-KML 是基于 XML 的，而 XSD 就是用来**定义 XML 文件结构的“代码级说明书”**。
 
 
 ## KMZ (KML Zipped)
