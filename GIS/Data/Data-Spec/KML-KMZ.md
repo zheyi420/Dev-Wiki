@@ -12,7 +12,8 @@
 - 用于 XML 解析器
 	- http://www.opengis.net/kml/2.2 会重定向到 http://schemas.opengis.net/kml/2.2.0/ogckml22.xsd
 - 解释文档
-	- https://www.ogc.org/standards/kml/  KML 2.2 官方标准文档 OGC Doc No. 07-147r2
+	- https://www.ogc.org/standards/kml/
+		- https://portal.ogc.org/files/?artifact_id=27810 PDF 下载地址（KML 2.2 官方标准文档 OGC Doc No. 07-147r2）
 	- https://developers.google.com/kml/documentation/kmlreference **📃喂 AI 用这个** 
 
 上述 `.xsd` 代表 **XML Schema Definition（XML 模式定义）**。
