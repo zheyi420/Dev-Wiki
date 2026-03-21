@@ -34,6 +34,13 @@
 ```
 pnpm dlx rimraf --glob "**/node_modules"
 ```
+
+如果遇到下方这类报错，表示可能是其他工作树正在跑如 Vite 服务，退出后再重试删除即可。
+```powershell
+PS C:\AIRace\Dev\Project\wt_m_B> pnpm dlx rimraf --glob "**/node_modules"
+Error: EPERM: operation not permitted, unlink 'C:\AIRace\Dev\Project\wt_m_B\node_modules\.pnpm\@esbuild+win32-x64@0.24.2\node_modules\@esbuild\win32-x64\esbuild.exe'
+```
+
 3. 删除项目根目录的 `pnpm-lock.yaml` 
 	```powershell
 	rm pnpm-lock.yaml
