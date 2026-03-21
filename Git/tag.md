@@ -1,3 +1,12 @@
+直接使用：
+```powershell
+git add package.json
+git commit -m "chore: bump version to 0.1.0"
+git tag -a v0.1.0 -m "Release v0.1.0"
+git push origin master --follow-tags
+```
+
+详解：
 可以按下面方式把版本变更提交并打 tag：
 ## 1. 提交版本变更
 ```powershell
@@ -35,7 +44,7 @@ git tag -a v0.1.0 -m "Release v0.1.0"
 ## 3. 推送到远程
 ```powershell
 # 推送当前分支
-git push origin main
+git push origin master
 # 推送 tag
 git push origin v0.1.0
 # 或一次推送所有 tag
@@ -47,7 +56,7 @@ git push origin --tags
 git add package.json
 git commit -m "chore: bump version to 0.1.0"
 git tag -a v0.1.0 -m "Release v0.1.0"
-git push origin main --follow-tags
+git push origin master --follow-tags
 ```
 
 | 部分              | 含义                                  |
@@ -55,7 +64,7 @@ git push origin main --follow-tags
 | `origin`        | 远程仓库名称                              |
 | `v0.1.0`        | 要推送的 tag 名（不是分支名）                   |
 | `--tags`        | 推送本地所有尚未在远程的 tag                    |
-| `main`          | 要推送的分支                              |
+| `master`        | 要推送的分支                              |
 | `--follow-tags` | 在推送分支时，同时推送当前提交所指向的 tag，但不会推送所有 tag |
 
 `--follow-tags` 会同时推送当前提交所指向的 tag，避免推送所有 tag。
