@@ -105,7 +105,7 @@ https://pnpm.io/zh/cli/exec
 
 ## `pnpm install`
 
-`--frozen-lockfile`  不更新 `pnpm-lock.yaml`
+`--frozen-lockfile`  不更新 `pnpm-lock.yaml` 完全按 `pnpm-lock.yaml` 装。
 
 `pnpm i --frozen-lockfile` 与 `npm ci` 类似
 
