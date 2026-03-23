@@ -70,7 +70,7 @@ $ git branch -a
 cd ../worktree_dir_going_to_delete/
 pnpm dlx rimraf --glob "**/node_modules"
 
-# **回到原主目录**（或者任何地方，只要不是要删除的那个目录）：
+# 去到原同仓库其他/主目录
 cd ../my-project
 
 # **执行删除 Worktree 命令**：

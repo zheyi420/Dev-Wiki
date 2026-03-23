@@ -334,7 +334,7 @@ fa19989 dev@{3}: branch: Created from HEAD
 	或者执行 `git fetch --prune`
 	当远程仓库删除了某个分支，用这个命令可以更新本地 git 知道的远程分支的列表。
 - `git branch -d <分支名>` 删除本地分支。
-- `git branch -d -r origin/<分支名>` 删除远程跟踪分支。
+- `git branch -d -r origin/<分支名>` 删除远程跟踪分支。（本地对远程分支的“记忆”）
 - 为新的本地分支设置跟踪信息。
 	- `git branch --set-upstream-to=origin/远程分支名 本地分支名` 
 	- `git branch -u origin/远程分支名` 
