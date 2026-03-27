@@ -436,6 +436,25 @@ fa19989 dev@{3}: branch: Created from HEAD
 	   $ git branch user_order origin/user_order # 创建分支并设置跟踪
 	   $ git checkout user_order # 切换到新分支
 		```
+
+
+#### 检出其他分支指定路径内容到当前分支
+`git checkout develop -- path1 path2 path3` 
+- `path1 path2 path3` 表示：**相对仓库根目录**（与 `.git` 同级）的文件或目录路径，可写多个，用空格分隔。
+- **文件**：`apps/yunyan-web/src/foo.ts`
+- **整个目录**：只写目录路径即可，Git 会递归带入该目录下在版本库里的所有文件，例如 `packages/map-sulan`
+- **Windows**：在 Git Bash / PowerShell 里建议用 **正斜杠** `packages/map-sulan`（与反斜杠等价，且少踩转义坑）
+
+
+如：检出 `develop` 分支的 `packages/map-sulan` 目录下在版本库里的所有文件（即就是要 `develop` 上的这套文件状态）
+```bash
+# 在当前分支（如 `master`）上：
+git checkout master   # 先确保在 master
+git fetch origin      # 可选：保证本地 develop 是最新的
+git checkout develop -- packages/map-sulan
+```
+
+
 #### 切到某个历史提交的状态
 `git checkout <commit-hash>`
 ```bash
