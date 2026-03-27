@@ -1186,3 +1186,8 @@ git ls-files | grep "匹配名"
 - 可以通过 `git stash show -p` 查看具体的改动内容。
 
 
+### 其他
+
+用 Git 自带的升级命令（2.16.1+ 才有）
+`git update-git-for-windows`
+
