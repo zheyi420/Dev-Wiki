@@ -1040,6 +1040,24 @@ git rebase -i release
 
 - 使用 `git reset --hard` 会丢失当前工作目录中未提交的更改，但不会直接影响 stash 列表。stash 是存储在 `.git/refs/stash` 中的临时更改，使用 `git reset --hard` 不会删除 stash。
 
+#### 分支远端历史被重写
+
+📄
+【1】➡丢弃本地旧 master，与远端完全一致
+先确认没有未提交的重要改动（或先 `git stash`）。
+```bash
+git fetch origin
+git checkout master
+git reset --hard origin/master
+```
+【2】删掉本地 master 再按远端建
+```bash
+git fetch origin
+git checkout develop
+git branch -D master
+git checkout -b master origin/master
+```
+
 #### 放弃当前Git项目所有修改
 
 要放弃当前Git项目中所有未提交的更改（包括已修改、已暂存和未跟踪的文件），可以使用以下几种常用命令：
