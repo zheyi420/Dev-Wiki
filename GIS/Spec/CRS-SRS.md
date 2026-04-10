@@ -68,6 +68,15 @@
 
 #### WGS84
 
+## 高程基准 Vertical Datum
+
+> 高程基准是推算国家法定海拔高度（高程）的起算标准。平面坐标（X/Y）与垂直高程（Z）在 GIS 标准中通常是分开定义的复合坐标系（Compound CRS）。
+
+- **1985国家高程基准 (Yellow Sea 1985 height)**
+	- **零点来源**：根据山东青岛验潮站 1952年到1979年 的潮汐观测数据计算得出的**黄海平均海平面**，作为中国海拔标高的“零点”。
+	- **水准原点**：设立于青岛观象山的“中华人民共和国水准原点”，海拔高度精准确定为 **72.260米**。全国的海拔高度均由此起算。
+	- **EPSG代码**：[EPSG:5737](https://epsg.io/5737)。(注：其前身“1956黄海高程基准”对应的 EPSG:5736 已被废止)。
+
 ---
 
 # 坐标/空间参考系
@@ -91,9 +100,8 @@
 - [ArcGIS - What are projected coordinate systems?](https://desktop.arcgis.com/en/arcmap/latest/map/projections/about-projected-coordinate-systems.htm)
 - [ArcGIS - Well-known ID - Projected Coordinate Systems](https://developers.arcgis.com/javascript/3/jshelp/pcs.htm)
 
-### 常用的地图投影
 
-#### 墨卡托投影 - Mercator
+### 墨卡托投影 - Mercator
 
 - [ArcGIS - 墨卡托投影](https://desktop.arcgis.com/zh-cn/arcmap/latest/map/projections/mercator.htm)
 
@@ -117,7 +125,7 @@
 	- 大面积畸变造成墨卡托投影不适用于一般地理世界地图和专题制图。
 
 
-##### Web 墨卡托坐标系 - Web Mercator
+#### Web 墨卡托坐标系 - Web Mercator
 
 - [ArcGIS - Web 墨卡托坐标系](https://desktop.arcgis.com/zh-cn/arcmap/latest/map/projections/mercator.htm#ESRI_SECTION1_AB3E85B510ED40698AB95BB94CB87374)
 - [Wikipedia - Web Mercator projection](https://en.wikipedia.org/wiki/Web_Mercator_projection)
@@ -141,17 +149,34 @@
 	- 墨卡托辅助球的实现只有球体方程。此外，它还有一个投影参数，如果地理坐标系是基于椭圆的，它可以确定使用什么作为球体半径。默认值为零（0），使用长半轴。
 
 
-###### Web Mercator & Mercator
+##### Web Mercator & Mercator
 - 
 
-#### 横轴墨卡托投影
+### 横轴墨卡托投影
 
 - [ArcGIS - 横轴墨卡托投影](https://desktop.arcgis.com/zh-cn/arcmap/latest/map/projections/transverse-mercator.htm)
 
 
-#### 高斯-克吕格 (Gauss-Krüger) 投影
+### 高斯-克吕格 (Gauss-Krüger) 投影
 
 - [ArcGIS - 高斯-克吕格 (Gauss-Krüger) 投影](https://desktop.arcgis.com/zh-cn/arcmap/latest/map/projections/gauss-kruger.htm)
+
+**数据实战：解析高斯投影坐标（以 CGCS2000 为例）**
+
+在中国测绘标准中，坐标的书写与数学/CAD默认的笛卡尔坐标是相反的：**X 代表南北方向（纵坐标），Y 代表东西方向（横坐标）**。在 CAD 中输入或提取坐标时，切记调换为 `Y, X`。
+
+高斯投影为了避免 Y 坐标出现负数，规定将每个投影带的中央经线 (Central Meridian, CM) 的横坐标统一向西平移 500,000 米。因此，**坐标的 Y 值表现形式决定了其所采用的 EPSG 投影体系**：
+
+- **不带带号（6位整数的 Y 坐标，如 `451975.501`）**
+	- **特征**：Y 值总是介于 330,000 ~ 670,000 之间。单从这 6 位数字**绝对无法推算**其所在的真实地理位置（因为它只是相对于某条未知的中央经线的偏移量），必须明确项目所在地对应的“中央经线”。
+	- **EPSG 匹配**：必须使用名称中带有 `CM`（Central Meridian）的坐标系。例如广东潮州（中央经线 117°E）对应代码为 `EPSG:4548` (CGCS2000 / 3-degree Gauss-Kruger CM 117E)。
+- **带带号（8位整数的 Y 坐标，如 `39451975.501`）**
+	- **特征**：纵坐标 X 保持不变，在横坐标 Y 前面拼接了 2 位数的“投影带号”。例如 `39` 代表第 39 号 3度带（117°E ÷ 3 = 39带），带号直接赋予了坐标全国唯一性。
+	- **EPSG 匹配**：必须使用名称中带有 `Zone`（投影带）的坐标系。例如对应的代码为 `EPSG:4527` (CGCS2000 / 3-degree Gauss-Kruger zone 39)。
+
+**误区指南：地理坐标系 vs 投影坐标系的区别**
+- 对于同一个物理位置，只要采用的是 `CGCS2000` 大地基准（EPSG:4490），其**经纬度（球面坐标）是全球唯一且绝对不变的**，不存在“分带”的概念。
+- 但是，同一个经纬度点，如果划归给**不同的投影带**，数学平铺展开的方式变了，计算出的 X/Y 平面坐标数值会天差地别。因此，**X/Y 平面坐标不仅认大地基准，还认投影带**。
 
 
 ## 地心坐标系 Geocentric coordinate system (or Earth-centered Earth-fixed [ECEF])
@@ -230,29 +255,65 @@ https://epsg.io/4479
 > Geodetic CRS: China Geodetic Coordinate System 2000
 
 
-## EPSG:4547
+## CGCS2000投影-三度带
+
+### 有带号
+
+#### EPSG:4513
+https://epsg.io/4513
+> CGCS2000 / 3-degree Gauss-Kruger zone 25
+> 
+> Center coordinates: 25505253.45 4233029.41
+> **说明**：中国最西的
+
+#### EPSG:4526
+https://epsg.io/4526
+> CGCS2000 / 3-degree Gauss-Kruger zone 38
+> 
+> Center coordinates: 38500000.0 3706538.8
+> **说明**: 第 38 号投影带（中央经线 114°E）、**带带号**（Y 坐标以 38 开头，8位 整数）的 CGCS2000 平面投影坐标系。
+
+#### EPSG:4533
+https://epsg.io/4533
+> CGCS2000 / 3-degree Gauss-Kruger zone 45
+> 
+> Center coordinates: 45434365.33 5221506.61
+> **说明**：中国最东的
+
+
+### 中央经线
+
+#### EPSG:4534
+https://epsg.io/4534
+> CGCS2000 / 3-degree Gauss-Kruger CM 75E
+> 
+> Center coordinates: 505253.45 4233029.41
+> **说明**：中国最西的
+
+#### EPSG:4547
 https://epsg.io/4547
 > CGCS2000 / 3-degree Gauss-Kruger CM 114E
 > 
-> Unit: metre
-> Geodetic CRS: China Geodetic Coordinate System 2000
+> Center coordinates: 500000.0 3706538.8
+> **说明**: 以 114°E 为中央经线、**不带带号**（Y 坐标为 6位 整数）的 CGCS2000 平面投影坐标系（覆盖广东广州、惠州等地）。
 
-
-## EPSG:4529
-https://epsg.io/4529
-> CGCS2000 / 3-degree Gauss-Kruger zone 41
+#### EPSG:4554
+https://epsg.io/4554
+> CGCS2000 / 3-degree Gauss-Kruger CM 135E
 > 
+> Center coordinates: 434365.33 5221506.61
+> **说明**：中国最东的
+
+
+## 高程
+### EPSG:5737
+https://epsg.io/5737
+> Yellow Sea 1985 height
+>
 > Unit: metre
-> Geodetic CRS: China Geodetic Coordinate System 2000
-
-
-## EPSG:4546
-https://epsg.io/4546
-> CGCS2000 / 3-degree Gauss-Kruger CM 111E
+> Datum: Yellow Sea 1985
 > 
-> Unit: metre
-> Geodetic CRS: China Geodetic Coordinate System 2000
-
+> **说明**: 中国目前法定的统一海拔标高起算坐标系（1985国家高程基准）。
 
 
 ---
