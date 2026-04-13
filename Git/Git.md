@@ -1210,7 +1210,8 @@ git ls-files | grep "匹配名"
 
 - **部分文件存储**：如果只想暂存某些文件，可以先使用 `git add` 将不想暂存的文件添加到暂存区，然后使用：
 ```bash
-  git stash --keep-index
+  # Will stash unstaged changes, keeping staged files intact
+  --keep-index
 ```
 - **创建新分支并恢复进度**：
 ```bash
