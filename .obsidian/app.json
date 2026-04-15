@@ -1,0 +1,11 @@
+{
+  "defaultViewMode": "source",
+  "showLineNumber": true,
+  "newLinkFormat": "relative",
+  "attachmentFolderPath": "./assets",
+  "readableLineLength": false,
+  "spellcheck": false,
+  "useMarkdownLinks": true,
+  "showUnsupportedFiles": true,
+  "strictLineBreaks": true
+}
