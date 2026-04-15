@@ -1,6 +1,4 @@
-# Agent 运行模式
-
-## ReAct 模式
+# ReAct 模式
 > Reasoning and Acting
 > 思考与行动
 > 
@@ -14,7 +12,7 @@ ReAct 执行流程图：
 
 ![](assets/Pasted%20image%2020260413215805.png)
 
-### ReAct 模式是如何实现的
+## ReAct 模式是如何实现的
 
 - 和模型训练过程关系不大。
 - 大部分奥秘在于系统提示词
@@ -27,17 +25,17 @@ ReAct 执行流程图：
 > 
 > 规范实现时：系统提示词与用户任务应当分开传给模型
 
-### ReAct 运行时序图
+## ReAct 运行时序图
 
 ![](assets/Pasted%20image%2020260413223942.png)
 
 ![](assets/Pasted%20image%2020260413224612.png)
 
-## Plan-And-Execute 模式
+# Plan-And-Execute 模式
 
 - 先规划再执行，每个 Agent 的实现多多少少有区别。
 
-### 运行流程
+## 运行流程
 
 ![](assets/Pasted%20image%2020260413231340.png)
 

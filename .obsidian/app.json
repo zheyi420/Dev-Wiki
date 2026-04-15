@@ -4,8 +4,8 @@
   "newLinkFormat": "relative",
   "attachmentFolderPath": "./assets",
   "readableLineLength": false,
-  "spellcheck": false,
   "useMarkdownLinks": true,
   "showUnsupportedFiles": true,
-  "strictLineBreaks": true
+  "strictLineBreaks": true,
+  "spellcheck": false
 }

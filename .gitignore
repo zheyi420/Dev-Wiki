@@ -4,6 +4,7 @@
 ## 排除文件
 .obsidian/community-plugins.json
 .obsidian/workspace.json
+.obsidian/graph.json
 ## 单独保留某个文件
 # !.obsidian/app.json
 # !.obsidian/appearance.json
