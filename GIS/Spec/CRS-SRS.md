@@ -241,7 +241,8 @@
 - Most GIS use EPSG codes as Spatial Reference System Identifier (SRID)
 - EPSG: European Petroleum Survey Group 欧洲石油调查组织
 
-## EPSG:4326
+## 通用
+### EPSG:4326
 https://epsg.io/4326
 > WGS 84 -- WGS84 - World Geodetic System 1984, used in GPS
 > 
@@ -250,18 +251,18 @@ https://epsg.io/4326
 
 
 
-## EPSG:3857
+### EPSG:3857
 https://epsg.io/3857
 > WGS 84 / Pseudo-Mercator -- Spherical Mercator
 > 
-> Unit: metre
+> UoM (Unit of Measure): metre  
 > Center coordinates: 0.0 0.0
 
 
 **说明**
 - web mapping standard CRS.
 
-## EPSG:4490
+### EPSG:4490
 https://epsg.io/4490
 > China Geodetic Coordinate System 2000
 > 
@@ -271,10 +272,10 @@ https://epsg.io/4490
 > Ellipsoid: CGCS2000
 
 
-## EPSG:4479
+### EPSG:4479
 https://epsg.io/4479
 > China Geodetic Coordinate System 2000
-> 
+> 地心空间直角坐标系 (Geocentric Cartesian)
 > Unit: metre
 > Geodetic CRS: China Geodetic Coordinate System 2000
 
