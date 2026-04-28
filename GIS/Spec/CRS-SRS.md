@@ -202,6 +202,18 @@
 > 已知中央经线 $CM$，则对应 `EPSG = 4534 + (CM - 75) / 3`
 > 例如，潮州的中央经线为 117°E，则 `EPSG = 4534 + (117 - 75) / 3 = 4534 + 14 = 4548`。
 
+#### ⚠️ 轴向冲突：高斯投影 vs Web Mercator
+在 WebGIS 开发中，经常需要将国内测绘数据与互联网地图进行融合，此时必须注意坐标轴向的**完全对立**：
+
+| 特性        | **高斯-克吕格 (如 EPSG:4547)** | **Web Mercator (EPSG:3857)** |
+| :-------- | :----------------------- | :--------------------------- |
+| **标准体系**  | 中国测绘国标 (GB/T 14911-2008) | 互联网地图标准 (Google/OSM)         |
+| **X 轴定义** | **纵坐标 (Northing)**，指向正北  | **横坐标 (Easting)**，指向正东       |
+| **Y 轴定义** | **横坐标 (Easting)**，指向正东   | **纵坐标 (Northing)**，指向正北      |
+| **底层表示**  | `[X(北), Y(东)]`           | `[X(东), Y(北)]`               |
+
+> **开发避坑**：在 OpenLayers、Cesium 或 Proj4js 等底层 GIS 库中，API 默认均遵循 Web Mercator 的 `[东, 北]` 顺序。因此，在接收用户填写的国产测绘坐标 (X: 7位数, Y: 6/8位数) 时，**必须在代码层面进行反转，即传入 `[Y, X]`**。
+
 
 ## 地心坐标系 Geocentric coordinate system (or Earth-centered Earth-fixed [ECEF])
 
@@ -241,6 +253,14 @@
 - Most GIS use EPSG codes as Spatial Reference System Identifier (SRID)
 - EPSG: European Petroleum Survey Group 欧洲石油调查组织
 
+## 核心属性：
+
+### UoM (Unit of Measure)
+在查阅 EPSG 字典时，坐标系的 `UoM` 属性决定了数据的物理意义及计算法则：
+- **UoM: degree (度)**：代表地理坐标系（如 EPSG:4490, EPSG:4326）。数值表示角度，不能直接用于常规几何的平面距离或面积计算。
+- **UoM: m (米)**：代表投影坐标系（如 EPSG:3857, EPSG:4547）或地心坐标系（如 EPSG:4479）。坐标的增减直接等同于现实物理世界中“米”的位移。可以直接使用几何公式进行缓冲区 (Buffer) 分析或距离计算。
+
+
 ## 通用
 ### EPSG:4326
 https://epsg.io/4326
@@ -262,23 +282,35 @@ https://epsg.io/3857
 **说明**
 - web mapping standard CRS.
 
+
+## CGCS2000 基础/不分带坐标系
+
+在处理全国性数据时，常常需要脱离三度带的限制，以下是官方定义的 3 种基础参照系，注意它们的维度与单位区别：
+
 ### EPSG:4490
 https://epsg.io/4490
-> China Geodetic Coordinate System 2000
-> 
-> Unit: degree (supplier to define representation)
-> Geodetic CRS: China Geodetic Coordinate System 2000
-> Datum: China 2000
-> Ellipsoid: CGCS2000
+> China Geodetic Coordinate System 2000 (2D)
+> - **类型**: 地理坐标系 (Geographic 2D)
+> - **UoM**: degree (度)
+> - **说明**: WebGIS 开发中最常用的 CGCS2000 经纬度标准。全中国通用，无分带概念。
 
+### EPSG:4480
+https://epsg.io/4480
+> China Geodetic Coordinate System 2000 (3D)
+> - **类型**: 地理坐标系 (Geographic 3D)
+> - **UoM**: degree, degree, metre.
+> - **说明**: 在 4490 的经纬度基础上，增加了椭球高 (Ellipsoidal height)。水平单位为度，垂直高度单位为米。
 
 ### EPSG:4479
 https://epsg.io/4479
-> China Geodetic Coordinate System 2000
-> 地心空间直角坐标系 (Geocentric Cartesian)
-> Unit: metre
-> Geodetic CRS: China Geodetic Coordinate System 2000
+> China Geodetic Coordinate System 2000 (Geocentric)
+> - **类型**: 地心空间直角坐标系 (Geocentric)
+> - **UoM**: m (米)
+> - **说明**: 以地球质心为原点的三维空间坐标 (X, Y, Z)。
 
+
+> **⚠️ 提示**：
+> 官方 EPSG 库中**不存在**“全国通用、不分带、且单位为米的平面投影”代码。如果需要处理米制的工程平面坐标（6/7位数），必须明确其所在的投影带，并使用对应的分带代码（如 4547 等）。
 
 ## CGCS2000投影-三度带
 

@@ -7,5 +7,6 @@
   "useMarkdownLinks": true,
   "showUnsupportedFiles": true,
   "strictLineBreaks": true,
-  "spellcheck": false
+  "spellcheck": false,
+  "livePreview": true
 }
