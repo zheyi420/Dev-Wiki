@@ -49,6 +49,35 @@ cd -
 ```
 
 
+# WSL2 中使用
+
+
+## WSL2 复用 Windows Git 凭据管理器
+
+在 WSL2 中，如果 Windows 侧已通过 Git Bash 配置好凭据管理器（凭据已保存在 Windows 凭据管理器中），可以直接让 WSL2 的 Git 调用 Windows 的 `git-credential-manager.exe`，无需重新输入 Token。
+
+```bash
+git config --global credential.helper "/mnt/c/'Program Files'/Git/mingw64/bin/git-credential-manager.exe"
+```
+
+> **注意路径中的空格处理**：Windows 路径 `C:\Program Files\...` 在 WSL2 中映射为 `/mnt/c/Program Files/...`。由于路径包含空格，需要用单引号将 `Program Files` 括起来，否则 shell 会将其解析为两个参数，导致 `No such file or directory` 错误。
+
+验证配置：
+
+```bash
+git config --list --global | grep credential
+# 应输出：
+# credential.helper=/mnt/c/'Program Files'/Git/mingw64/bin/git-credential-manager.exe
+
+git push
+# 应直接推送成功，无需再次输入用户名/密码
+```
+
+常见问题：
+
+- **报错 `/mnt/c/Program: not found`**：说明空格未正确处理，请使用 `/mnt/c/Program Files/...` 格式。
+- **Windows 凭据管理器中没有记录**：先在 Windows Git Bash 中执行一次 `git push` 并输入 Token，让凭据被保存后，WSL2 侧才能复用。
+
 # ⚠ fatal
 
 ## Failed to connect to github.com port 443: Timed out
