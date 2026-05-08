@@ -123,7 +123,20 @@ claude --version
 
 ---
 
-## 第五步：配置硅基流动 API
+
+## 第五步：配置第三方 API
+
+### 机制说明
+
+Claude Code 通过 `~/.claude/settings.json` 中的三个字段实现第三方 API 接入：
+
+| 字段 | 作用 |
+|------|------|
+| `apiKeyHelper` | 指向一个脚本，Claude Code 启动时执行该脚本获取 API Key |
+| `ANTHROPIC_BASE_URL` | 将所有 API 请求重定向到第三方端点，替代 Anthropic 官方地址 |
+| `ANTHROPIC_MODEL` | 设置默认模型名称 |
+
+> `ANTHROPIC_BASE_URL` 是全局生效的，配置后无论启动时使用哪个模型、会话中通过 `/model` 切换到哪个模型，**所有请求都走第三方 API**，不会回落到 Anthropic 官方。
 
 ### 5.1 创建 API Key 文件
 
@@ -132,7 +145,7 @@ mkdir -p ~/.claude
 
 cat > ~/.claude/api-key-helper.sh << 'EOF'
 #!/bin/bash
-echo sk-xxxx你的硅基流动密钥
+echo sk-xxxx你的第三方API密钥
 EOF
 
 chmod +x ~/.claude/api-key-helper.sh
@@ -140,17 +153,50 @@ chmod +x ~/.claude/api-key-helper.sh
 
 ### 5.2 创建 settings.json
 
+以**硅基流动**为例：
+
 ```bash
 cat > ~/.claude/settings.json << EOF
 {
   "apiKeyHelper": "/home/$(whoami)/.claude/api-key-helper.sh",
   "env": {
     "ANTHROPIC_BASE_URL": "https://api.siliconflow.cn",
-    "ANTHROPIC_MODEL": "Pro/moonshotai/Kimi-K2.5"
+    "ANTHROPIC_MODEL": "Pro/moonshotai/Kimi-K2.6",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "Pro/moonshotai/Kimi-K2.6",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "Pro/zai-org/GLM-5.1",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "Pro/moonshotai/Kimi-K2.5"
   }
 }
 EOF
 ```
+
+运行切换模型情况如下图
+
+![](assets/Pasted%20image%2020260508222451.png)
+
+完整的三个环境变量对应关系如下：
+
+| 废弃变量                         | 现用变量                             | 作用             |
+| ---------------------------- | -------------------------------- | -------------- |
+| `ANTHROPIC_MODEL`            | 未变                               | 主模型            |
+| `ANTHROPIC_SMALL_FAST_MODEL` | `ANTHROPIC_DEFAULT_HAIKU_MODEL`  | 后台轻量任务模型       |
+| ——                           | `ANTHROPIC_DEFAULT_SONNET_MODEL` | Sonnet 别名指向的模型 |
+| ——                           | `ANTHROPIC_DEFAULT_OPUS_MODEL`   | Opus 别名指向的模型   |
+
+- **主模型**：处理主要对话和代码任务，由 `ANTHROPIC_MODEL` 控制  
+- **后台小模型**：处理摘要、文件分析等轻量任务，由 `ANTHROPIC_DEFAULT_HAIKU_MODEL` 控制  
+只设置 `ANTHROPIC_MODEL` 的话，后台小模型会回退到默认值（claude-haiku），若第三方提供商没有该模型名则会报错。
+
+
+其他兼容 OpenAI 格式的第三方提供商，只需替换 `ANTHROPIC_BASE_URL` 和 `ANTHROPIC_MODEL`：
+
+| 提供商 | ANTHROPIC_BASE_URL | 模型名格式示例 |
+|--------|--------------------|----------------|
+| 硅基流动 | `https://api.siliconflow.cn` | `Pro/moonshotai/Kimi-K2.5` |
+| DeepSeek 官方 | `https://api.deepseek.com` | `deepseek-chat` |
+| OpenRouter | `https://openrouter.ai/api/v1` | `anthropic/claude-3-5-sonnet` |
+
+> `ANTHROPIC_BASE_URL` 末尾不加 `/`，Claude Code 会自动追加路径。
 
 ### 5.3 验证配置文件
 
@@ -159,7 +205,7 @@ cat ~/.claude/api-key-helper.sh
 cat ~/.claude/settings.json
 ```
 
-确认 API Key 和用户名路径均正确。
+确认 API Key 和用户名路径均正确（`settings.json` 中不应出现字面量 `$(whoami)`，应已替换为实际用户名）。
 
 ---
 
@@ -217,7 +263,7 @@ nano ~/.claude/settings.json
 explorer.exe ~/.claude
 ```
 
-### 硅基流动常用模型
+### 硅基流动常用模型（ANTHROPIC_BASE_URL = https://api.siliconflow.cn）
 
 | 模型 | ANTHROPIC_MODEL 值 |
 |------|-------------------|
