@@ -1,3 +1,5 @@
+
+Cursor，VS Code 通用，修改用户 `settings.json` 
 ```json
 {
 	// "http.proxy": "http://127.0.0.1:10809",
