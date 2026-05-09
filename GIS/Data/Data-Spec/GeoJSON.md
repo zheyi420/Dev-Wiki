@@ -5,7 +5,7 @@
 		- https://www.rfc-editor.org/rfc/rfc7946.txt
 		- https://www.rfc-editor.org/rfc/rfc7946.html
 - https://geojson.org/
-- [[JSON]]
+- [JSON](/ConfigDataFile/JSON.md)
 - https://zh.wikipedia.org/wiki/GeoJSON
 ---
 

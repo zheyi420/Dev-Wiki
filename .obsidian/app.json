@@ -1,7 +1,7 @@
 {
   "defaultViewMode": "preview",
   "showLineNumber": true,
-  "newLinkFormat": "relative",
+  "newLinkFormat": "absolute",
   "attachmentFolderPath": "./assets",
   "readableLineLength": false,
   "useMarkdownLinks": true,
