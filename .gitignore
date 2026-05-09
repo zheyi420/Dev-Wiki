@@ -9,3 +9,7 @@
 # !.obsidian/app.json
 # !.obsidian/appearance.json
 # !.obsidian/core-plugins.json
+
+
+# claude 相关
+.claude/scheduled_tasks.lock
