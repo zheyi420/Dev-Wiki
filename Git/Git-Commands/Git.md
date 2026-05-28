@@ -1206,6 +1206,40 @@ git ls-files | grep "匹配名"
 	- 包含未跟踪的文件 `git stash show -p -u stash@{0}` （如果 stash 时用了 `-u`）
 	- 只查看某个文件的变更  `git diff stash@{0} -- path/to/file` 
 	- 对比 stash 与当前分支  `git diff stash@{0} HEAD` 
+- **存储指定文件（含未跟踪文件）**
+	- `git stash push --include-untracked -m "附带描述信息" -- src/1.js src/2.js`
+	- `--` 用于明确分隔选项与 pathspec，避免文件名被误解析为选项参数。
+	
+		```bash
+		21632@DESKTOP-37PC1UP MINGW64 /c/AIRace/Dev/Project/YunYanRuoYi-MICRO-FRONTEND_wt_develop (develop)
+		$ git stash push --include-untracked -m "热力图内存问题优化1" -- packages-map/map-plugins/src/event-heatmap-mvt-ol-plugin/core/HeatmapMvtWebGLLayer.ts packages-map/map-plugins/src/event-heatmap-mvt-ol-plugin/descriptor/descriptor.ts
+		Saved working directory and index state On develop: 热力图内存问题优化1
+		```
+- **查看 stash 内文件列表**
+	- 只看文件名（含未跟踪文件）：`git stash show --name-only --include-untracked stash@{0}` 
+	- 看文件名 + 变更状态（含未跟踪文件）：`git stash show --name-status --include-untracked stash@{0}` 
+		```bash
+		21632@DESKTOP-37PC1UP MINGW64 /c/AIRace/Dev/Project/YunYanRuoYi-MICRO-FRONTEND_wt_develop (develop)
+		$ git stash show --name-only --include-untracked stash@{0}
+		packages-map/map-plugins/src/event-heatmap-mvt-ol-plugin/AGENTS.md
+		packages-map/map-plugins/src/event-heatmap-mvt-ol-plugin/core/HeatmapMvtWebGLLayer.ts
+		packages-map/map-plugins/src/event-heatmap-mvt-ol-plugin/descriptor/descriptor.ts
+		packages-map/map-plugins/src/event-heatmap-mvt-ol-plugin/hooks/useHeatmapMvtOl.ts
+		packages-map/map-plugins/src/event-heatmap-mvt-ol-plugin/hooks/useHeatmapMvtOlLayer.ts
+		packages-map/map-plugins/src/event-heatmap-mvt-ol-plugin/libs/purgeVectorTileSourceCache.ts
+		
+		21632@DESKTOP-37PC1UP MINGW64 /c/AIRace/Dev/Project/YunYanRuoYi-MICRO-FRONTEND_wt_develop (develop)
+		$ git stash show --name-status --include-untracked stash@{0}
+		M       packages-map/map-plugins/src/event-heatmap-mvt-ol-plugin/AGENTS.md
+		M       packages-map/map-plugins/src/event-heatmap-mvt-ol-plugin/core/HeatmapMvtWebGLLayer.ts
+		M       packages-map/map-plugins/src/event-heatmap-mvt-ol-plugin/descriptor/descriptor.ts
+		M       packages-map/map-plugins/src/event-heatmap-mvt-ol-plugin/hooks/useHeatmapMvtOl.ts
+		M       packages-map/map-plugins/src/event-heatmap-mvt-ol-plugin/hooks/useHeatmapMvtOlLayer.ts
+		A       packages-map/map-plugins/src/event-heatmap-mvt-ol-plugin/libs/purgeVectorTileSourceCache.ts
+		
+		21632@DESKTOP-37PC1UP MINGW64 /c/AIRace/Dev/Project/YunYanRuoYi-MICRO-FRONTEND_wt_develop (develop)
+		```
+
 #### 高级用法
 
 - **部分文件存储**：如果只想暂存某些文件，可以先使用 `git add` 将不想暂存的文件添加到暂存区，然后使用：
