@@ -204,6 +204,47 @@ ssh -p 22 服务器用户名@xxx.xxx.xxx.xxx # -p 后面是端口
 - `du -s * | sort -nr`
   > 显示当前目录下各子目录及文件的大小，并从大到小排序。
 
+- 同时显示总大小 + 各子项大小，并按大小排序
+	- `du -h --max-depth=1 /usr/local/geoserver/data_dir/gwc/ws_test_mv_order_grid/ | sort -rh`
+	- `du -h --max-depth=1 /usr/local/geoserver/data_dir/gwc/ws_test_mv_order_grid/ | sort -rh > /tmp/du_result.txt &`
+
+**`&` 的含义：后台运行**
+
+在 Linux/Unix 中，命令末尾加 `&` 表示将该命令**放到后台执行**，终端会立即返回，你可以继续输入其他命令，不会被阻塞。
+
+执行后终端会输出类似：
+```
+[1] 12345
+```
+- `[1]` 是后台任务编号
+- `12345` 是该进程的 PID
+
+---
+
+**对比一下：**
+
+| 写法 | 效果 |
+|---|---|
+| `du ... > /tmp/du_result.txt` | 前台运行，终端**阻塞等待**，命令结束才能继续操作 |
+| `du ... > /tmp/du_result.txt &` | 后台运行，终端**立即返回**，可继续做其他事 |
+
+---
+
+**配合使用的常用命令：**
+
+```bash
+# 查看后台任务列表
+jobs
+
+# 查看任务是否还在跑（通过PID）
+ps aux | grep du
+
+# 结果出来后查看
+cat /tmp/du_result.txt
+```
+
+所以这条命令的完整含义是：**在后台执行 du 统计，把结果写入文件，终端不阻塞**，是专门针对"执行很久没返回"问题的解决方案。
+
 ### `df`
 > ➡ disk free
 > 以表格形式显示文件系统的使用情况。
