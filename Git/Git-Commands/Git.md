@@ -403,14 +403,14 @@ fa19989 dev@{3}: branch: Created from HEAD
 > Clone a repository into a new directory.
 > - https://git-scm.com/docs/git-clone
 
-- `git clone -b branch_name https://github.com/vuejs/vue.git`
+- `git clone -b branch_name https://github.com/vuejs/vue.git`  
 	将版本库**指定分支**克隆到新目录中。
-- `git clone -b main https://github.com/mapbox/geojson.io.git --depth=10 --single-branch`
-	将版本库**指定分支 - 指定深度**克隆到新目录中。
-	`--depth`
-		创建一个浅克隆，其历史记录截断到指定的提交次数。
-		除非给出 `--no-single-branch` 以获取所有分支顶端附近的历史，否则会隐含 `--single-branch`。
-	🔺会导致 git 本地配置 `remote.origin.fetch=+refs/heads/<指定分支>:refs/remotes/origin/<指定分支>` 而 fetch 不到其他分支。
+- `git clone -b main https://github.com/mapbox/geojson.io.git --depth=10 --single-branch`  
+	将版本库**指定分支 - 指定深度**克隆到新目录中。  
+	`--depth`  
+		创建一个浅克隆，其历史记录截断到指定的提交次数。  
+		除非给出 `--no-single-branch` 以获取所有分支顶端附近的历史，否则会隐含 `--single-branch`。  
+	🔺会导致 git 本地配置 `remote.origin.fetch=+refs/heads/<指定分支>:refs/remotes/origin/<指定分支>` 而 fetch 不到其他分支。  
 
 
 ### `git checkout`
