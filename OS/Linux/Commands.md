@@ -293,7 +293,7 @@ cat /tmp/du_result.txt
 ### `tail`
 
 - `tail -f file.log` 跟踪文件新增情况，`-f` 随着文件的增长，输出附加的数据。
-
+- `tail -n 100 文件路径` 查看文件最后 xxx 行内容
 
 ## Backup compression
 
