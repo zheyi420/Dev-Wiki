@@ -57,8 +57,8 @@
 | 00  | `[00-总览-从格网聚合到可查热区.md](/Blog/mvt-webgl_heatmap-ccl/00-总览-从格网聚合到可查热区.md)`       | 端到端架构、选型决策表、各篇导航                        |
 | 01  | `[01-数据层-双物化视图.md](/Blog/mvt-webgl_heatmap-ccl/01-数据层-双物化视图.md)`               | 为何两个 MV；格网标识与索引设计；源数据更新后的刷新顺序（正文章节，非标题） |
 | 02  | `[02-服务层-MVT瓦片与按需明细查询.md](/Blog/mvt-webgl_heatmap-ccl/02-服务层-MVT瓦片与按需明细查询.md)` | MVT + 瓦片缓存 + WFS 分工与原因                  |
-| 03  | `[03-前端-热力图WebGL渲染管线.md](/Blog/mvt-webgl_heatmap-ccl/03-前端-热力图WebGL渲染管线.md)`   | 不用内置 Heatmap；管线；瓦片融合                    |
-| 04  | `[04-前端-热区识别、计算与绘制.md](/Blog/mvt-webgl_heatmap-ccl/04-前端-热区识别、计算与绘制.md)`       | FBO 连通域；ImageCanvas 边界；点击与双 MV          |
+| 03  | `[03-前端-热力图WebGL渲染管线.md](/Blog/mvt-webgl_heatmap-ccl/03-前端-热力图WebGL渲染管线.md)`   | 不用内置 Heatmap；**OL 覆写表**（postProcesses / AsShaders）；管线；瓦片融合 |
+| 04  | `[04-前端-热区识别、计算与绘制.md](/Blog/mvt-webgl_heatmap-ccl/04-前端-热区识别、计算与绘制.md)`       | 承接 03 覆写后的热区能力；FBO+CCL；ImageCanvas 边界；点击与双 MV          |
 
 
 **本次 Agent 任务边界**：仅维护本 `AGENTS.md`；各篇 `.md` 正文由后续迭代撰写。
@@ -429,9 +429,25 @@ flowchart LR
 | 无瓦片生命周期                                         | 须处理瓦片加载/淘汰/CQL refresh            |
 
 
-**结论**：复用 `Heatmap.js` 内 **splat shader 数学** 与 **postProcesses gradient**，但挂载到 **矢量瓦片 WebGL 层**。
+**结论**：复用 `Heatmap.js` 内 **splat shader 数学** 与 **postProcesses gradient**，但挂载到 **矢量瓦片 WebGL 层**；**不能**直接 `new Heatmap({ source: vectorTileSource })`（类型与 renderer 路径均不匹配）。
 
-#### B. 渲染管线
+#### B. OL 覆写与扩展：原因与实现能力
+
+博文须用**对比表 + 1 段总结**讲清：本方案在哪些点**未使用** OL 开箱类/构造参数，而是通过**子类继承、复刻 Heatmap 管线、组装 postProcess** 才跑通；**勿**在本节展开 Overlay / ImageCanvas 等标准组合用法，**勿**展开 `readPixels`、`sourceTiles_` 等读内部状态细节（留给 04 篇识别管线一笔带过即可）。
+
+| 扩展点 | 未覆写 / 未扩展时的缺口（对照 `Heatmap.js` 或 `WebGLVectorTile`） | 本方案做法（概念级，不写仓库路径） | 覆写后实现的能力 |
+| --- | --- | --- | --- |
+| **不用 `ol/layer/Heatmap`** | 内置层绑定 `ol/source/Vector`，`createRenderer()` 走 `WebGLVectorLayerRenderer`；无矢量瓦片生命周期 | 以 `VectorTileSource` + `WebGLVectorTile` 为宿主，**复刻** Heatmap 的 splat 与 gradient 数学，而非实例化 `Heatmap` | 百万级格网**按视口分块**加载；CQL 变更仅 `source.refresh()`，由 GPU 每帧对当前有效瓦片集重绘融合 |
+| **`postProcesses` 全屏后处理** | `WebGLVectorTile` 公开 `Options` **未暴露** `postProcesses`；无后处理则 splat 仅累加 alpha，无法映射冷蓝→热红 | 自定义 `WebGLVectorTile` **子类**，覆写 `createRenderer()`，向 renderer 注入 `postProcesses_`（OL 10.6.x 最小侵入点；升级须回归字段名） | 与内置 Heatmap **同构**的「splat 加性混合 → gradient 纹理上色」；**同一 WebGL 层**产出可供 04 篇做 alpha 阈值的热力图画面（见 04 §B 衔接） |
+| **`AsShaders` 形式 style** | 公开类型将 `style` 收窄为 `FlatStyleLike`；Heatmap 实际走 `ShaderBuilder` + `AsShaders` 分支 | `buildHeatmapShaderStyle` 用公开 `ShaderBuilder` / `compileUtil` **复刻** `Heatmap.js#createRenderer` 中 splat GLSL；构造子类时以类型断言传入 | 按要素属性（格内工单数）计算 **per-feature weight**；`radius` / `blur` 以 uniform 注入，与调参面板联动 |
+| **gradient 纹理与 postProcess shader** | 内置 Heatmap 在 `createRenderer` 内闭包创建 `createGradient(colors)` 与 fragmentShader | `createHeatmapGradient` 复刻 1×256 色带 canvas；在图层选项中组装 `postProcesses`（`u_gradientTexture`、`u_opacity`） | 色带可配置；整体透明度可调；视觉与 GeoServer/产品色带对齐 |
+| **WebGL 层销毁** | `WebGLVectorTile` 须显式 `dispose()` 释放 GL context / FBO / postProcess 纹理，否则泄漏 | `removeLayer` 后调用 `webglLayer.dispose()`（公开 API） | 插件关闭 / 离页后 GPU 资源可回收；与 04 篇 FBO 管线生命周期一致 |
+
+**必写一段（原因 → 能力）**：内置 Heatmap 把「矢量全量 + splat + gradient」封在一层里；本方案数据在 **MVT 瓦片**上，必须把 Heatmap 的 **GPU 数学**拆出来绑到 **WebGLVectorTile**，并用子类补上官方未导出的 **postProcesses** 能力，才能得到**可瓦片化、可 CQL 刷新、可后处理上色**的热力层——这也是 04 篇热区识别能 threshold **屏幕所见 alpha** 的前提。
+
+**OL 版本锁定**：`postProcesses_` 注入依赖 `ol/renderer/webgl/Layer.js` 私有字段；`AsShaders` 断言依赖 `WebGLVectorTileLayerRenderer.applyOptions_` 运行时分支。博文须注明锁定 **OL 10.6.1**，升级须回归上述扩展点。
+
+#### C. 渲染管线
 
 ```mermaid
 flowchart TB
@@ -449,7 +465,7 @@ flowchart TB
 
 
 
-#### C. 新瓦片如何融入已有热力
+#### D. 新瓦片如何融入已有热力
 
 - **无手写 CPU 融合循环**
 - 每帧 WebGL 对 **当前有效瓦片集** 重新 splat 到同一 FBO，加性混合即「融合」
@@ -458,12 +474,10 @@ flowchart TB
 
 
 
-#### D. 其他重点
+#### E. 其他重点
 
-- 自定义 WebGL 矢量瓦片层子类注入 `postProcesses`（`WebGLVectorTile` 公开 options 未暴露时的最小扩展）
 - 权重归一化：`weightCapCnt` + 曲线，防止单格过大导致全图饱和
-- WebGL 销毁顺序：`removeLayer` → `layer.dispose()` → 手动释放 MVT 瓦片（`TileSource#clear()` 在 OL 10.6.x 为空实现）
-- OL 版本锁定：私有字段 `postProcesses_` 依赖 `ol/renderer/webgl/Layer.js`，升级须回归
+- 博文 **§B 覆写表** 已涵盖 `postProcesses` 子类与 `AsShaders`；本节仅补充调参与生命周期，**不重复**展开标准 `VectorTileSource` / `MVT` 用法
 
 **核心伪代码（splat，等价 Heatmap.js 思路）**：
 
@@ -473,13 +487,14 @@ float t = smoothstep(0., 1., (1. - length(coordsPx * 2. / quadSize)) * blurSlope
 gl_FragColor = vec4(t * weight, ...);
 ```
 
-**交叉引用**：02（WMTS/CQL）、04（同一 WebGL 层 FBO 供 readback）。
+**交叉引用**：02（WMTS/CQL）、04（§B 承接 03 覆写后的热区识别与标注）。
 
 **DoD**：
 
-- [ ] Heatmap.js vs WebGLVectorTile 对比表
-- [ ] 渲染管线 mermaid + 瓦片融合说明
-- [ ] ≥1 段 OL 源码三段论（Heatmap `createRenderer`）
+- [ ] Heatmap.js vs WebGLVectorTile 对比表（§A）
+- [ ] **OL 覆写与扩展表**（§B）：原因 + 覆写后能力，含 postProcesses 子类与 AsShaders 复刻
+- [ ] 渲染管线 mermaid + 瓦片融合说明（§C–§D）
+- [ ] ≥1 段 OL 源码三段论（Heatmap `createRenderer` 与 WebGLVectorTile 缺口）
 - [ ] 无插件路径
 
 ---
@@ -496,10 +511,23 @@ gl_FragColor = vec4(t * weight, ...);
 
 - 热区是 **splat 晕染后的视觉连通区域**，不是格网中心点的 GIS 邻接
 - 阈值划在 **GPU 上色后的 alpha** 上，标注与屏幕所见一致
+- **与 03 覆写的衔接**：若 03 未通过子类注入 `postProcesses` 完成 gradient 上色，则没有与屏幕一致的「上色后 alpha」语义；若退回内置 `Heatmap` + 全量 `Vector`，则无法承载 MVT 瓦片规模。04 篇的识别管线**建立在 03 §B 覆写后的同一 WebGL 热力层之上**，而非另建一套几何聚类。
 
+#### B. 承接 03 覆写后的热区能力
 
+博文须说明：**热区识别不是 OL 开箱能力**，而是 03 篇覆写链路在 CPU 侧的延伸。用下表写清「覆写 → 能力」，**勿**在本节展开 `readPixels` / `renderer.helper` / `sourceTiles_` 等实现细节（识别管线 mermaid 可保留节点名，正文一笔带过即可）。
 
-#### B. 识别管线
+| 03 覆写 / 扩展（见 03 §B） | 04 篇由此得到的能力 | 说明（概念） |
+| --- | --- | --- |
+| `postProcesses` + gradient 上色 | **视觉一致的热区阈值** | `regionAlphaThreshold` 作用在 postProcess 之后的 alpha，CCL 掩膜与用户所见「热斑」同源 |
+| splat + 瓦片级 GPU 融合 | **连通域边界贴合晕染** | 热区轮廓来自像素域 8-连通，而非格网 Voronoi/多边形并集 |
+| MVT + `AsShaders` weight | **热区合计工单数** | 连通域内按 label 聚合当前帧格网的 `格内工单数`（与 splat 权重同源数据） |
+| 同一 `HeatmapMvtWebGLLayer` 实例 | **缩放 / CQL 后标注与热力同步** | `moveend` / `tileloadend` 触发重绘后重新识别；CQL 切换时先 invalidate 再 refresh 的时序与 03 瓦片语义一致 |
+| 掩膜缓存 + `cpuOnly` 路径 | **仅改阈值时快速重算** | 热区阈值调参可只重跑 CCL，不必重拉 MVT（依赖已捕获的 alpha 掩膜；实现细节不写） |
+
+**必写一段**：03 解决「瓦片化热力怎么画」；04 解决「画出来的热斑怎么标、怎么点」。二者共享**同一覆写后的 WebGL 层**；若产品只做格网中心点聚类而不走 postProcess alpha，则与 splat 视觉脱节——这是本系列坚持 FBO 掩膜路径的**产品原因**，不是 OL API 演示。
+
+#### C. 识别管线
 
 ```mermaid
 flowchart TB
@@ -517,10 +545,7 @@ flowchart TB
 
 **CCL**：对二值/alpha 掩膜做 8-连通域标注。博文须用 1–2 段话说明：输入为阈值化掩膜、输出为 label 图（背景为 0）、8-连通与 4-连通的区别。外部引用推荐 [炸鸡人博客 · 二值图像的连通域标记](https://zhajiman.github.io/post/connected_component_labelling/)（Seed-Filling / Two-Pass 讲解 + Python 示例）；4/8 邻接概念可辅以 [火山引擎 · 连通域的原理与 Python 实现](https://developer.volcengine.com/articles/7385112150811656242)。本方案在浏览器侧用 BFS（等价 Seed-Filling 的 8 邻域蔓延）实现，**不必**调用 OpenCV / scipy 等库 API。
 
-**为何从当前帧 MVT 瓦片采集格网计数**：
-
-- 须与 WebGL 渲染同一 **sourceZ**、同一 **CQL URL**
-- 避免 refresh 后旧 CQL 瓦片残留导致重复计数
+**格网计数采集（一笔带过）**：须与 WebGL 当前帧同一 sourceZ、同一 CQL；避免 refresh 后旧瓦片重复计数——**不写** `sourceTiles_` 遍历实现。
 
 **性能分级**：
 
@@ -529,7 +554,7 @@ flowchart TB
 
 
 
-#### C. 绘制
+#### D. 绘制
 
 
 | 能力      | 实现                                        | 为何                |
@@ -540,7 +565,7 @@ flowchart TB
 
 
 
-#### D. 为何使用 `ImageCanvasSource` 绘制热区边界
+#### E. 为何使用 `ImageCanvasSource` 绘制热区边界
 
 对照 `ol/source/ImageCanvas.js` 三段论：
 
@@ -559,31 +584,32 @@ flowchart TB
 
 
 
-#### E. 其他难点（checklist 级须在正文展开）
+#### F. 其他难点（checklist 级须在正文展开）
 
-- **sourceZ 对齐**：统计用 sourceZ 必须与 WebGL 矢量瓦片渲染一致
-- **CQL 切换后标注短暂归零**：先 invalidate 清空 → 瓦片 refresh → `tileloadend` 后再 readback（预期时序，非缺陷）
+- **sourceZ 对齐**：统计用 sourceZ 必须与 WebGL 矢量瓦片渲染一致（与 03 瓦片融合语义一致）
+- **CQL 切换后标注短暂归零**：先 invalidate 清空 → 瓦片 refresh → `tileloadend` 后再识别（预期时序，非缺陷；与 03 `source.refresh()` 联动）
 - **Overlay z-index**：圆标、高亮、定位闪烁的层叠顺序
 - **比例尺门控**：热区可点击需视图不小于某比例尺（如 1:20000）
 
 **勿写**：空间交互锁（测量/标绘互斥）— 非本系列目标。
 
-#### F. 热区点击查询（回扣数据层）
+#### G. 热区点击查询（回扣数据层）
 
 - 点击圆标 → WFS `关联格网标识 IN (...)` → 打开工单列表
 - 说明此路径如何依赖 **01 双 MV** 设计（明细 MV 存关联格网标识）
 
 **非目标**：筛选条、视口蓝标、调参面板、右栏列表。
 
-**交叉引用**：01（双 MV、格网标识）、03（同一 WebGL 层 FBO）。
+**交叉引用**：01（双 MV、格网标识）、03（§B 覆写表、同一 WebGL 层 FBO / postProcess 语义）。
 
 **DoD**：
 
-- [ ] 识别管线 mermaid + CCL 外部引用
-- [ ] ImageCanvas 三段论 + 对比表
-- [ ] 热区点击与双 MV 回扣
+- [ ] 03 覆写衔接说明（§A–§B）+ **承接覆写后的热区能力表**
+- [ ] 识别管线 mermaid + CCL 外部引用（§C）
+- [ ] ImageCanvas 三段论 + 对比表（§E）
+- [ ] 热区点击与双 MV 回扣（§G）
 - [ ] ≥2 张 mermaid
-- [ ] 无空间交互锁章节
+- [ ] 无空间交互锁章节；**无** `sourceTiles_` / `readPixels` 实现展开
 
 ---
 
@@ -726,8 +752,8 @@ return new WebGLVectorLayerRenderer(this, {
 | 00  | 端到端图 + 选型表 + 导航链接                            |
 | 01  | 双 MV 表 + 索引设计 + 刷新顺序图 + 示例 SQL + 格网标识/MVT id |
 | 02  | CRS 对齐 + Seed bbox 原则 + MVT/WFS 分工           |
-| 03  | 不用 Heatmap 论证 + 渲染管线 + 瓦片融合                  |
-| 04  | FBO+CCL 管线 + ImageCanvas 三段论 + 热区点击回扣 01     |
+| 03  | 不用 Heatmap 论证 + **§B OL 覆写表** + 渲染管线 + 瓦片融合                  |
+| 04  | **承接 03 覆写能力表** + FBO/CCL 管线 + ImageCanvas 三段论 + 热区点击回扣 01     |
 
 
 ---
