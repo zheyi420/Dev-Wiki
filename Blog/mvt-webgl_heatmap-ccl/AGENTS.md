@@ -14,7 +14,7 @@
 | 阶段     | 能力                                                               |
 | ------ | ---------------------------------------------------------------- |
 | 数据     | 双物化视图：格网聚合 + 工单明细；源数据更新后有明确刷新顺序                                  |
-| 服务     | MVT 矢量瓦片（热力）+ GWC WMTS 缓存 + WFS（按需明细）                            |
+| 服务     | MVT 矢量瓦片（热力）+ GWC WMTS 缓存 + **MVT GetTile 输出属性裁剪**（PBF 仅格内工单数 + 格网标识 fid）+ WFS（按需明细） |
 | 前端（渲染） | 自定义 WebGL 矢量瓦片层 + splat shader + gradient 后处理                    |
 | 前端（热区） | FBO readback → 8-连通域标注（CCL）→ Overlay / ImageCanvas 绘制 → 热区点击 WFS |
 
@@ -56,7 +56,7 @@
 | --- | ------------------------------------------------------------------------------ | --------------------------------------- |
 | 00  | `[00-总览-从格网聚合到可查热区.md](/Blog/mvt-webgl_heatmap-ccl/00-总览-从格网聚合到可查热区.md)`       | 端到端架构、选型决策表、各篇导航                        |
 | 01  | `[01-数据层-双物化视图.md](/Blog/mvt-webgl_heatmap-ccl/01-数据层-双物化视图.md)`               | 为何两个 MV；格网标识与索引设计；源数据更新后的刷新顺序（正文章节，非标题） |
-| 02  | `[02-服务层-MVT瓦片与按需明细查询.md](/Blog/mvt-webgl_heatmap-ccl/02-服务层-MVT瓦片与按需明细查询.md)` | MVT + 瓦片缓存 + WFS 分工与原因                  |
+| 02  | `[02-服务层-MVT瓦片与按需明细查询.md](/Blog/mvt-webgl_heatmap-ccl/02-服务层-MVT瓦片与按需明细查询.md)` | 查询层 vs 输出层；**MVT 属性裁剪**与瓦片体积优化；MVT/WFS 分工 |
 | 03  | `[03-前端-热力图WebGL渲染管线.md](/Blog/mvt-webgl_heatmap-ccl/03-前端-热力图WebGL渲染管线.md)`   | 不用内置 Heatmap；**OL 覆写表**（postProcesses / AsShaders）；管线；瓦片融合 |
 | 04  | `[04-前端-热区识别、计算与绘制.md](/Blog/mvt-webgl_heatmap-ccl/04-前端-热区识别、计算与绘制.md)`       | 承接 03 覆写后的热区能力；FBO+CCL；ImageCanvas 边界；点击与双 MV          |
 
@@ -110,7 +110,7 @@
 
 | 主题 | 相对路径 |
 | --- | --- |
-| Vector Tiles（MVT） | `extensions/vectortiles/index.html` |
+| Vector Tiles（MVT） | `extensions/vectortiles/index.html`（含 **Customize attributes** 概念，用于输出属性裁剪） |
 | GeoWebCache | `geowebcache/index.html` |
 | WFS | `services/wfs/index.html` |
 | CQL / ECQL | `tutorials/cql/cql_tutorial.html` |
@@ -151,6 +151,8 @@
 
 **聚合键语义**：`(格心坐标, 发生年份, 事项专题, 业务场景, 所属区县)` 唯一确定一行格网记录。
 
+> **库表 vs MVT 输出**：上表四维度筛选列存在于格网 MV 与 **CQL 查询层**；**不出现在** MVT PBF properties（见 **§3.4**、02 篇「MVT 属性裁剪」）。
+
 ### 3.2 工单明细物化视图（WFS 数据源）
 
 
@@ -171,11 +173,27 @@
 
 | 抽象名   | 含义                       |
 | ----- | ------------------------ |
-| 筛选表达式 | 专题/场景/年份/区县多选组合的服务端 ECQL |
+| 筛选表达式 | 专题/场景/年份/区县多选组合的服务端 ECQL（列名在查询层；**不**从瓦片 properties 读取） |
 | 热力权重  | 格内工单数经上限归一化后的 splat 强度   |
 | 热区阈值  | GPU 上色后 alpha 达到「算热区」的门槛 |
 | 热区合计  | 连通域内归属格网的工单数之和           |
 | 连通域标签 | CCL 算法输出的像素域 ID（labelId） |
+
+
+### 3.4 MVT 瓦片输出契约（与库表分离）
+
+博文须区分 **PostGIS / CQL 查询层** 与 **GetTile PBF 输出层**；勿让读者误以为瓦片内携带格网 MV 全部列。
+
+
+| 抽象概念 | 博文表述 |
+| --- | --- |
+| 库表 / CQL 查询层 | 格网聚合物化视图仍含四维度筛选列 + 格内工单数 + 格网标识；`CQL_FILTER` 仍引用四维度列名 |
+| MVT PBF properties | **仅**「格内工单数」 |
+| MVT feature id | 「格网标识」（整型） |
+| 前端不得假设 | 从瓦片 properties 读取发生年份 / 事项专题 / 业务场景 / 所属区县 |
+| 工单明细 | 热区点击、列表详情走 **独立 WFS 图层**（工单明细物化视图），不受热力 MVT 裁剪影响 |
+
+**写作提示**：GeoServer 图层 **Customize attributes**（概念，见 02 篇 §8）仅勾选「格内工单数」；格网标识作 Identifier/fid。发布配置变更后须**失效并重预热服务端瓦片缓存**（概念一句，不写 Truncate/Seed 手册）。
 
 
 ---
@@ -273,6 +291,7 @@ flowchart TB
   - [GeoServer 2.24.x · Vector Tiles](https://docs-archive.geoserver.org/2.24.x/en/user/extensions/vectortiles/index.html)（全文 GeoServer 引用见 **§2.2.1**）
   - 社区讨论：合成字符串 FID 无法映射为 MVT 数字 id 的问题（搜索关键词：`geoserver mvt numeric id`）
 - **结论**：格网聚合物化视图须物化 **整型格网标识** 列，并在发布层配置为 Identifier
+- **库表 ≠ PBF**：格网 MV **库内仍物化**四维度列供 CQL；**不等于** MVT 瓦片内携带这些列（详见 02 篇「MVT 属性裁剪」）
 
 
 
@@ -288,7 +307,7 @@ flowchart TB
 | 空间索引            | 格心坐标                      | 加速 MV 构建时的空间聚合、extent 统计与库内排查                                                                  |
 | 复合 / 单列 B-tree  | 发生年份、事项专题、业务场景、所属区县       | 与前端 ECQL 筛选维度对齐，加速带筛选条件的查询与校验                                                                  |
 | **唯一**索引        | 格网标识                      | MVT 数字 feature id、热区 `关联格网标识 IN (...)` 反查；`REFRESH` 后标识稳定依赖物化列 + 唯一约束语义                        |
-| **不建**业务聚合键唯一索引 | `(格心, 年份, 专题, 场景, 区县)` 组合 | 业务键在 `GROUP BY` 下已逻辑唯一，但**不宜**再暴露为库表 UNIQUE 供 GeoServer 误推主键；格网标识列单独承担 Identifier（与 §C、02 篇呼应） |
+| **不建**业务聚合键唯一索引 | `(格心, 年份, 专题, 场景, 区县)` 组合 | 业务键在 `GROUP BY` 下已逻辑唯一，但**不宜**再暴露为库表 UNIQUE 供 GeoServer 误推主键；格网标识列单独承担 Identifier（与 §C、02 篇呼应）。误建该 UNIQUE 会导致 GeoServer **非预期**仅输出格内工单数（**故障**，与 02 篇主动 **Customize attributes** 裁剪区分） |
 
 
 **工单明细物化视图**
@@ -376,6 +395,20 @@ REFRESH MATERIALIZED VIEW CONCURRENTLY 工单明细物化视图;
 5. **格网标识作为 MVT feature id**：与 01 呼应；支撑热区 `关联格网标识 IN (...)`
 6. **WFS 独立图层**：热区点击 / 按需 BBOX；不把全量明细列塞进 MVT
 7. **bbox 门控**：数据范围外 `tileUrlFunction` 返回空，不请求瓦片
+8. **MVT 属性裁剪（查询层 vs 输出层）**：
+  - **问题**：低 zoom（如 z=8）密集格网瓦片体积大、传输慢、GWC 磁盘占用高；根因之一是 PBF 内每个 feature 重复携带四列字符串筛选属性，而前端热力**不读取**这些字段
+  - **原则**：**查询层全列、输出层瘦身** — CQL 在 GeoServer 查询层过滤；PBF 只带 splat 权重与反查必需的格网标识 fid
+  - **手段（概念）**：图层 **Customize attributes**（GeoServer 2.24.x Vector Tiles，见 **§2.2.1**）仅保留「格内工单数」；格网标识继续作 Identifier / feature id（不写管理页逐步截图级 SOP）
+  - **缓存一致性（概念一句）**：发布配置变更后，**须失效并重预热服务端瓦片缓存**，否则 GWC 仍可能返回含旧属性的瓦片 — **不写** Truncate/Seed 命令与矩阵（遵守 §2.1）
+  - **主动裁剪 vs 故障**（必写对比表）：
+
+| 情形 | 原因 | 是否预期 |
+| --- | --- | --- |
+| 业务聚合键 UNIQUE 索引导致属性只剩格内工单数 | GeoServer 误隐藏列 | **故障**（见 01 §D） |
+| Customize attributes 仅勾选格内工单数 | 主动减小 PBF 体积 | **预期** |
+
+  - **效果（博文可写量级，勿写宿主机路径）**：GWC 某 zoom 段目录总量可由约 **54MiB 降至约 16MiB**；z=8 单瓦片簇可由约 **6.5MiB 降至约 4.8MiB**；**初始化低 zoom 改善最明显**
+  - **前端契约**：热力权重 ← PBF properties「格内工单数」；热区 WFS ← feature id「格网标识」；四维度筛选 ← URL `CQL_FILTER`（**不读**瓦片 properties）
 
 **必配图**：
 
@@ -393,9 +426,32 @@ flowchart LR
   gs --> orderMV
 ```
 
+**查询层 vs 输出层（必配图 2）**：
+
+```mermaid
+flowchart TB
+  subgraph queryLayer [查询层]
+    gridMV[(格网聚合物化视图全列)]
+    cql[CQL_FILTER四维度]
+  end
+  subgraph outputLayer [MVT输出层]
+    pbf[PBF properties仅格内工单数]
+    fid[fid格网标识]
+  end
+  subgraph clientSide [客户端]
+    splat[WebGL splat权重]
+    wfs[WFS grid_id IN]
+  end
+  gridMV --> cql
+  cql --> pbf
+  cql --> fid
+  pbf --> splat
+  fid --> wfs
+```
 
 
-**交叉引用**：01（格网标识、刷新）、03（瓦片 URL / refresh）、04（WFS 点击）。
+
+**交叉引用**：01（格网标识、索引故障区分）、03（瓦片解码仅读格内工单数 + fid）、04（WFS 点击）。
 
 **外部文档**：GeoServer MVT / GWC / WFS / CQL 说明引用 **§2.2.1**（锁定 [2.24.x User Manual](https://docs-archive.geoserver.org/2.24.x/en/user/)）。
 
@@ -404,6 +460,10 @@ flowchart LR
 - [ ] CRS 与 GridSet 对齐动机讲清
 - [ ] Seed bbox 原则（无操作手册）
 - [ ] MVT vs WFS 分工表
+- [ ] **查询层 vs 输出层**对照 + **主动裁剪 vs 故障**区分表（§8）
+- [ ] MVT 输出契约（仅格内工单数 property + 格网标识 fid，见 §3.4）
+- [ ] 瓦片体积优化动机与量级示例（无宿主机/IP）
+- [ ] 缓存失效概念一句（无 Truncate/Seed 手册）
 - [ ] GeoServer 外链落在 2.24.x 归档域（§2.2.1）
 - [ ] 无图层名/工作空间名
 
@@ -470,6 +530,7 @@ flowchart TB
 - **无手写 CPU 融合循环**
 - 每帧 WebGL 对 **当前有效瓦片集** 重新 splat 到同一 FBO，加性混合即「融合」
 - CQL 变更：仅 `source.refresh()`，OL 重拉视口瓦片并重绘
+- **MVT 契约**：瓦片解码后前端**只消费**「格内工单数」（splat weight）与 feature id（格网标识）；四维度筛选**不读**瓦片 properties，与 02 篇「MVT 属性裁剪」一致
 - **错误方案对比**：在 CPU 侧合并各瓦片 feature 缓存 — 与 GPU 帧语义不一致、易与 sourceZ/CQL 错位
 
 
@@ -487,7 +548,7 @@ float t = smoothstep(0., 1., (1. - length(coordsPx * 2. / quadSize)) * blurSlope
 gl_FragColor = vec4(t * weight, ...);
 ```
 
-**交叉引用**：02（WMTS/CQL）、04（§B 承接 03 覆写后的热区识别与标注）。
+**交叉引用**：02（WMTS/CQL、**MVT 属性裁剪契约**）、04（§B 承接 03 覆写后的热区识别与标注）。
 
 **DoD**：
 
@@ -717,14 +778,17 @@ return new WebGLVectorLayerRenderer(this, {
 
 1. 格网预聚合：点 → 格心 + 计数
 2. MVT 矢量瓦片：按 z/x/y 分块 Mapbox Vector Tile
-3. GWC WMTS + CQL_FILTER：参数化瓦片缓存键
-4. WebGL splat + 加性混合：多瓦片权重叠加
-5. Gradient post-pass：累积 alpha → 伪彩色
-6. 瓦片 sourceZ：OL 为 overzoom 选择的源级 z，统计须对齐
-7. FBO readback：GPU 结果 CPU 化
-8. 8-连通域 CCL：像素级热区分割
-9. 双查询路径：热区 `格网标识 IN` vs 视口 `BBOX + 筛选`（后者非系列重点，可一句带过）
-10. 稳定格网标识：刷新后业务格不变则 ID 不变
+3. **MVT 属性裁剪**：查询层全列、PBF 输出仅格内工单数 + 格网标识 fid（Customize attributes）
+4. **查询层与输出层分离**：CQL 引用 MV 四维度列；瓦片 properties 不携带筛选列
+5. GWC WMTS + CQL_FILTER：参数化瓦片缓存键
+6. **GWC 缓存与 PBF 体积**：裁剪属性可显著降低磁盘占用与传输耗时（低 zoom 最明显）
+7. WebGL splat + 加性混合：多瓦片权重叠加
+8. Gradient post-pass：累积 alpha → 伪彩色
+9. 瓦片 sourceZ：OL 为 overzoom 选择的源级 z，统计须对齐
+10. FBO readback：GPU 结果 CPU 化
+11. 8-连通域 CCL：像素级热区分割
+12. 双查询路径：热区 `格网标识 IN` vs 视口 `BBOX + 筛选`（后者非系列重点，可一句带过）
+13. 稳定格网标识：刷新后业务格不变则 ID 不变
 
 ---
 
@@ -741,6 +805,7 @@ return new WebGLVectorLayerRenderer(this, {
 - [ ] 00 含 01–04 绝对路径导航
 - [ ] OL 非自带能力处均有源码三段论
 - [ ] 每篇 ≥2 mermaid + 核心对比表
+- [ ] 02 篇含 MVT 输出契约与属性裁剪动机（§3.4、4.2 §8）
 
 
 
@@ -751,7 +816,7 @@ return new WebGLVectorLayerRenderer(this, {
 | --- | -------------------------------------------- |
 | 00  | 端到端图 + 选型表 + 导航链接                            |
 | 01  | 双 MV 表 + 索引设计 + 刷新顺序图 + 示例 SQL + 格网标识/MVT id |
-| 02  | CRS 对齐 + Seed bbox 原则 + MVT/WFS 分工           |
+| 02  | CRS 对齐 + Seed bbox 原则 + **MVT 属性裁剪与瓦片契约** + MVT/WFS 分工 |
 | 03  | 不用 Heatmap 论证 + **§B OL 覆写表** + 渲染管线 + 瓦片融合                  |
 | 04  | **承接 03 覆写能力表** + FBO/CCL 管线 + ImageCanvas 三段论 + 热区点击回扣 01     |
 
