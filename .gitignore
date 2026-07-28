@@ -3,7 +3,7 @@
 .obsidian/plugins/*
 ## 排除文件
 .obsidian/community-plugins.json
-.obsidian/workspace.json
+.obsidian/workspace*.json
 .obsidian/graph.json
 ## 单独保留某个文件
 # !.obsidian/app.json
@@ -13,3 +13,9 @@
 
 # claude 相关
 .claude/scheduled_tasks.lock
+
+
+
+
+# Ignore Smart Environment folder
+.smart-env
