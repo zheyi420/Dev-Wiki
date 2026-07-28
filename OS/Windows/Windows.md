@@ -40,6 +40,7 @@
         - 官网下载地址 https://www.getpaint.net/download.html
         - 免费版本下载地址 https://www.dotpdn.com/downloads/pdn.html
     - win10 自带的画图3D
+- [Windows 包管理器：Winget / Scoop / Chocolatey](/OS/Windows/Windows-包管理器.md)
 
 # Case
 
