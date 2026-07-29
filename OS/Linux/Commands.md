@@ -38,6 +38,26 @@ nohup <java编译器地址> -jar XXX.jar --spring.profiles.active=prd > log.log 
 ssh -p 22 服务器用户名@xxx.xxx.xxx.xxx # -p 后面是端口
 ```
 
+> `-p` 指定的是**远程主机 SSH 服务的端口**；远程 SSH 服务默认 `22`，未修改时可省略。`scp` 同样基于 SSH，但其端口参数是**大写 `-P`**，见下文。
+
+补充说明：
+
+- SSH 既是一种**安全协议**，也是一组程序：客户端程序为 `ssh`，服务端守护进程为 `sshd`。
+- `ssh` 用于**主动连接别人**（出站），`sshd` 用于**接受别人连接**（入站）。只装 `ssh` 时，本机能连其他主机，但其他主机无法 SSH 到本机。
+- Linux 通常默认自带 `ssh` 客户端，但 `sshd` 服务端不一定默认安装/启用（如 Ubuntu Desktop 需手动安装 `openssh-server`）。
+- 一台主机只需**一个 `sshd` 进程**即可同时监听多个端口，在 `/etc/ssh/sshd_config` 中写多个 `Port` 后重启服务即可：
+  ```bash
+  Port 22
+  Port 2222
+  ```
+
+方向对照：
+
+| 方向 | 能否 SSH | 说明 |
+|---|---|---|
+| 本机 → 其他主机 | ✅ 可以 | 用 `ssh user@remote` 主动连接远程的 `sshd` |
+| 其他主机 → 本机 | ❌ 不可以 | 本机没有监听端口的服务，连接会被拒绝或超时 |
+
 
 
 ## User management
@@ -105,9 +125,29 @@ ssh -p 22 服务器用户名@xxx.xxx.xxx.xxx # -p 后面是端口
 
 ### `scp`
 
-- 跨域复制文件
-	- `scp local_file remote_username@remote_ip:remote_file`
-	- `scp test.csv root@172.24.160.1:/home/jarvismusk/`
+> Secure Copy，基于 SSH 在本地与远程主机之间安全复制文件。
+
+常用示例：
+
+```bash
+# 1. 上传本地文件到远程主机
+scp /path/to/local/file.txt user@remote_host:/path/to/remote/
+
+# 2. 从远程主机下载文件到本地
+scp user@remote_host:/path/to/remote/file.txt /path/to/local/
+```
+
+其他常见用法：
+
+```bash
+# 递归复制整个目录
+scp -r /path/to/local/dir user@remote_host:/path/to/remote/
+
+# 指定端口（注意 scp 使用大写 -P）
+scp -P 2222 /path/to/file.txt user@remote_host:/path/to/remote/
+```
+
+> 说明：`scp -P <port>` 指定的是**远程主机 SSH 服务的端口**，因为 `scp` 底层走 SSH。只有当远程 SSH 服务改成非默认端口（如 `2222`）时才需要显式指定。注意 `ssh` 用**小写 `-p`**，`scp` 用**大写 `-P`**。
 
 
 ### `cat`
