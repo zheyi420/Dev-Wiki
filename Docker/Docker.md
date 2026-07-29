@@ -76,9 +76,45 @@ Tutorial
 
 
 ## `docker ps`
+> List containers
 
-- 列出本地所有容器。
-	- `docker ps -a`
+- 列出本地容器
+	- `docker ps` — 只显示运行中的容器
+	- `docker ps -a` / `docker ps --all` — 显示所有容器（包括已停止的）
+
+- 通过 `--filter` / `-f` 过滤容器
+	- 按名称过滤
+		- `docker ps --filter name=nginx`
+		- 支持通配：`-f name=^/nginx`（完整名称匹配需带前导 `/`）
+	- 按容器状态过滤
+		- `docker ps --filter status=running`
+		- 可选状态：`created`、`restarting`、`running`、`removing`、`paused`、`exited`、`dead`
+	- 按镜像过滤（只显示基于某镜像启动的容器）
+		- `docker ps --filter ancestor=nginx`
+		- `docker ps --filter ancestor=nginx:latest`
+	- 按容器 ID 过滤
+		- `docker ps --filter id=abc123`
+	- 按退出码过滤（常用于查找异常退出的容器）
+		- `docker ps -a --filter exited=1`
+	- 按端口映射过滤
+		- `docker ps --filter publish=80`
+		- `docker ps --filter expose=8080`
+	- 按挂载卷过滤
+		- `docker ps --filter volume=/var/lib/mysql`
+	- 按标签（label）过滤
+		- `docker ps --filter label=env=prod`
+	- 按健康检查状态过滤
+		- `docker ps --filter health=healthy`
+	- 按启动先后过滤
+		- `docker ps -a --filter before=my_container`
+		- `docker ps -a --filter since=another_container`
+
+- 组合多个过滤条件（条件之间为“与”关系）
+	- `docker ps --filter name=nginx --filter status=running`
+
+- 使用 `grep` 在输出中二次筛选
+	- `docker ps -a | grep nginx`
+	- `docker ps -a | grep -E 'Exited|Created'`
 
 ## `docker images`
 
