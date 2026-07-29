@@ -15,7 +15,7 @@
 .claude/scheduled_tasks.lock
 
 
-
+copilot/
 
 # Ignore Smart Environment folder
 .smart-env
