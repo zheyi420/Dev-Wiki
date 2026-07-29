@@ -385,8 +385,9 @@ REFRESH MATERIALIZED VIEW CONCURRENTLY 工单明细物化视图;
 
 1. **为何 MVT 矢量瓦片**：格网为 Point 要素，按视口分块；比栅格 WMS 更适合动态 CQL 筛选
 2. **GWC WMTS + CQL_FILTER**：
-  - 固定 GridSet，与 **前端地图 CRS 一致**（如 EPSG:4490），尽可能避免前端重投影计算
+  - **GWC Tile Layer 的 GridSet 须与宿主地图 view 所用 CRS 一致**（`TILEMATRIXSET` / `projection` 与 OL `View` 对齐），无需瓦片在客户端重投影，减少计算开销
   - 筛选参数进入 URL，不同 ECQL 组合可独立缓存
+  - **写作约束**：博文**勿写死**某一 EPSG 代号；若需举例，可用「如 CGCS2000 / Web Mercator」等占位并注明「以宿主 CRS 为准」
 3. **Seed 范围（概念）**：
   - 须设置与实际业务数据范围一致的 **Bounding box**（可略宽于数据 extent，用于规避离群点撑大图层边框）
   - 避免对无数据区域 Seed，否则耗时长且产生无用瓦片
@@ -407,7 +408,7 @@ REFRESH MATERIALIZED VIEW CONCURRENTLY 工单明细物化视图;
 | 业务聚合键 UNIQUE 索引导致属性只剩格内工单数 | GeoServer 误隐藏列 | **故障**（见 01 §D） |
 | Customize attributes 仅勾选格内工单数 | 主动减小 PBF 体积 | **预期** |
 
-  - **效果（博文可写量级，勿写宿主机路径）**：GWC 某 zoom 段目录总量可由约 **54MiB 降至约 16MiB**；z=8 单瓦片簇可由约 **6.5MiB 降至约 4.8MiB**；**初始化低 zoom 改善最明显**
+  - **效果（博文可写，勿写宿主机路径 / GWC 目录 tree_stats）**：属性裁剪后**单瓦片 PBF 体积约减少 26%**（本项目实测）；低 zoom、格网密集瓦片收益更明显。勿引用 GWC 某 zoom 段目录总量或单环境磁盘快照作通用结论。
   - **前端契约**：热力权重 ← PBF properties「格内工单数」；热区 WFS ← feature id「格网标识」；四维度筛选 ← URL `CQL_FILTER`（**不读**瓦片 properties）
 
 **必配图**：
@@ -457,12 +458,12 @@ flowchart TB
 
 **DoD**：
 
-- [ ] CRS 与 GridSet 对齐动机讲清
+- [ ] GridSet 与宿主地图 CRS 对齐动机讲清（泛化表述，不写死 EPSG 代号）
 - [ ] Seed bbox 原则（无操作手册）
 - [ ] MVT vs WFS 分工表
 - [ ] **查询层 vs 输出层**对照 + **主动裁剪 vs 故障**区分表（§8）
 - [ ] MVT 输出契约（仅格内工单数 property + 格网标识 fid，见 §3.4）
-- [ ] 瓦片体积优化动机与量级示例（无宿主机/IP）
+- [ ] 瓦片体积优化动机与单瓦片缩减比例（约 26%）；禁止 GWC 目录 MiB / tree_stats 对比
 - [ ] 缓存失效概念一句（无 Truncate/Seed 手册）
 - [ ] GeoServer 外链落在 2.24.x 归档域（§2.2.1）
 - [ ] 无图层名/工作空间名
@@ -781,7 +782,7 @@ return new WebGLVectorLayerRenderer(this, {
 3. **MVT 属性裁剪**：查询层全列、PBF 输出仅格内工单数 + 格网标识 fid（Customize attributes）
 4. **查询层与输出层分离**：CQL 引用 MV 四维度列；瓦片 properties 不携带筛选列
 5. GWC WMTS + CQL_FILTER：参数化瓦片缓存键
-6. **GWC 缓存与 PBF 体积**：裁剪属性可显著降低磁盘占用与传输耗时（低 zoom 最明显）
+6. **GWC 缓存与 PBF 体积**：属性裁剪后单瓦片 PBF 约减 **26%**（实测）；低 zoom、格网密集瓦片收益更明显（勿写 GWC 目录 MiB 快照）
 7. WebGL splat + 加性混合：多瓦片权重叠加
 8. Gradient post-pass：累积 alpha → 伪彩色
 9. 瓦片 sourceZ：OL 为 overzoom 选择的源级 z，统计须对齐
@@ -816,7 +817,7 @@ return new WebGLVectorLayerRenderer(this, {
 | --- | -------------------------------------------- |
 | 00  | 端到端图 + 选型表 + 导航链接                            |
 | 01  | 双 MV 表 + 索引设计 + 刷新顺序图 + 示例 SQL + 格网标识/MVT id |
-| 02  | CRS 对齐 + Seed bbox 原则 + **MVT 属性裁剪与瓦片契约** + MVT/WFS 分工 |
+| 02  | **GridSet 与宿主地图 CRS 对齐**（泛化表述）+ Seed bbox 原则 + **MVT 属性裁剪与瓦片契约** + MVT/WFS 分工 |
 | 03  | 不用 Heatmap 论证 + **§B OL 覆写表** + 渲染管线 + 瓦片融合                  |
 | 04  | **承接 03 覆写能力表** + FBO/CCL 管线 + ImageCanvas 三段论 + 热区点击回扣 01     |
 
