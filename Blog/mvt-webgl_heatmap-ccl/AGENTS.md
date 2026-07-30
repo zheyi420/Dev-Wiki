@@ -236,7 +236,7 @@
 | 前端不得假设 | 从瓦片 properties 读取发生年份 / 事项专题 / 业务场景 / 所属区县 |
 | 工单明细 | 热区点击、列表详情走 **独立 WFS 图层**（工单明细物化视图），不受热力 MVT 裁剪影响 |
 
-**写作提示**：GeoServer 图层 **Customize attributes**（概念，见 02 篇 §8）仅勾选「格内工单数」；格网标识作 Identifier/fid。发布配置变更后须**失效并重预热服务端瓦片缓存**（概念一句，不写 Truncate/Seed 手册）。
+**写作提示**：GeoServer 图层 **Customize attributes**（概念，见 02 篇 §8）仅勾选「格内工单数」；格网标识须能解析为 MVT **数字 fid**（常见为 `UNIQUE (格网标识)` 供自动推断，见 01 §C）。发布配置变更后须**失效并重预热服务端瓦片缓存**（概念一句，不写 Truncate/Seed 手册）。
 
 
 ---
@@ -337,7 +337,7 @@ flowchart TB
 - 博文可引用：
   - [GeoServer 2.24.x · Vector Tiles](https://docs-archive.geoserver.org/2.24.x/en/user/extensions/vectortiles/index.html)（全文 GeoServer 引用见 **§2.2.1**）
   - 社区讨论：合成字符串 FID 无法映射为 MVT 数字 id 的问题（搜索关键词：`geoserver mvt numeric id`）
-- **结论**：格网聚合物化视图须物化 **整型格网标识** 列，并在发布层配置为 Identifier
+- **结论**：格网聚合物化视图须物化 **整型格网标识** 列，并确保 GeoServer 能解析为 MVT **数字 fid**（常见做法：`UNIQUE (格网标识)` 供自动推断；**勿**再为业务聚合键建 UNIQUE 索引，见 §D）
 - **库表 ≠ PBF**：格网 MV **库内仍物化**四维度列供 CQL；**不等于** MVT 瓦片内携带这些列（详见 02 篇「MVT 属性裁剪」）
 
 
@@ -354,7 +354,9 @@ flowchart TB
 | 空间索引            | 格心坐标                      | 加速 MV 构建时的空间聚合、extent 统计与库内排查                                                                  |
 | 复合 / 单列 B-tree  | 发生年份、事项专题、业务场景、所属区县       | 与前端 ECQL 筛选维度对齐，加速带筛选条件的查询与校验                                                                  |
 | **唯一**索引        | 格网标识                      | MVT 数字 feature id、热区 `关联格网标识 IN (...)` 反查；`REFRESH` 后标识稳定依赖物化列 + 唯一约束语义                        |
-| **不建**业务聚合键唯一索引 | `(格心, 年份, 专题, 场景, 区县)` 组合 | 业务键在 `GROUP BY` 下已逻辑唯一，但**不宜**再暴露为库表 UNIQUE 供 GeoServer 误推主键；格网标识列单独承担 Identifier（与 §C、02 篇呼应）。误建该 UNIQUE 会导致 GeoServer **非预期**仅输出格内工单数（**故障**，与 02 篇主动 **Customize attributes** 裁剪区分） |
+| **不建**业务聚合键唯一索引 | `(格心, 年份, 专题, 场景, 区县)` 组合 | 业务键在 `GROUP BY` 下已逻辑唯一，但**不宜**再暴露为库表 UNIQUE 供 GeoServer 误推主键；格网标识列单独承担 MVT 数字 fid（与 §C、02 篇呼应）。误建该 UNIQUE 会导致 GeoServer **非预期**仅输出格内工单数（**故障**，与 02 篇主动 **Customize attributes** 裁剪区分） |
+
+**PostGIS Store 前置（02 篇可一句）**：DataStore **勿开启**「暴露主键」（Expose primary keys）；保持默认**不暴露**。若误将几何列与业务键一同暴露为主键，可能引发 WFS / WKB 解析类错误——与「业务聚合键 UNIQUE 误隐藏列」为**不同**故障路径。
 
 
 **工单明细物化视图**
@@ -448,16 +450,17 @@ REFRESH MATERIALIZED VIEW CONCURRENTLY 工单明细物化视图;
 8. **MVT 属性裁剪（查询层 vs 输出层）**：
   - **问题**：低 zoom（如 z=8）密集格网瓦片体积大、传输慢、GWC 磁盘占用高；根因之一是 PBF 内每个 feature 重复携带四列字符串筛选属性，而前端热力**不读取**这些字段
   - **原则**：**查询层全列、输出层瘦身** — CQL 在 GeoServer 查询层过滤；PBF 只带 splat 权重与反查必需的格网标识 fid
-  - **手段（概念）**：图层 **Customize attributes**（GeoServer 2.24.x Vector Tiles，见 **§2.2.1**）仅保留「格内工单数」；格网标识继续作 Identifier / feature id（不写管理页逐步截图级 SOP）
+  - **手段（概念）**：图层 **Customize attributes**（GeoServer 2.24.x Vector Tiles，见 **§2.2.1**）仅保留「格内工单数」；格网标识须能解析为 MVT **数字 fid**（常见为 `UNIQUE (格网标识)` 供自动推断，见 01 §C）（不写管理页逐步截图级 SOP）
   - **缓存一致性（概念一句）**：发布配置变更后，**须失效并重预热服务端瓦片缓存**，否则 GWC 仍可能返回含旧属性的瓦片 — **不写** Truncate/Seed 命令与矩阵（遵守 §2.1）
   - **主动裁剪 vs 故障**（必写对比表）：
 
 | 情形 | 原因 | 是否预期 |
 | --- | --- | --- |
 | 业务聚合键 UNIQUE 索引导致属性只剩格内工单数 | GeoServer 误隐藏列 | **故障**（见 01 §D） |
+| PostGIS Store 误开启「暴露主键」 | 几何列与 PK 分量冲突等 | **故障**（见 01 §D Store 前置） |
 | Customize attributes 仅勾选格内工单数 | 主动减小 PBF 体积 | **预期** |
 
-  - **效果（博文可写，勿写宿主机路径 / GWC 目录 tree_stats）**：属性裁剪后**单瓦片 PBF 体积约减少 26%**（本项目实测）；低 zoom、格网密集瓦片收益更明显。勿引用 GWC 某 zoom 段目录总量或单环境磁盘快照作通用结论。
+  - **效果（博文可写，勿写宿主机路径 / GWC 目录 tree_stats）**：属性裁剪后**显著减小体积**（本文项目业务数据背景下实测约 **26%**，读者需自行回归）；低 zoom、格网密集瓦片收益更明显。勿引用 GWC 某 zoom 段目录总量或单环境磁盘快照作通用结论。
   - **前端契约**：热力权重 ← PBF properties「格内工单数」；热区 WFS ← feature id「格网标识」；四维度筛选 ← URL `CQL_FILTER`（**不读**瓦片 properties）
 
 **必配图**：
@@ -513,7 +516,7 @@ flowchart TB
 - [ ] MVT vs WFS 分工表
 - [ ] **查询层 vs 输出层**对照 + **主动裁剪 vs 故障**区分表（§8）
 - [ ] MVT 输出契约（仅格内工单数 property + 格网标识 fid，见 §3.4）
-- [ ] 瓦片体积优化动机与单瓦片缩减比例（约 26%）；禁止 GWC 目录 MiB / tree_stats 对比
+- [ ] 瓦片体积优化动机与缩减效果（显著减小 + 可写本项目约 26% 并注明读者自行回归）；禁止 GWC 目录 MiB / tree_stats 对比
 - [ ] 缓存失效概念一句（无 Truncate/Seed 手册）
 - [ ] GeoServer 外链落在 2.24.x 归档域（§2.2.1）
 - [ ] 无图层名/工作空间名
@@ -838,7 +841,7 @@ return new WebGLVectorLayerRenderer(this, {
 3. **MVT 属性裁剪**：查询层全列、PBF 输出仅格内工单数 + 格网标识 fid（Customize attributes）
 4. **查询层与输出层分离**：CQL 引用 MV 四维度列；瓦片 properties 不携带筛选列
 5. GWC WMTS + CQL_FILTER：参数化瓦片缓存键
-6. **GWC 缓存与 PBF 体积**：属性裁剪后单瓦片 PBF 约减 **26%**（实测）；低 zoom、格网密集瓦片收益更明显（勿写 GWC 目录 MiB 快照）
+6. **GWC 缓存与 PBF 体积**：属性裁剪后显著减小体积（本文项目业务数据背景下实测约 **26%**，读者需自行回归）；低 zoom、格网密集瓦片收益更明显（勿写 GWC 目录 MiB 快照）
 7. WebGL splat + 加性混合：多瓦片权重叠加
 8. Gradient post-pass：累积 alpha → 伪彩色
 9. 瓦片 sourceZ：OL 为 overzoom 选择的源级 z，统计须对齐
@@ -887,10 +890,11 @@ return new WebGLVectorLayerRenderer(this, {
 ## 9. Agent 执行顺序（写博文时）
 
 1. 阅读本 `AGENTS.md` 全文 + **§2.2.1** GeoServer 2.24.x 文档入口 + 第 5 节 OL 源码（含 §5.0 本地 / GitHub 回退路径）
-2. 按 00 → 01 → 02 → 03 → 04 顺序撰写（后篇可引用前篇绝对路径）
-3. 每篇写完对照第 8.2 分篇 DoD 自检
-4. 全文完成后对照第 8.1 合集 DoD
-5. **禁止**在博文中出现实现仓库路径；**禁止**将 Seed/容器/runbook 扩写成运维章节
+2. **内化事实**时可对照实现侧 GeoServer MVT 稳定态说明（含 Customize attributes、查询层 vs 输出层等），但博文遵守 **§2.1**：不得出现 monorepo / 插件目录 / `status-*` 路径
+3. 按 00 → 01 → 02 → 03 → 04 顺序撰写（后篇可引用前篇绝对路径）
+4. 每篇写完对照第 8.2 分篇 DoD 自检
+5. 全文完成后对照第 8.1 合集 DoD
+6. **禁止**在博文中出现实现仓库路径；**禁止**将 Seed/容器/runbook 扩写成运维章节
 
 ---
 
