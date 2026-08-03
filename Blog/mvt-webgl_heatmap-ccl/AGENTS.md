@@ -46,7 +46,9 @@
 ### 1.4 Dev-Wiki 惯例
 
 - 博文以 **Markdown** 存于本目录；系列配图放 `[assets/](./assets/)`（按需创建）
-- 合集内交叉引用使用 **绝对路径**，例如 `[/Blog/mvt-webgl_heatmap-ccl/01-数据层-双物化视图.md](/Blog/mvt-webgl_heatmap-ccl/01-数据层-双物化视图.md)`
+- **链接分工**（勿混用）：
+  - **本 `AGENTS.md` 及仓库内维护**：合集内交叉引用使用 Dev-Wiki **项目相对路径**（以 `/Blog/mvt-webgl_heatmap-ccl/…` 开头），例如 `[/Blog/mvt-webgl_heatmap-ccl/01-数据层-双物化视图.md](/Blog/mvt-webgl_heatmap-ccl/01-数据层-双物化视图.md)`
+  - **各篇正式博文正文**（`00–04` 的 `.md`）：系列内交叉引用、系列导航表使用 **博客园线上 URL**（见 **§1.5**「线上」列）；正文**勿**写 Dev-Wiki 路径
 - 勿使用 Obsidian `[[wikilink]]` 语法
 
 
@@ -54,13 +56,13 @@
 ### 1.5 系列目录（5 篇）
 
 
-| 序号  | 文件名                                                                            | 标题方向                                    |
-| --- | ------------------------------------------------------------------------------ | --------------------------------------- |
-| 00  | `[百万级点数据：MVT + WebGL 热力渲染与 FBO 连通域热区工单统计.md](/Blog/mvt-webgl_heatmap-ccl/百万级点数据：MVT + WebGL 热力渲染与 FBO 连通域热区工单统计.md)` | 端到端架构、选型决策表、各篇导航；MVT/WebGL 热力、FBO 连通域热区工单统计 |
-| 01  | `[01-数据层-双物化视图.md](/Blog/mvt-webgl_heatmap-ccl/01-数据层-双物化视图.md)`               | 为何两个 MV；格网标识与索引设计；源数据更新后的刷新顺序（正文章节，非标题） |
-| 02  | `[02-服务层-MVT瓦片与按需明细查询.md](/Blog/mvt-webgl_heatmap-ccl/02-服务层-MVT瓦片与按需明细查询.md)` | 查询层 vs 输出层；**MVT 属性裁剪**与瓦片体积优化；MVT/WFS 分工 |
-| 03  | `[03-前端-热力图WebGL渲染管线.md](/Blog/mvt-webgl_heatmap-ccl/03-前端-热力图WebGL渲染管线.md)`   | 不用内置 Heatmap；**OL 覆写表**（postProcesses / AsShaders）；管线；瓦片融合 |
-| 04  | `[04-前端-热区识别、计算与绘制.md](/Blog/mvt-webgl_heatmap-ccl/04-前端-热区识别、计算与绘制.md)`       | 承接 03 覆写后的热区能力；FBO+CCL；ImageCanvas 边界；点击与双 MV          |
+| 序号 | 文件名（Dev-Wiki） | 线上（博客园） | 标题方向 |
+| --- | --- | --- | --- |
+| 00 | `[百万级点数据：MVT + WebGL 热力渲染与 FBO 连通域热区工单统计.md](/Blog/mvt-webgl_heatmap-ccl/百万级点数据：MVT + WebGL 热力渲染与 FBO 连通域热区工单统计.md)` | https://www.cnblogs.com/zheyi420/p/22182243 | 端到端架构、选型决策表、各篇导航；MVT/WebGL 热力、FBO 连通域热区工单统计 |
+| 01 | `[01-数据层-双物化视图.md](/Blog/mvt-webgl_heatmap-ccl/01-数据层-双物化视图.md)` | https://www.cnblogs.com/zheyi420/p/22182285 | 为何两个 MV；格网标识与索引设计；源数据更新后的刷新顺序（正文章节，非标题） |
+| 02 | `[02-服务层-MVT瓦片与按需明细查询.md](/Blog/mvt-webgl_heatmap-ccl/02-服务层-MVT瓦片与按需明细查询.md)` | https://www.cnblogs.com/zheyi420/p/22182306 | 查询层 vs 输出层；**MVT 属性裁剪**与瓦片体积优化；MVT/WFS 分工 |
+| 03 | `[03-前端-热力图WebGL渲染管线.md](/Blog/mvt-webgl_heatmap-ccl/03-前端-热力图WebGL渲染管线.md)` | https://www.cnblogs.com/zheyi420/p/22182345 | 不用内置 Heatmap；**OL 覆写表**（postProcesses / AsShaders）；管线；瓦片融合 |
+| 04 | `[04-前端-热区识别、计算与绘制.md](/Blog/mvt-webgl_heatmap-ccl/04-前端-热区识别、计算与绘制.md)` | https://www.cnblogs.com/zheyi420/p/22182374 | 承接 03 覆写后的热区能力；FBO+CCL；ImageCanvas 边界；点击与双 MV |
 
 
 **本次 Agent 任务边界**：仅维护本 `AGENTS.md`；各篇 `.md` 正文由后续迭代撰写。
@@ -293,7 +295,7 @@
   - 内置 `ol/layer/Heatmap` vs MVT + 自定义 WebGL
   - 栅格 WMS 热力 vs MVT 矢量瓦片
   - 单物化视图 vs 双物化视图
-5. 系列导航：链接 01–04（绝对路径）
+5. 系列导航：链接 01–04（博客园线上 URL，见 **§1.5**）
 
 **文体**：导语称「**总览篇**」；遵守 **§1.7**；**勿**附文末 DoD。
 
@@ -327,7 +329,7 @@ flowchart TB
 
 - [ ] 开篇「背景环境」表（**§1.6** 全集基准表）
 - [ ] 无 monorepo / 真实字段名
-- [ ] 含 01–04 绝对路径链接
+- [ ] 含 01–04 博客园线上链接（见 **§1.5**）
 - [ ] ≥2 张 mermaid + ≥1 张选型对比表
 
 ---
@@ -893,7 +895,7 @@ return new WebGLVectorLayerRenderer(this, {
 - [ ] **01–04** 正文开篇含「背景环境」，且组件与 **§1.6** 一致
 - [ ] **00** 含全集背景环境基准表（**§1.6**）
 - [ ] 抽象字段在 01 / 04 交叉一致
-- [ ] 00 含 01–04 绝对路径导航
+- [ ] 00 含 01–04 博客园线上导航（见 **§1.5**）
 - [ ] OL 非自带能力处均有源码三段论
 - [ ] 每篇 ≥2 mermaid + 核心对比表
 - [ ] 02 篇含 MVT 输出契约与属性裁剪动机（§3.4、4.2 §8）
@@ -920,7 +922,7 @@ return new WebGLVectorLayerRenderer(this, {
 
 1. 阅读本 `AGENTS.md` 全文 + **§1.7** 文体用语 + **§2.2.1** GeoServer 2.24.x 文档入口 + 第 5 节 OL 源码（含 §5.0 本地 / GitHub 回退路径）
 2. **内化事实**时可对照实现侧 GeoServer MVT 稳定态说明（含 Customize attributes、查询层 vs 输出层等），但博文遵守 **§2.1**：不得出现 monorepo / 插件目录 / `status-*` 路径
-3. 按 00 → 01 → 02 → 03 → 04 顺序撰写（后篇可引用前篇绝对路径）
+3. 按 00 → 01 → 02 → 03 → 04 顺序撰写（博文正文交叉引用用 **§1.5** 博客园 URL；`AGENTS.md` 内用 Dev-Wiki 相对路径）
 4. 每篇写完对照第 8.2 分篇 DoD 自检（**勿**在博文文末附 DoD checklist）
 5. 全文完成后对照第 8.1 合集 DoD
 6. **禁止**在博文中出现实现仓库路径、目标读者表述、文末 DoD；**禁止**将 Seed/容器/runbook 扩写成运维章节
