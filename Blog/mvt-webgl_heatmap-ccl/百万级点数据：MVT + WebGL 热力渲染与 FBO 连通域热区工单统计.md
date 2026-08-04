@@ -34,11 +34,26 @@
 
 需要解决的三大问题：
 
-1. **热力展示**：做热力图渲染，支持全量数据范围的热力图查看，提供专题、场景、年份、区县等关注的**多个维度筛选**，但又不能靠客户端全量渲染所有点（必定卡顿） ➡️ 数据端对源表做格网（分筛选属性）聚合（ 5m 格网格心点替代原始点坐标，通过新增权重字段标识聚合前的点数量）缩减数据量【源数据压缩】，服务端通过 MVT 方式【传输层数据压缩】分发数据给前端并通过 GWC 缓存切片【服务层预计算缓存切片文件】。
-2. **热区识别与标注**：基于渲染出的热力图，识别出各个热区区域，并计算显示对应区域所含的业务点数量 ➡️ 在 splat 晕染形成的视觉高热区域上做连通域分割，绘制热区合计图标与边界——与热力**同步**计算与渲染，随视口与瓦片更新而刷新。
-3. **热区内业务数据详情查看**：用户点击热区图标，能查看对应热区内业务点的所有属性信息，但为了热力图展示而做的数据压缩导致热力图所用的数据源无法满足需求 ➡️ 基于格网聚合出的数据反向另建数据源专用于查询。
+1. **热力展示**：做热力图渲染，支持全量数据范围的热力图查看，提供专题、场景、年份、区县等关注的**多个维度筛选**，但又不能靠客户端全量渲染所有点（必定卡顿）  
+  ➡️ 数据端对源表做格网（分筛选属性）聚合（5m 格网格心点替代原始点坐标，通过新增权重字段标识聚合前的点数量）缩减数据量【_源数据压缩_】，服务端通过 MVT 方式【_传输层数据压缩_】分发数据给前端并通过 GWC 缓存切片【_服务层预计算缓存切片文件_】。
 
-要解决的不是「画一张静态热力图」，而是：**预聚合 → 压缩缓存瓦片 → GPU 融合渲染 → 像素级热区识别 → 点击反查明细** 的完整链路。
+2. **热区识别与标注**：基于渲染出的热力图，识别出各个热区区域，并计算显示对应区域所含的业务点数量  
+  ➡️ 在 splat 晕染形成的视觉高热区域上做连通域分割，绘制热区合计图标与边界——与热力**同步**计算与渲染，随视口与瓦片更新而刷新。
+
+3. **热区内业务数据详情查看**：用户点击热区图标，能查看对应热区内业务点的所有属性信息，但为了热力图展示而做的数据压缩导致热力图所用的数据源无法满足需求  
+  ➡️ 基于格网聚合出的数据反向另建数据源专用于查询。
+
+要解决的不是「画一张静态热力图」，而是贯穿数据、服务、前端的完整链路。下图概括从源数据到可交互热区的五个阶段：
+
+```mermaid
+flowchart LR
+  preAgg[格网预聚合]
+  tileCache[MVT瓦片与GWC缓存]
+  gpuRender[WebGL splat热力渲染]
+  cclLabel[FBO连通域与热区标注]
+  drillDown[点击WFS查明细]
+  preAgg --> tileCache --> gpuRender --> cclLabel --> drillDown
+```
 
 ---
 
@@ -54,7 +69,30 @@
 | **前端** | GPU 热力 + CPU 热区后分析 | WebGL splat + gradient 后处理；FBO readback → 8-连通域标注（CCL）→ Overlay / ImageCanvas 绘制                                                             |
 
 
-**数据层**将百万级点数据作格网聚合、减列得到适合热力图的数据量尽可能小的物化视图；**服务层**按筛选条件切片出图缓存；**前端**负责读取、解析、热力渲染、热区连通域识别与交互。三层边界清晰，换业务库表时仍可套用同一架构。
+**数据**将百万级点数据作格网聚合、减列，得到适合热力图、数据量尽可能小的物化视图；**服务**按筛选条件切片出图缓存；**前端**负责读取、解析、热力渲染、热区连通域识别与交互。三层边界清晰，换业务库表时仍可套用同一架构。
+
+各层产出与消费关系如下：
+
+```mermaid
+flowchart TB
+  subgraph data [数据]
+    gridMV[格网聚合物化视图]
+    orderMV[工单明细物化视图]
+  end
+  subgraph service [服务]
+    mvtOut[MVT热力瓦片]
+    wfsOut[WFS明细接口]
+  end
+  subgraph client [前端]
+    heatRender[热力渲染]
+    regionWork[热区识别与交互]
+  end
+  gridMV --> mvtOut
+  orderMV --> wfsOut
+  mvtOut --> heatRender
+  heatRender --> regionWork
+  wfsOut --> regionWork
+```
 
 ---
 
@@ -82,16 +120,41 @@ flowchart TB
   orderMV --> clickQuery
 ```
 
-
-
 **路径说明**：
 
-- 源业务表经 ETL 或定时任务写入 **格网聚合物化视图**（供热力 MVT）。**工单明细物化视图**在格网 MV 已存在且已刷新后构建：由源表关联格网 MV 取得**格网标识**并保留单条业务记录完整属性。日常数据更新时须 **先刷新格网 MV、再刷新工单明细 MV**（顺序原因见 [01-数据层-双物化视图](https://www.cnblogs.com/zheyi420/p/22182285)）。
+- 源业务表经 ETL 或定时任务写入 **格网聚合物化视图**（供热力 MVT）。**工单明细物化视图**在格网 MV 已存在且已刷新后构建：由源表关联格网 MV 取得**格网标识**并保留单条业务记录完整属性。日常数据更新须 **先刷新格网 MV、再刷新工单明细 MV**（顺序原因见 [01-数据层-双物化视图](https://www.cnblogs.com/zheyi420/p/22182285)）。
+
+```mermaid
+flowchart LR
+  refreshGrid[刷新格网聚合物化视图]
+  refreshOrder[刷新工单明细物化视图]
+  refreshGrid --> refreshOrder
+```
+
 - 地图客户端请求 **MVT 瓦片**（可带 `CQL_FILTER`），解码后由 WebGL 对「格内工单数」做 splat 渲染并 gradient 上色。
 - 瓦片就绪且热力重绘完成后，从 GPU 帧缓冲读取 alpha 掩膜，做 **8-连通域标注**，在质心绘制热区合计圆标；该流程与当前视口、缩放级别同步。
 - 点击圆标时，走 **WFS** 路径：`关联格网标识 IN (...)`，从工单明细物化视图拉取列表——**不**从 MVT 瓦片 properties 读取明细列。
 
-这是本系列的**双查询路径**：热力展示走 MVT（四维度筛选下推为 MVT 的 `CQL_FILTER`）；下钻明细走 WFS（热区点击 **仅**按格网标识列表查询，**不**再重复四维度 ECQL）。二者数据源与契约不同，在数据层通过「格网标识」关联。
+本系列采用**双查询路径**：热力展示与下钻明细数据源、筛选契约不同，在数据层通过「格网标识」关联。
+
+```mermaid
+flowchart TB
+  subgraph mvtPath [热力展示路径]
+    filterMvt[MVT请求带CQL_FILTER]
+    decodeMvt[解码格内工单数]
+    splatHeat[splat与gradient上色]
+    filterMvt --> decodeMvt --> splatHeat
+  end
+  subgraph wfsPath [热区下钻路径]
+    pickRegion[点击热区圆标]
+    gridIn[关联格网标识IN列表]
+    wfsList[WFS拉取工单明细]
+    pickRegion --> gridIn --> wfsList
+  end
+  splatHeat --> pickRegion
+```
+
+热力路径：四维度筛选下推为 MVT 的 `CQL_FILTER`。下钻路径：热区点击 **仅**按格网标识列表查询，**不**再重复四维度 ECQL（筛选已体现在当前热力 MVT 结果与热区格网集合中）。
 
 ---
 
@@ -101,15 +164,15 @@ flowchart TB
 
 ```mermaid
 flowchart LR
-  subgraph dataLayer [数据层]
+  subgraph data [数据]
     gridMV[格网聚合物化视图]
     orderMV[工单明细物化视图]
   end
-  subgraph serviceLayer [服务层]
+  subgraph service [服务]
     mvt[MVT瓦片GWC]
     wfs[WFS明细]
   end
-  subgraph clientLayer [前端]
+  subgraph client [前端]
     render[WebGL热力]
     analyze[FBO与CCL]
   end
@@ -120,15 +183,13 @@ flowchart LR
   wfs --> analyze
 ```
 
-
-
 GeoServer 侧：格网 MV 发布为 **MVT 矢量瓦片图层**（经 GWC 缓存）；工单 MV 发布为独立 **WFS 图层**。前端四维度筛选下推为 **MVT** 的 `CQL_FILTER`，**不**假设瓦片内携带这些筛选字段。热区点击下钻的 **WFS** **仅**按 `关联格网标识 IN (...)` 查询，**不**再附带专题/场景/年份/区县 ECQL（筛选已体现在当前热力 MVT 结果与热区格网集合中）。
 
 ---
 
 ## 5. 选型决策
 
-下列对比概括本系列在关键分叉上的选择及原因。详细论证见 01–04 各篇。
+下列对比概括本系列在关键分叉上的选择及原因。详细论证见 [01-数据层-双物化视图](https://www.cnblogs.com/zheyi420/p/22182285)、[02-服务层-MVT瓦片与按需明细查询](https://www.cnblogs.com/zheyi420/p/22182306)、[03-前端-热力图WebGL渲染管线](https://www.cnblogs.com/zheyi420/p/22182345)、[04-前端-热区识别、计算与绘制](https://www.cnblogs.com/zheyi420/p/22182374)。
 
 
 | 对比维度     | 方案 A                                | 方案 B                        | 本系列选择                                                                                                                |
@@ -164,6 +225,6 @@ GeoServer 侧：格网 MV 发布为 **MVT 矢量瓦片图层**（经 GWC 缓存�
 
 - [GeoServer 2.24.x User Manual](https://docs-archive.geoserver.org/2.24.x/en/user/)
 - [OpenLayers v10.6.1 源码目录](https://github.com/openlayers/openlayers/tree/v10.6.1/src/ol)
-- [二值图像的连通域标记（炸鸡人博客）](https://zhajiman.github.io/post/connected_component_labelling/) — CCL 概念，04 篇主引用
+- [二值图像的连通域标记（炸鸡人博客）](https://zhajiman.github.io/post/connected_component_labelling/) — CCL 概念，[04-前端-热区识别、计算与绘制](https://www.cnblogs.com/zheyi420/p/22182374) 主引用
 - [Mapbox Vector Tile specification](https://github.com/mapbox/vector-tile-spec)
 
