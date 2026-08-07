@@ -1,4 +1,4 @@
-# Windows 包管理器：Winget / Scoop / Chocolatey
+# Windows 包管理器：WinGet / Scoop / Chocolatey
 
 ## 前言
 
@@ -26,11 +26,11 @@ Todo-Tree: Failed to find vscode-ripgrep - please install ripgrep manually and s
 
 ## Windows 常见包管理器对比
 
-| 包管理器 | 出品方 | 是否官方 | 特点 | 适合人群 |
-|---|---|---|---|---|
-| Winget | Microsoft | 官方内置（Windows 11 自带） | 无需额外安装，命令简单，软件源较全 | 普通用户 / 不想多装工具的人 |
-| Scoop | 开源社区 | 第三方 | 安装路径干净、默认无需管理员、适合命令行工具 | 开发者 |
-| Chocolatey | Chocolatey Software | 第三方 | 软件数量多、历史悠久、有企业版 | 老用户 / 企业环境 |
+| 包管理器       | 出品方                 | 是否官方                | 特点                     | 适合人群            |
+| ---------- | ------------------- | ------------------- | ---------------------- | --------------- |
+| WinGet     | Microsoft           | 官方内置（Windows 11 自带） | 无需额外安装，命令简单，软件源较全      | 普通用户 / 不想多装工具的人 |
+| Scoop      | 开源社区                | 第三方                 | 安装路径干净、默认无需管理员、适合命令行工具 | 开发者             |
+| Chocolatey | Chocolatey Software | 第三方                 | 软件数量多、历史悠久、有企业版        | 老用户 / 企业环境      |
 
 ## 安装 ripgrep（贯穿示例）
 
@@ -58,7 +58,7 @@ echo %PROCESSOR_ARCHITECTURE%
 
 近几年的 Windows 电脑几乎都是 `AMD64`，直接下载 `x86_64` 版本即可。
 
-### 使用 Winget（推荐，官方内置）
+### 使用 WinGet（推荐，官方内置）
 
 ```powershell
 # 安装
@@ -71,7 +71,7 @@ winget upgrade BurntSushi.ripgrep.MSVC
 winget upgrade --all
 ```
 
-Winget 会默认把 `rg.exe` 放到类似下面的路径，并自动添加到 `PATH`：
+WinGet 会默认把 `rg.exe` 放到类似下面的路径，并自动添加到 `PATH`：
 
 ```text
 C:\Users\<用户名>\AppData\Local\Microsoft\WinGet\Links\rg.exe
@@ -121,7 +121,7 @@ rg --version
 
 ## VSCode 环境变量未刷新问题（简要）
 
-通过 Winget 安装 `ripgrep` 后，即使完全退出并重启 VSCode，`Todo Tree` 仍可能报同样的错误。原因是 VSCode 启动时读取一次系统 `PATH`，新安装的工具路径没有被刷新到 VSCode 进程中。
+通过 WinGet 安装 `ripgrep` 后，即使完全退出并重启 VSCode，`Todo Tree` 仍可能报同样的错误。原因是 VSCode 启动时读取一次系统 `PATH`，新安装的工具路径没有被刷新到 VSCode 进程中。
 
 快速解决办法：在 VSCode 的 `settings.json` 中显式指定 `rg.exe` 的路径。
 
@@ -150,10 +150,10 @@ rg TODO -C 2
 
 ## 如何选择
 
-| 场景 | 推荐 |
+| 场景 | 推荐                  |
 |---|---|
-| 不想额外安装包管理器，快速解决一个问题 | Winget |
-| 开发者，经常安装命令行工具 | Scoop |
+| 不想额外安装包管理器，快速解决一个问题 | WinGet              |
+| 开发者，经常安装命令行工具 | Scoop               |
 | 企业批量部署，或已有 Chocolatey 生态 | Chocolatey / Winget |
 
 ## 参考链接
