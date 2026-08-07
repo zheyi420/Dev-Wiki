@@ -1,5 +1,7 @@
 下载 https://www.anaconda.com/download
 
+公司电脑无法安装 Anaconda 时，可使用 [uv](/Language/Python/uv.md) 作为替代方案。
+
 与直接下载使用 Python 的区别
 
 - "纯净"的 Python 环境
