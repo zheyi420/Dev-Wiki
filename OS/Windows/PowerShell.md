@@ -1,3 +1,5 @@
+- [在 Windows 上安装 PowerShell 7](https://learn.microsoft.com/zh-cn/powershell/scripting/install/install-powershell-on-windows) 
+
 # Case
 
 ## 在 Windows 系统层级解除长路径限制
