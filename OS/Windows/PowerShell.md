@@ -36,6 +36,74 @@ Test-NetConnection server.example.com -Port 22
 ```
 
 
+## Query listening process
+
+查询监听指定端口的进程（Windows 11 + PowerShell 7）。
+
+`State Listen` 表示进程已绑定该端口并处于**监听**状态，通常可理解为「有程序在该端口上提供服务 / 等待连接」。需注意：
+
+- `Listen` 与仅有 `Established` 连接不同；后者表示已有活动连接，不一定在监听。
+- 同一端口可能因 IPv4 / IPv6 出现多条 `Listen` 记录，对应同一或不同 PID。
+- 无进程监听时，`Get-NetTCPConnection` 返回空，后续查询不会输出结果。
+
+与 [Windows.md — 查询端口占用](/OS/Windows/Windows.md) 中 `netstat -ano` 目标相同；本写法可直接拿到进程路径与完整命令行。
+
+> **勿用 `$pid` 作变量名**：PowerShell 内置只读变量 `$PID` 表示**当前 shell 的进程 ID**（大小写不敏感），赋值会报错 `Cannot overwrite variable PID because it is read-only or constant.`。示例改用 `$listeningPid` / `$listeningPids`。
+
+### 基础用法
+
+```powershell
+$port = 9222   # 示例：Chrome DevTools / MCP 调试端口
+$listeningPid = (Get-NetTCPConnection -LocalPort $port -State Listen).OwningProcess
+Get-CimInstance Win32_Process -Filter "ProcessId = $listeningPid" |
+  Select-Object ProcessId, Name, ExecutablePath, CommandLine, CreationDate
+```
+
+### 多条监听或无监听
+
+```powershell
+$port = 9222
+$listeningPids = (Get-NetTCPConnection -LocalPort $port -State Listen).OwningProcess | Select-Object -Unique
+
+if (-not $listeningPids) {
+  Write-Host "端口 $port 当前无 Listen 状态的进程。"
+} else {
+  foreach ($listeningPid in $listeningPids) {
+    Get-CimInstance Win32_Process -Filter "ProcessId = $listeningPid" |
+      Select-Object ProcessId, Name, ExecutablePath, CommandLine, CreationDate
+  }
+}
+```
+
+### 封装为函数（可选）
+
+```powershell
+function Get-ListeningProcess {
+  param([int]$Port)
+
+  $listeningPids = (Get-NetTCPConnection -LocalPort $Port -State Listen -ErrorAction SilentlyContinue).OwningProcess |
+    Select-Object -Unique
+
+  if (-not $listeningPids) { return }
+
+  foreach ($listeningPid in $listeningPids) {
+    Get-CimInstance Win32_Process -Filter "ProcessId = $listeningPid" |
+      Select-Object ProcessId, Name, ExecutablePath, CommandLine, CreationDate
+  }
+}
+
+Get-ListeningProcess -Port 9222
+```
+
+查询一般无需管理员权限。若需绑定低端口或受安全软件限制，可尝试以管理员身份运行终端。
+
+需要结束占用端口的进程时，见 [Windows.md — 关闭某个进程](/OS/Windows/Windows.md)。
+
+### 示例：端口 9222
+
+排查 Chrome DevTools Protocol、Cursor `chrome-devtools` MCP 是否已启动，或该端口是否被其它 Chrome 实例占用。
+
+
 ## 执行命令控制只输出前几行
 
 ### 方法 1：使用 `Select-Object`

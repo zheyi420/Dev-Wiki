@@ -194,6 +194,8 @@ netstat -ano | findstr "PID"
 tasklist | findstr 'PID'
 ```
 
+**PowerShell 7（推荐）**：按监听端口直接查看进程名、路径与完整命令行，见 [PowerShell.md — Query listening process](/OS/Windows/PowerShell.md#query-listening-process)。
+
 ### 关闭某个进程
 
 1. 使用 PowerShell
