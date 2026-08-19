@@ -43,8 +43,21 @@ Tutorial
 > Usage: `docker exec [OPTIONS] CONTAINER COMMAND [ARG...]`
 
 
-- 在正在运行的容器中执行命令，在容器上执行交互式 sh shell。
+- 在正在运行的容器中执行命令，在容器上执行交互式 shell。
 	- `docker exec -it mycontainer /bin/bash`
+	- `/bin/bash` 是要在容器内执行的命令（即 `COMMAND` 参数），这里指定启动一个 Bash shell。Bash（Bourne Again Shell）是 Linux 中最常用的 shell，支持命令补全、历史记录、脚本语法等丰富功能。
+	- 并非所有容器镜像都包含 Bash。许多精简镜像（如基于 Alpine Linux 的镜像）为了减小体积不会安装 Bash，此时执行 `/bin/bash` 会报错：
+		- `OCI runtime exec failed: exec failed: unable to start container process: exec: "/bin/bash": stat /bin/bash: no such file or directory`
+	- 遇到这种情况，可改用更轻量的 `sh`（几乎所有 Linux 镜像都包含）：
+		- `docker exec -it mycontainer /bin/sh`
+	- 若不确定容器中有哪些 shell 可用，可以通过以下命令查看：
+		- `docker exec mycontainer cat /etc/shells`
+		- 或尝试 `docker exec mycontainer which bash sh ash zsh`
+
+- 退出交互式 shell
+	- 输入 `exit` 命令或按 `Ctrl+D`：退出 shell 并断开与容器的连接（容器本身继续运行）。
+	- 按 `Ctrl+P` 然后 `Ctrl+Q`：从交互式 shell 中分离（detach），保持 shell 进程在容器内继续运行，之后可通过 `docker attach mycontainer` 重新连接到该容器的主进程（PID 1）。
+		- 注意：`docker attach` 连接的是容器的主进程，而非之前 `docker exec` 启动的 shell。若要重新进入之前的交互式 shell，应再次执行 `docker exec -it mycontainer /bin/bash`。
 
 - OPTIONS
 	- `--interactive` `-i` Keep STDIN open even if not attached
