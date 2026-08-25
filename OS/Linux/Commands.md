@@ -159,6 +159,42 @@ kill PID
 
 - `cp -ri ./ /dir_name/` 复制目录内所有文件到指定目录。
 
+#### 带时间戳的配置文件备份
+
+```bash
+cp -a server.xml "server.xml.bak-$(date +%Y%m%d%H%M)"
+```
+
+> 将源文件**完整保留权限/时间戳等属性**地复制一份，新文件名带有 `.bak-年月日时分` 后缀，方便按时间区分多次备份、且不覆盖已有备份文件。
+
+**`-a`（archive）**：等价于 `-dR --preserve=all`，会尽量保留原文件的所有属性：
+
+| 组成部分 | 说明 |
+|---|---|
+| `-d` | 保留符号链接本身（不追踪链接指向的实际文件），并保留硬链接关系 |
+| `-R` | 递归复制（针对目录；对单个文件无影响） |
+| `--preserve=all` | 尽可能保留权限模式、属主/属组、时间戳（mtime、atime）、链接关系、SELinux 上下文/ACL/扩展属性（xattr，若系统支持） |
+
+对于普通配置文件备份场景，`-a` 的核心价值是**保留原文件的权限和时间戳**，避免备份文件权限被 umask 重置。
+
+**`$(date +%Y%m%d%H%M)`**：命令替换（command substitution），shell 先执行 `date` 命令，再将输出代入目标文件名。
+
+| 格式符 | 含义 | 示例 |
+|---|---|---|
+| `%Y` | 4 位年份 | 2026 |
+| `%m` | 2 位月份 | 08 |
+| `%d` | 2 位日期 | 24 |
+| `%H` | 24 小时制小时 | 14 |
+| `%M` | 分钟 | 30 |
+
+执行后目标文件名类似 `server.xml.bak-202608241430`。
+
+**双引号**：把整个目标文件名括起来，防止变量替换后若含特殊字符被 shell 误解析；路径中可能含空格时也更安全。
+
+参考：
+- [GNU Coreutils `cp`](https://www.gnu.org/software/coreutils/manual/html_node/cp-invocation.html)
+- [GNU Coreutils `date`](https://www.gnu.org/software/coreutils/manual/html_node/date-invocation.html)
+
 
 ### `scp`
 
@@ -226,6 +262,10 @@ scp -P 2222 /path/to/file.txt user@remote_host:/path/to/remote/
 
 
 ### Case
+
+#### 带时间戳的配置文件备份
+
+见 [`/OS/Linux/Commands.md`](/OS/Linux/Commands.md) 中「带时间戳的配置文件备份」（如修改 Tomcat `server.xml` 前）。
 
 #### 查看文件编码字符集
 

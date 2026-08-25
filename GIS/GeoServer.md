@@ -111,6 +111,8 @@ GeoServer 官方 Docker 镜像内置 Tomcat；`$CATALINA_HOME` 通常指向 `/us
 
 ## 查看当前配置
 
+修改 `server.xml` 前可先备份，见 [`/OS/Linux/Commands.md`](/OS/Linux/Commands.md) 中「带时间戳的配置文件备份」。
+
 在运行中的 GeoServer 容器内执行（容器名按实际替换，如 `geoserver2242`）：
 
 ```bash

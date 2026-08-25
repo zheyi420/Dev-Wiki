@@ -74,7 +74,7 @@ Tutorial
 		```bash
 		docker exec geoserver2242 sh -c 'grep -nE "Connector|compression|compressibleMimeType" "$CATALINA_HOME/conf/server.xml"'
 		```
-	- 上例用于在 GeoServer 容器内查看 Tomcat `server.xml` 的 HTTP Connector 与 gzip 压缩配置；容器名按实际替换。业务背景见 [`/GIS/GeoServer.md`](/GIS/GeoServer.md)。
+	- 上例用于在 GeoServer 容器内查看 Tomcat `server.xml` 的 HTTP Connector 与 gzip 压缩配置；容器名按实际替换。业务背景见 [`/GIS/GeoServer.md`](/GIS/GeoServer.md)。修改前可在容器内用 `cp -a` 带时间戳备份（见 [`/OS/Linux/Commands.md`](/OS/Linux/Commands.md)），或先用 [`docker cp`](/Docker/Docker.md) 取出到宿主机再备份。
 
 
 
