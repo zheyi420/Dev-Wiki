@@ -347,11 +347,18 @@ cat /tmp/du_result.txt
 - 输出显示 `匹配到二进制文件（标准输入）` 时，添加参数如下
 	- `grep -a`
 	- `grep --binary-files=text`
+- 显示匹配行的**行号**（便于定位配置文件）
+	- `-n`
+- 启用**扩展正则表达式**（Extended Regex），竖线 `|` 可直接表示「或」，无需转义
+	- `-E`
 - 搜索目录下所有符合正则匹配的 csv 文件内是否存在某个字符串。
 	- `grep '309383_5,' *road*.csv`
 - 在匹配行之后显示指定数量的行
 	- `docker inspect <容器ID或名称> | grep Mounts -A 10`
 	> `-A 10` 表示在找到包含 "Mounts" 的行后，还会显示该行之后的10行内容。
+- 组合示例：在配置文件中查找 Connector 或压缩相关行并带行号
+	- `grep -nE "Connector|compression|compressibleMimeType" "$CATALINA_HOME/conf/server.xml"`
+	> 若通过 [`docker exec`](/Docker/Docker.md) 在容器内执行且路径含 `$CATALINA_HOME`，须配合 `sh -c`，见 [`/OS/Linux/shell.md`](/OS/Linux/shell.md)。
 
 ### `sed`
 > sed (stream editor) is a non-interactive command-line text editor.

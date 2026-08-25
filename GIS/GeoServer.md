@@ -83,3 +83,42 @@ url: http://localhost:8080/geoserver/web/
 # ECQL
 
 - [ECQL Reference](https://docs.geoserver.org/stable/en/user/filter/ecql_reference.html#filter-ecql-reference) 
+
+
+# Docker 部署 · Tomcat 响应压缩
+
+GeoServer 官方 Docker 镜像内置 Tomcat；`$CATALINA_HOME` 通常指向 `/usr/local/tomcat`，核心配置在 `conf/server.xml`。
+
+## 排查动机
+
+排查 HTTP 响应是否启用 gzip 压缩，例如 GeoWebCache 瓦片请求体积过大时，可先确认 Tomcat HTTP Connector 的压缩相关属性是否开启。
+
+## 关注配置项
+
+在 `server.xml` 中查找 HTTP **Connector** 及其压缩属性：
+
+- **`Connector`**：连接器标签，含 `port`、`protocol`、`maxThreads` 等
+- **`compression`**：是否开启响应压缩（常见值为 `"on"`、`"off"`，或数字阈值如 `"2048"` 表示超过多少字节才压缩）
+- **`compressibleMimeType`**：允许压缩的 MIME 类型，如 `text/html,text/xml,application/json`
+
+典型配置片段：
+
+```xml
+<Connector port="8080" protocol="HTTP/1.1"
+           compression="on" compressionMinSize="2048"
+           compressibleMimeType="text/html,text/xml,application/json"/>
+```
+
+## 查看当前配置
+
+在运行中的 GeoServer 容器内执行（容器名按实际替换，如 `geoserver2242`）：
+
+```bash
+docker exec geoserver2242 sh -c 'grep -nE "Connector|compression|compressibleMimeType" "$CATALINA_HOME/conf/server.xml"'
+```
+
+命令说明与 `sh -c` 用法见 [`/Docker/Docker.md`](/Docker/Docker.md)、[`/OS/Linux/shell.md`](/OS/Linux/shell.md)；`grep -nE` 参数见 [`/OS/Linux/Commands.md`](/OS/Linux/Commands.md)。
+
+## 参考
+
+- [Tomcat HTTP Connector 配置](https://tomcat.apache.org/tomcat-8.5-doc/config/http.html)（Tomcat 版本随镜像而定，链接仅供属性语义参考）

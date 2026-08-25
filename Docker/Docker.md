@@ -63,6 +63,19 @@ Tutorial
 	- `--interactive` `-i` Keep STDIN open even if not attached
 	- `--tty` `-t` Allocate a pseudo-TTY
 
+- 非交互执行：`sh -c`
+	- `docker exec` 默认把 `COMMAND` 及其后的参数当作「可执行文件 + 参数数组」直接传给容器执行，**不经过 shell**，因此 `$VAR`、管道 `|`、通配符 `*` 等不会在容器内解析。
+	- 若命令依赖容器内环境变量、管道或 shell 语法，应通过 `sh -c '...'` 让容器内的 shell 解析整段字符串。`-c` 是 [`sh`](/OS/Linux/shell.md) 的参数，含义见该笔记。
+	- 错误写法（`$CATALINA_HOME` 会在宿主机展开，通常为空）：
+		```bash
+		docker exec geoserver2242 grep -nE "Connector|compression" "$CATALINA_HOME/conf/server.xml"
+		```
+	- 正确写法（单引号内字符串原样传入容器，由容器内 `sh` 展开 `$CATALINA_HOME`）：
+		```bash
+		docker exec geoserver2242 sh -c 'grep -nE "Connector|compression|compressibleMimeType" "$CATALINA_HOME/conf/server.xml"'
+		```
+	- 上例用于在 GeoServer 容器内查看 Tomcat `server.xml` 的 HTTP Connector 与 gzip 压缩配置；容器名按实际替换。业务背景见 [`/GIS/GeoServer.md`](/GIS/GeoServer.md)。
+
 
 
 ## `docker run`
