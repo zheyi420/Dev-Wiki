@@ -209,7 +209,7 @@ WebGL 层不会随 `removeLayer` 自动释放：OL 明确要求对 WebGL 图层�
 
 - 总览：[百万级点数据：MVT + WebGL 热力渲染与 FBO 连通域热区工单统计](https://www.cnblogs.com/zheyi420/p/22182243)
 - 上一篇：[02-服务层-MVT瓦片与按需明细查询](https://www.cnblogs.com/zheyi420/p/22182306)
-- 下一篇：[04-前端-热区识别、计算与绘制](https://www.cnblogs.com/zheyi420/p/22182374)
+- 下一篇：[04-前端-矢量瓦片 Renderer 覆写与 LOD composite](https://www.cnblogs.com/zheyi420/p/22699358)
 
 ---
 
