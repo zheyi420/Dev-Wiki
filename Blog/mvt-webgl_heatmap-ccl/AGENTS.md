@@ -258,7 +258,7 @@
 | 抽象名    | 业务含义               |
 | ------ | ------------------ |
 | 工单主键   | 单条工单唯一 ID          |
-| 关联格网标识 | 指向格网聚合行，支撑热区点击批量反查 |
+| 关联格网标识 | 指向**细格网**聚合行，支撑热区点击批量反查；格网标识仅在单一档位内唯一，跨档位不可混用 |
 | 发生年份   | 与聚合维度一致，供视口筛选      |
 | 业务场景   | 与聚合维度一致            |
 | 事项名称路径 | 多级事项分类全文，供统计下钻     |
@@ -357,9 +357,7 @@ flowchart TB
   sourceTable --> gridMV5
   sourceTable --> gridMV100
   sourceTable --> gridMV300
-  gridMV5 --> orderMV
-  gridMV100 --> orderMV
-  gridMV300 --> orderMV
+  gridMV5 -->|"仅细格网提供关联格网标识"| orderMV
   gridMV5 --> mvtService
   gridMV100 --> mvtService
   gridMV300 --> mvtService
@@ -475,23 +473,21 @@ flowchart LR
   sourceUpdate --> refreshGrid100
   sourceUpdate --> refreshGrid300
   refreshGrid5 --> refreshOrder
-  refreshGrid100 --> refreshOrder
-  refreshGrid300 --> refreshOrder
 ```
 
 
 
-**顺序原因**：工单明细 MV 通过 JOIN/关联从格网聚合 MV 取得「关联格网标识」；**三档格网 MV 均须**先于工单 MV 刷新，否则关联错位或缺失。
+**顺序原因**：工单明细 MV 通过 JOIN/关联从**细格网** MV 取得「关联格网标识」；**细格网 MV 须**先于工单 MV 刷新，否则关联错位或缺失。中 / 粗格网 MV 与工单 MV **无依赖**，三档之间亦互不依赖，可并行刷新。
 
 **示例 SQL（博文须写出，但不展开运维）**：
 
 ```sql
--- 步骤 1：刷新三档格网聚合物化视图（普通 REFRESH，不改变已有格网标识）
+-- 步骤 1：刷新三档格网聚合物化视图（普通 REFRESH，不改变已有格网标识；三条互不依赖）
 REFRESH MATERIALIZED VIEW 细格网聚合物化视图;
 REFRESH MATERIALIZED VIEW 中格网聚合物化视图;
 REFRESH MATERIALIZED VIEW 粗格网聚合物化视图;
 
--- 步骤 2：在三档格网 MV 完成后刷新工单明细（依赖最新格网标识）
+-- 步骤 2：在细格网 MV 完成后刷新工单明细（依赖最新格网标识；与中 / 粗格网无先后关系）
 REFRESH MATERIALIZED VIEW CONCURRENTLY 工单明细物化视图;
 ```
 
@@ -506,6 +502,7 @@ REFRESH MATERIALIZED VIEW CONCURRENTLY 工单明细物化视图;
 - **问题**：三百万级点数据若仅维护细格网（如 5m），低 zoom 视口下单瓦片格网要素过密，MV 行数、MVT PBF 体积与 GWC 缓存压力均过大
 - **方案**：并行维护中格网（100m）、粗格网（300m），与服务层、前端 `sourceZ` 阈值对齐（见 **§3.1.1**、02 篇 §9）
 - **与双 MV 关系**：仍为「格网 MV 族 + 工单明细 MV」；不是第四类业务表，而是**同一聚合逻辑、三种格网步长**
+- **写作提示（勿漏）**：工单明细 MV **只**与细格网档建立关联、只维护一份，属**业务取舍**（仅细格网呈现的层级提供点击下钻）。博文须点明：若产品要求**任一档位都能下钻**，需为每档各建一份关联（各档步长重算格心、下游按档位选表/选列），DDL 与整体方案均需相应改造
 
 **必配图**：
 
@@ -519,9 +516,7 @@ flowchart TB
   sourceTable --> mv5
   sourceTable --> mv100
   sourceTable --> mv300
-  mv5 --> orderMV
-  mv100 --> orderMV
-  mv300 --> orderMV
+  mv5 -->|"仅细格网提供关联格网标识"| orderMV
 ```
 
 **非目标**：GWC Truncate、GeoServer Reload、Seed 矩阵。
@@ -534,6 +529,7 @@ flowchart TB
 - [ ] 双 MV + **三格网 MV 族**职责对比表
 - [ ] 索引设计表（格网 MV + 工单 MV）及设计动机
 - [ ] 刷新顺序 mermaid + 示例 SQL（三格网 + 工单，作为正文章节，标题不含「刷新顺序」）
+- [ ] 刷新链路与依赖图**只画细格网 → 工单 MV**（中 / 粗格网与工单 MV 无依赖边）
 - [ ] §F 三格网 LOD 动机 mermaid
 - [ ] 格网标识稳定性 + MVT 数字 id 必要性（含外部链接）
 - [ ] 无真实表名/列名

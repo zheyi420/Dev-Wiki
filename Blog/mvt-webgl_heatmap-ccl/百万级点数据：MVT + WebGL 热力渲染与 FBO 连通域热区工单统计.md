@@ -136,9 +136,7 @@ flowchart TB
   sourceTable --> gridMV5
   sourceTable --> gridMV100
   sourceTable --> gridMV300
-  gridMV5 --> orderMV
-  gridMV100 --> orderMV
-  gridMV300 --> orderMV
+  gridMV5 -->|"仅细格网提供关联格网标识"| orderMV
   gridMV5 --> mvtService
   gridMV100 --> mvtService
   gridMV300 --> mvtService
@@ -153,7 +151,7 @@ flowchart TB
 
 **路径说明**：
 
-- 源业务表经 ETL 或定时任务写入**三档格网聚合物化视图**（供热力 MVT）。**工单明细物化视图**在格网 MV 已存在且已刷新后构建：由源表关联格网 MV 取得**格网标识**并保留单条业务记录完整属性。日常数据更新须 **先刷新三档格网 MV、再刷新工单明细 MV**（顺序原因见 [01-数据层-双物化视图](https://www.cnblogs.com/zheyi420/p/22182285)）。
+- 源业务表经 ETL 或定时任务写入**三档格网聚合物化视图**（供热力 MVT）。**工单明细物化视图**在**细格网 MV** 已存在且已刷新后构建：由源表关联细格网 MV 取得**格网标识**并保留单条业务记录完整属性——只有细格网呈现的层级才提供点击下钻，因此该关联只挂在细格网这一档上。日常数据更新时，三档格网 MV 互不依赖、**可并行刷新**；工单明细 MV 须在**细格网 MV** 刷新完成后再刷新（顺序原因见 [01-数据层-双物化视图](https://www.cnblogs.com/zheyi420/p/22182285)）。
 
 ```mermaid
 flowchart LR
@@ -162,8 +160,6 @@ flowchart LR
   refreshGrid300[刷新粗格网MV]
   refreshOrder[刷新工单明细MV]
   refreshGrid5 --> refreshOrder
-  refreshGrid100 --> refreshOrder
-  refreshGrid300 --> refreshOrder
 ```
 
 - 地图客户端经 `tileUrlFunction` 按 `sourceZ` 请求对应档位的 **MVT 瓦片**（可带 `CQL_FILTER`）；WebGL **renderer** 仅 composite 与 active LOD 一致的瓦片，避免缩放跨档时**旧档位热力/热区标注残留**（详见 [04-前端-矢量瓦片 Renderer 覆写与 LOD composite](https://www.cnblogs.com/zheyi420/p/22699358)）。
