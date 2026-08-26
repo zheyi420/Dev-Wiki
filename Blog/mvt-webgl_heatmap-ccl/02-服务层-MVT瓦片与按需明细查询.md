@@ -287,7 +287,7 @@ BBOX(工单几何, ...) AND 业务场景 = ... AND 发生年份 IN (...) AND 所
 ## 系列导航
 
 - 总览：[百万级点数据：MVT + WebGL 热力渲染与 FBO 连通域热区工单统计](https://www.cnblogs.com/zheyi420/p/22182243)
-- 上一篇：[01-数据层-双物化视图](https://www.cnblogs.com/zheyi420/p/22182285)
+- 上一篇：[01-数据层-双物化视图与三格网 LOD](https://www.cnblogs.com/zheyi420/p/22182285)
 - 下一篇：[03-前端-热力图WebGL渲染管线](https://www.cnblogs.com/zheyi420/p/22182345)
 
 ---

@@ -64,7 +64,7 @@
 
 - 博文以 **Markdown** 存于本目录；系列配图放 `[assets/](./assets/)`（按需创建）
 - **链接分工**（勿混用）：
-  - **本 `AGENTS.md` 及仓库内维护**：合集内交叉引用使用 Dev-Wiki **项目相对路径**（以 `/Blog/mvt-webgl_heatmap-ccl/…` 开头），例如 `[/Blog/mvt-webgl_heatmap-ccl/01-数据层-双物化视图.md](/Blog/mvt-webgl_heatmap-ccl/01-数据层-双物化视图.md)`
+  - **本 `AGENTS.md` 及仓库内维护**：合集内交叉引用使用 Dev-Wiki **项目相对路径**（以 `/Blog/mvt-webgl_heatmap-ccl/…` 开头），例如 `[/Blog/mvt-webgl_heatmap-ccl/01-数据层-双物化视图与三格网 LOD.md](/Blog/mvt-webgl_heatmap-ccl/01-数据层-双物化视图与三格网 LOD.md)`
   - **各篇正式博文正文**（`00–05` 的 `.md`）：系列内交叉引用、系列导航表使用 **博客园线上 URL**（见 **§1.5**「线上」列）；正文**勿**写 Dev-Wiki 路径
 - 勿使用 Obsidian `[[wikilink]]` 语法
 
@@ -76,7 +76,7 @@
 | 序号 | 文件名（Dev-Wiki） | 线上（博客园） | 标题方向 |
 | --- | --- | --- | --- |
 | 00 | `[百万级点数据：MVT + WebGL 热力渲染与 FBO 连通域热区工单统计.md](/Blog/mvt-webgl_heatmap-ccl/百万级点数据：MVT + WebGL 热力渲染与 FBO 连通域热区工单统计.md)` | https://www.cnblogs.com/zheyi420/p/22182243 | 总览；**副标题/正文**点出主验证约 **三百万** 点数据与三格网 LOD；端到端架构、选型表、各篇导航 |
-| 01 | `[01-数据层-双物化视图.md](/Blog/mvt-webgl_heatmap-ccl/01-数据层-双物化视图.md)` | https://www.cnblogs.com/zheyi420/p/22182285 | 双 MV + **三格网 MV 族**（每精度一档）；格网标识与索引；源数据更新后的刷新顺序（正文章节，非标题） |
+| 01 | `[01-数据层-双物化视图与三格网 LOD.md](/Blog/mvt-webgl_heatmap-ccl/01-数据层-双物化视图与三格网 LOD.md)` | https://www.cnblogs.com/zheyi420/p/22182285 | 双 MV + **三格网 MV 族**（每精度一档）；格网标识与索引；源数据更新后的刷新顺序（正文章节，非标题） |
 | 02 | `[02-服务层-MVT瓦片与按需明细查询.md](/Blog/mvt-webgl_heatmap-ccl/02-服务层-MVT瓦片与按需明细查询.md)` | https://www.cnblogs.com/zheyi420/p/22182306 | 三格网 LOD 发布；`sourceZ` 阈值；查询层 vs 输出层；**MVT 属性裁剪**；**gzip 传输一句**；双业务数据集契约一句；MVT/WFS 分工 |
 | 03 | `[03-前端-热力图WebGL渲染管线.md](/Blog/mvt-webgl_heatmap-ccl/03-前端-热力图WebGL渲染管线.md)` | https://www.cnblogs.com/zheyi420/p/22182345 | 不用内置 Heatmap；postProcesses / AsShaders；**tileUrlFunction LOD 选层**；瓦片融合；**不含** renderer 覆写 |
 | 04 | `[04-前端-矢量瓦片Renderer覆写与LOD-composite.md](/Blog/mvt-webgl_heatmap-ccl/04-前端-矢量瓦片Renderer覆写与LOD-composite.md)` | https://www.cnblogs.com/zheyi420/p/22699358 | **`TileLayerBase` 三段论**：`findAltTiles_` / `drawTile_` active LOD 过滤；避免旧档位热力/热区标注残留 |
@@ -385,7 +385,7 @@ flowchart TB
 
 
 
-### 4.1 数据层 — `01-数据层-双物化视图.md`
+### 4.1 数据层 — `01-数据层-双物化视图与三格网 LOD.md`
 
 **目标读者（Agent 内化）**：数据工程师、后端、需理解热力数据模型的前端。
 
