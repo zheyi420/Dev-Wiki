@@ -79,8 +79,8 @@
 | 01 | `[01-数据层-双物化视图.md](/Blog/mvt-webgl_heatmap-ccl/01-数据层-双物化视图.md)` | https://www.cnblogs.com/zheyi420/p/22182285 | 双 MV + **三格网 MV 族**（每精度一档）；格网标识与索引；源数据更新后的刷新顺序（正文章节，非标题） |
 | 02 | `[02-服务层-MVT瓦片与按需明细查询.md](/Blog/mvt-webgl_heatmap-ccl/02-服务层-MVT瓦片与按需明细查询.md)` | https://www.cnblogs.com/zheyi420/p/22182306 | 三格网 LOD 发布；`sourceZ` 阈值；查询层 vs 输出层；**MVT 属性裁剪**；**gzip 传输一句**；双业务数据集契约一句；MVT/WFS 分工 |
 | 03 | `[03-前端-热力图WebGL渲染管线.md](/Blog/mvt-webgl_heatmap-ccl/03-前端-热力图WebGL渲染管线.md)` | https://www.cnblogs.com/zheyi420/p/22182345 | 不用内置 Heatmap；postProcesses / AsShaders；**tileUrlFunction LOD 选层**；瓦片融合；**不含** renderer 覆写 |
-| 04 | `[04-前端-矢量瓦片Renderer覆写与LOD-composite.md](/Blog/mvt-webgl_heatmap-ccl/04-前端-矢量瓦片Renderer覆写与LOD-composite.md)` | **待重写后更新** | **`TileLayerBase` 三段论**：`findAltTiles_` / `drawTile_` active LOD 过滤；避免旧档位热力/热区标注残留 |
-| 05 | `[04-前端-热区识别、计算与绘制.md](/Blog/mvt-webgl_heatmap-ccl/04-前端-热区识别、计算与绘制.md)`（物理文件后续可重命名为 `05-…`） | https://www.cnblogs.com/zheyi420/p/22182374（沿用至 05 重写） | 承接 03+04；FBO+CCL；ImageCanvas 边界；热区点击与双 MV；active LOD 统计对齐 |
+| 04 | `[04-前端-矢量瓦片Renderer覆写与LOD-composite.md](/Blog/mvt-webgl_heatmap-ccl/04-前端-矢量瓦片Renderer覆写与LOD-composite.md)` | https://www.cnblogs.com/zheyi420/p/22699358 | **`TileLayerBase` 三段论**：`findAltTiles_` / `drawTile_` active LOD 过滤；避免旧档位热力/热区标注残留 |
+| 05 | `[05-前端-热区识别、计算与绘制.md](/Blog/mvt-webgl_heatmap-ccl/05-前端-热区识别、计算与绘制.md)` | https://www.cnblogs.com/zheyi420/p/22182374 | 承接 03+04；FBO+CCL；ImageCanvas 边界；热区点击与双 MV；active LOD 统计对齐 |
 
 
 **本次 Agent 任务边界**：仅维护本 `AGENTS.md`；各篇 `.md` 正文由后续迭代撰写。
@@ -820,7 +820,7 @@ flowchart TB
 
 
 
-### 4.5 前端（下）— `05-前端-热区识别、计算与绘制.md`（物理文件暂为 [`04-前端-热区识别、计算与绘制.md`](C:/AIRace/Dev/zheyi420/Dev-Wiki/Blog/mvt-webgl_heatmap-ccl/04-前端-热区识别、计算与绘制.md)；博客园链至重写前）
+### 4.5 前端（下）— [`05-前端-热区识别、计算与绘制.md`](/Blog/mvt-webgl_heatmap-ccl/05-前端-热区识别、计算与绘制.md)
 
 **目标读者（Agent 内化）**：需实现「看得懂的热区」与「点得中的下钻」的前端工程师。
 
