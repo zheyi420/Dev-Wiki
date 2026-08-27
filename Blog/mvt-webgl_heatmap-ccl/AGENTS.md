@@ -66,6 +66,7 @@
 - **链接分工**（勿混用）：
   - **本 `AGENTS.md` 及仓库内维护**：合集内交叉引用使用 Dev-Wiki **项目相对路径**（以 `/Blog/mvt-webgl_heatmap-ccl/…` 开头），例如 `[/Blog/mvt-webgl_heatmap-ccl/01-数据层-双物化视图与三格网 LOD.md](/Blog/mvt-webgl_heatmap-ccl/01-数据层-双物化视图与三格网 LOD.md)`
   - **各篇正式博文正文**（`00–05` 的 `.md`）：系列内交叉引用、系列导航表使用 **博客园线上 URL**（见 **§1.5**「线上」列）；正文**勿**写 Dev-Wiki 路径
+  - **配图**：存 `./assets/`，本目录内各 `.md` 引用图片使用 **相对路径** `./assets/文件名.png`，例如 `![说明](./assets/00-overview-map-heatmap.png)`；**勿**对配图使用 `/Blog/mvt-webgl_heatmap-ccl/assets/…` 绝对路径
 - 勿使用 Obsidian `[[wikilink]]` 语法
 
 
@@ -1031,7 +1032,7 @@ return new WebGLVectorLayerRenderer(this, {
 | 对比表     | 内置方案 vs 本方案，≥3 行                                |
 | 代码块     | 伪代码或 10–30 行核心片段；标注「等价 OL Heatmap postProcess」等 |
 | 外部链接    | CCL 讲解博客、GeoServer **2.24.x** MVT（§2.2.1）、OL API / 源码优先 |
-| 图片      | 存 `./assets/`，Markdown 用绝对路径引用                  |
+| 图片      | 存 `./assets/`，Markdown 用相对路径 `./assets/` 引用      |
 
 
 ---
