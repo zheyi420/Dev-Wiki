@@ -15,7 +15,7 @@ MCP Host 与 MCP Server （程序、服务） 的沟通方式（transportType）
 - `SSE (Server-Sent Events)`
 
 
-![](AI/MCP/assets/Pasted%20image%2020260727231013.png)
+![](./assets/Pasted%20image%2020260727231013.png)
 
 
 # MCP Server
