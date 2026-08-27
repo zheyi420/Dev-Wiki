@@ -13,7 +13,7 @@
 
 ---
 
-## 1. OL 默认如何 composite 瓦片
+## 1. OL 源码行为：TileLayerBase 如何 composite 瓦片
 
 先看 OL 源码行为。`ol/layer/WebGLVectorTile.js` 创建的 `WebGLVectorTileLayerRenderer` 继承自 `ol/renderer/webgl/TileLayerBase.js`。TileLayerBase 为每帧渲染维护一张 **`tileRepresentationCache`**（LRU 缓存）：加载完成的瓦片会以「可绘制表示」（tile representation）的形式进入缓存，等待被帧绘制取用。
 
@@ -38,7 +38,7 @@ flowchart TB
 
 这套机制对「单图层瓦片源」完全正确：缓存里的瓦片都属于同一图层，任何替补都比空白强。
 
-## 2. 三格网 LOD 下的缺口
+## 2. 本方案缺口：三格网 LOD 共用 VectorTileSource
 
 本方案的现实不同：三档格网图层共用**同一个** `VectorTileSource`，`tileUrlFunction` 只是按 `sourceZ` 改写 URL 里的 `LAYER` 参数（见第三篇 §3）。在 OL 眼里这些瓦片同属于一个 source，缓存键只认 z/x/y——于是缓存里可以同时躺着细格网与中格网两套瓦片，而默认 composite **不区分它们属于哪一档**。
 
@@ -75,7 +75,7 @@ sequenceDiagram
   end
 ```
 
-## 3. 覆写方案：renderer 只画当前档
+## 3. 覆写方案：findAltTiles_ / drawTile_ 过滤 active LOD
 
 概念做法分四步（概念级描述，不展开实现类名）：
 

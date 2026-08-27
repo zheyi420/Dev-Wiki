@@ -232,7 +232,7 @@ WebGL 层不会随 `removeLayer` 自动释放：OL 明确要求对 WebGL 图层�
 
 ## References
 
-- [OpenLayers Heatmap 示例](https://openlayers.org/en/latest/examples/heatmap-earthquakes.html)
+- [OpenLayers Heatmap 示例](https://openlayers.org/en/latest/examples/heatmap-earthquakes.html)（官方仅提供 latest 交互示例；本系列以 OL **10.6.1** 为准。）
 - [ol/layer/Heatmap.js（v10.6.1）](https://github.com/openlayers/openlayers/blob/v10.6.1/src/ol/layer/Heatmap.js)
 - [ol/layer/WebGLVectorTile.js（v10.6.1）](https://github.com/openlayers/openlayers/blob/v10.6.1/src/ol/layer/WebGLVectorTile.js)
 - [ol/renderer/webgl/Layer.js（v10.6.1）](https://github.com/openlayers/openlayers/blob/v10.6.1/src/ol/renderer/webgl/Layer.js)

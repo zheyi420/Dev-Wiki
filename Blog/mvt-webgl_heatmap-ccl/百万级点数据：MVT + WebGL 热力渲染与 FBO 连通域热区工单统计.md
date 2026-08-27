@@ -67,7 +67,7 @@ flowchart LR
 | ------ | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
 | **数据** | **三格网**格网预聚合 + 工单明细保留 | 每业务数据源：细 / 中 / 粗三档格网聚合物化视图 + 工单明细 MV；**格网标识**刷新后稳定、**格内工单数**可更新                                                                                                             |
 | **服务** | 热力瓦片 + 按需明细        | 每数据源 **3 个 MVT 图层**（LOD 组）+ GWC WMTS + `CQL_FILTER`；**查询层**保留全列筛选，**PBF 输出**仅「格内工单数」+ 格网标识 fid；GWC 磁盘存未压缩 PBF，HTTP 层 **gzip** 可缩短传输（详见 [02-服务层-MVT瓦片与按需明细查询](https://www.cnblogs.com/zheyi420/p/22182306)） |
-| **前端** | GPU 热力 + CPU 热区后分析 | `tileUrlFunction` 按 `sourceZ` 选 LOD 图层；自定义 WebGL splat + gradient 后处理；**renderer** 仅 composite active LOD 瓦片；FBO readback → CCL → Overlay / ImageCanvas；同一套 active LOD 语义用于热区 cnt 采集                                                             |
+| **前端** | GPU 热力 + CPU 热区后分析 | `tileUrlFunction` 按 `sourceZ` 选 LOD 图层；自定义 WebGL splat + gradient 后处理；**renderer** 仅 composite active LOD 瓦片；FBO readback → CCL → Overlay / ImageCanvas；同一套 active LOD 语义用于格网计数采集                                                             |
 
 
 **数据**将三百万级点数据作**三格网**格网聚合、减列，得到适合热力图、数据量尽可能小的物化视图族；**服务**按筛选条件与缩放档位切片出图并缓存；**前端**负责按 LOD 读取、解析、热力渲染、renderer 过滤 composite、热区连通域识别与交互。三层边界清晰，换业务库表时仍可套用同一架构。
@@ -164,7 +164,7 @@ flowchart LR
 
 - 地图客户端经 `tileUrlFunction` 按 `sourceZ` 请求对应档位的 **MVT 瓦片**（可带 `CQL_FILTER`）；WebGL **renderer** 仅 composite 与 active LOD 一致的瓦片，避免缩放跨档时**旧档位热力/热区标注残留**（详见 [04-前端-矢量瓦片 Renderer 覆写与 LOD composite](https://www.cnblogs.com/zheyi420/p/22699358)）。
 - 解码后由 WebGL 对「格内工单数」做 splat 渲染并 gradient 上色；同场景跨 LOD 缩放可保留三档瓦片缓存以加速来回缩放，由 renderer 过滤保证屏上只显示当前档。
-- 瓦片就绪且热力重绘完成后，从 GPU 帧缓冲读取 alpha 掩膜，做 **8-连通域标注**；格网 cnt 采集与 renderer 共用 active LOD URL 过滤。
+- 瓦片就绪且热力重绘完成后，从 GPU 帧缓冲读取 alpha 掩膜，做 **8-连通域标注**；格网计数采集与 renderer 共用 active LOD URL 过滤。
 - 点击圆标时，走 **WFS** 路径：`关联格网标识 IN (...)`，从工单明细物化视图拉取列表——**不**从 MVT 瓦片 properties 读取明细列。
 
 本系列采用**双查询路径**：热力展示与下钻明细数据源、筛选契约不同，在数据层通过「格网标识」关联。
@@ -242,7 +242,7 @@ GeoServer 侧：三档格网 MV 各发布为 **MVT 矢量瓦片图层**（经 GW
 
 **不选单 MV 的原因**：把全部工单列塞进 MVT 会导致低 zoom 瓦片体积暴涨；查询层与输出层必须分离，主动裁剪 PBF 属性是预期优化，而非故障。
 
-**三格网 LOD 的改造点**：除 URL 选层外，多 LOD 共用 `VectorTileSource` 时须 **renderer 过滤** `findAltTiles_` / `drawTile_`，仅 composite active LOD 瓦片；否则缩放跨档且新档瓦片未就绪时，屏上可能仍显示**上一档**热力与热区标注（**旧档位残留**）。这与「重复 splat 导致计数虚高」不是同一类问题——热区 cnt 采集路径同样按 active LOD URL 过滤，与 renderer 语义一致。
+**三格网 LOD 的改造点**：除 URL 选层外，多 LOD 共用 `VectorTileSource` 时须 **renderer 过滤** `findAltTiles_` / `drawTile_`，仅 composite active LOD 瓦片；否则缩放跨档且新档瓦片未就绪时，屏上可能仍显示**上一档**热力与热区标注（**旧档位残留**）。这与「重复 splat 导致计数虚高」不是同一类问题——格网计数采集路径同样按 active LOD URL 过滤，与 renderer 语义一致。
 
 ---
 
