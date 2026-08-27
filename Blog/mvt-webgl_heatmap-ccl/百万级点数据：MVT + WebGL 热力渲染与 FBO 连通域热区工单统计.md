@@ -35,7 +35,7 @@
 需要解决的三大问题：
 
 1. **热力展示**：做热力图渲染，支持全量数据范围查看，并提供专题、场景、年份、区县等多维筛选，但不能靠客户端全量渲染所有点（必定卡顿）  
-  ➡️ 数据端对源表做**三格网 LOD**格网聚合（细 / 中 / 粗三档，结构相同、步长不同）与减列【_源数据压缩_】；服务端按视口 `sourceZ` 发布 **3 个 MVT 图层**并通过 GWC 缓存切片【_服务层预计算_】；HTTP 传输层可对 PBF 做 **gzip** 压缩（与属性裁剪、LOD **互补**，不写运维细节）。
+  ➡️ 数据端对源表做**三格网 LOD**格网聚合（细 / 中 / 粗三档，结构相同、步长不同）与减列【_源数据压缩_】；服务端按视口 `sourceZ` 发布 **3 个 MVT 图层**并通过 GWC 缓存切片【_服务层预计算_】；HTTP 传输层可对 PBF 做 **gzip** 压缩，与属性裁剪、LOD **互补**，缩短传输时延（GWC 存的是未压缩 PBF，详见 [02-服务层-MVT瓦片与按需明细查询](https://www.cnblogs.com/zheyi420/p/22182306)）。
 
 ![端到端热力展示界面](./assets/00-overview-map-heatmap.png)
 
@@ -104,7 +104,7 @@ flowchart LR
 
 *图：数据/服务/前端分工在界面上的对应，并可见筛选下推后的 MVT 瓦片请求载荷（抽象图层与 `CQL_FILTER` 结构）。*
 
-同一前端还可绑定**多套**「三格网 MVT + 工单 WFS」业务数据集；切换时更换 LAYER 集合并重拉视口瓦片（不写具体 UI 实现）。
+同一前端还可绑定**多套**「三格网 MVT + 工单 WFS」业务数据集；切换时更换 LAYER 集合并重拉视口瓦片。
 
 各层产出与消费关系如下：
 
@@ -292,7 +292,7 @@ GeoServer 侧：三档格网 MV 各发布为 **MVT 矢量瓦片图层**（经 GW
 | 篇      | 链接 | 本篇解决什么                                           |
 | ------ | --- | ------------------------------------------------ |
 | **01** | [01-数据层-双物化视图与三格网 LOD](https://www.cnblogs.com/zheyi420/p/22182285) | 双 MV + **三格网 MV 族**；格网标识与索引设计；源数据更新后的刷新顺序                   |
-| **02** | [02-服务层-MVT瓦片与按需明细查询](https://www.cnblogs.com/zheyi420/p/22182306) | 三格网 LOD 发布与 `sourceZ` 阈值；查询层 vs 输出层；MVT 属性裁剪；gzip 传输一句；MVT 与 WFS 分工                 |
+| **02** | [02-服务层-MVT瓦片与按需明细查询](https://www.cnblogs.com/zheyi420/p/22182306) | 三格网 LOD 发布与 `sourceZ` 阈值；查询层 vs 输出层；MVT 属性裁剪；HTTP gzip 传输；MVT 与 WFS 分工                 |
 | **03** | [03-前端-热力图WebGL渲染管线](https://www.cnblogs.com/zheyi420/p/22182345) | 为何不用内置 Heatmap；postProcesses / AsShaders；**tileUrlFunction LOD 选层**；瓦片 GPU 融合         |
 | **04** | [04-前端-矢量瓦片 Renderer 覆写与 LOD composite](https://www.cnblogs.com/zheyi420/p/22699358) | `TileLayerBase` 三段论：`findAltTiles_` / `drawTile_` active LOD 过滤；避免旧档位热力/热区标注残留 |
 | **05** | [05-前端-热区识别、计算与绘制](https://www.cnblogs.com/zheyi420/p/22182374) | 承接 03+04；FBO readback + CCL；ImageCanvas 热区边界；热区点击与双 MV；active LOD 统计对齐 |

@@ -78,7 +78,7 @@
 | --- | --- | --- | --- |
 | 00 | `[百万级点数据：MVT + WebGL 热力渲染与 FBO 连通域热区工单统计.md](/Blog/mvt-webgl_heatmap-ccl/百万级点数据：MVT + WebGL 热力渲染与 FBO 连通域热区工单统计.md)` | https://www.cnblogs.com/zheyi420/p/22182243 | 总览；**副标题/正文**点出主验证约 **三百万** 点数据与三格网 LOD；端到端架构、选型表、各篇导航 |
 | 01 | `[01-数据层-双物化视图与三格网 LOD.md](/Blog/mvt-webgl_heatmap-ccl/01-数据层-双物化视图与三格网 LOD.md)` | https://www.cnblogs.com/zheyi420/p/22182285 | 双 MV + **三格网 MV 族**（每精度一档）；格网标识与索引；源数据更新后的刷新顺序（正文章节，非标题） |
-| 02 | `[02-服务层-MVT瓦片与按需明细查询.md](/Blog/mvt-webgl_heatmap-ccl/02-服务层-MVT瓦片与按需明细查询.md)` | https://www.cnblogs.com/zheyi420/p/22182306 | 三格网 LOD 发布；`sourceZ` 阈值；查询层 vs 输出层；**MVT 属性裁剪**；**gzip 传输一句**；双业务数据集契约一句；MVT/WFS 分工 |
+| 02 | `[02-服务层-MVT瓦片与按需明细查询.md](/Blog/mvt-webgl_heatmap-ccl/02-服务层-MVT瓦片与按需明细查询.md)` | https://www.cnblogs.com/zheyi420/p/22182306 | 三格网 LOD 发布；`sourceZ` 阈值；查询层 vs 输出层；**MVT 属性裁剪**；§11 MVT HTTP gzip（篇幅：一段技术陈述，无运维 SOP）；双业务数据集（篇幅：1–2 句抽象契约）；MVT/WFS 分工 |
 | 03 | `[03-前端-热力图WebGL渲染管线.md](/Blog/mvt-webgl_heatmap-ccl/03-前端-热力图WebGL渲染管线.md)` | https://www.cnblogs.com/zheyi420/p/22182345 | 不用内置 Heatmap；postProcesses / AsShaders；**tileUrlFunction LOD 选层**；瓦片融合；**不含** renderer 覆写 |
 | 04 | `[04-前端-矢量瓦片Renderer覆写与LOD-composite.md](/Blog/mvt-webgl_heatmap-ccl/04-前端-矢量瓦片Renderer覆写与LOD-composite.md)` | https://www.cnblogs.com/zheyi420/p/22699358 | **`TileLayerBase` 三段论**：`findAltTiles_` / `drawTile_` active LOD 过滤；避免旧档位热力/热区标注残留 |
 | 05 | `[05-前端-热区识别、计算与绘制.md](/Blog/mvt-webgl_heatmap-ccl/05-前端-热区识别、计算与绘制.md)` | https://www.cnblogs.com/zheyi420/p/22182374 | 承接 03+04；FBO+CCL；ImageCanvas 边界；热区点击与双 MV；active LOD 统计对齐 |
@@ -148,6 +148,19 @@
 | **总览·数据层叙述** | 「将三百万级点数据作**三格网**格网聚合、减列，得到适合热力图、数据量尽可能小的物化视图族」 |
 | **总览·前端层叙述** | 「负责按 LOD 读取、解析、热力渲染、renderer 过滤 composite、热区连通域识别与交互」 |
 | **流程 / 管线 / 数据流配图** | 见 **§1.3.1**：凡讲解流程、管线、数据流（含端到端路径、刷新顺序、渲染/识别管线、双查询路径等），**必须**同节配 mermaid；禁止纯文字代替 |
+| **禁止元写作入正文** | 见 **§1.7.1**；篇幅/编辑指令（如「gzip 传输一句」「不写运维细节」）**不得**出现在 00–05 正文 |
+
+### 1.7.1 禁止元写作入正文（Agent 内化）
+
+下列约定**仅**供 Agent / DoD / 配图清单内化；**00–05 正文禁止**出现同类表述。
+
+| 类别 | Agent 内化（AGENTS / DoD / 配图清单） | 博文正文（00–05） |
+| --- | --- | --- |
+| 篇幅/编辑指令 | 「gzip 传输一句」「双数据集一句」「不写 Tomcat/nginx SOP」「不写 UI/宿主细节」 | **禁止**；改为直接写技术事实或链到对应篇 |
+| 否定式写作合约 | 「不写运维细节」「勿写…」「不写…」作为对读者的说明 | **禁止** |
+| 读者向指路 | — | **允许**：「详见 02 篇」「留给下一篇」「此处不展开实现细节」当且仅当是在说明**阅读范围或技术边界**，而非交代作者没写多少 |
+
+**自检**：正文 grep 不应出现 `不写运维`、`gzip 传输一句`、`不写具体 UI` 等 Agent 短语；导航表「本篇解决什么」列用读者向技术摘要，勿抄 DoD 篇幅用语。
 
 ---
 
@@ -1078,8 +1091,9 @@ return new WebGLVectorLayerRenderer(this, {
 - [ ] OL 非自带能力处均有源码三段论
 - [ ] 每篇 ≥2 mermaid + 核心对比表
 - [ ] 凡流程 / 管线 / 数据流章节均有 mermaid（**§1.3.1**），无纯文字代替
-- [ ] 02 篇含 MVT 输出契约、属性裁剪、**三格网 LOD**、**gzip 一句**
+- [ ] 02 篇含 MVT 输出契约、属性裁剪、**三格网 LOD**、§11 gzip 技术陈述（无运维 SOP）
 - [ ] **04 篇含 renderer 缺口正述（旧档位残留，非 cnt 虚高）**
+- [ ] **00–05 正文**无「不写/一句/勿写」类编辑元语言（见 **§1.7.1**）
 
 
 
@@ -1107,7 +1121,7 @@ return new WebGLVectorLayerRenderer(this, {
 3. 按 **00 → 01 → 02 → 03 → 04 → 05** 顺序撰写（博文正文交叉引用用 **§1.5** 博客园 URL；`AGENTS.md` 内用 Dev-Wiki 相对路径）
 4. 每篇写完对照第 8.2 分篇 DoD 自检（**勿**在博文文末附 DoD checklist）
 5. 全文完成后对照第 8.1 合集 DoD
-6. **禁止**在博文中出现实现仓库路径、目标读者表述、文末 DoD；**禁止**将 Seed/容器/runbook 扩写成运维章节；**禁止** cnt 重复累计 / splat 虚高误述
+6. **禁止**在博文中出现实现仓库路径、目标读者表述、文末 DoD；**禁止**将 Seed/容器/runbook 扩写成运维章节；**禁止** cnt 重复累计 / splat 虚高误述；**禁止**元写作表述渗入正文（见 **§1.7.1**）
 
 ---
 
