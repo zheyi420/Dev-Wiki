@@ -836,113 +836,177 @@ flowchart TB
 
 **目标读者（Agent 内化）**：需实现「看得懂的热区」与「点得中的下钻」的前端工程师。
 
-**必写章节**：
+**正文章节映射**（A–G 对应博文 §1–§7；§C 内嵌 §3.1–§3.7 子节编号与正文一致）：
 
 0. **背景环境**（开篇：**OpenLayers 10.6.1**（与 03、04 一致）；见 **§1.6**）
 
-#### A. 识别：为何 FBO readback，而非格网几何聚类
+#### A. 识别：为何 FBO readback，而非格网几何聚类（正文 §1）
 
 - 热区是 **splat 晕染后的视觉连通区域**，不是格网中心点的 GIS 邻接
 - 阈值划在 **GPU 上色后的 alpha** 上，标注与屏幕所见一致
 - **与 03 + 04 的衔接**：03 子类注入 `postProcesses` 完成 gradient 上色；04 renderer 过滤保证 composite 与 **active LOD** 一致。05 篇识别管线**建立在同一 WebGL 热力层之上**，而非格网几何聚类。
+- **必写**：方案 A（格网几何聚类）vs 方案 B（FBO + 像素掩膜）对比表（≥4 行）
 
-#### B. 承接 03 / 04 后的热区能力
+#### B. 承接 03 / 04 后的热区能力（正文 §2）
 
 博文须说明：**热区识别不是 OL 开箱能力**，而是 03 覆写 + 04 renderer 过滤在 CPU 侧的延伸。用下表写清「前置能力 → 热区能力」，**勿**展开 `readPixels` / `sourceTiles_` 实现细节。
 
 | 03 / 04 能力 | 05 篇由此得到的能力 | 说明（概念） |
 | --- | --- | --- |
 | `postProcesses` + gradient 上色 | **视觉一致的热区阈值** | CCL 掩膜与用户所见「热斑」同源 |
-| 04 active LOD composite | **热力与标注不残留旧档位** | 与 cnt 采集同一 URL 过滤语义 |
+| 04 active LOD composite | **热力与标注不残留旧档位** | 与格网计数采集同一 URL / active LOD 过滤语义 |
 | splat + 瓦片级 GPU 融合 | **连通域边界贴合晕染** | 像素域 8-连通，非格网 Voronoi |
-| MVT + splat weight | **热区合计工单数** | 连通域内聚合 **active LOD** 下当前帧格网 `格内工单数` |
-| 掩膜缓存 + `cpuOnly` 路径 | **仅改阈值时快速重算** | 不必重拉 MVT |
+| MVT + splat weight | **热区合计工单数** | 连通域内聚合 **active LOD** 下当前帧格网 **格内工单数** |
+| 同一 WebGL 热力层实例 | **缩放 / 筛选后标注与热力同步** | 平移缩放结束、瓦片到达后重识别；筛选切换先失效再刷新 |
+| 掩膜缓存 + `cpuOnly` 路径 | **仅改阈值时快速重算** | 不必重拉 MVT（依赖已捕获 splat alpha 掩膜） |
 
 **必写一段**：03 解决「瓦片化热力怎么画」；04 解决「LOD 切换时不 composite 错档」；05 解决「画出来的热斑怎么标、怎么点」。
 
-#### C. 识别管线
+#### C. 识别管线（正文 §3）
+
+**总览 mermaid**（与正文 §3 顶图一致；节点用语对齐正文，如「读回帧缓冲」而非 `readPixels`）：
 
 ```mermaid
 flowchart TB
   trigger[moveend或tileloadend防抖]
   render[触发WebGL层重绘]
-  readback[postrender readPixels]
+  readback[postrender读回帧缓冲]
   mask[RGBA下采样为alpha掩膜]
-  ccl[8连通域CCL labeling]
-  collect[从当前帧有效MVT瓦片采集格网计数]
-  aggregate[按label聚合sum与质心]
+  ccl[8连通域CCL标注]
+  collect[采集当前帧格网计数]
+  aggregate[按标签聚合合计与质心]
   trigger --> render --> readback --> mask --> ccl --> collect --> aggregate
 ```
 
+**§3.1 触发与防抖**。`moveend` / `tileloadend` 调度识别，约 300ms 防抖；标记待读回并触发 WebGL 层重绘。
 
+**§3.2 读回**。须在 `postrender` 之后读回 postProcess 完成后的 RGBA；Y 轴翻转对齐屏幕坐标系。锁定 OL 10.6.1，**不**展开私有渲染结构细节。
 
-**CCL**：对二值/alpha 掩膜做 8-连通域标注。博文须用 1–2 段话说明：输入为阈值化掩膜、输出为 label 图（背景为 0）、8-连通与 4-连通的区别。外部引用推荐 [炸鸡人博客 · 二值图像的连通域标记](https://zhajiman.github.io/post/connected_component_labelling/)（Seed-Filling / Two-Pass 讲解 + Python 示例）；4/8 邻接概念可辅以 [火山引擎 · 连通域的原理与 Python 实现](https://developer.volcengine.com/articles/7385112150811656242)。本方案在浏览器侧用 BFS（等价 Seed-Filling 的 8 邻域蔓延）实现，**不必**调用 OpenCV / scipy 等库 API。
+**§3.3 掩膜（readback → mask）**。下采样成长边 ≤512 的掩膜栅格；每格取覆盖块内 splat alpha **最大值**（非平均）；预乘 alpha 按整体透明度反推 splat 累积 alpha，再按热区阈值二值化。交叉引用 §3.3.1。
 
-**格网计数采集（一笔带过）**：须与 WebGL 当前帧同一 **active LOD**（URL `LAYER=` + `sourceZ`）、同一 CQL；经 active LOD 过滤后按 `grid_id` 去重聚合——**不是**旧 CQL 或错误档位重复累计。**不写** `sourceTiles_` 遍历实现。**勿**写 cnt 虚高 / 重复 splat 叙事。
+**§3.3.1 为何下采样到长边 512 的掩膜（必写）**
 
-**性能分级**：
+- **性能**：全分辨率 CCL 成本随视口面积线性涨（常见 CSS 视口 ~1920×900 约 170 万像素）；长边 512 后通常十余万像素（如 512×241），BFS 规模封顶
+- **保真**：粗格内取 splat alpha **最大值**，宁可保留小热斑、不让平均化冲淡细窄连通
+- **一致**：MVT 归属查表与掩膜共用 `pixelScale`（`floor(screenPx / pixelScale)`），避免「全分辨率 CCL、粗栅格查表」两套尺度
 
-- 仅改热区阈值：`cpuOnly` 重跑 CCL，不重读 FBO
-- 缩放换档 / 瓦片更新：全量 FBO readback
+| 维度 | 做法 | 效果 |
+| --- | --- | --- |
+| **性能** | 长边上限 512，CCL 在粗栅格上 BFS | 连通域规模有顶；与每帧 FBO 读回成本解耦 |
+| **保真** | 粗格内取 splat alpha **最大值** | 细窄热连通不易被平均化抹掉 |
+| **一致** | MVT 查表与掩膜共用 `pixelScale` | 热区标签与格网合计在同一粗栅格上对齐 |
 
+诚实表述：粗化引入边界误差（§3.4.1 注意点）；长边 512 在验证视口下**实测轮廓与合计可接受**，属工程折中；常量可调需回归 CCL 耗时与边界误差。
 
+```mermaid
+flowchart LR
+  fboFull[全分辨率FBO读回]
+  downsample[下采样长边不超过512]
+  splatGrid[splatAlpha粗栅格]
+  cclRun[8连通CCL]
+  fboFull --> downsample --> splatGrid --> cclRun
+```
 
-#### D. 绘制
+**§3.4 连通域标注（mask → ccl）**。8-连通 CCL；浏览器侧 BFS（等价 Seed-Filling 8 邻域）。外部引用：[炸鸡人博客 · 二值图像的连通域标记](https://zhajiman.github.io/post/connected_component_labelling/)、[火山引擎 · 连通域的原理与 Python 实现](https://developer.volcengine.com/articles/7385112150811656242)。可选 CCL 概念伪代码块。**不必**调用 OpenCV / scipy。
 
+**§3.4.1 格网归属与坐标映射（必写）**
 
-| 能力      | 实现                                        | 为何                |
-| ------- | ----------------------------------------- | ----------------- |
-| 热区工单数圆标 | `ol/Overlay` DOM，质心锚点                     | 不随缩放变形；可点击下钻（**勿**在博文写具体比例尺档位策略，见 **§1.7**） |
-| 热区边界    | `ol/source/ImageCanvas` + `ImageCanvas` 层 | 见下文 D             |
+热区归属是两条数据线在同一套 **CSS 屏幕像素** 空间汇合后的查表，**不是**格网 GIS 邻接。
 
+**双线汇合 mermaid**：
 
+```mermaid
+flowchart TB
+  gpuLine[GPU热力线]
+  mvtLine[MVT格网线]
+  fbo[FBO读回]
+  downsample[下采样掩膜]
+  ccl[CCL标注]
+  mvtCollect[采集格心屏幕位置]
+  merge[按掩膜格查连通域标签聚合]
+  gpuLine --> fbo --> downsample --> ccl
+  mvtLine --> mvtCollect --> merge
+  ccl --> merge
+```
 
+**必写内容清单**：
 
-#### E. 为何使用 `ImageCanvasSource` 绘制热区边界
+1. **三套坐标系表**（地理坐标 / OL CSS 屏幕像素 / 掩膜栅格索引）及角色说明
+2. **DevTools 澄清**：`canvas width` 为设备像素，不参与 MVT↔掩膜查表；FBO 读回后 ÷ `pixelRatio` 还原 CSS，再下采样
+3. **完整数字示例**：屏 A（2880×1351、`scale(0.666667)` → CSS ~1920×900.67、掩膜 512×241、`pixelScale` 3.75）；屏 B（2561×1172 → 掩膜 ~512×235）；walkthrough `screenPx=(750,420)` → `(gx,gy)` → 查连通域标签 → 累加格内工单数
+4. **正向映射公式**（概念伪代码，无仓库路径）
+5. **坐标系关系（ASCII 框图，硬性）**：双层叠加示意（OL CSS 视口 + MVT 投屏 → 掩膜格；下层 WebGL 设备像素 canvas + FBO → pixelRatio → 下采样）。须放入 fenced code block；**禁止**仅用 mermaid 替代
+6. **反向显示两条路径表**：圆标（地理加权质心 + `ol/Overlay`）/ 边界（掩膜格四角 → 地理 quad + `ImageCanvas`）；说明**不**经掩膜格回写屏幕；fallback（无格网计数时掩膜格中心 → 地理）一句
+7. **完整映射链（ASCII 三阶段框图，硬性）**：阶段 1 FBO→掩膜+CCL；阶段 2 MVT 归属查表；显示分叉圆标/边界。须放入 fenced code block；**禁止**仅用 mermaid 替代
+8. **映射注意点**（4 条）：粗化误差；圆标质心与 CCL 视觉解耦；单点采样；视口门控
+
+**§3.5 采集（ccl → collect）**。并行采集格心屏幕位置与格内工单数；**必须**交叉引用 §3.4.1。同一帧 active LOD（`LAYER=` + `sourceZ`）、同一 CQL、按格网标识去重；与 04 renderer composite 共用瓦片事实。**不写** `sourceTiles_` 遍历。
+
+**§3.6 聚合（collect → aggregate）**。`screenPx` → 掩膜格 → 连通域标签；累加格内工单数、地理加权质心；无数据标签丢弃。圆标/边界显示路径交叉引用 §3.4.1「反向显示」。
+
+**§3.7 性能分级**。mermaid：仅热区阈值变化 → 复用缓存掩膜重跑 CCL（cpuOnly）；缩放/瓦片更新 → 全量读回重建掩膜。两条路径独立防抖、互不取消。
+
+#### D. 绘制（正文 §4）
+
+**须交叉引用 §3.4.1**（圆标地理加权质心、边界掩膜格捕获 quad）。
+
+| 能力 | 实现 | 为何 |
+| --- | --- | --- |
+| 热区工单数圆标 | `ol/Overlay` DOM，质心锚点 | 不随缩放变形；可点击下钻（**勿**在博文写具体比例尺档位策略，见 **§1.7**） |
+| 热区边界 | `ol/source/ImageCanvas` + Image 图层 | 像素级贴合晕染边界；随视口缓存与重绘（见 §E） |
+
+圆标按合计十进制位数分档视觉；边界阶梯形白线引出 §5 ImageCanvas 选型。
+
+#### E. 为何使用 `ImageCanvasSource` 绘制热区边界（正文 §5）
 
 对照 `ol/source/ImageCanvas.js` 三段论：
 
-1. **OL 源码行为**：`canvasFunction(extent, resolution, pixelRatio, size, projection)` 按当前视口 extent 生成 canvas；结果由 source **缓存**；几何变化时须 `source.changed()` 失效
+1. **OL 源码行为**：`canvasFunction(extent, resolution, pixelRatio, size, projection)` 按当前视口 extent 生成 canvas；结果由 source **缓存**；内容变化时须 `changed()` 失效；`interpolate` 控制重采样
 2. **本方案缺口**：热区边界来自 **像素掩膜栅格的阶梯形轮廓**，不是预定义 Vector 多边形；splat 边界在像素级，矢量面难以贴合
-3. **选型**：捕获时刻将 labelId>0 的栅格单元转为 **地理锚定四角**，在 canvasFunction 内绘制阶梯形边界；地图平移/缩放时 OL 自动按 extent 重绘，边界与热力 **跟手**
+3. **选型**：捕获时刻将连通域标签 >0 的栅格单元四角转为 **地理锚定四边形**；`canvasFunction` 内映射回 canvas 像素，只描外边缘；`interpolate` 关闭以保持阶梯感
 
 **对比表**：
 
+| 方案 | 优点 | 缺点 |
+| --- | --- | --- |
+| Vector 多边形 | 原生矢量编辑 | 难以表达 GPU 晕染边界；顶点多、更新成本高 |
+| ImageCanvas | 像素级贴合；随视口缓存 | 需维护捕获时刻地理锚定；命中交互交给 Overlay 圆标 |
 
-| 方案          | 优点          | 缺点                      |
-| ----------- | ----------- | ----------------------- |
-| Vector 多边形  | 原生矢量编辑      | 难以表达 GPU 晕染边界；顶点多、更新成本高 |
-| ImageCanvas | 像素级贴合；随视口缓存 | 需维护捕获时刻地理锚定与掩膜一致性       |
+#### F. 其他难点（正文 §6）
 
-
-
-
-#### F. sourceZ / active LOD 对齐（checklist 级须在正文展开）
-
-- **active LOD 一致**：格网计数采集、WebGL composite（04 篇 renderer）、`tileUrlFunction` 选层须共用同一套 URL 过滤语义
-- **CQL 切换后标注短暂归零**：先 invalidate 清空 → 瓦片 refresh → `tileloadend` 后再识别（预期时序，非缺陷）
+- **active LOD 三方对齐**：格网计数采集、WebGL composite（04 renderer）、`tileUrlFunction` 选层须共用同一套 URL / `sourceZ` / CQL 过滤语义
+- **筛选切换后标注短暂归零**：先 invalidate 清空 → 瓦片 refresh → 识别恢复；`rendercomplete` 兜底（瓦片全缓存时不触发 `tileloadend`）
 
 **勿写**：空间交互锁 — 非本系列目标。**勿写**视口蓝标/点位互斥等宿主产品策略（**§1.7**、**§2.3**；**01 §6.2** 热区点击比例尺门槛为例外）。**勿写** cnt 重复累计 / splat 虚高误述（该短语仅 AGENTS 内化，不得写入博文）。
 
-#### G. 热区点击查询（回扣数据层）
+#### G. 热区点击查询：回扣数据层（正文 §7）
 
-- 点击圆标 → WFS `关联格网标识 IN (...)` → 打开工单列表
-- 说明此路径如何依赖 **01 双 MV** 设计（明细 MV 存关联格网标识）
+**必写 mermaid**：点击圆标 → 取出归属格网标识集合 → WFS `关联格网标识 IN (...)` → 工单明细列表。
+
+- 查询**不重复携带**四维度 ECQL（筛选已在 MVT 层体现）
+- 回扣 **01 双 MV**：明细 MV 物化关联格网标识；格网标识稳定；热区合计来自 MVT、明细来自 WFS
 
 **非目标**：筛选条、视口蓝标、调参面板、右栏列表。
 
-**交叉引用**：01（双 MV + 三格网、格网标识）、03（postProcess / splat）、04（active LOD composite）、02（WFS 契约）。
+**交叉引用**：01（双 MV + 三格网、格网标识）、02（WFS 契约）、03（postProcess / splat）、04（active LOD composite）。
+
+**小结须含**：§3.3.1（512 下采样）、§3.4.1（`pixelScale` 查表、地理锚定显示）要点 bullet。
 
 **DoD**：
 
 - [ ] 开篇「背景环境」表（**§1.6**：OL 10.6.1）
-- [ ] 03 + 04 衔接说明（§A–§B）+ **承接能力表**
-- [ ] 识别管线 mermaid + CCL 外部引用（§C）
-- [ ] ImageCanvas 三段论 + 对比表（§E）
-- [ ] §F **active LOD 统计对齐**（与 04 一致）
-- [ ] 热区点击与双 MV 回扣（§G）
-- [ ] ≥2 张 mermaid；**无** cnt 虚高误述
-- [ ] 无空间交互锁章节；**无** `sourceTiles_` / `readPixels` 实现展开
+- [ ] §1 选型对比表 + §2 承接能力表（§A–§B）
+- [ ] §3 总览 mermaid + §3.1–§3.2 触发/读回
+- [ ] §3.3.1：512 下采样动机表 + 子 mermaid
+- [ ] §3.4 CCL 外部引用（+ 可选伪代码）
+- [ ] §3.4.1：三套坐标系表 + 屏 A/B 数字示例 + walkthrough
+- [ ] §3.4.1：**两张 ASCII**（坐标系关系、完整映射链）；反向显示表 + 注意点 4 条
+- [ ] §3.5–§3.7 采集/聚合/性能分级（含性能分级 mermaid）
+- [ ] §4 交叉引用 §3.4.1；§5 ImageCanvas 三段论 + 对比表
+- [ ] §6 active LOD 对齐 + 筛选归零时序；§7 热区点击 mermaid + 双 MV
+- [ ] 全文 ≥5 张 mermaid（总览、512 子流程、双线汇合、性能分级、热区点击）
+- [ ] 博文正文无 `cnt`、`grid_id`、monorepo/插件路径；ASCII 图用「连通域标签」「格内工单数」
+- [ ] **无** cnt 虚高误述；**无**空间交互锁章节；**无** `sourceTiles_` / `readPixels` 实现展开
 
 ---
 
@@ -1107,7 +1171,7 @@ return new WebGLVectorLayerRenderer(this, {
 | 02  | **开篇背景环境**（GeoServer 2.24.x）+ **§9 三 MVT/sourceZ** + **§10 双数据集一句** + **§11 gzip 一句** + 属性裁剪 + MVT/WFS 分工 |
 | 03  | **开篇背景环境**（OL 10.6.1）+ 不用 Heatmap + **§B 覆写表（无 renderer 行）** + **LOD URL 选层** mermaid + 瓦片融合 |
 | **04**  | **开篇背景环境**（OL 10.6.1）+ **TileLayerBase 三段论标题**（OL 源码行为 / 本方案缺口 / 覆写方案）+ **残留问题（非 cnt 虚高）** + 覆写对比表 + mermaid |
-| **05**  | **开篇背景环境**（OL 10.6.1）+ 承接 03+04 + FBO/CCL + **active LOD 统计对齐** + ImageCanvas 三段论 + 热区点击 |
+| **05**  | **开篇背景环境**（OL 10.6.1）+ §1–§2 选型/承接表 + §3 管线（**§3.3.1 512 下采样**、**§3.4.1 坐标映射含双屏算例与两张 ASCII**、§3.5–§3.7 采集/聚合/性能分级）+ §4–§5 绘制与 ImageCanvas 三段论 + §6 active LOD/筛选归零 + §7 热区点击与双 MV |
 
 
 ---
