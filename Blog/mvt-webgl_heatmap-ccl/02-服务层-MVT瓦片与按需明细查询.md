@@ -122,6 +122,10 @@ GWC Tile Layer 的 GridSet、GetTile 的 `TILEMATRIXSET` 和前端瓦片源的 p
 
 字符串中的单引号必须按 ECQL 规则转义为两个单引号，不能直接拼接原始输入。
 
+![筛选状态与 MVT 请求载荷对照-00-overview-ui-chrome-networkpayload](./assets/00-overview-ui-chrome-networkpayload.png)
+
+*图：左下四维度筛选状态与 Network 中 MVT GetTile 载荷对照——`CQL_FILTER` 在查询层下推，瓦片 PBF properties 仍仅含格内工单数与格网标识。*
+
 ### 3.4 Parameter Filter 与参数化缓存
 
 GWC 需要显式允许 `CQL_FILTER` 作为 Parameter Filter。否则同一 z/x/y 在不同筛选条件下可能共用错误缓存。
@@ -139,6 +143,12 @@ flowchart TB
   cacheKey -->|"HIT"| pbf
   cacheKey -->|"MISS"| postgisQuery --> pbf
 ```
+
+同一瓦片坐标在有无 ECQL 时，GetTile 请求载荷与屏上热力会同步变化，而不是在客户端合并旧、新要素缓存。
+
+![筛选前后热力与 CQL_FILTER 对照-02-bridge-filter-before-after](./assets/02-bridge-filter-before-after.png)
+
+*图：同一瓦片坐标下，未筛选时 GetTile 不带 `CQL_FILTER`（左），收窄专题后 URL 出现专题 ECQL 且屏上热力与「当前画面」合计随之变化（右）；筛选由服务端查询层生效并驱动瓦片 refresh 重绘，而非客户端合并要素缓存。*
 
 筛选发生在 GeoServer 查询 PostGIS 时；GWC 负责按完整请求参数区分缓存；前端只需在筛选变化后刷新瓦片源，不需要自行合并旧、新瓦片数据。
 
@@ -275,6 +285,10 @@ flowchart TB
 关联格网标识 IN (...)
 ```
 
+![热区点击 WFS 仅格网标识 IN-02-devtools-wfs-grid-in](./assets/02-devtools-wfs-grid-in.png)
+
+*图：热区点击下钻时，尽管筛选 Dock 仍显示当前 MVT 筛选态，WFS 请求仅按关联格网标识 `IN (...)` 查询，不重复拼接事项专题/场景/年份/区县 ECQL。*
+
 这里不重复附加事项专题、业务场景、年份和区县条件。筛选已体现在当前 MVT 及其热区几何中，重复拼接四维度 ECQL 反而会让两条契约耦合。
 
 当前数据模型中，工单明细只关联**细格网**标识，格网标识也只保证在单一档位内有意义。因此细格网档提供热区明细下钻；若产品要求中、粗格网也能下钻，需要分别建立对应档位的关联关系，并让查询端按 active LOD 选择关联键，不能跨档位混用格网标识。
@@ -293,6 +307,12 @@ AND 所属区县
 空间范围直接写入 `CQL_FILTER` 的 `BBOX(...)`，不再同时传独立 `bbox` KVP。当前工单明细视图物化了业务场景、发生年份和所属区县，没有物化事项专题，因此事项专题只下推到 MVT 查询层，不能直接拼入该 WFS。若产品要求按专题查询视口明细，应先建立专题到业务场景的映射，或在明细视图中显式物化专题字段。
 
 当前请求策略先以 `count=1` 获取响应中的匹配总量，再按总量拉取完整结果，不依赖 `resultType=hits`。原因是部分 GeoServer 配置下 `hits` 可能返回 XML，而普通 JSON GetFeature 响应已经包含匹配总数。
+
+在同一筛选条件与当前视口下，可将「热区色带阈值」「热力饱和标准」调至最低时的「当前画面」工单合计，与「点位」功能触发的视口 WFS 探针 `numberMatched` 对照校验。掩膜汇总仅基于已加载 MVT 与 FBO 掩膜在客户端重算，远比每次视口拉取 WFS 更快；计数一致，说明 BBOX 路径与客户端格网汇总口径对齐。
+
+![视口热区掩膜与 BBOX WFS 计数校验-02-bridge-viewport-markers](./assets/02-bridge-viewport-markers.png)
+
+*图：在同一筛选条件与当前视口下，将「热区色带阈值」「热力饱和标准」调至最低后，「热区统计」面板「当前画面」工单合计、左下「点位」查询的视口范围内工单总件数，与 WFS `BBOX` 探针返回的匹配总量一致（图中均为 23,007 件），说明视口热区掩膜汇总与 WFS 明细统计口径对齐。掩膜路径仅基于已加载 MVT 与 FBO 掩膜在客户端重算，无需每次全量拉取 WFS，响应更快，且在本验证条件下计数一致。*
 
 两条路径的区别如下：
 
@@ -314,6 +334,10 @@ flowchart TB
   probe --> fullResult
 ```
 
+![视口 WFS BBOX 与场景 CQL-02-devtools-wfs-bbox](./assets/02-devtools-wfs-bbox.png)
+
+*图：视口工单 WFS 在 Dock 仅选业务场景时，`CQL_FILTER` 由 `BBOX` 与 `scene_type` 等属性条件组成，与热区点击的格网标识 `IN` 路径分离。*
+
 热区下钻是本系列主路径；视口查询只是同一 WFS 明细层上的另一种有界访问方式，不能把两者概括成“所有 WFS 都携带热力筛选表达式”。
 
 ---
@@ -327,6 +351,10 @@ flowchart TB
 | `>= 13` | 细格网（约 5m） | 保留更细的空间分布 |
 | `11`–`12` | 中格网（约 100m） | 降低中等视口下的要素密度 |
 | `< 11` | 粗格网（约 300m） | 控制低 zoom 大范围瓦片体积 |
+
+![细格网档位 GetTile LAYER-01-devtools-fine-layer-url](./assets/01-devtools-fine-layer-url.png)
+
+*图：视口 `sourceZ` 较高时 GetTile 的 `LAYER` 指向细格网（约 5m）档位 MVT 图层。*
 
 `sourceZ` 是瓦片源实际请求的层级，不应简单等同于 UI 显示的 View zoom。`tileUrlFunction` 根据 `sourceZ` 选择当前 active LOD 对应的 `LAYER`，三档图层共用同一套 CQL 与 PBF 输出契约。
 
