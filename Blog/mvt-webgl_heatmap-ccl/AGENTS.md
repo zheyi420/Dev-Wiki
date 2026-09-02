@@ -80,7 +80,7 @@
 | 00 | `[百万级点数据：MVT + WebGL 热力渲染与 FBO 连通域热区工单统计.md](/Blog/mvt-webgl_heatmap-ccl/百万级点数据：MVT + WebGL 热力渲染与 FBO 连通域热区工单统计.md)` | https://www.cnblogs.com/zheyi420/p/22182243 | 总览；**副标题/正文**点出主验证约 **三百万** 点数据与三格网 LOD；端到端架构、选型表、各篇导航 |
 | 01 | `[01-数据层-双物化视图与三格网 LOD.md](/Blog/mvt-webgl_heatmap-ccl/01-数据层-双物化视图与三格网 LOD.md)` | https://www.cnblogs.com/zheyi420/p/22182285 | 双 MV + **三格网 MV 族**（每精度一档）；格网标识与索引；源数据更新后的刷新顺序（正文章节，非标题） |
 | 02 | `[02-服务层-MVT瓦片与按需明细查询.md](/Blog/mvt-webgl_heatmap-ccl/02-服务层-MVT瓦片与按需明细查询.md)` | https://www.cnblogs.com/zheyi420/p/22182306 | 三格网 LOD 发布；`sourceZ` 阈值；查询层 vs 输出层；**MVT 属性裁剪**；§11 MVT HTTP gzip（篇幅：一段技术陈述，无运维 SOP）；双业务数据集（篇幅：1–2 句抽象契约）；MVT/WFS 分工 |
-| 03 | `[03-前端-热力图WebGL渲染管线.md](/Blog/mvt-webgl_heatmap-ccl/03-前端-热力图WebGL渲染管线.md)` | https://www.cnblogs.com/zheyi420/p/22182345 | 不用内置 Heatmap；postProcesses / AsShaders；**tileUrlFunction LOD 选层**；§4 每帧重绘 / 筛选 `refresh()`；**§4.1** 同 LOD 缩放、`TILEMATRIX` 升级与短暂直缝；§5.1–5.3 权重/调参/销毁；**6 处配图**（见 §6 / 配图清单 §8）；**不含** renderer 覆写 |
+| 03 | `[03-前端-热力图WebGL渲染管线.md](/Blog/mvt-webgl_heatmap-ccl/03-前端-热力图WebGL渲染管线.md)` | https://www.cnblogs.com/zheyi420/p/22182345 | 不用内置 Heatmap；postProcesses / AsShaders；**tileUrlFunction LOD 选层**；**§3.1** 视口快照 / 掩膜计算边界；§4 每帧重绘 / 筛选 `refresh()`；**§4.1** 同 LOD 缩放、`TILEMATRIX` 升级与短暂直缝；§5.1–5.3 权重/调参/销毁；**7 处配图**（见 §6 / 配图清单 §8，含 `掩膜计算边界.jpg`）；**不含** renderer 覆写 |
 | 04 | `[04-前端-矢量瓦片Renderer覆写与LOD-composite.md](/Blog/mvt-webgl_heatmap-ccl/04-前端-矢量瓦片Renderer覆写与LOD-composite.md)` | https://www.cnblogs.com/zheyi420/p/22699358 | **`TileLayerBase` 三段论**：`findAltTiles_` / `drawTile_` active LOD 过滤；避免旧档位热力/热区标注残留 |
 | 05 | `[05-前端-热区识别、计算与绘制.md](/Blog/mvt-webgl_heatmap-ccl/05-前端-热区识别、计算与绘制.md)` | https://www.cnblogs.com/zheyi420/p/22182374 | 承接 03+04；FBO+CCL；ImageCanvas 边界；热区点击与双 MV；active LOD 统计对齐 |
 
@@ -142,8 +142,8 @@
 | **数据规模** | 总览**主标题/文件名仍用「百万级」**；正文/副标题可写「当前方案验证规模约**三百万**条点数据」。Agent 内化主案例为**三百万级**；；格网 MV 行数情况为细（50万）、中（35万）、粗（20万），**不写**精确行数 |
 | **双业务数据集** | 总览/02 可各 **1–2 句**抽象「多套三格网 MVT + WFS，前端可切换业务数据集」；**不写**切换 UI / 宿主细节 |
 | **renderer 缺口表述** | **勿**将 WebGL renderer 覆写缺口写成「重复 splat / cnt 虚高」；正确叙事为 LOD 切换时 **旧档位热力/热区标注残留**（见 **§4.4**） |
-| **缩放/刷新/LOD 三分边界** | 须区分：**同 LOD 缩放** → `TILEMATRIX` 升级、新切片未 ready 时的**短暂瓦片直缝**（03 **§4.1**，非 splat 错误）；**筛选变更** → `source.refresh()` 重拉（03 §4）；**跨 LOD 阈值** → 旧档位 composite **残留**（04 专讲）。**勿**混写为 cnt 虚高或 FBO 增量合并失败 |
-| **热区与缩放** | 热区连通域（CCL）与热力**同步**计算与渲染，随视口/瓦片更新；**勿**称热区为「中观」能力，**勿**写「放大后识别热区」 |
+| **缩放/刷新/LOD 四分边界** | 须区分：**同 LOD 缩放** → `TILEMATRIX` 升级、新切片未 ready 时的**短暂瓦片直缝**（03 **§4.1**，非 splat 错误）；**筛选变更** → `source.refresh()` 重拉（03 §4）；**跨 LOD 阈值** → 旧档位 composite **残留**（04 专讲）；**缩小/平移动画中** → GPU 热力每帧重绘 vs 热区标注/边界沿用**上一份 FBO 视口快照**（03 **§3.1**，`moveend` 后重算对齐，**非**故障排查段落）。**勿**混写为 cnt 虚高或 FBO 增量合并失败 |
+| **热区与缩放** | 交互**结束后**（`moveend` / 瓦片齐备）热区 CCL 与热力对齐更新；**缩放动画过程中**可短暂出现热力已扩、圆标/边界仍限上一快照（03 **§3.1**）。**勿**称热区为「中观」能力，**勿**写「放大后识别热区」 |
 | **产品比例尺互斥** | 默认**勿**在系列博文写视口蓝标/点位互斥、自动开关等宿主产品策略（见 **§2.3**）。**例外**：**01 §6.2** 为论证「仅细格网关联、单工单明细 MV」，**允许**写热区点击比例尺门槛（视图 **≥ 1:20000**）及该比例尺下与**细格网（5m）** LOD 的对齐关系 |
 | **三层命名** | 分工表与架构叙述用「**数据 / 服务 / 前端**」；勿用「浏览器」作为分层名称。mermaid `subgraph` 客户端层标签用 `前端`。运行环境偶可写「地图客户端」 |
 | **选型对比表** | 列名用「**方案 A / 方案 B**」，选择列写「**方案 B**」；总结段用「**改造点**」「**原因**」，勿写「一句话」 |
@@ -735,8 +735,20 @@ flowchart TB
 | --- | --- | --- |
 | U1 | `03-pipeline-gradient.png` | §3 mermaid **之后** |
 | D2 | `01-devtools-fine-layer-url.png`（复用 02-D3） | U1 **之后** |
+| U5 | `掩膜计算边界.jpg` | **§3.1** 引子段落后（见 §C.1） |
 
 图注用语见 [`配图清单.md`](/Blog/mvt-webgl_heatmap-ccl/配图清单.md) **§8**（产出层抽象字段，无 `cnt` / `grid_id`）。
+
+#### C.1 视口快照：热区标注与边界的计算范围（博文 §3.1）
+
+> **章节顺序**：位于 **§3 渲染管线**（§C mermaid 与 U1/D2 配图）**之后**、**§4 新瓦片融入**（§D）**之前**。
+
+- **引子**：放大 → 开启热力与「显示热区工单数 / 显示热区边界」→ 计算完成 → **缩小**；抓拍某一帧：外围已有热力，圆标与红色阶梯边界仍集中在中心
+- **必写对比表**：热力图（MVT + WebGL 每帧） vs 热区圆标/边界（FBO 整屏 readback + CCL + 视口内格网计数）；列：渲染/计算来源、有效范围、典型更新时机
+- **必写 mermaid**：WebGL 热力 → 交互结束后 FBO readback → 下采样掩膜 → CCL → 采集视口内格网计数 → Overlay 圆标 / ImageCanvas 边界
+- **配图**：`掩膜计算边界.jpg`（U5）；图注说明「缩小瞬间」范围不一致，承下 04（active LOD composite）、05（坐标映射与 CCL 细节）
+- **边界**：本节只建立「GPU 热力 → 视口快照 → 标注/边界」分工；**非**故障排查、**非**修复方案；与 §4.1 直缝、04 跨 LOD 残留区分
+- **§2.3 交叉**：postProcess 产出的成品 alpha 亦为 §3.1 视口快照输入
 
 #### D. 新瓦片如何融入已有热力
 
@@ -825,7 +837,7 @@ float t = smoothstep(0., 1., (1. - length(coordsPx * 2. / quadSize)) * blurSlope
 gl_FragColor = vec4(t * weight, ...);
 ```
 
-**交叉引用**：02（WMTS/CQL、**MVT 属性裁剪**、**LOD 三图层**、gzip 一句）、**04**（renderer active LOD 过滤；03 **§4.1** 已覆盖同 LOD 缩放加载中间态）、05（FBO/CCL 承接同一 WebGL 层）。
+**交叉引用**：02（WMTS/CQL、**MVT 属性裁剪**、**LOD 三图层**、gzip 一句）、**04**（renderer active LOD 过滤；03 **§4.1** 已覆盖同 LOD 缩放加载中间态）、05（FBO/CCL 承接同一 WebGL 层；**§3.1** 承下 05 识别管线细节）。
 
 **DoD**：
 
@@ -833,11 +845,12 @@ gl_FragColor = vec4(t * weight, ...);
 - [ ] Heatmap.js vs WebGLVectorTile 对比表（§A）
 - [ ] **OL 覆写与扩展表**（§B）：含 postProcesses、AsShaders、**LOD URL 选层**；**不含** renderer 行
 - [ ] 渲染管线 mermaid 含 **resolveLod** + **§3 配图** U1 / D2（§C）
+- [ ] **§3.1** 双管线对比表 + 视口快照 mermaid + **U5** `掩膜计算边界.jpg`；与 §4.1 / 04 / 05 边界句（§C.1）
 - [ ] §4 **每帧重绘** mermaid + CPU 方案 A/B 对比表 + 筛选 refresh 配图 U2 / D1（§D）
 - [ ] **§4.1** 三类变化表 + 缩放因果 mermaid + U4 + 与 refresh / 04 边界说明（§D.1）
-- [ ] **6 处配图**已插入且图注符合 §1.7（清单 §8）
+- [ ] **7 处配图**已插入且图注符合 §1.7（清单 §8，含 1 JPG）
 - [ ] §5.1–5.3（权重公式、调参路径、销毁顺序）
-- [ ] 小结含「同 LOD 直缝」一句
+- [ ] 小结含「同 LOD 直缝」与「热力每帧 vs 热区视口快照」各一句
 - [ ] ≥1 段 OL 源码三段论（Heatmap `createRenderer` 与 WebGLVectorTile 缺口）
 - [ ] 无插件路径
 
@@ -1206,12 +1219,13 @@ return new WebGLVectorLayerRenderer(this, {
 10. Gradient post-pass：累积 alpha → 伪彩色
 11. 瓦片 sourceZ：OL 为 overzoom 选择的源级 z；既驱动 **LOD 选层**（`LAYER`），也驱动 WMTS **瓦片矩阵层级**（`TILEMATRIX`）；统计与 renderer 均须对齐 **active LOD**
 12. **同 LOD 缩放瓦片矩阵升级**：`change:resolution` **不**触发 `source.refresh()`；更高 `TILEMATRIX` 切片异步加载；每帧 FBO 重绘 → 短暂**瓦片直缝** → 切片齐备后愈合（03 **§4.1**）
-13. **WebGL renderer 覆写**：`findAltTiles_` / `drawTile_` 仅 composite active LOD；避免 **旧档位残留**（**非** cnt 重复累计叙事）
-14. **双业务数据集切换**（抽象）：多套三格网 MVT + WFS；切换时换 LAYER 集合并重拉瓦片（一句，不写 UI）
-15. FBO readback：GPU 结果 CPU 化
-16. 8-连通域 CCL：像素级热区分割
-17. 双查询路径：热区 `格网标识 IN` vs 视口 `BBOX + 筛选`（后者非系列重点，可一句带过）
-18. 稳定格网标识：刷新后业务格不变则 ID 不变
+13. **视口快照 vs 每帧 GPU 热力**（03 **§3.1**）：热区圆标/边界基于交互结束后的 FBO 整屏 readback + 掩膜边界；缩放动画中热力可先扩至外围、标注仍限上一快照；`moveend` 后重算对齐（**非**故障排查）
+14. **WebGL renderer 覆写**：`findAltTiles_` / `drawTile_` 仅 composite active LOD；避免 **旧档位残留**（**非** cnt 重复累计叙事）
+15. **双业务数据集切换**（抽象）：多套三格网 MVT + WFS；切换时换 LAYER 集合并重拉瓦片（一句，不写 UI）
+16. FBO readback：GPU 结果 CPU 化
+17. 8-连通域 CCL：像素级热区分割
+18. 双查询路径：热区 `格网标识 IN` vs 视口 `BBOX + 筛选`（后者非系列重点，可一句带过）
+19. 稳定格网标识：刷新后业务格不变则 ID 不变
 
 ---
 
@@ -1246,7 +1260,7 @@ return new WebGLVectorLayerRenderer(this, {
 | 00  | **开篇背景环境**（§1.6 全集表）+ 三百万主案例 + LOD 端到端图 + **单格网 vs 三格网**选型 + 导航 01–05；**正文无实现字段名** |
 | 01  | **开篇背景环境**（PG/PostGIS）+ 双 MV + **三格网 MV 族** + 索引设计 + 刷新顺序（三格网 + 工单 SQL）+ §F LOD 动机 + **§6.2 比例尺/细格网/单明细 MV** |
 | 02  | **开篇背景环境**（GeoServer 2.24.x）+ **§9 三 MVT/sourceZ** + **§10 双数据集一句** + **§11 gzip 一句** + 属性裁剪 + MVT/WFS 分工 |
-| 03  | **开篇背景环境**（OL 10.6.1）+ §A–B 覆写表/postProcess + §3 管线 mermaid/配图 U1·D2 + §4 每帧重绘/refresh/§4.1 直缝/配图 U2·D1·U4 + §5.1–5.3/配图 U3 + **6 处 assets**；无 renderer 覆写 |
+| 03  | **开篇背景环境**（OL 10.6.1）+ §A–B 覆写表/postProcess + §3 管线 mermaid/配图 U1·D2 + **§3.1 视口快照/双管线/U5** + §4 每帧重绘/refresh/§4.1 直缝/配图 U2·D1·U4 + §5.1–5.3/配图 U3 + **7 处 assets**（含 1 JPG）；无 renderer 覆写 |
 | **04**  | **开篇背景环境**（OL 10.6.1）+ **TileLayerBase 三段论标题**（OL 源码行为 / 本方案缺口 / 覆写方案）+ **残留问题（非 cnt 虚高）** + 覆写对比表 + mermaid |
 | **05**  | **开篇背景环境**（OL 10.6.1）+ §1–§2 选型/承接表 + §3 管线（**§3.3.1 512 下采样**、**§3.4.1 坐标映射含双屏算例与两张 ASCII**、§3.5–§3.7 采集/聚合/性能分级）+ §4–§5 绘制与 ImageCanvas 三段论 + §6 active LOD/筛选归零 + §7 热区点击与双 MV |
 
