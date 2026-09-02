@@ -5,7 +5,7 @@ description: 根据 git 暂存区生成 Conventional Commit 文案（仅 message
 
 # Git Commit Message（仅文案）
 
-根据 **git 暂存区（staged）** 生成 **commit message 文案**，供用户手动复制粘贴提交。
+根据 **git 暂存区（staged）** 生成 **commit message 文案**，供用户手动复制粘贴提交。  
 monorepo 下 scope 按 `package.json` 目录结构自动推导。
 
 ## 职责边界

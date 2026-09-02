@@ -99,9 +99,17 @@ flowchart TB
   filter --> resolveLod --> url --> vts --> decode --> splat --> fbo --> grad
 ```
 
+![MVT splat 与 gradient 成品热力-03-pipeline-gradient](./assets/03-pipeline-gradient.png)
+
+*图：MVT 格网点经 splat 加性混合写入组 FBO，再经 gradient postProcess 映射为冷蓝→热红的成品热力（与 §3 管线 mermaid 对应）。*
+
 逐段说明。
 
 **LOD 选层（resolveLod）**。上一篇发布的三档格网 MVT 图层共享同一套 CQL 与 PBF 输出契约。`tileUrlFunction` 拿到瓦片坐标后，先按 OL 为当前视口选定的 `sourceZ` 解析 active LOD：`sourceZ >= 13` 取细格网，`11`–`12` 取中格网，低于 `11` 取粗格网，再把对应图层名写进 WMTS GetTile 的 `LAYER` 参数。也就是说，三档图层在前端看来是同一条 URL 模板的不同参数取值——瓦片源与 WebGL 层都只有一份。
+
+![tileUrlFunction WMTS GetTile URL-01-devtools-fine-layer-url](./assets/01-devtools-fine-layer-url.png)
+
+*图：`tileUrlFunction` 按 sourceZ 拼装的 GWC WMTS GetTile URL（`LAYER`、`TILEMATRIX` 等）。*
 
 **瓦片源（filter → url → vts）**。`VectorTileSource` 内置与 GWC GridSet 对齐的 `WMTSTileGrid`，无需请求 GetCapabilities。`tileUrlFunction` 里还有一道请求门控：瓦片地理范围与业务数据范围不相交时直接不生成 URL（OL 允许瓦片 URL 为空，该瓦片不会发起请求，见上一篇 §4）；否则拼出带 `TILEMATRIX / TILEROW / TILECOL` 的 WMTS GetTile URL，筛选条件非默认时附加 `CQL_FILTER`。筛选状态变化时只更新「下一次生成 URL 所用的 CQL」，再调 `source.refresh()` 让 OL 重新拉取视口瓦片。
 
@@ -158,6 +166,10 @@ flowchart TB
 
 第一，**筛选变更只需 `source.refresh()`**。CQL 变化后 OL 会重拉视口内瓦片（URL 里的 `CQL_FILTER` 已更新），新瓦片到达后自然进入下一帧的有效瓦片集，前端无需做任何新旧数据 diff。
 
+![筛选 refresh 前后热力对比-03-filter-refresh-compare](./assets/03-filter-refresh-compare.png)
+
+*图：同一视口与比例尺下，仅事项专题筛选不同；右图热力收窄来自 CQL 变更后 `source.refresh()` 与 GPU 每帧重绘，而非客户端合并瓦片要素缓存。*
+
 第二，**不要在 CPU 侧合并瓦片要素缓存**。一个容易想到的错误路线是：监听瓦片加载事件，把各瓦片要素合并进一份「全量列表」再喂给渲染。这与 GPU 帧语义完全冲突：
 
 | 对比维度 | 方案 A：CPU 合并瓦片要素缓存 | 方案 B：每帧重绘有效瓦片集（本方案） |
@@ -166,6 +178,10 @@ flowchart TB
 | 实现成本 | 多一份全量要素缓存，加加载、淘汰、刷新三条同步循环 | 零融合代码，加性混合即合并 |
 | 内存占用 | 全量要素常驻内存，随浏览范围增长 | 只画当前帧需要的瓦片 |
 
+![筛选 refresh 后 Network GetTile 累计-03-devtools-refresh-tiles](./assets/03-devtools-refresh-tiles.png)
+
+*图：筛选变更后 Preserve log 下同一视口再请求一批 GetTile（示例：由 9 条增至 18 条），对应 `source.refresh()` 以新 CQL 重拉视口 MVT，无手写 merge 循环。*
+
 理解了「每帧重绘」，就不会再去寻找增量合并点。剩下两个与瓦片缓存有关的策略值得一提。
 
 **同场景跨档缩放不清缓存**。三档 LOD 的瓦片 URL 只在 `LAYER` 参数上不同，它们可以并存于同一个瓦片源缓存：来回缩放时旧档瓦片不主动清除（purge），再次回到该档位可直接复用。但「缓存里并存」不等于「可以同时画」——OL 默认的 composite 逻辑并不区分瓦片属于哪一档，需要 renderer 覆写来保证屏幕上只出现 active LOD 的内容，这正是[下一篇](https://www.cnblogs.com/zheyi420/p/22699358)的主题。
@@ -173,6 +189,47 @@ flowchart TB
 **切换业务数据集按图层白名单清理**。切换到另一套业务数据集时，前端按「当前数据集的三档图层」为白名单清理瓦片缓存中非本数据集的瓦片，再刷新重拉——概念上仍是「换 URL 键 + refresh」，不涉及逐要素数据合并。
 
 真正需要维护时序的只有一件事：筛选刷新后等待瓦片重新到达，再驱动依赖瓦片的下游计算——这正是第 05 篇热区识别要处理的「短暂归零」时序。
+
+
+### 4.1 缩放加载：同 LOD 下的瓦片矩阵升级
+
+除筛选 refresh 外，**平移与缩放**也会不断换一批瓦片坐标，但触发路径不同：放大视图时 `view` 的 `change:resolution` 只会通知 WebGL 层重绘，**不会**改 CQL、也**不会**调 `source.refresh()`。OpenLayers 按新 resolution 向 `VectorTileSource` 索要更高 sourceZ 的瓦片，`tileUrlFunction` 拼出新的 GetTile URL——需要区分三类变化：
+
+| 维度 | 放大后典型变化 | 是否为本节讨论对象 |
+| --- | --- | --- |
+| **WMTS 瓦片矩阵** | `TILEMATRIX` / `TILEROW` / `TILECOL`（sourceZ）升高，视口需要更多、更细的切片 | **是** |
+| **三格网 LOD（`LAYER`）** | 仅当 sourceZ 跨过 11 / 13 阈值时才切换细 / 中 / 粗格网图层 | **否**（本节在阈值内放大） |
+| **筛选 CQL** | 变更才 `refresh()` 重拉 | **否** |
+
+在同一格网 LOD 档位内连续放大时，`LAYER` 保持不变，变化的是 WMTS **瓦片矩阵层级**——不是三格网 LOD 切换。帧与帧之间仍**不保留**上一帧热力：每帧清空组 FBO，只对当前帧**已就绪**且 active LOD 匹配的瓦片做 splat 加性混合。若放大后更高 `TILEMATRIX` 的新切片尚在异步下载，邻接格尚未 ready，屏上该格为空，与已绘邻格之间会出现沿瓦片网格边界的**短暂直缝**；各切片加载完成后下一帧 FBO 重绘即愈合——这是「每帧重绘有效瓦片集」在缩放加载下的正常中间态，**不是** FBO 增量合并失败，也**不是** splat 参数或数据错误。
+
+```mermaid
+flowchart TB
+  zoomIn[放大地图 change resolution]
+  newSourceZ[OL按新resolution计算更高sourceZ]
+  tileUrl[tileUrlFunction拼URL]
+  sameLayer[LAYER仍为同一格网LOD档位]
+  higherMatrix[TILEMATRIX与行列号更新]
+  netGetTile[并发GetTile异步返回]
+  perFrame[每帧清空组FBO]
+  drawReady[仅splat已ready且activeLOD的瓦片]
+  seam[邻接切片未ready则网格直缝]
+  heal[tileloadend后下一帧愈合]
+  zoomIn --> newSourceZ --> tileUrl
+  tileUrl --> sameLayer
+  tileUrl --> higherMatrix
+  higherMatrix --> netGetTile --> drawReady
+  newSourceZ --> perFrame --> drawReady
+  drawReady --> seam
+  netGetTile --> heal --> drawReady
+```
+
+![同 LOD 放大后瓦片加载中间态-mvt-切片更新时效果](./assets/mvt-切片更新时效果.png)
+
+*图：在同一格网 LOD 档位内放大地图后，视口改请求更高 TILEMATRIX 的 MVT 切片（LAYER 不变）；WebGL 层每帧仅对已就绪切片整体 splat 重绘组 FBO，新切片异步到达前邻格未绘制，连片热区出现沿瓦片网格的短暂直缝，待切片齐备后下一帧即愈合——属 §4「每帧重绘有效瓦片集」在缩放加载下的正常中间态，与筛选 refresh 无关。*
+
+与上文「筛选 refresh」及[下一篇](https://www.cnblogs.com/zheyi420/p/22699358)「跨 LOD 阈值后旧档画面残留」不同：本节是**同 LOD 缩放**时的加载中间态；筛选变更走 `refresh()` 重拉（见上图与 Network 对照），跨档 composite 过滤是 renderer 覆写主题。
+
 
 ---
 
@@ -187,6 +244,10 @@ flowchart TB
 const linear = Math.min(1, Math.log(格内工单数 + 1) / Math.log(Math.max(1, 热力饱和标准)))
 const weight = Math.pow(linear, 1.4) // 幂次 > 1，压低中低段
 ```
+
+![热力饱和标准调参对比-03-tuning-auto-expand](./assets/03-tuning-auto-expand.png)
+
+*图：降低「热力饱和标准」后单格权重归一化分母变小，同等格内工单数映射更高 splat 权重，热力更易饱和变红；参数经 uniform/attribute 写入 WebGL 层后重绘生效。*
 
 **热力饱和标准**（单格累计多少件算「最热」）决定归一化分母：调大它需要更多工单叠加才饱和，适合密集区域防止整图过红；幂次曲线进一步拉开中低段差异，让「温」和「热」在色带上更可区分。实现上还保留了不做幂次的纯对数模式作为对照项，默认启用「对数 + 幂次」组合。
 
@@ -213,7 +274,7 @@ WebGL 层不会随 `removeLayer` 自动释放：OL 明确要求对 WebGL 图层�
 - 内置 `ol/layer/Heatmap` 绑定全量 `Vector` 源与无瓦片语义的 renderer，不能直接承载 MVT；本方案把它的 splat 与 gradient 数学迁移到 `WebGLVectorTile` 子类。
 - 六个扩展点中，`postProcesses_` 私有注入与 `AsShaders` 断言是版本敏感点，本系列锁定 OpenLayers 10.6.1。
 - `tileUrlFunction` 按 `sourceZ` 在三档格网图层间选层；三档瓦片共存于同一瓦片源缓存，但屏幕上只显示哪一档由 renderer 决定——这是下一篇的主题。
-- 多瓦片融合不靠 CPU 合并：每帧对当前有效瓦片集重新 splat + 加性混合；筛选变更只调 `source.refresh()`。
+- 多瓦片融合不靠 CPU 合并：每帧对当前有效瓦片集重新 splat + 加性混合；筛选变更只调 `source.refresh()`；同 LOD 内放大会请求更高 `TILEMATRIX` 的新切片，加载中间态可能出现短暂瓦片直缝（§4.1），与筛选 refresh 无关。
 - 权重默认经「对数 + 幂次」归一化并封顶，配合热力饱和标准与色带，控制稀疏与密集区域的视觉平衡。
 - 热力层就绪后，接下来两篇分别解决「多档瓦片只画当前档」（04）与「画出来的热斑怎么标、怎么点」（05）。
 
