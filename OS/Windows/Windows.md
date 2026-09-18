@@ -44,6 +44,10 @@
 
 # Case
 
+## Win10 关闭休眠与快速启动
+
+释放 `C:\hiberfil.sys`、关掉快速启动：[Win10-关闭休眠与快速启动](/OS/Windows/Win10-关闭休眠与快速启动.md)
+
 ## Win10 磁盘管理
 
 [Win10磁盘管理教程：新建、合并分区，添加和修改盘符](https://www.pcoic.com/system/windows/218.html) 
