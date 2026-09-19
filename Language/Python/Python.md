@@ -19,7 +19,9 @@
 
 ### python3 本地配置
 
-系统变量设置好
+Windows 10/11 新机推荐用 uv 管理解释器、装到 D 盘：[Windows-uv-Python-环境配置](/Language/Python/Windows-uv-Python-环境配置.md)。日常命令见 [uv](/Language/Python/uv.md)。
+
+旧方式：python.org 安装包 + 系统变量设置好
 
 ```powershell
 PS C:\Users> python -V
