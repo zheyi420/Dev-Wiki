@@ -35,7 +35,7 @@ C:\Program Files\nodejs\node.exe
 
 ### 最佳实践
 
-Windows 11 新电脑从零安装（nvm + Node + npm + pnpm 10，装到 D 盘）：[Windows-nvm-Node-pnpm-环境配置](/Node/Windows-nvm-Node-pnpm-环境配置.md)
+Windows 11 新电脑从零安装（nvm 默认路径 + Node + npm + pnpm 10，缓存上 D）：[Windows-nvm-Node-pnpm-环境配置](/Node/Windows-nvm-Node-pnpm-环境配置.md)
 
 使用 nvm-windows，参考 [Installation & Upgrades](https://github.com/coreybutler/nvm-windows#installation--upgrades) 
 > 为了简单起见，我们建议在Windows上使用NVM之前卸载所有现有版本的Node.js。删除任何现有的Node.js安装目录(例如，`%ProgramFiles%\nodejs`)。

@@ -1,4 +1,4 @@
-> Windows 11 新电脑从零配置 nvm / Node / npm / pnpm 10。工具装到 D 盘，避免占满系统盘。npm 随 Node 安装，不必单独下载。
+> Windows 11 新电脑从零配置 nvm / Node / npm / pnpm 10。本体走 nvm-windows 默认路径，npm / pnpm 缓存指到 D 盘。npm 随 Node 安装，不必单独下载。
 
 # 原则
 
@@ -12,19 +12,21 @@
 
 # 推荐目录
 
-新机按盘符改即可。`nodejs` 这一项**不要先手动建文件夹**，留给安装程序创建符号链接。
+本体用安装向导默认路径，不要改到 D 盘。`C:\Program Files\nodejs` **不要先手动建文件夹**，留给安装程序创建符号链接。
 
 ```text
-D:\dev\env\nvm          NVM_HOME（nvm 本体 + 各版本 Node）
-D:\dev\env\nodejs       NVM_SYMLINK（当前版本入口，必须是符号链接）
+%APPDATA%\nvm                 NVM_HOME（nvm 本体 + 各版本 Node）
+C:\Program Files\nodejs       NVM_SYMLINK（当前版本入口，必须是符号链接）
 D:\dev\env\cache\npm-cache
 D:\dev\env\cache\pnpm-store
 D:\dev\env\cache\pnpm-cache
 ```
 
+`%APPDATA%\nvm` 即 `C:\Users\<用户名>\AppData\Roaming\nvm`。项目仍放 `D:\dev\project`。
+
 # 安装前清理
 
-空白新机可跳过本节。若已误装 Node `.msi`、旧 nvm，或 Path 里已有 `nodejs`，必须先清干净，否则 `nvm use` 看起来成功、`node -v` 仍指向旧安装。
+空白新机可跳过本节。若已误装 Node `.msi`、旧 nvm（含曾按旧文档装到 `D:\dev\env\nvm`），或 Path 里已有 `nodejs`，必须先清干净，否则 `nvm use` 看起来成功、`node -v` 仍指向旧安装。
 
 1. 关掉 Cursor / VS Code、所有终端、正在跑的 `node` / `npm` / `pnpm`。
 2. 管理员 PowerShell 执行 `nvm off`（没有 `nvm` 命令则跳过）。
@@ -35,6 +37,8 @@ D:\dev\env\cache\pnpm-cache
 $paths = @(
   "$env:APPDATA\nvm",
   "C:\Program Files\nodejs",
+  "D:\dev\env\nvm",
+  "D:\dev\env\nodejs",
   "$env:APPDATA\npm",
   "$env:LOCALAPPDATA\npm",
   "$env:LOCALAPPDATA\npm-cache",
@@ -55,11 +59,11 @@ if (Test-Path "$env:USERPROFILE\.npmrc") {
 }
 ```
 
-项目目录（如 `D:\dev\project`）和其中的 `node_modules` **不要删**。
+项目目录（如 `D:\dev\project`）和其中的 `node_modules` **不要删**。`D:\dev\env\cache` 可留，重装后仍会用。
 
 5. **设置 → 系统 → 关于 → 高级系统设置 → 环境变量**。用户变量、系统变量都要看：
-   - 删除 `NVM_HOME`、`NVM_SYMLINK`（若存在）
-   - Path 中删除 `...\AppData\Roaming\nvm`、`...\AppData\Roaming\npm`、`C:\Program Files\nodejs`、`%NVM_HOME%`、`%NVM_SYMLINK%` 以及旧的 pnpm / yarn 路径
+   - 删除 `NVM_HOME`、`NVM_SYMLINK`（若存在；安装程序稍后会按默认路径重写）
+   - Path 中删除 `D:\dev\env\nvm`、`D:\dev\env\nodejs`、`...\AppData\Roaming\nvm`、`...\AppData\Roaming\npm`、`C:\Program Files\nodejs`、`%NVM_HOME%`、`%NVM_SYMLINK%` 以及旧的 pnpm / yarn 路径
 
 6. **关掉所有终端再开一个新的**，核对应几乎找不到旧命令：
 
@@ -70,27 +74,27 @@ Get-ChildItem Env:NVM*, Env:PNPM* -ErrorAction SilentlyContinue
 ($env:Path -split ';') | Where-Object { $_ -match 'node|npm|nvm|pnpm|yarn' }
 ```
 
-# 安装 nvm 到 D 盘
+# 安装 nvm（默认路径）
 
 1. 从 [nvm-windows Releases](https://github.com/coreybutler/nvm-windows/releases) 下载 1.x 的 `nvm-setup.exe`（Windows 11 64 位）。
-2. 安装向导两项都改到 D 盘：
+2. 安装向导两项都**保持默认**，不要改到 D 盘：
 
-| 向导项 | 填 |
+| 向导项 | 默认（保持） |
 |--------|-----|
-| NVM 安装目录 | `D:\dev\env\nvm` |
-| Node.js symlink | `D:\dev\env\nodejs` |
+| NVM 安装目录 | `%APPDATA%\nvm`（如 `C:\Users\<用户名>\AppData\Roaming\nvm`） |
+| Node.js symlink | `C:\Program Files\nodejs` |
 
 3. 装完**新开**管理员 PowerShell，应能运行 `nvm`。安装程序通常会写好：
 
 | 变量 | 值 |
 |------|-----|
-| `NVM_HOME` | `D:\dev\env\nvm` |
-| `NVM_SYMLINK` | `D:\dev\env\nodejs` |
+| `NVM_HOME` | `%APPDATA%\nvm` |
+| `NVM_SYMLINK` | `C:\Program Files\nodejs` |
 | Path | 追加 `%NVM_HOME%;%NVM_SYMLINK%` |
 
 若没有自动写入，按上表加到**用户变量**，Path 末尾追加 `%NVM_HOME%;%NVM_SYMLINK%`。
 
-4. 可选：设置 → 系统 → 开发者选项 → 打开**开发人员模式**，减少 `nvm use` 因创建符号链接而要管理员的情况。
+4. 建议：设置 → 系统 → 开发者选项 → 打开**开发人员模式**，减少 `nvm use` 因创建 `C:\Program Files\nodejs` 符号链接而要管理员的情况。
 
 # 用 nvm 安装 Node 和 npm
 
@@ -107,7 +111,7 @@ where.exe node
 where.exe npm
 ```
 
-`where` 应指向 `D:\dev\env\nodejs\...`。
+`where` 应指向 `C:\Program Files\nodejs\...`。
 
 下载慢时可设镜像（说明见 [NVM](/Node/NVM.md)）：
 
@@ -169,7 +173,7 @@ pnpm config get cache-dir
 npm config get prefix
 ```
 
-`prefix` 一般在 `D:\dev\env\nodejs` 一带，全局 `pnpm` 跟着当前 Node，都在 D 盘。
+`prefix` 一般在 `C:\Program Files\nodejs` 一带，全局 `pnpm` 跟着当前 Node。缓存三项应都在 `D:\dev\env\cache\...`。
 
 `npm config set ... --location=user` 会写入（没有则新建）用户配置文件 `%USERPROFILE%\.npmrc`。清理阶段删过它之后**再次出现是正常的**，体积只有几行，应保留。示例：
 
@@ -199,8 +203,9 @@ Get-ChildItem Env:NVM_HOME, Env:NVM_SYMLINK
 合格标准：
 
 - `nvm` / `node` / `npm` / `pnpm` 都能运行
-- 路径都在 `D:\dev\env\...`
-- Path 里没有 `AppData\Roaming\nvm`、`C:\Program Files\nodejs` 实体目录抢优先级
+- `nvm` 在 `%APPDATA%\nvm`；`node` / `npm` 在 `C:\Program Files\nodejs`（符号链接，不是旧的实体 Node 安装）
+- Path 中**应当有** `%APPDATA%\nvm` 与 `C:\Program Files\nodejs`（或 `%NVM_HOME%` / `%NVM_SYMLINK%`）
+- Path 中**没有** `D:\dev\env\nvm`、`D:\dev\env\nodejs` 抢优先级
 - `pnpm -v` 是 10.x，且不再出现 Corepack 下载提示
 
 任选一个项目执行 `pnpm install` 或 `npm install`，确认缓存写到 `D:\dev\env\cache`。

@@ -1,4 +1,4 @@
-> 极快的 Python 包和项目管理工具，集 Python 解释器管理、虚拟环境、包管理、工具运行（`uvx`）于一体。无需预装 Python，适合新 Windows 机器及公司电脑禁装 Anaconda 的场景。新机装到 D 盘见 [Windows-uv-Python-环境配置](/Language/Python/Windows-uv-Python-环境配置.md)。
+> 极快的 Python 包和项目管理工具，集 Python 解释器管理、虚拟环境、包管理、工具运行（`uvx`）于一体。无需预装 Python，适合新 Windows 机器及公司电脑禁装 Anaconda 的场景。新机本体默认路径、缓存上 D 见 [Windows-uv-Python-环境配置](/Language/Python/Windows-uv-Python-环境配置.md)。
 
 官方文档 https://docs.astral.sh/uv/
 
@@ -29,9 +29,9 @@
 
 # 安装 uv（Windows 10/11）
 
-**新机（推荐）**：装到 `D:\dev\env`、清理官方 Python、全局只留一个入口，见 [Windows-uv-Python-环境配置](/Language/Python/Windows-uv-Python-环境配置.md)。
+**新机（推荐）**：本体走官方默认路径、仅缓存上 D、清理官方 Python、全局只留一个入口，见 [Windows-uv-Python-环境配置](/Language/Python/Windows-uv-Python-环境配置.md)。
 
-不改 D 盘、装到用户目录时，用官方独立安装脚本（无需管理员权限）：
+仅装 uv、暂不改缓存目录时，用官方独立安装脚本（无需管理员权限）：
 
 ```powershell
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
@@ -54,7 +54,7 @@ uv --version
 
 # 安装 Python（由 uv 管理）
 
-新机 D 盘布局与 Path 切入口见 [Windows-uv-Python-环境配置](/Language/Python/Windows-uv-Python-环境配置.md)。下面路径对应当默认装到 `.local\bin` 的情况。
+新机缓存目录与 Path 见 [Windows-uv-Python-环境配置](/Language/Python/Windows-uv-Python-环境配置.md)。下面路径对应当默认装到 `.local\bin` 的情况。
 
 无需先去 python.org 下载：
 
@@ -66,7 +66,7 @@ uv python list                   # 查看已安装/可下载版本
 
 关键路径：
 
-- 解释器本体：`%APPDATA%\uv\python\cpython-3.12.x-windows-x86_64-none\python.exe`
+- 解释器本体：`%LOCALAPPDATA%\uv\python\cpython-3.12.x-windows-x86_64-none\python.exe`
 - PATH 入口：`%USERPROFILE%\.local\bin\python3.12.exe`（及 `--default` 后的 `python.exe`）
 
 参考 [Installing Python](https://docs.astral.sh/uv/guides/install-python/)
@@ -75,7 +75,7 @@ uv python list                   # 查看已安装/可下载版本
 
 # 使 `python` 全局可用
 
-新机 D 盘入口切法见 [Windows-uv-Python-环境配置](/Language/Python/Windows-uv-Python-环境配置.md)。以下对应默认 `.local\bin`。
+新机全局入口切法见 [Windows-uv-Python-环境配置](/Language/Python/Windows-uv-Python-环境配置.md)。以下对应默认 `.local\bin`。
 
 `uv python install 3.12` 只装版本化命令（`python3.12`），**不会**创建 `python` 命令。
 
@@ -181,9 +181,7 @@ Remove-Item "$HOME\.local\bin\uvw.exe"
 Remove-Item "$HOME\.local\bin\python*.exe" -ErrorAction SilentlyContinue
 ```
 
-补充：从用户 PATH 中移除 `%USERPROFILE%\.local\bin`（若不再需要）。
-
-若按 [新机指引](/Language/Python/Windows-uv-Python-环境配置.md) 装到 `D:\dev\env\uv`，改为删除该目录下的 `uv.exe` / `uvx.exe` / `uvw.exe` / `python*.exe`，并从用户 Path 移除 `D:\dev\env\uv`。解释器本体在 `uv python dir`（通常为 `D:\dev\env\uv\python`）。
+补充：从用户 PATH 中移除 `%USERPROFILE%\.local\bin`（若不再需要）。解释器本体在 `uv python dir`（默认 `%LOCALAPPDATA%\uv\python`）。若设过 `UV_CACHE_DIR`，可一并删除该用户变量及 `D:\dev\env\cache\uv`。
 
 ---
 
