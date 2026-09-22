@@ -201,6 +201,7 @@ reference: [git-checkout--orphan](https://git-scm.com/docs/git-checkout#Document
 - 为所有项目设置默认的用户名和邮箱，使用 `--global`
 	`git config --global user.name "name"`
 	`git config --global user.email "email"`
+- [按目录为 Git 仓库配置用户身份](/Git/Git-Commands/按目录配置%20Git%20用户身份.md)：为某父目录下的所有子仓库设置专用身份。
 
 ## 版本管理
 
@@ -1262,4 +1263,3 @@ git ls-files | grep "匹配名"
 
 用 Git 自带的升级命令（2.16.1+ 才有）
 `git update-git-for-windows`
-
