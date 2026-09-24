@@ -42,7 +42,7 @@
     - win10 自带的画图3D
 - [Windows 包管理器：Winget / Scoop / Chocolatey](/OS/Windows/Windows-包管理器.md)
 - 新机开发环境（本体默认路径，缓存上 D）
-    - Node：[Windows-nvm-Node-pnpm-环境配置](/Node/Windows-nvm-Node-pnpm-环境配置.md)
+    - Node：[Windows-mise-Node-环境配置](/Node/Windows-mise-Node-环境配置.md)（本机从 nvm 迁到 mise）；旧的 nvm 从零装机：[Windows-nvm-Node-pnpm-环境配置](/Node/Windows-nvm-Node-pnpm-环境配置.md)
     - Python：[Windows-uv-Python-环境配置](/Language/Python/Windows-uv-Python-环境配置.md)
 
 # Case

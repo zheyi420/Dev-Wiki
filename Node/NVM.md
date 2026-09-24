@@ -1,3 +1,5 @@
+> 本机后续以 mise 为准，见 [mise](/Node/mise.md)、[Windows-mise-Node-环境配置](/Node/Windows-mise-Node-环境配置.md)。下文保留 nvm-windows 命令备忘。
+
 > Node Version Manager
 
 

@@ -1,3 +1,5 @@
+> 本机后续以 mise 为准，见 [mise](/Node/mise.md)、[Windows-mise-Node-环境配置](/Node/Windows-mise-Node-环境配置.md)。下文保留 nvm-windows 从零装机记录，其中的 `corepack disable` 与 `npm install -g pnpm@10` 不要再照做。
+
 > Windows 11 新电脑从零配置 nvm / Node / npm / pnpm 10。本体走 nvm-windows 默认路径，npm / pnpm 缓存指到 D 盘。npm 随 Node 安装，不必单独下载。
 
 # 原则

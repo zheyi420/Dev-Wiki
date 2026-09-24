@@ -148,7 +148,7 @@ uv cache dir
 1. 删除 `...\Programs\Python\Python3xx\` 与 `...\Python3xx\Scripts\`（若还在）
 2. 删除 `D:\dev\env\uv`（若还在）
 3. 保留并置顶 `%USERPROFILE%\.local\bin`
-4. nvm 默认 Path（`%APPDATA%\nvm`、`C:\Program Files\nodejs`）、Pandoc 等其它条目原样保留
+4. 若已按 [Windows-mise-Node-环境配置](/Node/Windows-mise-Node-环境配置.md) 卸掉 nvm，保留用户 Path 里的 `%LOCALAPPDATA%\mise\shims`，不要把 `%APPDATA%\nvm`、`C:\Program Files\nodejs` 加回去。尚未迁移时，nvm 默认 Path（`%APPDATA%\nvm`、`C:\Program Files\nodejs`）原样保留。Pandoc 等其它条目原样保留
 
 再次确认应用执行别名已关闭。关掉所有终端和 Cursor，再开 PowerShell：
 
@@ -243,5 +243,5 @@ uv cache dir
 - [Python](/Language/Python/Python.md)
 - [Anaconda](/Language/Python/Anaconda.md)
 - [pip](/Language/Python/pip.md)
-- Windows 新机 Node：[Windows-nvm-Node-pnpm-环境配置](/Node/Windows-nvm-Node-pnpm-环境配置.md)
+- Windows 新机 Node：[Windows-mise-Node-环境配置](/Node/Windows-mise-Node-环境配置.md)；旧的 nvm 从零装机：[Windows-nvm-Node-pnpm-环境配置](/Node/Windows-nvm-Node-pnpm-环境配置.md)
 - 官方：[Installation](https://docs.astral.sh/uv/getting-started/installation/)、[Installer options](https://docs.astral.sh/uv/reference/installer/)、[Installing Python](https://docs.astral.sh/uv/guides/install-python/)

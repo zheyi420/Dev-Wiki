@@ -28,12 +28,15 @@ C:\Program Files\nodejs\node.exe
 
 
 ### 关于 NodeJS 版本控制
+- [mise](/Node/mise.md)（本机当前使用）：[Windows-mise-Node-环境配置](/Node/Windows-mise-Node-环境配置.md)
 - [NVM](./NVM.md) 
 - 使用 [n](https://github.com/tj/n)，[nvm](https://github.com/nvm-sh/nvm) 或 [nvm-windows](https://github.com/coreybutler/nvm-windows) 在同一台电脑中管理多个 Node 版本。
 - win10 Node.js 版本更新
 	> 解决方法：`cmd` 命令窗口使用 `where node` 查看之前的 node 版本安装的路径，在官网下载 nodejs Windows Installer (.msi) 并安装覆盖即可。
 
 ### 最佳实践
+
+本机从 nvm-windows 迁到 mise（默认路径 + 缓存上 D）：[Windows-mise-Node-环境配置](/Node/Windows-mise-Node-环境配置.md)
 
 Windows 11 新电脑从零安装（nvm 默认路径 + Node + npm + pnpm 10，缓存上 D）：[Windows-nvm-Node-pnpm-环境配置](/Node/Windows-nvm-Node-pnpm-环境配置.md)
 
