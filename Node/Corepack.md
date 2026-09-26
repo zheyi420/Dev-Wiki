@@ -56,3 +56,11 @@
 
 ## 不显式执行 `corepack install` 的机制
 
+# enable、项目版本与全局默认
+
+三件事各管一层：
+
+- `corepack enable` 在某一版 Node 的安装目录里放入 `pnpm`、`yarn` 的启动命令。它不选定 pnpm 的版本号。每个 Node 版本做一次。Windows 上与 mise 一起用时的命令见 [Windows-mise-Node-环境配置](/Node/Windows-mise-Node-环境配置.md)。
+- 在项目目录里执行 `pnpm` 时，Corepack 读取该目录 `package.json` 的 `packageManager`，下载并运行这一版。同一 Node 版本、不同 `packageManager` 的项目各自使用自己的 pnpm。下载缓存在 `%LOCALAPPDATA%\node\corepack`（`COREPACK_HOME`）。
+- `corepack install -g pnpm@<版本>` 只设置项目外、没有 `packageManager` 时的默认 pnpm 版本。只在项目内使用 `pnpm` 时不必执行。
+

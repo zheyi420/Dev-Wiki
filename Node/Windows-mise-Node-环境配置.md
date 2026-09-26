@@ -21,7 +21,7 @@
 - 不安装 Node.js 官方 Windows Installer（`.msi`）。用 [mise](https://mise.jdx.dev/) 管理版本。
 - 不设置 `MISE_DATA_DIR`。各版本 Node 留在 mise 默认数据目录。
 - 不删除 `D:\dev\env\cache`，也不删除项目目录和其中的 `node_modules`。
-- 不把 pnpm 装成 mise 工具，也不在每个 Node 里 `npm install -g pnpm`。打开 `node.corepack`，由项目 `package.json` 的 `packageManager` 锁定 pnpm 版本。见 [Corepack](/Node/Corepack.md)。
+- 不把 pnpm 装成 mise 工具，也不在每个 Node 里 `npm install -g pnpm`。安装时保持 `node.corepack false`。装完后对该版本执行 `corepack enable`，写入的是 `pnpm` 启动命令；项目里的 pnpm 版本由 `package.json` 的 `packageManager` 决定。见 [Corepack](/Node/Corepack.md)。
 - 使用 shim。把 `%LOCALAPPDATA%\mise\shims` 写入用户 Path。不新建、不修改 PowerShell 配置文件。
 
 # 推荐目录
@@ -122,12 +122,14 @@ New-Item -ItemType Directory -Force -Path D:\dev\env\cache\mise | Out-Null
 
 `MISE_CACHE_DIR` 应为 `D:\dev\env\cache\mise`。Path 中应能看到 shims 目录。winget 另外放入的 `mise.exe` 路径可以同时在。
 
-# 打开 Corepack 与版本文件
+# 打开版本文件
 
-这两项要在 `mise install` 之前做。`node.corepack` 让之后安装的每个 Node 带上 Corepack shim。idiomatic version file 让 `.node-version` 和 `.nvmrc` 生效；`mise.toml` 不依赖这项。
+这项要在 `mise install` 之前做。idiomatic version file 让仓库根目录的 `.nvmrc` 生效。项目用这个文件指定 Node 版本，文件里只写一行版本号，例如 `20.20.1`。nvm、fnm、asdf 也认这个文件。
+
+安装 Node 时保持 `node.corepack false`。mise 2026.9.5 在 Windows 上若于安装前打开 `node.corepack`，会在 `corepack enable` 失败并把刚装上的 Node 回滚：它把并不存在的 `installs\node\<版本>\bin` 放进 `PATH`，Corepack 用 `which corepack` 找不到安装根目录里的 `corepack.cmd`。
 
 ```powershell
-mise settings set node.corepack true
+mise settings set node.corepack false
 mise settings add idiomatic_version_file_enable_tools node
 ```
 
@@ -168,6 +170,25 @@ mise doctor
 
 `npm config get cache` 应为 `D:\dev\env\cache\npm-cache`。
 
+# 为每个 Node 版本启用 pnpm 启动命令
+
+`corepack enable` 写进该 Node 安装目录的是 `pnpm` 启动命令，不是某一个 pnpm 版本。项目里执行 `pnpm` 时，Corepack 读取该目录 `package.json` 的 `packageManager`，按项目下载对应版本，缓存在 `%LOCALAPPDATA%\node\corepack`。同一 Node 版本、不同 `packageManager` 的两个项目可以同时使用，不必再执行下面的命令。
+
+每个 Node 版本第一次装好后做一次。再装一版新的 Node 时，只对那一版再做一次。不必按项目重复，也不必每次 `pnpm install` 都做。只在带 `packageManager` 的项目里使用 `pnpm` 时，不必 `corepack install -g`。
+
+每个要启用的版本各执行一次下面这段，把 `版本号` 改成实际版本（如 `22.23.2`）后再运行。`--install-directory` 直接指定安装根目录，避开前面的 `which corepack` 失败。`mise reshim` 把新出现的 `pnpm` 登记到 `%LOCALAPPDATA%\mise\shims`（作用见 [mise](/Node/mise.md)）。用户 Path 里只有这个 shims 目录，没有 Node 安装目录本身。
+
+```powershell
+$nodeHome = (mise where node@版本号).Trim()
+if (-not (Test-Path "$nodeHome\corepack.cmd")) {
+  $nodeHome = Split-Path $nodeHome -Parent
+}
+& "$nodeHome\corepack.cmd" enable --install-directory $nodeHome
+mise reshim
+```
+
+以后新装一版 Node，把 `版本号` 改成那一版再执行一次，然后再 `mise reshim`。
+
 # 验收
 
 新开普通 PowerShell：
@@ -189,7 +210,7 @@ Get-Command nvm -ErrorAction SilentlyContinue
 - Path 中有 mise shims，没有 `%APPDATA%\nvm`、没有 `C:\Program Files\nodejs`
 - `npm config get cache` 仍是 `D:\dev\env\cache\npm-cache`
 
-按目录切换：找一个空目录（不要放进真实仓库），写入 `.node-version`，内容一行 `16.20.2`。在该目录执行 `node -v`，应为 `v16.20.2`。另开一个终端，停在没有版本文件的目录，`node -v` 仍是 `v22.23.2`。测完删掉这个临时 `.node-version`。
+按目录切换：找一个空目录（不要放进真实仓库），写入 `.nvmrc`，内容一行 `16.20.2`。在该目录执行 `node -v`，应为 `v16.20.2`。另开一个终端，停在没有 `.nvmrc` 的目录，`node -v` 仍是 `v22.23.2`。测完删掉这个临时 `.nvmrc`。真实项目把 `.nvmrc` 提交到仓库根目录。
 
 pnpm：进入 `package.json` 含 `packageManager`（例如 `pnpm@10.30.1`）的项目目录，执行 `pnpm -v`。版本应与该字段一致，由 Corepack 提供。项目外没有这份字段时，可以没有 `pnpm` 命令。
 
