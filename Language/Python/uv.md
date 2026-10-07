@@ -22,6 +22,7 @@
 |-------|-----|
 | `conda create -n myenv python=3.12` | `uv venv --python 3.12` |
 | `conda activate myenv` | `.venv\Scripts\Activate.ps1` |
+| `conda deactivate` | `deactivate` |
 | `conda install numpy` | `uv add numpy` |
 | `conda run -n myenv python script.py` | `uv run script.py` |
 
