@@ -50,6 +50,8 @@ mise 不读 `package.json` 里的 `volta`，也不读 `engines.node`。`engines.
 
 从资源管理器直接打开的程序，只要用户 Path 里有这份 shim，也会按它所在目录选版本。
 
+Windows 上默认的 exe shim 在 `Ctrl + C` 时会先退出，底下的 `npm.cmd` 还在问要不要终止批处理，终端已基本无法使用。本机临时改成 file 模式：退出时仍要回答两次 `Y`，但答完提示符就回来，窗口可以接着用。原因和步骤见 [Windows-mise-npm-Ctrl-C-退出卡住](/Node/Windows-mise-npm-Ctrl-C-退出卡住.md)。
+
 # reshim
 
 `mise reshim` 不安装、不切换 Node 或 pnpm。它查看所有已安装工具的可执行文件（不只当前默认版本），在 `%LOCALAPPDATA%\mise\shims` 里补上还没有的 shim，并去掉已不存在的。用户 Path 里只有这个目录，终端里的命令必须先在这里有一份 shim 才能被找到。官方说明：[mise reshim](https://mise.jdx.dev/cli/reshim.html)。
@@ -81,6 +83,7 @@ npm 缓存仍由用户 `%USERPROFILE%\.npmrc` 的 `cache` 决定，见 [npm](/No
 # 相关笔记
 
 - [Windows-mise-Node-环境配置](/Node/Windows-mise-Node-环境配置.md)
+- [Windows-mise-npm-Ctrl-C-退出卡住](/Node/Windows-mise-npm-Ctrl-C-退出卡住.md)
 - [Node](/Node/Node.md)
 - [Corepack](/Node/Corepack.md)
 - [npm](/Node/npm.md)

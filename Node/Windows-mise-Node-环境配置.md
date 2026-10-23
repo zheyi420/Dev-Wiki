@@ -217,6 +217,7 @@ pnpm：进入 `package.json` 含 `packageManager`（例如 `pnpm@10.30.1`）的�
 # 相关笔记
 
 - [mise](/Node/mise.md)
+- `npm` 经 shim 启动时，`Ctrl + C` 后终端已基本无法使用的临时处理：[Windows-mise-npm-Ctrl-C-退出卡住](/Node/Windows-mise-npm-Ctrl-C-退出卡住.md)
 - [Node](/Node/Node.md)
 - [Corepack](/Node/Corepack.md)
 - [npm](/Node/npm.md)
