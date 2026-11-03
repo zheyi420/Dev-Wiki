@@ -30,6 +30,38 @@ Windows 11 自带的是 **Windows PowerShell 5.1**（`powershell.exe`），启�
 
 ---
 
+## 判断当前终端是 5.1 还是 7
+
+打开终端后若不确定当前会话运行的是哪一个，执行：
+
+```powershell
+$PSVersionTable | Select-Object PSVersion, PSEdition
+$PSHOME
+(Get-Process -Id $PID).Path
+```
+
+对照下表结论：
+
+| 输出 | 结论 |
+|------|------|
+| `PSVersion` 为 `5.1.x`，`PSEdition` 为 `Desktop`，`$PSHOME` 为 `C:\Windows\System32\WindowsPowerShell\v1.0` | Windows PowerShell 5.1 |
+| `PSVersion` 为 `7.x`，`PSEdition` 为 `Core`，`$PSHOME` 为 `C:\Program Files\PowerShell\7` | PowerShell 7 |
+
+只想知道版别时，用 5.1 / 7 都支持的写法：
+
+```powershell
+if ($PSVersionTable.PSEdition -eq 'Core') { 'pwsh 7' } else { 'Windows PowerShell 5.1' }
+```
+
+### 注意
+
+- `powershell` 命令**始终**指向 5.1，安装 7 不会改变；要用 7 必须执行 `pwsh`。
+- 判断版别以 `$PSVersionTable.PSEdition` 为准。`$Host.Version` 表示**宿主**版本，理论上可能与 `PSVersion` 不一致。
+- Windows Terminal 标签页显示的「Windows PowerShell」/「PowerShell」来自配置文件名称，可被重命名，只能作参考。
+- 不要用三元运算符 `? :` 写判断语句，该语法仅 7.x 支持，在 5.1 中会直接语法报错。
+
+---
+
 ## 安装方式选择
 
 官方在 Windows 客户端上**推荐 WinGet**。常见安装方式对比如下：
@@ -228,7 +260,7 @@ winget uninstall --id Microsoft.PowerShell
 
 ### 打开终端仍显示 Windows PowerShell 版权信息
 
-说明打开的是 5.1（`powershell.exe`）。应使用 `pwsh`，或将 Windows Terminal 默认配置文件改为 PowerShell 7。
+说明打开的是 5.1（`powershell.exe`）。应使用 `pwsh`，或将 Windows Terminal 默认配置文件改为 PowerShell 7。判断当前会话版本的方法见上文「判断当前终端是 5.1 还是 7」一节。
 
 ### `winget` 与 MSI 参数的区别
 
