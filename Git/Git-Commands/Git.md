@@ -964,8 +964,9 @@ $ git merge origin/<分支名>
 > Update remote refs along with associated objects.
 > - https://git-scm.com/docs/git-push
 
+#### 删除
 - `git push origin -d <分支名>` 删除远程分支
-
+#### 发布
 - `git push origin 本地分支名:远程分支名`
 	发布新分支
 	把新建的本地分支上传到远程服务器，建议远程分支与本地分支同名（也可以随意起名）
@@ -974,6 +975,27 @@ $ git merge origin/<分支名>
 	简写 `git push -u origin <远程分支名>`
 	> fatal: 当前分支 xxx 没有上游分支。
 	> 要推送当前分支并将远程设置为上游，请使用上述命令
+
+#### 推送覆盖远程
+
+```bash
+git push --force-with-lease origin feature/flight-list-query
+```
+
+这条命令会将**本地 `feature/flight-list-query` 分支推送到 `origin` 上的同名分支**，允许改写远端历史，但会先检查远端状态。
+
+各部分含义：
+
+- `git push`：将本地提交推送到远端。
+- `--force-with-lease`：允许强制更新，前提是远端分支仍指向本地 `origin/feature/flight-list-query` 所记录的提交。
+- `origin`：远程仓库的名称。
+- `feature/flight-list-query`：要推送的本地分支。
+
+比如：远端原先保留三个提交，本地已经压缩成一个新提交。虽然文件内容一致，但提交历史发生了变化，普通 `push` 会拒绝这种更新，所以需要强制更新。
+
+`--force-with-lease` 的保护体现在：**如果其他人已更新远端分支，而本地记录尚未更新，推送就会被拒绝**，避免直接覆盖对方的提交。遇到拒绝时，应先获取并检查远端变化。
+
+另外，即使当前检出的是 `develop`，这条命令仍然推送明确指定的 `feature/flight-list-query`，不会推送 `develop`。
 
 
 ### `git rebase` 
