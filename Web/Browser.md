@@ -65,3 +65,9 @@ the test run in Tor Broswer seems did’t catch me.
 
 the local IPs would be exposed even if i enable the **EXPERIMENTAL FEATURES: Anonymize local IPs exposed by WebRTC**
 
+# 其他
+
+- [No-JS fingerprinting](https://noscriptfingerprint.com/)
+  > 用户指纹生成程序，不依赖 JavaScript，即使用户禁止运行 JS 脚本，依然能够得到用户指纹。
+- Chrome html5播放器视频加速 `document.querySelector('video').playbackRate = 16.0;`
+

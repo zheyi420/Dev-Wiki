@@ -54,3 +54,28 @@ Windows 11 新电脑从零安装（nvm 默认路径 + Node + npm + pnpm 10，缓
 Use emitter.setMaxListeners() to increase limit
 ```
 
+# 版本查看
+
+```powershell
+## 常用工具之版本查看命令
+
+PS C:\Users\21632> node --version
+v14.16.0
+
+PS C:\Users\21632> npm --version
+6.14.11
+
+## 查看 vue/cli 版本
+PS C:\Users\21632> vue --version
+@vue/cli 4.5.12
+
+PS C:\Users\21632> cnpm --version
+cnpm@6.1.1 (C:\Users\21632\AppData\Roaming\npm\node_modules\cnpm\lib\parse_argv.js)
+npm@6.14.12 (C:\Users\21632\AppData\Roaming\npm\node_modules\cnpm\node_modules\npm\lib\npm.js)
+node@14.16.0 (C:\Program Files\nodejs\node.exe)
+npminstall@3.28.0 (C:\Users\21632\AppData\Roaming\npm\node_modules\cnpm\node_modules\npminstall\lib\index.js)
+prefix=C:\Users\21632\AppData\Roaming\npm
+win32 x64 10.0.19042
+registry=https://r.npm.taobao.org
+```
+

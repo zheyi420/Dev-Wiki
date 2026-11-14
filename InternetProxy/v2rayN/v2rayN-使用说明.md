@@ -408,3 +408,9 @@ Get-WinEvent -LogName 'Microsoft-Windows-Store/Operational' -MaxEvents 30 | Sele
 
 - 如果日志里出现类似 `0x80072EFD`，通常表示网络连接阶段失败
 - 如果失败地址是 `storeedge.microsoft.com`、`xboxservices.com` 等微软服务地址，需要结合代理链路一起判断
+
+# 相关
+
+- [v2ray](/InternetProxy/v2ray.md)
+- [v2rayN 路由备忘](/InternetProxy/v2rayN/v2rayN-路由备忘.md)
+- [代理与证书](/InternetProxy/代理与证书.md)
