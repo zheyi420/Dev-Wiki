@@ -1,0 +1,6 @@
+interface:
+  display_name: "暂存提交信息"
+  short_description: "分析指定目录的已暂存变更并起草提交信息"
+  default_prompt: "请分析以下目录中已暂存的变更并给出提交信息："
+policy:
+  allow_implicit_invocation: false
