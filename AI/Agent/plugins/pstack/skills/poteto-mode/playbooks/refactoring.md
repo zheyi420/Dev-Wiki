@@ -6,9 +6,9 @@
 
 1. 先钉住行为契约。追踪受影响的子系统，弄清契约，然后在任何结构移动之前，写一个特征测试、快照或等价 harness，抓住当前行为。这一带没有覆盖时，先写钉，再碰结构。类型检查和 lint 不是钉。
 2. 按 **principle-model-the-domain** 点名代码缺少的结构。形状已经清楚，而且就在局部时，平淡的代码留着。重塑要删掉分支或非法状态，不要增加间接层。
-3. 点名目标形状。说明若今天来建，模块布局、类型和调用图应当是什么样（**principle-foundational-thinking**、**principle-redesign-from-first-principles**）。目标若跨过函数边界，移动之前先跑 **architect** skill，并行探索这个形状。
+3. 点名目标形状。说明若今天来建，模块布局、类型和调用图应当是什么样（**principle-foundational-thinking**、**principle-redesign-from-first-principles**）。目标若跨过函数边界，移动之前先跑 **architect** skill，定下这个形状。
 4. 先减后加。引入新形状之前，删掉死代码，折掉只有一个调用方的包装，丢掉多余的校验器，并移除孤儿引用（**principle-subtract-before-you-add**）。能到达目标形状的最小变更就交付（**principle-laziness-protocol**）。「也许有用」的投机清理要回退。
-5. 以保持行为的小步移动，每一步都让钉保持绿色。API 重塑时，在同一波里迁移每个调用方，并删掉旧 API（**principle-migrate-callers-then-delete-legacy-apis**）。不要兼容垫片，不要新旧路径并列。对照实际文件抽查每一次重命名。重命名会静默漏掉字符串、说明文字和反向引用里的用法。把机械编辑委派给 subagent，用你配置的重构模型（默认 `claude-opus-5-5-xhigh`），范围要具体（文件路径、正在移动的名字、必须守住的行为）。按 Subagents 一节，按这项工作为每个 subagent 选推理档位，以及快速或标准速度。
+5. 以保持行为的小步移动，每一步都让钉保持绿色。API 重塑时，在同一波里迁移每个调用方，并删掉旧 API（**principle-migrate-callers-then-delete-legacy-apis**）。不要兼容垫片，不要新旧路径并列。对照实际文件抽查每一次重命名。重命名会静默漏掉字符串、说明文字和反向引用里的用法。把机械编辑委派给 subagent，用你配置的重构模型（默认 `claude-opus-5-5-xhigh-fast`），范围要具体（文件路径、正在移动的名字、必须守住的行为）。按 Subagents 一节，按这项工作为每个 subagent 选推理档位。
 6. 在真实产物上证明行为没变，而不是「能编译就行」（**principle-prove-it-works**）。较大的重塑要做等价检查：一个对比新旧输出的脚本，把录下的基线对着新代码重放，或经由相关控制 skill 在匹配界面上跑一次冒烟。
 7. 确认这处变更值得留下。成功的度量是阅读负担下降（**principle-minimize-reader-load**）。diff 若没有在某处降低阅读负担，就回退。
 8. 变基成小而有序的 commit。先是一个删减 commit，然后是重塑，然后是后续清理。用 **sequence-verifiable-units** 原则 skill 来塑形，让每个保持行为的切片在下一步之前保持绿色。运行 **开 PR**。

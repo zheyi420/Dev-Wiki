@@ -5,7 +5,7 @@
 一条判定覆盖一个补丁，一次绿色 CI 覆盖一个 head。第 4 步的完整 swarm 只跑一次，只有重大变更才再跑。`playbooks/shipping.md` 里的 patch-id 规则可以沿用一条通道的结果，每个新 head 都要有自己的绿色 CI。
 
 1. **操作者的关卡优先。** 授权只覆盖队列里的条目，所以操作者标明归自己的条目，以及队列外的 PR，都停在可合并。要求把计划说出来，并不等于放行。
-2. **每个 PR 派一个负责人，并把工作放在接替者找得到的地方。** 整个项目只解析一次托管平台。GitHub CLI（`gh`）是默认。若 `command -v origin` 成功，且 Origin 能解析这个仓库，每次 PR 操作都用 `origin pr`。否则留在 `gh`，并记下回退。绝不要求 Graphite（`gt`）。每个负责人都是一个 Cursor cloud agent：它构建，按 `playbooks/opening-a-pr.md` 开自己的 PR，在真实产物上证明变更，按 `playbooks/babysit.md` 看护到绿色，并在第 4 步和第 5 步都放行后合并。
+2. **每个 PR 派一个负责人，并把工作放在接替者找得到的地方。** 整个项目只解析一次托管平台。GitHub CLI（`gh`）是默认。若 `command -v origin` 成功，且 Origin 能解析这个仓库，每次 PR 操作都用 `origin pr`。否则留在 `gh`，并记下回退。绝不要求 Graphite（`gt`）。每个负责人都是一个 Cursor cloud agent：它构建，按 `playbooks/opening-a-pr.md` 开自己的 PR，在真实产物上证明变更，按 `playbooks/babysit.md` 看护到绿色，并在第 4 步和第 5 步都放行后合并。那个 playbook 说要报告变基的地方，负责人自己给自己的分支变基，并用 `git push --force-with-lease` 发布。
 
    尽早开 PR，让 CI 和 bot 跟工作一起跑。代码要先清掉注水代码（`deslop` skill，来自 `cursor-team-kit` 插件（`/deslop`）），并过完 `/no-comments` 这一遍，才算就绪，所以完整 swarm 跑在已经做完的代码上。然后变基到当前主干，并在自证之前报告代码就绪的 head，这样验证跑在补丁即将落地的基线上。之后每个 head 都要报告。自证、CI 和看护都做完，再报可合并。修复轮留在这个基线上，除非会和主干冲突、弄坏 CI，或主干合入了已知的、改到相同文件的并发变更，因为每次变基都会重启 CI。在代码就绪那次推送之前，以及之后每一次需要验证者的推送之前，在已提交的 head 上跑仓库针对改动路径的检查。
 

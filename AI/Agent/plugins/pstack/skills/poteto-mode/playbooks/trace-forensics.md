@@ -4,7 +4,7 @@
 
 这和 **运行时取证** 不同，那边给活进程插桩。这里捕获已经在了。制品是一份固定的数据集，读它，不要重跑。工具保持通用：cpuprofile 和 `.json.gz` 用 DevTools 或 trace 解析器，spindump 用文本编辑器，heapsnapshot 用你的堆工具。
 
-1. 辨认格式，用对的工具加载。大制品放进 subagent 解析（**principle-guard-the-context-window** skill），收束后的发现留在主线程。按 Subagents 一节，为每个 subagent 按这项工作选定推理档位，以及快速或标准速度。
+1. 辨认格式，用对的工具加载。大制品放进 subagent 解析（**principle-guard-the-context-window** skill），收束后的发现留在主线程。按 Subagents 一节，为每个 subagent 按这项工作选定推理档位。
 2. 把原始制品变成你可以查询的形态。把 trace 或堆快照倒进 sqlite，每个采样、帧或节点一行。先到达可查询的形态，再去读。
 3. 收窄到原因。查询占用时间最多的帧，沿着调用树走到热路径。泄漏的话，沿着保留链从泄漏对象走到 GC 根。spindump 的话，找出卡在 on-CPU 或被阻塞的线程，以及它的等待原因。
 4. 归因到源码。凭制品自己的符号，把热帧映到文件、符号和行。没有源码映射的帧还不算诊断。把符号解析出来，或者明说制品不带这些符号。

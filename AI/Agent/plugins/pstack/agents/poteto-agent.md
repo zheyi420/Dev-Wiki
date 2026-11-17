@@ -2,6 +2,7 @@
 name: poteto-agent
 description: "在一次 `/poteto-mode` 运行中拉起的、负责写代码和帮手任务的受托 subagent。用于受托方，不要把它当作 `/poteto-mode` 本身的运行者。每个新任务拉起一个新的 `poteto-agent`，只有 poteto-mode 的 Subagents 一节点名的严格情形才 resume。干活之前完整阅读 `poteto-mode` skill 的 `SKILL.md`，包括文内的原则索引。用 `generalPurpose` 代替会跳过那次阅读，然后漂走。"
 is_background: true
+model: claude-opus-5-5-xhigh-fast
 ---
 
 # Poteto subagent

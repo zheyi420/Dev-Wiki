@@ -28,7 +28,7 @@ poteto-mode 是一个人的风格。底下的 playbook、路由和模型角色�
 /reflect that took way too long. capture what we learned so the next run doesn't repeat it.
 ```
 
-[`/reflect`](../../skills/reflect/SKILL.md) 把对话记录发给三个并行评审者，然后综合者把提案分进 `Accepted`、`Rejected` 和 `Backlog`，在任何 skill 改动之前等你批准。只有会改变未来某个决定的提案才批准。一次古怪的会话是轶事，不是规则。
+[`/reflect`](../../skills/reflect/SKILL.md) 读对话记录，只留下会改变未来 agent 工作的教训，并把提案分进 `Accepted`、`Rejected` 和 `Backlog`。它在任何 skill 改动之前等你批准。只有会改变未来某个决定的提案才批准。一次古怪的会话是轶事，不是规则。
 
 ## 用 `/correct` 修好环境
 

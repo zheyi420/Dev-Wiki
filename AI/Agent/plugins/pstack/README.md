@@ -40,7 +40,7 @@ Claude Code 从仓库根目录的 [`harness/pstack/`](https://github.com/cursor/
 
 刚来？[pstack 指南](./docs/guide/README.md) 会带你走完第一个真任务，从配置、写 prompt，一直到验证和过夜跑。卡住了，或者不确定哪个 skill 合适？问 [`/poteto-help`](./skills/poteto-help/SKILL.md)。
 
-就这些。其他 skill 看情况用，模式 skill 会在需要时替你调用它们。开箱时，这个模式按模型强弱分工：代码委托（功能、重构、修 bug、性能、hillclimb）、散文和判断交给 opus 5.5，最难的改动交给 fable 5.2。默认面板是 fable 5.2 / opus 5.5 / gemini 4 carbon。[`/setup-pstack`](./skills/setup-pstack/SKILL.md) 可以改其中任何一项。
+就这些。其他 skill 看情况用，模式 skill 会在需要时替你调用它们。开箱时，代码委托（功能、重构、修 bug、性能、hillclimb）、散文和判断交给 xhigh 档的 opus 5.5，没有角色跑在 xhigh 之上。在评审面板之外，fable 5.2 只在你点名它时才跑，或者在同一份简报的两次 opus 5.5 运行都失败之后才跑。默认面板是 fable 5.2 / opus 5.5 / gemini 4 carbon。[`/setup-pstack`](./skills/setup-pstack/SKILL.md) 可以改其中任何一项。
 
 ## 用法
 
@@ -50,7 +50,7 @@ Claude Code 从仓库根目录的 [`harness/pstack/`](https://github.com/cursor/
 
 ### 直接用 [`/poteto-mode`](./skills/poteto-mode/SKILL.md)
 
-这个 skill 是主快捷方式。我需要 agent 做严谨的工程活时，就用它。它自带二十三个 playbook：
+这个 skill 是主快捷方式。我需要 agent 做严谨的工程活时，就用它。它自带二十二个 playbook：
 
 ```
 /poteto-mode this pr has a subtle bug where the scroll drifts every 750ms even when idle. repro
@@ -63,7 +63,7 @@ morning.
 ```
 
 <details>
-<summary>二十三个 playbook</summary>
+<summary>二十二个 playbook</summary>
 
 | playbook | 用于 |
 |---|---|
@@ -82,7 +82,6 @@ morning.
 | [看护 PR](./skills/poteto-mode/playbooks/babysit.md) | 把一个 PR 或一个 stack 推到能合并：冲突、评审线程、CI。 |
 | [交付](./skills/poteto-mode/playbooks/shipping.md) | 独立验证一个全绿的 stack，再把连续验证过的这一串自底向上落地，默认经 GitHub，有 Origin 时经 Origin。 |
 | [自主运行](./skills/poteto-mode/playbooks/autonomous-run.md) | 把一个长任务一直推到做完，中途不停。 |
-| [编排](./skills/poteto-mode/playbooks/orchestrate.md) | 一个长期项目，交给一个负责协调的聊天：跨很多天，很多叠着的 PR，成批的 subagent。 |
 | [autopilot-full](./skills/poteto-mode/playbooks/autopilot-full.md) | 把彼此独立的 PR 跑到合并，每个 PR 一个负责人。swarm 验证每个代码就绪的 head，之后对这个补丁的每次改动都重新检查。 |
 | [autopilot-stack](./skills/poteto-mode/playbooks/autopilot-stack.md) | 不合并的 autopilot-full。把 PR 建好并验证，留给操作的人评审和落地。一个 PR 只叠在它所基于的那个 PR 上。 |
 | [接手会话](./skills/poteto-mode/playbooks/session-pickup.md) | 恢复或接管上一个 agent 还没做完的活。 |

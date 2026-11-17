@@ -131,7 +131,7 @@
 /poteto-mode open the pr. small ordered commits, evidence in the description.
 ```
 
-[开 PR playbook](../../skills/poteto-mode/playbooks/opening-a-pr.md) 从 worktree 开工，把工作变基成小而有序的 commit，清理 diff，给散文去掉 AI 腔，并返回 PR 链接。五个窄 PR 胜过一个胖的，叠着的后续胜过一条不断长大的分支。
+[开 PR playbook](../../skills/poteto-mode/playbooks/opening-a-pr.md) 从 worktree 开工，把工作变基成小而可落地的 commit，清理 diff，写一份一分钟简报作为正文，并以就绪状态开出 PR。叠着的后续胜过一条不断长大的分支。
 
 ## 用看护 PR 把 PR 推到可合并
 
@@ -141,7 +141,7 @@
 /poteto-mode babysit this pr. get it green.
 ```
 
-看护盯着 PR。GitHub 上有捆绑的监视器，Origin CLI 可用时也用它。阻塞按顺序处理：冲突，然后评审讨论串，然后 CI。每个已知修复收进同一波推送，所以检查只重启一次，而不是每次修复之后都重启。评论分诊带着怀疑，因为人和 bot 把真问题和噪音放在同一份列表里。真发现得到修复，噪音用发在讨论串上的反证驳回。你只要状态时，问得更小，看护会回答，而不启动循环：
+看护盯着 PR。GitHub 上有捆绑的监视器，Origin CLI 可用时也用它。阻塞按顺序处理：冲突，然后评审讨论串，然后 CI。它从不变基，也从不强推。冲突或过时的基线会回到你手里，并附上需要变基的那条分支。评论分诊带着怀疑，因为人和 bot 把真问题和噪音放在同一份列表里。真发现得到修复，噪音用发在讨论串上的反证驳回。你只要状态时，问得更小，看护会回答，而不启动循环：
 
 ```text
 /poteto-mode check on pr 123. anything outstanding?

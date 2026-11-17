@@ -12,15 +12,9 @@
 /architect design the import pipeline before writing any code. i care most about how callers use it.
 ```
 
-[`/architect`](../../skills/architect/SKILL.md) 先把自己落在实处：追踪设计碰到的代码，涉及所有权或分层变动时跑 `/why`。然后跑 `/arena`，产出互相竞争的设计草图。每份草图先写调用方的用法，再是类型、签名和模块图。
+[`/architect`](../../skills/architect/SKILL.md) 先追踪这次改动碰到的每个系统。然后它勾勒两种不同的形状，每种都带类型、签名和模块边界，并选出这样一种：每份状态只有一个所有者，每项任务只有一种做法，调用方需要知道的最少。设计很大或有争议时，它跑 `/arena`，而不是独自勾勒。想在写任何代码之前看设计，就在 prompt 里说出来。
 
-默认情况下，它从综合后的设计直接进入实现。想先看设计，就说出来：
-
-```text
-/architect with checkpoint. stop and show me before implementing.
-```
-
-代码一开始，设计就不是神圣的。实现里如果在互不相关的地方出现同一个变通，或者类型只有靠 `any` 或强制转换才能编译，`/architect` 把这当作设计错了的证据。它丢掉草图重来，而不是绕着补。
+代码一开始，设计就不是神圣的。同一个变通反复出现时，`/architect` 重新设计，而不是绕着补。
 
 ## 用 `/arena` 把尝试扇出去
 
@@ -106,7 +100,7 @@ pstack 故意没有规划 skill。你确实想要书面计划时，等设计定�
 /poteto-mode turn this design into a plan. small verifiable PRs, each with its own verification steps.
 ```
 
-[多阶段计划 playbook](../../skills/poteto-mode/playbooks/multi-phase-plan.md) 用原型解决剩下的未决问题，然后每个 PR 写一节，每节以这次改动能用的证据收尾。光是一套通过的测试不算那种证据。计划就是交付物。playbook 不去实现它，并指出下一步跑哪个执行 playbook。
+[多阶段计划 playbook](../../skills/poteto-mode/playbooks/multi-phase-plan.md) 用原型解决剩下的未决问题，然后每个 PR 写一节，每节以这次改动能用的证据收尾。光是一套通过的测试不算那种证据。计划就是交付物。playbook 不去实现它，只有你说开始，执行才开始。
 
 迁移时，在 prompt 里写明标准：
 
@@ -121,7 +115,7 @@ pstack 故意没有规划 skill。你确实想要书面计划时，等设计定�
 你也许在想，是不是每次改动都需要这些。不需要。大多数改动一样都不用。粗略的阶梯：
 
 - 一处小的、已完成的改动，你没把握，只需要 `/interrogate`。
-- 越过函数边界或移动所有权的改动，值得上 `/architect`，它会带上 `/arena`。
+- 越过函数边界或移动所有权的改动，值得上 `/architect`，设计很大或有争议时，它会带上 `/arena`。
 - 独立尝试会有帮助的单独决定，例如命名、格式或算法，直接用 `/arena`。
 - 覆盖矩阵、一组并行检查，或带已声明臂的竞速，用 `/swarm`。
 - 靠跑一个东西就能回答的未决问题，例如布局、耗时或一种做法，做原型，不要辩论。

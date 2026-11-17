@@ -19,7 +19,7 @@ disable-model-invocation: true
 
 1. 说明完成谓词，以及 swarm 必须返回的产物或报告。
 2. 选定形状。切成片，让 N 个 worker 用同一份简报竞速，或两种混用。竞速或混合形状，拉起之前先声明 `first pass`、`rank all` 或 `best-of`。
-3. 从 `swarm workers` 那一行选 worker 模型，这一行在 `~/.cursor/rules/pstack-models.mdc` 里。规则或那一行不存在时，用 `claude-opus-5-5-high-fast`。`auto` 或 `inherit-parent` 时，省略 `model`，让 worker 跑在父模型上。Task 工具拒绝一个 slug 时，用默认值并说出来。它也拒绝默认值时，用错误信息里同一家族最接近的合法 slug。模型竞速时，事先点名每一臂的模型。按 **poteto-mode** skill 的 Subagents 一节，为每个 subagent 按这项工作选定推理档位，以及快速或标准速度。
+3. 从 `swarm workers` 那一行选 worker 模型，这一行在 `~/.cursor/rules/pstack-models.mdc` 里。规则或那一行不存在时，用 `claude-opus-5-5-high-fast`。`auto` 或 `inherit-parent` 时，省略 `model`，让 worker 跑在父模型上。Task 工具拒绝一个 slug 时，用默认值并说出来。它也拒绝默认值时，用错误信息里同一家族最接近的合法 slug。模型竞速时，事先点名每一臂的模型。按 **poteto-mode** skill 的 Subagents 一节，为每个 subagent 按这项工作选定推理档位。
 4. worker 会写东西时，给每个 worker 自己的可写输出。worker 要验证或测量 commit 时，每份简报点名确切的 SHA。测量简报还要点名方法（样本数、一个样本是什么、顺序）。worker 在结果里把两者都记下来。
 
 ## 阶段 B：扇出
