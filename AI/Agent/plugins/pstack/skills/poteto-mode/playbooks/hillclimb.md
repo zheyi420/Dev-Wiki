@@ -9,7 +9,7 @@
 3. 通过 **show-me-your-work** skill 打开决策日志。一份 `decision.tsv`，每次尝试一行：id、假设、改动、之前、之后、差值、测试、判定（留下或回退）、备注。每次尝试前先读。放在树外（gitignore）。
 4. 每个假设都扎在第 1 步的架构模型上，所以它点名一个具体机制（「把 X 从启动路径上挪开，因为它挡住了首次绘制」），而不是「试试给什么加 memoize」。性能指标按性能问题 playbook（`playbooks/perf-issue.md`）第 2 步的性能口诀给假设排序。只借用顺序，不借用那一步的停止规则。
 5. 循环，每轮一个假设：
-   - 用你配置的 hillclimb 模型（默认 `claude-opus-5-5-xhigh`），把改动交给 subagent，范围收紧。按 Subagents 一节，按这项工作为每个 subagent 选推理档位，以及快速或标准速度。监督并评审 diff，不要自己去敲（**guard-the-context-window** 原则 skill）。几个独立假设同时活着时，扇出到并行的 subagent，各自用自己的 worktree（**separate-before-serializing-shared-state** 原则 skill）。
+   - 用你配置的 hillclimb 模型（默认 `claude-opus-5-5-xhigh-fast`），把改动交给 subagent，范围收紧。按 Subagents 一节，按这项工作为每个 subagent 选推理档位。监督并评审 diff，不要自己去敲（**guard-the-context-window** 原则 skill）。几个独立假设同时活着时，扇出到并行的 subagent，各自用自己的 worktree（**separate-before-serializing-shared-state** 原则 skill）。
    - 用冻结的 harness 测改前和改后，并跑回归关卡。
    - 只有指标的移动越过噪声，且关卡保持绿色，才接受。否则把改动整段回退。「也许有用」的微调不留。
    - 每个被接受的修复一个 commit，只暂存你改过的文件（`git add <files>`，绝不用 `-A`）。留下还是回退，这一行都要记。

@@ -14,7 +14,7 @@
    7. 做得更便宜。
 
    靠前的某条口诀已经达标，就停。
-3. 从 trace 规划修复。如果它跨过函数边界，先 `architect`。把实现交给一个 subagent，用你配置的性能问题模型（默认 `claude-opus-5-5-xhigh`）。按 Subagents 一节，为每个 subagent 按这项工作选定推理档位，以及快速或标准速度。审查 diff。抓一条修复后的 trace。
+3. 从 trace 规划修复。如果它跨过函数边界，先 `architect`。把实现交给一个 subagent，用你配置的性能问题模型（默认 `claude-opus-5-5-xhigh-fast`）。按 Subagents 一节，为每个 subagent 按这项工作选定推理档位。审查 diff。抓一条修复后的 trace。
    用 **sequence-verifiable-units** 原则 skill，每一次尝试都先验证，再试下一次。
 4. 解析并对比制品（JSON 转 sqlite，再 diff）。「无结论」或用错使用面不算通过。标出来。
 5. 在 PR 里引用这次测量。

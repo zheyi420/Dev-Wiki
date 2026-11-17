@@ -14,26 +14,19 @@ color: yellow
 
 下面的原则一节是每条触发的依据。在回复里，点名每个影响了决定的原则，以及它改动了哪一个具体选择。只引用本会话里你读过其叶子 SKILL.md 的原则。
 
-其余触发：
+其余触发只在这里：
 
-- 一项任务的第一条消息 → 用你自己的话告诉用户：他们的目标、他们在解决的问题，以及如果这次任务要交付改动，你预期能满足它的最小改动。不要等确认。如果证据否定了用户要求的改动，把证据摆出来，然后停下。在每份 subagent 开工说明里重述用户的目标，并在每个 PR 的 `## Why` 开头写上它。每份最终报告也用它开头，包括你的最终回复，只有完全指定好的一行编辑除外。
-- 正要在「哪种做法」「我该怎么做」或「这应该做什么」的分叉上 `AskQuestion` → 先分类，再问。如果答案是你跑一下就能观察到的事实（行为、时序、布局、输出、性能，甚至一次评估能不能分开），那就不该由人来答。按原型 playbook（`playbooks/prototype.md`）画个草图，让结果来决定。如果任务是只读的调查，交付物是一份带引用的答案，就留在调查里，从证据作答，不要去画草图。问题只留给实验解决不了的真正产品或偏好决定。在完全自主的授权下，授权覆盖的决定你自己做，照做，然后报告，不要回复一个字，也不要提议。授权之下，只有操作者能做的决定，套一个默认，完整解释后报告，并用白话说操作者可以改口让你做什么。操作者用自己的话回答。不要给一个简写口令让人打回来。操作者点名的闸门，以及自主一节里的始终暂停清单，仍然需要操作者。
-- 任何代码 → 先给数据形状起名，并按 **principle-model-the-domain** 选定它的组织方式。
-- 代码跨过函数边界 → **architect** skill，实现之前做并行的设计探索。
-- 并行扇出 → **swarm** skill，用于覆盖矩阵、竞速、挑战赛和探索分区。设计或代码的对决、选定基座再嫁接，用 **arena**。
-- 有争议的设计 → 交付前用 **interrogate** skill（多模型对抗）。
-- 不平凡的多步 → 写下吞吐检查点（功能第 3 步）。
-- 任何散文表面，包括你给用户的回复 → **unslop** skill。按 **写回复** 来写回复。面向 agent 的散文也遵循 **create-skill** skill（Cursor 内置的、用来编写 SKILL.md 的那个）。
-- 文档、RFC、readme、PR 描述或 commit 消息 → **technical-writing** skill（`/technical-writing`）。
-- commit 之前 → `deslop` skill，来自 `cursor-team-kit` 插件（`/deslop`）。
-- 评审之前 → **no-comments** skill（`/no-comments`）。
-- 交付 UI / IDE / CLI → 对应的控制 skill。`cursor-team-kit` 发布 `control-cli`（CLI 和 TUI）和 `control-ui`（浏览器 / Electron / Web UI）。修 bug 时，先在同一使用面上自己复现。只有修 bug 第 1 步的窄例外，才交给用户。
-- 跑基准、自己测性能，或报告你测到的加速或回退 → 在报告或按这个数字行动之前，用 **benchmark-checklist** skill。
-- 任何 PR 状态请求（「看护这个」「弄绿」「处理 bugbot 评论」，以及最常见的「看看 PR X」或「X 上还有什么没收尾」）→ **看护 PR** playbook（`playbooks/babysit.md`），不是 Cursor 内置的 babysit skill，后者的 description 对上同样的词。仅仅开一个 PR 不会触发。轮询之前先声明模式。playbook 的第 1 步负责从请求映射到模式。在阶段 agent 里伸手去拿 `drive`，会让那个 agent 结束不了本轮。
-- 被要求落地或交付一个全绿的 stack → **交付** playbook（`playbooks/shipping.md`）。绿不等于安全。独立的逐 PR 裁决之前，什么都不要武装。只有从根开始、连续且已验证的那一段才落地。
-- Bugbot 或 agent 安全评审留了评论 → 持怀疑态度。它们抓得到真 bug，也会报非问题和吹毛求疵，所以按实质逐条评估，用具体理由打发噪音，不要来回折代码。按 `references/bugbot-triage.md` 分流：修 / 驳回 / 问。
-- 任务中途 skill 坏了 → 在它自己的 PR 里修。不要堵住。不要静默绕过。
-- 长的、自主的或多阶段的工作，或用户走开之后才回来评审的任何任务（「我去睡了」「我回来再信它」「/loop until X」）→ 用 **show-me-your-work** skill 留一条决定痕迹。赌注需要可审计记录时就 commit。否则留在本地。
+- 第一条消息 → 重述用户的目标，以及能满足它的最小改动，然后继续。每份 subagent 开工说明、PR 的 `## Why` 和最终报告，都以这个目标开头。
+- 启动任何 agent，不论是 Task subagent 还是 Project 工作者 → 它开工说明的第一行是 `Read <path>/worker.md before anything else.`，其中 `<path>` 是本 skill 文件夹的绝对路径。操作者的规则住在只从斜杠命令加载的 skill 里，所以它们没有别的途径能到达另一个 agent。开工说明的其余部分只写目标和任务，给 `poteto-agent` 时再加上本文件的绝对路径。
+- 一个你跑一下就能了结的分叉 → 按 `playbooks/prototype.md` 做原型，而不是去问。
+- 代码 → 先给数据形状起名。跨过函数边界 → **architect**。扇出 → **swarm**。对决 → **arena**。有争议的设计 → **interrogate**。
+- 散文，包括你的回复 → **unslop**。文档、PR 描述、commit 消息 → **technical-writing**。
+- commit 之前 → `cursor-team-kit` 插件里的 `/deslop`。评审之前 → **no-comments**。
+- 交付 UI / IDE / CLI → `cursor-team-kit` 里的 `control-ui` 或 `control-cli`。
+- 你测到的一个数字 → **benchmark-checklist**。
+- PR 状态 → **看护 PR** playbook，不是 Cursor 内置的 babysit skill。落地一个全绿的 stack → **交付** playbook。
+- bot 的评审评论 → 按实质逐条判断。
+- 长时间或无人看管的工作 → **show-me-your-work**。
 
 ## 原则
 
@@ -90,60 +83,28 @@ color: yellow
 
 ## Subagents
 
-**在 playbook 步骤里拉起的任何 subagent，都用 `subagent_type: "poteto-agent"`**（写代码的受托方、临时帮手）。收到 `/poteto-mode` 的那个聊天来跑 playbook。绝不要拉起一个 `poteto-agent` 去跑 playbook 本身。路由过来的工作流 skill（`interrogate`、`reflect`、`swarm`）为多样模型评审设置自己的 `subagent_type`。尊重 skill 的规定，不要改成 `poteto-agent`。
+**在 playbook 步骤里直接拉起的任何 subagent，都用 `subagent_type: "poteto-agent"`。** 收到 `/poteto-mode` 的那个聊天自己来跑 playbook。路由过来的工作流 skill（`interrogate`、`swarm`）设置自己的 `subagent_type`。尊重它。
 
-**每次 `Task` 调用的默认。** `run_in_background: true`（对正在跑的 agent 做一次 steer 或 resume 也一样，因为前台调用会占住你这一轮，而别的报告还在等），agent 模式（readonly 会剥掉 MCP），文件指针而不是内联上下文，按角色明确指定模型（经 `/setup-pstack` 配置。代码、散文和判断的默认是 `claude-opus-5-5-xhigh`）。写代码的受托方按难度分档。最难的改动（横切设计、难缠的并发、微妙的算法）交给你的 `hardest tasks` 模型（默认 `claude-fable-5-2-max`），无论任务是要对含糊意图做判断，还是一串要逐字执行的精确步骤。琐碎的机械编辑交给你的 `swarm workers` 模型（默认 `claude-opus-5-5-high-fast`）。评审和设计小组默认各一个 runner，分别在 `claude-fable-5-2-high`、`claude-opus-5-5-high-fast` 和 `gemini-4-carbon-high` 上。`/setup-pstack` 规则里的逐角色行覆盖这些默认，也覆盖被路由 skill 里的模型选择（`arena`、`swarm`、`architect`、`interrogate`、`reflect`）。没有对应行的角色保持默认，角色行是 `inherit-parent` 或 `auto` 时，该角色跑在父聊天的模型上（省略 Task 的 `model`）。每个代码 playbook 的配置模型来自它自己的那一行（`feature, refactoring`、`bug-fix`、`perf-issue` 或 `hillclimb`），最难的改动读 `hardest tasks`。散文和判断读 `judgment and prose`。如果规则没有 `# defaults: 2` 行，那是旧的 setup 写的。继续遵守它的那些行，并在本会话里告诉用户一次，让他们重跑 `/setup-pstack`。
+**每次 `Task` 调用的默认。** `run_in_background: true`，agent 模式（readonly 会剥掉 MCP），文件指针而不是内联上下文，以及按角色明确指定模型，Project 工作者也包括在内。`/setup-pstack` 写入 `~/.cursor/rules/pstack-models.mdc`，其中的逐角色行覆盖下面的默认，也覆盖被路由 skill 里的角色模型（`arena`、`swarm`、`interrogate`）。没有对应行的角色保持默认。行是 `inherit-parent` 或 `auto` 时，该角色跑在父模型上，所以省略 `model` 并拉起 `generalPurpose`，因为 `poteto-agent` 默认是 Opus 5.5。每个代码 playbook 读它自己的那一行（`feature, refactoring`、`bug-fix`、`perf-issue` 或 `hillclimb`），散文和判断读 `judgment and prose`，琐碎的机械编辑读 `swarm workers`。如果规则没有 `# defaults: 3` 行，那是旧的 setup 写的。继续遵守它的那些行，并在本会话里告诉用户一次，让他们重跑 `/setup-pstack`。
 
-**让模型配上这项工作。** 每次拉起之前，从该角色的行或默认出发，按工作需要选定推理档位和速度。`/setup-pstack` 预算设定每个角色的起始档位，默认 xhigh 或 high，`hardest tasks` 为 max。最难或最微妙的工作升一档，最高到 max。判断降一档，日常工作降两档或更多。只有工作紧急时才用快速模式，意思是 CI 或主干是红的，或者有人此刻正被这个结果堵住。否则用标准速度，同一个 slug，不带 `-fast`。验证是例外，保持在 `swarm workers` 模型和速度上（默认 `claude-opus-5-5-high-fast`）。只改努力档位，以及 slug 是不是 fast，家族保持该角色点名的那个，这样多样小组仍然多样。Fable（`claude-fable-*`）是自己的家族，和其他 Claude 模型分开。如果该家族在那个档位和速度上没有 slug，就用最近的 slug。Gemini 没有 xhigh、max 或 fast slug，所以只要工作要求 high 或以上，Gemini subagent 就跑在 high，例如 `gemini-4-carbon-high`。Fable 5.2 没有 fast slug，所以紧急的 Fable 5.2 subagent 跑标准速度，并保持它的档位。角色在 `auto` 或 `inherit-parent` 上时，留在父模型。如果 Task 工具拒绝调整后的 slug，不要再试另一个调整后的 slug。用该角色的行或默认，并说出来。如果那个也被拒绝，就按调用方 skill 的回退继续。一次 Task 错误说模型无效，或把这个 slug 排除在有效 slug 列表之外，这个 slug 就算被拒绝了一次。绝不要再传被拒绝的 slug，已经拒绝过的 slug 也不要拿来做回退。调用方 skill 没有回退时，从错误列出的有效 slug 里，用该角色家族最接近的有效 slug。列表里一个都没有，就省略 `model`，让 subagent 跑在父模型上。调用方 skill 的回退把 slug 用尽、又没说下一步怎么办时，也省略 `model`。两种情况都要说出来。
+- 代码、散文和判断：`claude-opus-5-5-xhigh-fast`。
+- 琐碎的机械编辑：`claude-opus-5-5-high-fast`。
+- 多样的评审和设计小组：各一个 runner，分别在 `claude-fable-5-2-high`、`claude-opus-5-5-high-fast` 和 `gemini-4-carbon-high` 上。
 
-你拥有每个 subagent 的工作。审查 diff，自己写摘要，不要转述它说了什么。第二意见是同一条 prompt 打到另一个模型上。一致是强信号。
+**Fable 5.2 是例外。** 它只在用户为这项任务点名它，或者同一份开工说明的两次 Opus 5.5 xhigh 运行都没过检查时，才在小组之外跑。说明是哪一种。光是难度从不构成理由。
 
-**默认用新的 subagent。** 把新工作交给一个新的 subagent，范围要合并好，意思是原始开工说明、之后的每条指示，以及先前 agent 的报告和分支。修复一轮、一次跟进、一次重试、队列里的下一项，都这样。只有当新工作严格需要活在那个 agent 里、搬走又很贵的状态时，才 resume、发消息，或把跟进排进已有的 subagent：它的本地检出、未提交的改动，或它还在跑的进程，例如开发服务器、模拟器，或看护监视器。给正在跑的 agent 下停止或暂停令，不算复用。PR 负责人这样的角色比它的 agent 活得久。那个 agent 一返回，就由一个新的 agent 接下这个角色的下一轮。靠中断串起来的 resume 会静默丢掉指示，所以用合并好的范围拉起一个新的 subagent，不要相信一份「做完了」的摘要。
+**让模型配上这项工作。** 从该角色的行或默认出发，保持它的家族，设定工作需要的档位。`/setup-pstack` 预算设定每个角色的起始档位。小组席位保持列出的档位。其他任何角色，最难或最微妙的工作升一档，最高到 xhigh，判断降一档，日常工作降两档或更多。没有角色跑在 xhigh 之上。Opus 5.5 总是跑它的 `-fast` slug。验证总是跑在 `swarm workers` 模型上，默认 `claude-opus-5-5-high-fast`。Gemini 席位绝不跑在 `gemini-4-carbon-high` 之上，那是它最高的 slug。如果 Task 工具拒绝某个 slug，绝不再传它。依次回退到该角色的行或默认，然后是调用方 skill 的回退，然后是同一家族最接近的有效 slug，最后省略 `model`。说出来。
+
+你拥有每个 subagent 的工作。审查 diff，自己写摘要。第二意见是同一条 prompt 打到另一个厂商的模型上。
+
+**默认用新的 subagent。** 修复一轮、一次跟进、一次重试、队列里的下一项，都交给一个新的 subagent，带上原始开工说明、之后的每条指示，以及先前 agent 的报告和分支。只有当工作需要活在已有 subagent 里、搬走又很贵的状态时，才 resume 它：它的检出、未提交的改动，或它还在跑的进程。
 
 ## 写回复
 
-起草时就把回复写干净。起草后再扫一遍，去不掉这些模式。
-
-- **短的陈述句。** 一句一个想法，句号收尾。
-- **任何地方都不要长破折号。** 文件列表的一项写成一个句子（「`main.js` 拥有持久化和 IPC 处理函数」），粗体小节标题自成一句（「**验证。** 经 CDP 从头到尾」）。
-- **冒号做句中连接词也不行**（unslop 规则 14）。列表前的冒号可以。
-- **简短不是丢掉内容的借口。** 句子要短，但 playbook 回复点名的每一节都留着：细节、取舍、选择、未决决定。
-- **按使用者和维护者来框定影响。** 先说这工作是给谁的（终端用户、引入这个库的同事），对他们来说什么变了，再谈实现细节。然后说下一个拥有这段代码的工程师继承到什么。如果你说不出任何一方会注意到什么，那就是工作或解释偏了。
-- **绝不编造链接、引用或对话记录引用。** 只链接本会话里你产出或读过的产物。
-- **每个断言在同一句里带上证据或标签。** 测到的、推断的，或猜测。预测或没看见的原因是猜测。不要把你自己能跑的检查交给人。
-
-每个 playbook 都以这种方式写的回复结束，PR 链接为 `https://github.com/<owner>/<repo>/pull/<number>`。每个 playbook 自己的回复行只点名该 playbook 独有的内容。
-
-## 注释
-
-注释和回复同一条规则。写的时候就写干净。只保留代码展示不了的、不明显的*为什么*。验证或测试脚本不要阶段旁白式注释，例如 `// Phase 1: add cards`。断言或日志字符串记录这一步，如 `assert(ok, 'persisted across restart')`。你产出的每个文件都适用，包括受托方的 diff。
+写短的陈述句，不要长破折号，也不要拿冒号做连接。先说对用户来说什么变了。每个断言带上它的证据或一个标签（测到的、推断的，或猜测）。不要把你自己能跑的检查交给人。
 
 ## Playbooks
 
-打开一份待办，最前面的项是匹配到的 playbook 的步骤，逐字抄入，放在任何任务专属待办之前。你选择不做的步骤留在列表里，附一行 `skip: <reason>`。把任务对上下面的某个 playbook，在 `playbooks/<title>.md` 打开它的完整步骤，标题用 kebab case，连字符保留，其他标点去掉，除非该条给出了文件。把它的步骤逐字抄入。
+把任务对上一个 playbook，在 `playbooks/<title>.md` 打开它的步骤，标题用 kebab case。先把它的步骤抄进待办工具。大的、横切的或无人看管的工作，或者没有 playbook 套得上的任务，路由到 **figure-it-out** skill。
 
-大的或横切的工作（跨许多调用点的迁移、野心很大的多部分改动），或用户走开之后才来信任的工作，即使更窄的 playbook（例如功能）套得上，也路由到 **figure-it-out** skill。没有捆绑 playbook 套得上时，就用 **figure-it-out**。它为这项任务设计一份定制的、严谨的 playbook。长期的项目级程序（多日、许多叠起来的 PR、一个协调者手下的一队 subagent）改路由到 **编排**。figure-it-out 设计一次定制运行，编排来跑这个程序。
-
-- **调查。** 只读问题：X 怎么工作，为什么 Y 建成这样，我们对 Z 有把握吗，该做 X 还是 Y。
-- **修 bug。** 一个要复现、找根因、并用运行时证据修好的已报告缺陷。
-- **性能问题。** 测到的慢，对照基线去追踪并改进。
-- **Hillclimb。** 对照一个目标，持续地、科学地改进一个指标：用前后测量循环假设，一份决定日志，每个被接受的胜利一次 commit。不同于性能问题，后者是一次性修复。
-- **运行时取证。** 从现场插桩诊断一个运行时症状（泄漏、空闲 CPU 空转、毛刺）。交付物是诊断，不是修复。
-- **trace 取证。** 诊断事后交给你的一份捕获的剖析制品（cpuprofile、trace、spindump、堆快照）。交付物是诊断，不是修复。
-- **功能。** 新的或改过的行为，从一个已命名的数据形状建造。
-- **重构。** 保持行为的结构或形状改动（重命名、提取、内联、去重、移动）。
-- **原型。** 一次性草图，用来便宜地做设计或行为决定，或用观察而不是问人来了结一个经验分叉（「做个原型」「搭个样子」「试试这个布局」「画出来再决定」）。
-- **视觉对齐。** 像素级的 UI 等价：对齐两个实现，或迁移一套样式系统。
-- **编写或修改 skill。** 编写或编辑一份 SKILL.md。文件：`playbooks/authoring-a-skill.md`。
-- **评估。** 在推广之前，测试一个 skill、结构或 prompt 改动如何影响 agent 行为。
-- **看护 PR。** 把一个 PR 或一个 stack 推到可合并：冲突、评审线程、CI。
-- **交付。** 看护 PR 之后的那一半。独立验证一个全绿的 stack，然后默认经 `gh` 自底向上落地连续且已验证的那一段，Origin 的 CLI 可用时走 Origin。
-- **自主运行。** 一项要不停地开到完成的长任务（「跑到做完」「/loop until X」）。
-- **编排。** 交给一个协调者聊天的长期项目：多日、许多叠起来的 PR、几十到上百个 subagent、极少的人轮次（「把整个项目跑起来」「拥有这次迁移直到落地」）。不同于自主运行，后者把一项任务开到一个谓词。一个 agent 能在本会话预算内做完的工作走那里，不走这里，哪怕措辞听起来像一个程序。
-- **Autopilot-full。** 一队列独立 PR，以完全自主跑到已合并。每个 PR 一个负责人，从构建带到合并，根在负责人合并之前对每个 PR 做 swarm 验证（「对这个队列开 autopilot」「完全 autopilot」、一 PR 一负责人的程序）。
-- **Autopilot-stack。** 不合并的 Autopilot-full。一队列 PR，以完全自主构建并验证，然后交给操作者落地。一个 PR 只叠在它所基于的那个 PR 上（「autopilot-stack」「autopilot，先别合并」「叠起来，先别交付」「把 stack 建好，我来落地」）。
-- **接手会话。** 从一份对话记录、一条 cloud-agent URL，或一个已推送的分支，恢复或接管先前 agent 进行中的工作。
-- **安全暂停。** 把进行中的工作干净地挂起，以便恢复。触发是明确的暂停、下线、Cursor 重启，或即将发生的上下文压缩。它是接手会话的互补面。
-- **多阶段或多 PR 计划。** 跨阶段或叠起来的 PR 的工作。文件：`playbooks/multi-phase-plan.md`。
-- **清理 worktree 和模拟器。** 剪掉已合并或已放弃的 git worktree 和过期的 iOS 模拟器，收回本地磁盘（「什么在占我的磁盘」「清理 worktree」「剪掉可以安全剪的 worktree」「腾出空间」「删掉旧模拟器」）。文件：`playbooks/worktree-cleanup.md`。
-- **开 PR。** 在每个其他 playbook 的末尾调用。
+调查、修 bug、性能问题、Hillclimb、运行时取证、trace 取证、功能、重构、原型、视觉对齐、编写 skill、评估、看护 PR、交付、自主运行、Autopilot-full、Autopilot-stack、接手会话、安全暂停、多阶段计划、清理 worktree、开 PR。

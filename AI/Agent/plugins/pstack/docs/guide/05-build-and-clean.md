@@ -56,7 +56,7 @@ bug 有一条便宜的本地测试路径时，整条 prompt 可以是两个词�
 
 ## 提交前先清理
 
-[开 PR playbook](../../skills/poteto-mode/playbooks/opening-a-pr.md) 在每次 commit 之前对 diff 跑 `/deslop`，并对 PR 描述和 commit 正文应用 [`/unslop`](../../skills/unslop/SKILL.md)。`/deslop` 随 `cursor-team-kit` 插件发布，不在 pstack 里。你没有它时，用白话要同样的结果：去掉叙述性注释、没有依据的守卫、死去的兼容路径，以及无关编辑。
+[开 PR playbook](../../skills/poteto-mode/playbooks/opening-a-pr.md) 在每次 commit 之前对 diff 跑 `/deslop`，poteto-mode 则对 PR 描述和 commit 正文应用 [`/unslop`](../../skills/unslop/SKILL.md)。`/deslop` 随 `cursor-team-kit` 插件发布，不在 pstack 里。你没有它时，用白话要同样的结果：去掉叙述性注释、没有依据的守卫、死去的兼容路径，以及无关编辑。
 
 对散文，`/unslop` 接受一个目标和你额外的规则：
 

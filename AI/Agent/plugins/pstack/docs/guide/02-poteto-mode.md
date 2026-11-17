@@ -1,6 +1,6 @@
 # 经 `/poteto-mode` 路由工作
 
-`/poteto-mode` 是入口。你给它一个目标，它从二十三个 playbook 里匹配一个，把那个 playbook 的步骤抄进待办，并在步骤需要时调用其他 skill。本页讲好的 prompt 长什么样，以及你其实需要写得多短。
+`/poteto-mode` 是入口。你给它一个目标，它从二十二个 playbook 里匹配一个，把那个 playbook 的步骤抄进待办，并在步骤需要时调用其他 skill。本页讲好的 prompt 长什么样，以及你其实需要写得多短。
 
 ![调度员扳下道岔，把轨道手摇车上的机器人送向亮着的闸门。上方的 /poteto-mode 发车牌写着 BUG FIX、FEATURE 和 INVESTIGATION。](./images/router.jpg)
 
@@ -25,7 +25,7 @@ flowchart TD
     J --> K
 ```
 
-图里是常见路线。还有这些 playbook：对一项指标做 hillclimb，诊断运行时症状和抓下来的 trace，原型，视觉对齐，编写和评估 skill，自主运行，开 PR，把 PR 或 stack 看护到可合并，交付一个已验证的 stack，用 autopilot 跑一队列 PR 或一个 stack，编排项目规模的程序，接手会话，安全暂停，多阶段计划，以及清理 worktree。[playbook 目录](../../skills/poteto-mode/playbooks/) 是全套。
+图里是常见路线。还有这些 playbook：对一项指标做 hillclimb，诊断运行时症状和抓下来的 trace，原型，视觉对齐，编写和评估 skill，自主运行，开 PR，把 PR 或 stack 看护到可合并，交付一个已验证的 stack，用 autopilot 跑一队列 PR 或一个 stack，接手会话，安全暂停，多阶段计划，以及清理 worktree。[playbook 目录](../../skills/poteto-mode/playbooks/) 是全套。
 
 ## 说目标，别走形式
 
@@ -35,7 +35,7 @@ flowchart TD
 /poteto-mode users get two notifications after a retry. repro first, then fix and verify.
 ```
 
-这是一条修 bug 的 prompt。「先复现」是真正的约束，不是客气，playbook 会照做。看修 bug 的步骤填进待办。跳过的步骤仍看得见，并标着 `skip: <reason>`。
+这是一条修 bug 的 prompt。「先复现」是真正的约束，不是客气，playbook 会照做。看修 bug 的步骤填进待办。
 
 ## prompt 里写什么
 

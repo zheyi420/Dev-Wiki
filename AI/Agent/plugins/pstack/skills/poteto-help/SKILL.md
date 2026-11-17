@@ -49,7 +49,7 @@ pstack 为 Cursor 而建，用 `/plugin marketplace add cursor/plugins`，然后
 
 ## 用 `/poteto-mode` 开始一项任务
 
-`/poteto-mode` 把任务对上一个 playbook，把 playbook 的步骤抄进待办，并在步骤需要时跑其他 skill。它跳过的步骤留在列表里，写成 `skip: <reason>`。一条好的 prompt 说出目标，以及怎么判断做完了。它不列 skill，因为手写的顺序容易丢掉或打乱 playbook 会保留的步骤。帮人措辞之前，先读 [`references/prompting.md`](references/prompting.md)。[指南第 2 页](../../docs/guide/02-poteto-mode.md) 有例子。
+`/poteto-mode` 把任务对上一个 playbook，把 playbook 的步骤抄进待办，并在步骤需要时跑其他 skill。一条好的 prompt 说出目标，以及怎么判断做完了。它不列 skill，因为手写的顺序容易丢掉或打乱 playbook 会保留的步骤。帮人措辞之前，先读 [`references/prompting.md`](references/prompting.md)。[指南第 2 页](../../docs/guide/02-poteto-mode.md) 有例子。
 
 `/poteto-mode` 会不会一直开着，取决于用户怎么启动它：
 
@@ -106,16 +106,15 @@ pstack 为 Cursor 而建，用 `/plugin marketplace add cursor/plugins`，然后
 
 - `/how` 解释代码做什么。`/why` 解释原因。`/teach` 跑其中一个或两个，并用白话解释结果。
 - `/arena` 给每个工作者同一份开工说明，并合并最好的部分。`/swarm` 把工作拆成切片或一场竞速，返回一份报告。
-- `/architect` 定下设计之后马上实现。加上「带检查点」，以便在它写代码之前评审设计。
 - `/interrogate` 评审 diff。`/blast-radius` 寻找 diff 之外的破损，并证明那一个让改动安全的事实。
 - `/recall` 跨最近的聊天重建上下文。`/ketchup` 只覆盖这次聊天里自用户上一条消息以来的部分。恢复某一个具体聊天或分支，是接手会话 playbook。
-- `/figure-it-out` 设计一次严谨的运行。编排 playbook 跑一个跨多日、许多 PR 的程序。自主运行 playbook 把一项任务开到一个完成条件。
+- `/figure-it-out` 设计一次严谨的运行。自主运行 playbook 把一项任务开到一个完成条件。
 
 不在 pstack 里：
 
 - `/deslop`、`control-cli` 和 `control-ui` 随 `cursor-team-kit` 插件发布。
 - `/loop` 和 `/create-skill` 是 Cursor 内置的。
-- pstack 没有 `/orchestrate` skill。编排是 `/poteto-mode` 的一个 playbook。如果斜杠菜单显示 `/orchestrate`，那是另一个插件提供的。
+- pstack 没有 `/orchestrate` skill。如果斜杠菜单显示 `/orchestrate`，那是另一个插件提供的。
 
 ## Playbook 和原则
 
@@ -128,7 +127,7 @@ Playbook 是 `/poteto-mode` 里面的步骤清单，不是 skill，所以没有�
 - 「对这个队列完全 autopilot」跑 Autopilot-full。「autopilot，先别合并」跑 Autopilot-stack。
 - 「跑评估 playbook」跑评估。
 
-没有 `/poteto-mode` 时，「看护这个 PR」这样的说法可能启动 Cursor 自己做同一件事的 skill。[`poteto-mode`](../poteto-mode/SKILL.md) 的 Playbooks 一节列出每个 playbook 以及何时适用。[指南第 6 页](../../docs/guide/06-verify-and-ship.md) 覆盖开 PR、看护 PR 和落地 PR。
+没有 `/poteto-mode` 时，「看护这个 PR」这样的说法可能启动 Cursor 自己做同一件事的 skill。[`poteto-mode`](../poteto-mode/SKILL.md) 的 Playbooks 一节列出每个 playbook。[指南第 6 页](../../docs/guide/06-verify-and-ship.md) 覆盖开 PR、看护 PR 和落地 PR。
 
 pstack 没有规划 skill。Cursor 的 Plan Mode 可以和它一起用。对跨阶段或叠起来的 PR 的工作，向 `/poteto-mode` 要一份计划，会跑 [多阶段计划 playbook](../poteto-mode/playbooks/multi-phase-plan.md)，它写下计划，不实现。对设计问题，原型 playbook 或 `/architect` 先在代码里把它定下来。
 
