@@ -1,4 +1,5 @@
 {
   "theme": "system",
-  "cssTheme": "Dracula Official"
+  "cssTheme": "Dracula Official",
+  "showRibbon": true
 }
