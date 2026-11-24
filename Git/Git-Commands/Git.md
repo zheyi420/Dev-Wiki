@@ -1274,6 +1274,55 @@ git ls-files | grep "匹配名"
 ```bash
   git stash branch new-branch-name  # 创建新分支并恢复最新存储内容
 ```
+- **查看某个文件的变更，只应用 stash 中某个文件的变更**  
+	```bash
+	zheyi@LAPTOP-3ROIBGFN MINGW64 /d/dev/project/sinoaero/EasyGo/eg-arinc-web (feat/change-import-design)
+	$ git diff 'stash@{0}^1' 'stash@{0}' -- vite.config.ts
+	diff --git a/vite.config.ts b/vite.config.ts
+	index 7af7837..f2ae572 100644
+	--- a/vite.config.ts
+	+++ b/vite.config.ts
+	@@ -45,8 +45,9 @@ export default defineConfig({
+	         changeOrigin: true,
+	       },
+	       '/api/easygoAuth': {
+	-        target: 'http://10.10.10.9',
+	+        target: 'http://127.0.0.1:8040',^M
+	         changeOrigin: true,
+	+        rewrite: (path) => path.replace(/^\/api/, ''),^M
+	         configure: (proxy) => {
+	           proxy.on('proxyReq', (proxyReq) => {
+	             proxyReq.removeHeader('origin')
+	@@ -54,13 +55,11 @@ export default defineConfig({
+	             proxyReq.removeHeader('cookie')
+	           })
+	         },
+	-        // target: 'http://127.0.0.1:8040',
+	-        // rewrite: (path) => path.replace(/^\/api/, '')
+	       },
+	       '/api': {
+	         target: 'http://127.0.0.1:8151',
+	         changeOrigin: true,
+	-        rewrite: (path) => path.replace(/^\/api/, '')
+	+        rewrite: (path) => path.replace(/^\/api/, '/arinc424')^M
+	       }
+	     }
+	   },
+	
+	zheyi@LAPTOP-3ROIBGFN MINGW64 /d/dev/project/sinoaero/EasyGo/eg-arinc-web (feat/change-import-design)
+	$ git diff 'stash@{0}^1' 'stash@{0}' -- vite.config.ts | git apply --check
+	
+	zheyi@LAPTOP-3ROIBGFN MINGW64 /d/dev/project/sinoaero/EasyGo/eg-arinc-web (feat/change-import-design)
+	$ git diff 'stash@{0}^1' 'stash@{0}' -- vite.config.ts | git apply
+
+	```
+	- 这里的 `^1` 表示 stash 创建时的原始 HEAD 父提交，比较的是该提交与 stash 保存的工作区版本。
+		- 它会显示 `stash@{0}` 中 `vite.config.ts` 相对于创建 stash 时 HEAD 版本的差异，不会修改文件。
+
+	- 关于上述示例
+		- `git diff 'stash@{0}^1' 'stash@{0}' -- vite.config.ts | git apply --check` 检查是否能正常应用
+		- 这样只会应用 `vite.config.ts` 的差异，其他文件不会受到影响，stash 记录也不会被删除。
+	
 
 #### 注意事项
 

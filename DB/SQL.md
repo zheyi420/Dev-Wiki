@@ -12,4 +12,12 @@
 	SELECT COUNT(DISTINCT 字段名) AS 唯一值数量
 	FROM 表名;
 	```
-
+	- 显示出现次数
+	```sql
+	SELECT
+	    字段名,
+	    COUNT(*) AS count
+	FROM 表名
+	GROUP BY 字段名
+	ORDER BY 字段名;
+	```
