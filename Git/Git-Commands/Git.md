@@ -906,6 +906,56 @@ feature:        C---D
 main:     A---B---C---D
 ```
 
+#### `--ff-only`
+
+```bash
+git merge --ff-only origin/develop
+```
+
+在**当前检出的分支**上合并 `origin/develop`，并且只允许快进。能快进时，当前分支指针移到 `origin/develop`，不产生新的提交。不能快进时，命令拒绝执行，当前分支、暂存区和工作区保持原样。
+
+拆开看：
+
+- `git merge`：把给出的提交合并进当前分支。
+- `origin/develop`：本地的远程跟踪分支，记录上次 `git fetch` 看到的远程 `develop`。本地提交不会推动它。合并前先执行 `git fetch origin develop`，否则用的是本地这份旧记录。
+- `--ff-only`：只接受 fast-forward。当前分支必须是 `origin/develop` 的祖先，远程只是在它前面多出若干提交。
+
+当前分支落后时可以快进。下面的 `dev-local` 换成当前分支名即可：
+
+```
+# 合并前
+dev-local:      A---B
+origin/develop: A---B---C---D
+
+# 成功后，两边指向同一提交，没有新的 merge commit
+dev-local:      A---B---C---D
+```
+
+已经和 `origin/develop` 指向同一提交时，输出 `Already up to date.`，指针不动。
+
+历史已经分叉时不能快进，Git 以失败退出，提示 `fatal: Not possible to fast-forward, aborting.`
+
+```
+dev-local:      A---B---E
+origin/develop: A---B---C
+```
+
+工作区里的未提交修改若会被进来的提交覆盖，Git 也会拒绝，并列出会被覆盖的文件。先提交、暂存或挪开这些修改，再执行。
+
+相近命令的结果：
+
+| 命令 | 能快进 | 已经分叉 |
+| --- | --- | --- |
+| `git merge --ff-only origin/develop` | 移动分支指针 | 拒绝，现场不变 |
+| `git merge origin/develop` | 移动分支指针 | 生成合并提交；有冲突时停在合并中 |
+| `git merge --no-ff origin/develop` | 仍生成一个合并提交 | 生成合并提交 |
+| `git pull origin develop` | 先 fetch 再按默认策略合并 | 可能进入合并，不一定拒绝 |
+| `git reset --hard origin/develop` | 指针移到远程 | 指针仍移到远程，当前分支上多出的提交从该分支消失 |
+
+适合本地锚点分支保持和远程集成线同一条历史，例如固定工作树里的 `dev-local` 跟上 `origin/develop`。当前分支已有自己的提交，或远程历史被改写过时，命令会拒绝；先看两边差异，再决定合并、变基或重置。
+
+要更新的是当前检出的分支。在 `dev-local` 工作树里执行，移动的是 `dev-local`；主目录检出的 `develop` 不受影响。
+
 
 ### `git merge-base`
 > 寻找合并可能的最优共同祖先

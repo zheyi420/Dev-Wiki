@@ -70,6 +70,9 @@ $ git branch -a
 cd ../worktree_dir_going_to_delete/
 pnpm dlx rimraf --glob "**/node_modules"
 
+# npm 项目，没有嵌套依赖目录的话用 powershell 的也可
+Remove-Item -LiteralPath .\node_modules -Recurse -Force
+
 # 去到原同仓库其他/主目录
 cd ../my-project
 
@@ -115,4 +118,50 @@ error: failed to delete 'C:/AIRace/Dev/Project/yunyan-panorama-frontend_wt_branc
 
 如果 lock 文件未被 git 追踪，新增 worktree 时会导致新的 Worktree 目录中没有 lock 文件，进而导致下载依赖时会重新计算依赖树并生成新的 lock 文件。
 如果这期间某个间接依赖包发布了新版本（且符合 `package.json` 的版本范围），新 worktree 里的依赖版本可能和主目录里的**不一致**。导致两边工作树项目实际依赖不一致，进而导致”一边能跑通，另一边跑不通“或者相反的诡异 Bug。
+
+# 固定工作树
+
+主检出长期停在 `develop`，用来跑本机开发环境，不在那里频繁切分支。另建一条只留在本机的分支，挂在固定工作树目录里；后续功能都在这个目录中切分支开发，目录本身不变。
+
+同一条分支不能同时被两个工作树检出，所以这条长期工作树不能直接检出 `develop`，即使它的内容和 `origin/develop` 相同。
+
+以 `ek-web-vue2-97` 为例：
+
+- 主目录 `ek-web-vue2-97`：长期停在 `develop`。
+- 工作树 `.worktrees/ek-web-vue2-97/dev-local`：空闲时停在本地分支 `dev-local`。
+- `dev-local` 从 `origin/develop` 切出，不设置上游，不推远程。
+
+`git worktree add` 若基准是远程跟踪分支，Git 会自动设置上游。上游若是 `origin/develop`，在该目录执行不带参数的 `git push` 会推到 `develop`。建好后取消跟踪：
+
+```bash
+git fetch origin develop
+git worktree add -b dev-local ../.worktrees/ek-web-vue2-97/dev-local origin/develop
+git branch --unset-upstream dev-local
+```
+
+## 平时
+
+命令都在固定工作树目录中执行。
+
+空闲时停在 `dev-local`。跟上集成线时，先更新远程跟踪分支，再只做快进合并。`--ff-only` 的含义见 [Git.md 的 `git merge --ff-only`](/Git/Git-Commands/Git.md)。
+
+```bash
+git fetch origin develop
+git merge --ff-only origin/develop
+```
+
+开始一个功能时，先完成上面的快进，再在同一目录切出功能分支。开发、提交、推送都在这里做。做完后切回 `dev-local`。
+
+```bash
+git switch -c feature/some-topic
+# 或 git switch -c bugfix/some-topic
+
+git switch dev-local
+```
+
+切到 `feature/...` 或 `bugfix/...` 后，目录名仍然是 `dev-local`。这个目录是固定工位，不随当前分支改名。
+
+这个目录同时只能检出一个分支。要并行做另一个功能，另建工作树。
+
+主目录里未提交的本机配置留在主目录，不会出现在这条工作树里。
 

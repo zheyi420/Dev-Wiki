@@ -21,3 +21,16 @@
 	GROUP BY 字段名
 	ORDER BY 字段名;
 	```
+
+- 查询 schema 中的所有表
+	```sql
+	SELECT table_name
+
+	FROM information_schema.tables
+	
+	WHERE table_schema = 'schema名'
+	
+		AND table_type = 'BASE TABLE'
+	
+	ORDER BY table_name;
+	```
