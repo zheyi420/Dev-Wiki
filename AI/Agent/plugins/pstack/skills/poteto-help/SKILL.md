@@ -68,6 +68,7 @@ pstack 为 Cursor 而建，用 `/plugin marketplace add cursor/plugins`，然后
 | 用严谨做任何不平凡的任务 | [`/poteto-mode`](../poteto-mode/SKILL.md) |
 | 在开工之前，确认 agent 理解了他们的目标和问题 | [`/in-your-own-words`](../in-your-own-words/SKILL.md) |
 | 发出之前，把 prompt 改写得更深，而不是更大：顶尖专业人士会补上什么、他们的原材料和方法，以及一次外部检查。它返回 prompt，不做这项任务 | [`/sharpen`](../sharpen/SKILL.md) |
+| 学会他们正在做的东西的专家用词，包括从相邻领域借来的词，每一条引用来源都核对过，并用这些词改写他们的描述 | [`/reframe`](../reframe/SKILL.md) |
 | 知道代码现在怎么工作，或新代码该放在哪里 | [`/how`](../how/SKILL.md) |
 | 知道代码为什么是这个形状，或一个数字从哪来 | [`/why`](../why/SKILL.md) |
 | 理解一处改动或一个子系统，用白话讲清楚 | [`/teach`](../teach/SKILL.md) |

@@ -14,7 +14,7 @@ disable-model-invocation: true
 
 1. 说明每个候选要产出的产物。
 2. 导出评分标准：3 到 6 条具体、可打分的标准，说明*这个*任务上成功是什么样。它是阶段 D 里挑选者的工具。候选只看见任务。
-3. 从 `~/.cursor/rules/pstack-models.mdc` 里的 `arena runners` 那一行选定 runner，默认是 `claude-fable-5-2-high`、`claude-opus-5-5-high-fast` 和 `gemini-4-carbon-high`。`auto` 或 `inherit-parent` 条目是父模型，所以省略 `model`，并拉起 `generalPurpose`。Task 工具拒绝某个 slug 时，用同一家族最接近的合法 slug，或者丢掉这个席位，至少保留两个 runner，并说出来。家族按前缀分，最长匹配胜出：`claude-fable-*`、`claude-*`、`gemini-*`，比较之前先去掉开头的 `cursor-`。其他 slug 的家族是第一个连字符之前的那段文本。有多个设计方向时再多拉一些，工作受生成所限、对判断不敏感时，同一个模型重复用。按 **poteto-mode** skill 的 Subagents 一节，为每个 subagent 选定推理档位。
+3. 从 `~/.cursor/rules/pstack-models.mdc` 里的 `arena runners` 那一行选定 runner，默认是 `claude-fable-5-2-high`、`claude-opus-5-5-high-fast` 和 `gemini-4-neon-xhigh`。`auto` 或 `inherit-parent` 条目是父模型，所以省略 `model`，并拉起 `generalPurpose`。Task 工具拒绝某个 slug 时，用同一家族最接近的合法 slug，或者丢掉这个席位，至少保留两个 runner，并说出来。家族按前缀分，最长匹配胜出：`claude-fable-*`、`claude-*`、`gemini-*`，比较之前先去掉开头的 `cursor-`。其他 slug 的家族是第一个连字符之前的那段文本。有多个设计方向时再多拉一些，工作受生成所限、对判断不敏感时，同一个模型重复用。按 **poteto-mode** skill 的 Subagents 一节，为每个 subagent 选定推理档位。
 4. 给每个候选自己的输出位置（能用 git worktree 就用，否则用 `/tmp/arena-<slug>/candidate-<n>/`），见 **separate-before-serializing-shared-state** 原则 skill。
 
 ## 阶段 B：扇出
@@ -25,7 +25,7 @@ disable-model-invocation: true
 
 ## 阶段 C：交叉评审
 
-阶段 B 的候选全部完成后，从 `~/.cursor/rules/pstack-models.mdc` 里的 `arena cross-judge pool` 那一行拉起一个只读评判者，默认是 `claude-opus-5-5-high-fast`、`gemini-4-carbon-high`。评判者永远不来自父模型的厂商，做这项检查时 Fable 算作 Claude，所以用第一个来自另一厂商的条目。`auto` 或 `inherit-parent` 条目是父模型。如果你不知道父模型是什么，用第一个真实 slug，并说明厂商检查没有跑。Task 工具拒绝某个 slug 时，用同一家族最接近的合法 slug，再不行就换下一个这样的条目，或者跳过评判者，并说出来。你在阶段 D 阅读时，评判者按路径标签，在每条评分标准上给每个候选打分，并推荐一个基底。
+阶段 B 的候选全部完成后，从 `~/.cursor/rules/pstack-models.mdc` 里的 `arena cross-judge pool` 那一行拉起一个只读评判者，默认是 `claude-opus-5-5-high-fast`、`gemini-4-neon-xhigh`。评判者永远不来自父模型的厂商，做这项检查时 Fable 算作 Claude，所以用第一个来自另一厂商的条目。`auto` 或 `inherit-parent` 条目是父模型。如果你不知道父模型是什么，用第一个真实 slug，并说明厂商检查没有跑。Task 工具拒绝某个 slug 时，用同一家族最接近的合法 slug，再不行就换下一个这样的条目，或者跳过评判者，并说出来。你在阶段 D 阅读时，评判者按路径标签，在每条评分标准上给每个候选打分，并推荐一个基底。
 
 ## 阶段 D：选定基底
 

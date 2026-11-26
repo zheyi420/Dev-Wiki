@@ -43,7 +43,7 @@ pstack 的 skill 用的是 Cursor 的名字。在 Claude Code 里，每个会话
 Claude Code 会把每个 `.md` 文件从 `~/.claude/rules/` 载入每个新会话，所以 `setup-pstack` 把规则写在那里。按它的步骤做，并做这些改动：
 
 - 检测。检测出来的模型是 `model` 值，由 `Agent` 工具 schema 列出，每个都带一个来自其 `effort` 值的努力。把真实模型写成 `<model> <effort>`，例如 `opus xhigh`。努力是最后一个记号，所以预算那一步照写的做。
-- 默认。用上面各行映射每个默认 slug：`claude-opus-5-5-xhigh-fast` 是 `opus xhigh`，`claude-opus-5-5-high-fast` 是 `opus high`，`claude-fable-5-2-high` 是 `fable high`，`gemini-4-carbon-high` 是 `inherit-parent`。
+- 默认。用上面各行映射每个默认 slug：`claude-opus-5-5-xhigh-fast` 是 `opus xhigh`，`claude-opus-5-5-high-fast` 是 `opus high`，`claude-fable-5-2-high` 是 `fable high`，`gemini-4-neon-xhigh` 是 `inherit-parent`。
 - 写入。写入 `~/.claude/rules/pstack-models.md`，不要 frontmatter，然后是注释行、`# budget` 那一行，以及第 5 步里每个角色一行。整文件覆盖。绝不要把角色行放进 `CLAUDE.md` 或 `AGENTS.md`。
 
 ## 路径

@@ -89,11 +89,11 @@ color: yellow
 
 - 代码、散文和判断：`claude-opus-5-5-xhigh-fast`。
 - 琐碎的机械编辑：`claude-opus-5-5-high-fast`。
-- 多样的评审和设计小组：各一个 runner，分别在 `claude-fable-5-2-high`、`claude-opus-5-5-high-fast` 和 `gemini-4-carbon-high` 上。
+- 多样的评审和设计小组：各一个 runner，分别在 `claude-fable-5-2-high`、`claude-opus-5-5-high-fast` 和 `gemini-4-neon-xhigh` 上。
 
 **Fable 5.2 是例外。** 它只在用户为这项任务点名它，或者同一份开工说明的两次 Opus 5.5 xhigh 运行都没过检查时，才在小组之外跑。说明是哪一种。光是难度从不构成理由。
 
-**让模型配上这项工作。** 从该角色的行或默认出发，保持它的家族，设定工作需要的档位。`/setup-pstack` 预算设定每个角色的起始档位。小组席位保持列出的档位。其他任何角色，最难或最微妙的工作升一档，最高到 xhigh，判断降一档，日常工作降两档或更多。没有角色跑在 xhigh 之上。Opus 5.5 总是跑它的 `-fast` slug。验证总是跑在 `swarm workers` 模型上，默认 `claude-opus-5-5-high-fast`。Gemini 席位绝不跑在 `gemini-4-carbon-high` 之上，那是它最高的 slug。如果 Task 工具拒绝某个 slug，绝不再传它。依次回退到该角色的行或默认，然后是调用方 skill 的回退，然后是同一家族最接近的有效 slug，最后省略 `model`。说出来。
+**让模型配上这项工作。** 从该角色的行或默认出发，保持它的家族，设定工作需要的档位。`/setup-pstack` 预算设定每个角色的起始档位。小组席位保持列出的档位。其他任何角色，最难或最微妙的工作升一档，最高到 xhigh，判断降一档，日常工作降两档或更多。没有角色跑在 xhigh 之上。Opus 5.5 总是跑它的 `-fast` slug。验证总是跑在 `swarm workers` 模型上，默认 `claude-opus-5-5-high-fast`。Gemini 席位跑在 `gemini-4-neon-xhigh`，除非它那一行点了别的档位。如果 Task 工具拒绝某个 slug，绝不再传它。依次回退到该角色的行或默认，然后是调用方 skill 的回退，然后是同一家族最接近的有效 slug，最后省略 `model`。说出来。
 
 你拥有每个 subagent 的工作。审查 diff，自己写摘要。第二意见是同一条 prompt 打到另一个厂商的模型上。
 
