@@ -74,6 +74,14 @@ flowchart TD
 
 agent 会说出顶尖的人会做、而你没开口要的事，他们从什么原材料起步，他们的方法和工具，以及除了你或 agent 之外，什么能表明结果是对的。然后它改写你的 prompt，正好去要这些，更深，但并不更大。改写要求 agent 把实验能定的选择先做成原型，并根据观察到的结果推荐一个选项，产品和偏好上的选择留给你。它不做这个任务。读完改写再发出去，例如配上 `/poteto-mode`。
 
+叫不出你要的东西叫什么时，先对自己的描述和文件跑 [`/reframe`](../../skills/reframe/SKILL.md)：
+
+```text
+/reframe the settings page saves some fields right away and others only on submit, and people lose edits.
+```
+
+agent 给出 8 到 12 个专家术语，按每一个会在多大程度上改变你要做的东西来排序。每一个都带上它点名的那段描述、一个那样使用它的真实项目（链接已核对），以及它让你能向 agent 开口要什么。它也从 2 到 3 个用别的名字解决了同一问题的相邻领域借术语，并说出每个类比在哪里断开。然后用这些新词改写你的描述。把改写发出去，或者先对它跑 `/sharpen`。
+
 ## 短跟进
 
 聊天里已经装着上下文时，prompt 可以缩到几乎没有。下面这些都够：

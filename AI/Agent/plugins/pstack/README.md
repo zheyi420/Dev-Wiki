@@ -40,7 +40,7 @@ Claude Code 从仓库根目录的 [`harness/pstack/`](https://github.com/cursor/
 
 刚来？[pstack 指南](./docs/guide/README.md) 会带你走完第一个真任务，从配置、写 prompt，一直到验证和过夜跑。卡住了，或者不确定哪个 skill 合适？问 [`/poteto-help`](./skills/poteto-help/SKILL.md)。
 
-就这些。其他 skill 看情况用，模式 skill 会在需要时替你调用它们。开箱时，代码委托（功能、重构、修 bug、性能、hillclimb）、散文和判断交给 xhigh 档的 opus 5.5，没有角色跑在 xhigh 之上。在评审面板之外，fable 5.2 只在你点名它时才跑，或者在同一份简报的两次 opus 5.5 运行都失败之后才跑。默认面板是 fable 5.2 / opus 5.5 / gemini 4 carbon。[`/setup-pstack`](./skills/setup-pstack/SKILL.md) 可以改其中任何一项。
+就这些。其他 skill 看情况用，模式 skill 会在需要时替你调用它们。开箱时，代码委托（功能、重构、修 bug、性能、hillclimb）、散文和判断交给 xhigh 档的 opus 5.5，没有角色跑在 xhigh 之上。在评审面板之外，fable 5.2 只在你点名它时才跑，或者在同一份简报的两次 opus 5.5 运行都失败之后才跑。默认面板是 fable 5.2 / opus 5.5 / gemini 4 neon。[`/setup-pstack`](./skills/setup-pstack/SKILL.md) 可以改其中任何一项。
 
 ## 用法
 
@@ -127,6 +127,7 @@ morning.
 | [`/poteto-help`](./skills/poteto-help/SKILL.md) | 你刚接触 pstack，或者不确定哪个 skill、playbook 或原则合适。它先弄清你想做什么，回答那一部分，再交给你一条可以直接输入的 prompt。只有你输入 `/poteto-help` 时才跑。 |
 | [`/in-your-own-words`](./skills/in-your-own-words/SKILL.md) | 你想让 agent 在开工前先复述你的目标和问题。只有你输入 `/in-your-own-words` 时才跑。 |
 | [`/sharpen`](./skills/sharpen/SKILL.md) | 你想在发出去之前把 prompt 做深，不做大：顶尖的人会做、但你没开口要的事，他们从什么原材料起步，他们的方法和工具，以及一个从外部确认结果是对的检查。它交回改写后的 prompt。这条 prompt 要求 agent 把实验能定的选择先做成原型，产品和偏好上的选择留给你。它不做这个任务。只有你输入 `/sharpen` 时才跑。 |
+| [`/reframe`](./skills/reframe/SKILL.md) | 你叫不出正在做的东西的名字，所以没法向 agent 把它问清楚。从你的文件和你自己的话出发。这些话如果能描述不止一个问题，就列出可能的两三个，各附一个把它们分开的迹象，并挑出最可能的那个。然后给出 8 到 12 个专家术语，按会在多大程度上改变你要做的东西来排序，每一个都系在它点名的那段描述上，并系到一个核对过链接的真实项目。从 2 到 3 个用别的名字解决了同一问题的相邻领域借术语，说出每个类比在哪里断开，再用这些新词改写你的描述。只有你输入 `/reframe` 时才跑。 |
 | [`/how`](./skills/how/SKILL.md) | 你想要一份走查，看某个子系统是怎么工作的。 |
 | [`/why`](./skills/why/SKILL.md) | 你想知道为什么某个东西做成这样。答案来自记录，不来自代码：引入它的那些 commit 和 PR 讨论，以及之后的每一次改动；这条痕迹很淡时，再看别的来源。引用作者写过的原话，标出自己的推断，并说明记录没有回答的部分。 |
 | [`/recall`](./skills/recall/SKILL.md) | 你在开始或接着做，想把某个主题上最近的上下文，从你自己的聊天记录和共享记录里重新整理出来，交回一份紧凑的当前状态简报。 |

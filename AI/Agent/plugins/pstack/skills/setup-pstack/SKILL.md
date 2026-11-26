@@ -17,6 +17,8 @@ description: "配置 pstack 每个角色用哪个模型、推理预算是多少�
 
 默认的角色到模型映射，是下面第 5 步所示的规则形状。如果 `~/.cursor/rules/pstack-models.mdc` 已经存在，读它，把它的 `# budget` 行和它的角色值当作当前选择。否则从那些默认出发。角色不在第 5 步里的行，例如 `hardest tasks`、`architect runners`、`reflect tooling` 或 `why investigators`，来自已退役的角色。丢掉它。
 
+更旧的默认先把另一个 Gemini 模型、后来是 `gemini-4-neon-high` 放进小组席位。所以在任何规则里，小组角色（`arena runners`、`arena cross-judge pool`、`interrogate reviewers`）里的 `gemini-4-neon-high` 条目，或者不是 `gemini-4-neon-*` 的 `gemini-4-*` 条目，都是旧默认。每一个都变成 `gemini-4-neon-xhigh`。其他档位上的 Gemini 4 Neon 条目是用户的选择，保留。告诉用户你替换了哪些条目。
+
 没有 `# defaults: 3` 行的规则来自更旧的 setup。那个 setup 为每个角色都写了一行，所以其中一些值是旧默认，不是选择。第 3 步之前，替换这些值：
 
 - `arena cross-judge pool` 的列表恰好是一个 `claude-fable-*` 条目、一个 `claude-opus-*` 条目和一个 `gemini-*` 条目，不论顺序时，改取该角色在第 5 步的列表。Fable 和 Opus 是同一个厂商，所以 Fable 条目能担任裁判的地方，Opus 条目也能。
@@ -33,7 +35,7 @@ description: "配置 pstack 每个角色用哪个模型、推理预算是多少�
 - `medium — high reasoning`
 - `small — medium reasoning`
 
-**(b) 应用它。** 从 skill 默认建出工作表。重跑时，保留任何你按家族、列表或别名改过的角色（`inherit-parent`、`auto`）。家族是 **arena** skill 的 Phase A 所定义的那些，所以 Fable 是它自己的家族。每个角色有一个目标努力档，就是把它的默认努力按预算挪过之后的档。`large` 保持不动，`medium` 降一档，`small` 降两档，梯子是 `xhigh` > `high` > `medium` > `low`。没有角色跑在 `xhigh` 之上，目标已经在梯子底端时，留在那里。大多数默认在 `xhigh`，每个预算标签点名它们落在哪里。把角色里每个真实 slug 的努力记号设成该角色的目标，小组条目也包括在内。努力记号是最后一个记号，或尾部 `fast` 之前的那个。如果结果不是检测出来的 slug，就用同一家族里、努力不高于目标的、最高的那个检测出来的 slug，否则把该角色标成需要选择。`inherit-parent` 和 `auto` 不改变。所以 `medium` 把 `claude-opus-5-5-xhigh-fast` 变成 `claude-opus-5-5-high-fast`，把 `claude-opus-5-5-high-fast` 变成 `claude-opus-5-5-medium-fast`，`small` 则把它们变成 `claude-opus-5-5-medium-fast` 和 `claude-opus-5-5-low-fast`。Opus 5.5 总是跑它的 `-fast` slug，所以每个 Opus 5.5 值都以 `-fast` 结尾。Fable 5.2 和 Gemini 没有 fast slug，所以绝不要写一个。Gemini 到 `high` 封顶，所以角色的目标是 `xhigh` 时，Gemini 条目跑在 `high`。
+**(b) 应用它。** 从 skill 默认建出工作表。重跑时，保留任何你按家族、列表或别名改过的角色（`inherit-parent`、`auto`）。家族是 **arena** skill 的 Phase A 所定义的那些，所以 Fable 是它自己的家族。每个角色有一个目标努力档，就是把它的默认努力按预算挪过之后的档。`large` 保持不动，`medium` 降一档，`small` 降两档，梯子是 `xhigh` > `high` > `medium` > `low`。没有角色跑在 `xhigh` 之上，目标已经在梯子底端时，留在那里。大多数默认在 `xhigh`，每个预算标签点名它们落在哪里。把角色里每个真实 slug 的努力记号设成该角色的目标，小组条目也包括在内。努力记号是最后一个记号，或尾部 `fast` 之前的那个。如果结果不是检测出来的 slug，就用同一家族里、努力不高于目标的、最高的那个检测出来的 slug，否则把该角色标成需要选择。`inherit-parent` 和 `auto` 不改变。所以 `medium` 把 `claude-opus-5-5-xhigh-fast` 变成 `claude-opus-5-5-high-fast`，把 `claude-opus-5-5-high-fast` 变成 `claude-opus-5-5-medium-fast`，`small` 则把它们变成 `claude-opus-5-5-medium-fast` 和 `claude-opus-5-5-low-fast`。Opus 5.5 总是跑它的 `-fast` slug，所以每个 Opus 5.5 值都以 `-fast` 结尾。Fable 5.2 和 Gemini 没有 fast slug，所以绝不要写一个。Gemini 4 Neon 的 slug 从 `low` 排到 `xhigh`，没有 `max` 或 `fast` slug，所以它的席位跑在 `gemini-4-neon-xhigh`，那是它最高的 slug。小组角色里的 Gemini 4 Neon 条目取它自己的目标，也就是 `xhigh` 按预算挪过之后的档，所以 `large` 保持 `gemini-4-neon-xhigh`，`medium` 写成 `gemini-4-neon-high`，`small` 写成 `gemini-4-neon-medium`。
 
 **(c) 展示角色并确认。** 展示每个角色及其模型，任何不在检测集合里的真实 slug 标成需要选择。也列出第 2 步丢掉的每一行。问是按原样接受，还是改特定角色，选项是检测出来的、在 `xhigh` 或以下的模型，加上 `inherit-parent` 和 `auto`（两者的意思都是：这个角色跑在父聊天的模型上，Auto 用户就是这样留在 Auto 上）。优先用 AskQuestion，不要自由文本。对小组角色（arena 的 runner、interrogate 的评审者），值是一个列表，每个条目跑一个 subagent，别名条目也算，所以列表长度决定个数。`arena cross-judge pool` 也是一个列表，但 Arena 只跑一个裁判。它只按列表顺序尝试来自父级以外厂商的值，所以按偏好排序。Fable 和其他 Claude 模型是同一个厂商。`inherit-parent` 或 `auto` 的值从不担任裁判。`swarm workers` 是每个工作者的默认模型，除非一场竞速或比较为每条臂指定了另一个模型。
 
@@ -59,10 +61,10 @@ bug-fix: claude-opus-5-5-xhigh-fast
 perf-issue: claude-opus-5-5-xhigh-fast
 hillclimb: claude-opus-5-5-xhigh-fast
 judgment and prose: claude-opus-5-5-xhigh-fast
-arena runners: claude-fable-5-2-high, claude-opus-5-5-high-fast, gemini-4-carbon-high
-arena cross-judge pool: claude-opus-5-5-high-fast, gemini-4-carbon-high
+arena runners: claude-fable-5-2-high, claude-opus-5-5-high-fast, gemini-4-neon-xhigh
+arena cross-judge pool: claude-opus-5-5-high-fast, gemini-4-neon-xhigh
 swarm workers: claude-opus-5-5-high-fast
-interrogate reviewers: claude-fable-5-2-high, claude-opus-5-5-high-fast, gemini-4-carbon-high
+interrogate reviewers: claude-fable-5-2-high, claude-opus-5-5-high-fast, gemini-4-neon-xhigh
 ```
 
 ### 6. 确认
