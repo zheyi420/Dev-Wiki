@@ -344,6 +344,14 @@ fa19989 dev@{3}: branch: Created from HEAD
 	使用 `git branch -vv` 查看本地分支关联（跟踪）的远程分支时，发现创建的新分支未关联远程分支。
 - 取消对特定分支的跟踪：
 	`git branch --unset-upstream 本地分支名`
+- `git branch 新分支名`
+	- 基于当前 HEAD 指向的 commit 创建一个新的本地分支。
+	- 不切换当前分支。
+	- 不修改工作区和暂存区。
+	- 不创建新的 commit。
+	- 不涉及远程仓库，也不会自动建立远程跟踪关系。
+	- 等价于 `git branch 新分支名 HEAD`
+
 
 #### 关于远程跟踪分支
 
