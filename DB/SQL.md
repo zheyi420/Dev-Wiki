@@ -1,6 +1,24 @@
 - 查询表的数据行数  
 	`SELECT COUNT(*) FROM YOUR_TABLE_NAME;`
 
+- 查询某条 SELECT 会返回多少行
+	- 普通过滤查询：把 `SELECT *` 换成 `SELECT COUNT(*)`，`FROM` 和 `WHERE` 保持不变。
+
+	```sql
+	SELECT COUNT(*)
+	FROM 表名
+	WHERE 条件;
+	```
+
+	- 原查询较复杂（含 JOIN、DISTINCT、GROUP BY、UNION）时，整段包进子查询再计数。子查询必须有别名。
+
+	```sql
+	SELECT COUNT(*)
+	FROM (
+	    -- 原查询
+	) AS t;
+	```
+
 - 限制返回行数  
 	`SELECT * FROM table_name LIMIT 5;`
 
